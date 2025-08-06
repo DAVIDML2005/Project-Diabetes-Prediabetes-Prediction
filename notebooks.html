@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Informe Python &#8212; jbook_ml202330</title>
+    <title>EDA - Exploratory Data Analysis &#8212; EDA</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -62,8 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Notebooks with MyST Markdown" href="markdown-notebooks.html" />
-    <link rel="prev" title="Markdown Files" href="markdown.html" />
+    <link rel="prev" title="Información del Dataset" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -155,8 +154,8 @@
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="jbook_ml202330 - Home"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="jbook_ml202330 - Home"/>`);</script>
+    <img src="_static/logo.png" class="logo__image only-light" alt="EDA - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="EDA - Home"/>`);</script>
   
   
 </a></div>
@@ -177,14 +176,12 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Welcome to your Jupyter Book
+                    Información del Dataset
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Informe Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">EDA - Exploratory Data Analysis</a></li>
 </ul>
 
     </div>
@@ -370,7 +367,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Informe Python</h1>
+    <h1>EDA - Exploratory Data Analysis</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -380,9 +377,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markdown-notebooks">Markdown + notebooks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#myst-markdown">MyST markdown</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-blocks-and-outputs">Code blocks and outputs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importar-librerias">Importar librerías</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">Lectura de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-univariado">Análisis univariado</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-binarias">Variables Binarias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-categoricas">Variables Categóricas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-numericas">Variables Númericas</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-bivariado">Análisis Bivariado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-multivariado">Análisis Multivariado</a></li>
 </ul>
             </nav>
         </div>
@@ -394,114 +398,1162 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="informe-python">
-<h1>Informe Python<a class="headerlink" href="#informe-python" title="Link to this heading">#</a></h1>
-<p>You can also create content with Jupyter Notebooks. This means that you can include
-code blocks and their outputs in your book.</p>
-<section id="markdown-notebooks">
-<h2>Markdown + notebooks<a class="headerlink" href="#markdown-notebooks" title="Link to this heading">#</a></h2>
-<p>As it is markdown, you can embed images, HTML, etc into your posts!</p>
-<p><img alt="" src="https://myst-parser.readthedocs.io/en/latest/_static/logo-wide.svg" /></p>
-<p>You can also <span class="math notranslate nohighlight">\(add_{math}\)</span> and</p>
-<div class="math notranslate nohighlight">
-\[
-math^{blocks}
-\]</div>
-<p>or</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{aligned}
-\mbox{mean} la_{tex} \\ \\
-math blocks
-\end{aligned}
-\end{split}\]</div>
-<p>But make sure you $Escape $your $dollar signs $you want to keep!</p>
-</section>
-<section id="myst-markdown">
-<h2>MyST markdown<a class="headerlink" href="#myst-markdown" title="Link to this heading">#</a></h2>
-<p>MyST markdown works in Jupyter Notebooks as well. For more information about MyST markdown, check
-out <a class="reference external" href="https://jupyterbook.org/content/myst.html">the MyST guide in Jupyter Book</a>,
-or see <a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/">the MyST markdown documentation</a>.</p>
-</section>
-<section id="code-blocks-and-outputs">
-<h2>Code blocks and outputs<a class="headerlink" href="#code-blocks-and-outputs" title="Link to this heading">#</a></h2>
-<p>Jupyter Book will also embed your code blocks and output in your book.
-For example, here’s some sample Matplotlib code:</p>
-<div class="math notranslate nohighlight">
-\[
-\int_{-\infty}^{\infty}\frac{\sin x}{x}
-\]</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="eda-exploratory-data-analysis">
+<h1>EDA - Exploratory Data Analysis<a class="headerlink" href="#eda-exploratory-data-analysis" title="Link to this heading">#</a></h1>
+<section id="importar-librerias">
+<h2>Importar librerías<a class="headerlink" href="#importar-librerias" title="Link to this heading">#</a></h2>
+<p>Se importan las librerías esenciales para facilitar el análisis que abarca la carga de datos, la evaluación estadística, la visualización, la transformación de datos, la fusión y la unión.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rcParams</span><span class="p">,</span> <span class="n">cycler</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ion</span><span class="p">()</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p>Se Instala el paquete <code class="docutils literal notranslate"><span class="pre">ucimlrepo</span></code> desde PyPI (Python Package Index).<br />
+Este paquete permite acceder a datasets del repositorio UCI Machine Learning.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">ucimlrepo</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;contextlib.ExitStack at 0x1f7e04450d0&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: ucimlrepo in c:\users\david\miniconda3\envs\ml_venv\lib\site-packages (0.0.7)
+Requirement already satisfied: pandas&gt;=1.0.0 in c:\users\david\miniconda3\envs\ml_venv\lib\site-packages (from ucimlrepo) (2.3.1)
+Requirement already satisfied: certifi&gt;=2020.12.5 in c:\users\david\miniconda3\envs\ml_venv\lib\site-packages (from ucimlrepo) (2023.7.22)
+Requirement already satisfied: numpy&gt;=1.22.4 in c:\users\david\miniconda3\envs\ml_venv\lib\site-packages (from pandas&gt;=1.0.0-&gt;ucimlrepo) (1.25.2)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in c:\users\david\miniconda3\envs\ml_venv\lib\site-packages (from pandas&gt;=1.0.0-&gt;ucimlrepo) (2.8.2)
+Requirement already satisfied: pytz&gt;=2020.1 in c:\users\david\miniconda3\envs\ml_venv\lib\site-packages (from pandas&gt;=1.0.0-&gt;ucimlrepo) (2023.3)
+Requirement already satisfied: tzdata&gt;=2022.7 in c:\users\david\miniconda3\envs\ml_venv\lib\site-packages (from pandas&gt;=1.0.0-&gt;ucimlrepo) (2023.3)
+Requirement already satisfied: six&gt;=1.5 in c:\users\david\miniconda3\envs\ml_venv\lib\site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&gt;=1.0.0-&gt;ucimlrepo) (1.16.0)
+Note: you may need to restart the kernel to use updated packages.
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="lectura-de-datos">
+<h2>Lectura de datos<a class="headerlink" href="#lectura-de-datos" title="Link to this heading">#</a></h2>
+<p>Se Importa la función <code class="docutils literal notranslate"><span class="pre">fetch_ucirepo</span></code> del paquete <code class="docutils literal notranslate"><span class="pre">ucimlrepo</span></code>.<br />
+<code class="docutils literal notranslate"><span class="pre">fetch_ucirepo</span></code> es la función clave para descargar datasets usando su ID único.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fixing random state for reproducibility</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">19680801</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ucimlrepo</span><span class="w"> </span><span class="kn">import</span> <span class="n">fetch_ucirepo</span> 
+  
+<span class="c1"># fetch dataset </span>
+<span class="n">cdc_diabetes_health_indicators</span> <span class="o">=</span> <span class="n">fetch_ucirepo</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">891</span><span class="p">)</span> 
+  
+<span class="c1"># data (as pandas dataframes) </span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">cdc_diabetes_health_indicators</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span> 
+<span class="n">y</span> <span class="o">=</span> <span class="n">cdc_diabetes_health_indicators</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">targets</span> 
 
-<span class="n">N</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="n">ii</span> <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
-<span class="n">cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">coolwarm</span>
-<span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.prop_cycle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cycler</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">cmap</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">)))</span>
+<span class="c1"># metadata </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cdc_diabetes_health_indicators</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span>
 
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.lines</span><span class="w"> </span><span class="kn">import</span> <span class="n">Line2D</span>
-<span class="n">custom_lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">cmap</span><span class="p">(</span><span class="mf">0.</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span>
-                <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">cmap</span><span class="p">(</span><span class="mf">.5</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span>
-                <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">cmap</span><span class="p">(</span><span class="mf">1.</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">)]</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">lines</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">custom_lines</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Cold&#39;</span><span class="p">,</span> <span class="s1">&#39;Medium&#39;</span><span class="p">,</span> <span class="s1">&#39;Hot&#39;</span><span class="p">]);</span>
+<span class="c1"># Se X e y (ambos son DataFrames)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/10e4426d9a98b8b32d6c7c558b9983b6bfbf3f7b3422996bacff632594cdfad8.png" src="_images/10e4426d9a98b8b32d6c7c558b9983b6bfbf3f7b3422996bacff632594cdfad8.png" />
-</div>
-</div>
-<p>There is a lot more that you can do with outputs (such as including interactive outputs)
-with your book. For more information about this, see <a class="reference external" href="https://jupyterbook.org">the Jupyter Book documentation</a></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;uci_id&#39;: 891, &#39;name&#39;: &#39;CDC Diabetes Health Indicators&#39;, &#39;repository_url&#39;: &#39;https://archive.ics.uci.edu/dataset/891/cdc+diabetes+health+indicators&#39;, &#39;data_url&#39;: &#39;https://archive.ics.uci.edu/static/public/891/data.csv&#39;, &#39;abstract&#39;: &#39;The Diabetes Health Indicators Dataset contains healthcare statistics and lifestyle survey information about people in general along with their diagnosis of diabetes. The 35 features consist of some demographics, lab test results, and answers to survey questions for each patient. The target variable for classification is whether a patient has diabetes, is pre-diabetic, or healthy. &#39;, &#39;area&#39;: &#39;Health and Medicine&#39;, &#39;tasks&#39;: [&#39;Classification&#39;], &#39;characteristics&#39;: [&#39;Tabular&#39;, &#39;Multivariate&#39;], &#39;num_instances&#39;: 253680, &#39;num_features&#39;: 21, &#39;feature_types&#39;: [&#39;Categorical&#39;, &#39;Integer&#39;], &#39;demographics&#39;: [&#39;Sex&#39;, &#39;Age&#39;, &#39;Education Level&#39;, &#39;Income&#39;], &#39;target_col&#39;: [&#39;Diabetes_binary&#39;], &#39;index_col&#39;: [&#39;ID&#39;], &#39;has_missing_values&#39;: &#39;no&#39;, &#39;missing_values_symbol&#39;: None, &#39;year_of_dataset_creation&#39;: 2017, &#39;last_updated&#39;: &#39;Fri Nov 03 2023&#39;, &#39;dataset_doi&#39;: &#39;10.24432/C53919&#39;, &#39;creators&#39;: [], &#39;intro_paper&#39;: {&#39;ID&#39;: 308, &#39;type&#39;: &#39;NATIVE&#39;, &#39;title&#39;: &#39;Incidence of End-Stage Renal Disease Attributed to Diabetes Among Persons with Diagnosed Diabetes — United States and Puerto Rico, 2000–2014&#39;, &#39;authors&#39;: &#39;Nilka Rios Burrows, MPH; Israel Hora, PhD; Linda S. Geiss, MA; Edward W. Gregg, PhD; Ann Albright, PhD&#39;, &#39;venue&#39;: &#39;Morbidity and Mortality Weekly Report&#39;, &#39;year&#39;: 2017, &#39;journal&#39;: None, &#39;DOI&#39;: None, &#39;URL&#39;: &#39;https://www.cdc.gov/mmwr/volumes/66/wr/mm6643a2.htm&#39;, &#39;sha&#39;: None, &#39;corpus&#39;: None, &#39;arxiv&#39;: None, &#39;mag&#39;: None, &#39;acl&#39;: None, &#39;pmid&#39;: None, &#39;pmcid&#39;: None}, &#39;additional_info&#39;: {&#39;summary&#39;: &#39;Dataset link: https://www.cdc.gov/brfss/annual_data/annual_2014.html&#39;, &#39;purpose&#39;: &#39;To better understand the relationship between  lifestyle and diabetes in the US&#39;, &#39;funded_by&#39;: &#39;The CDC&#39;, &#39;instances_represent&#39;: &#39;Each row represents a person participating in this study.&#39;, &#39;recommended_data_splits&#39;: &#39;Cross validation or a fixed train-test split could be used.&#39;, &#39;sensitive_data&#39;: &#39;- Gender\n- Income\n- Education level&#39;, &#39;preprocessing_description&#39;: &#39;Bucketing of age&#39;, &#39;variable_info&#39;: &#39;- Diabetes diagnosis\n- Demographics (race, sex)\n- Personal information (income, educations)\n- Health history (drinking, smoking, mental health, physical health)&#39;, &#39;citation&#39;: None}, &#39;external_url&#39;: &#39;https://www.kaggle.com/datasets/alexteboul/diabetes-health-indicators-dataset&#39;}
 </pre></div>
 </div>
 </div>
 </div>
+<hr class="docutils" />
+<p>Se muestran las primeras filas del DataFrame con todos los detalles.<br />
+Se usa <code class="docutils literal notranslate"><span class="pre">.to_string()</span></code> para evitar el truncamiento de columnas y lograr mostrar todas las variables.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hasGPUSupport</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">is_built_with_cuda</span><span class="p">()</span>
-<span class="n">gpuList</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s2">&quot;GPU&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tensorflow compiled with CUDa/GPU Support:&quot;</span><span class="p">,</span><span class="n">hasGPUSupport</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tensorflow can access&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">gpuList</span><span class="p">),</span><span class="s2">&quot;GPU&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accessible GPUs are:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">gpuList</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tensorflow compiled with CUDa/GPU Support: True
-Tensorflow can access 1 GPU
-Accessible GPUs are:
-[PhysicalDevice(name=&#39;/physical_device:GPU:0&#39;, device_type=&#39;GPU&#39;)]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   HighBP  HighChol  CholCheck  BMI  Smoker  Stroke  HeartDiseaseorAttack  PhysActivity  Fruits  Veggies  HvyAlcoholConsump  AnyHealthcare  NoDocbcCost  GenHlth  MentHlth  PhysHlth  DiffWalk  Sex  Age  Education  Income  Diabetes_binary
+0       1         1          1   40       1       0                     0             0       0        1                  0              1            0        5        18        15         1    0    9          4       3                0
+1       0         0          0   25       1       0                     0             1       0        0                  0              0            1        3         0         0         0    0    7          6       1                0
+2       1         1          1   28       0       0                     0             0       1        0                  0              1            1        5        30        30         1    0    9          4       8                0
+3       1         0          1   27       0       0                     0             1       1        1                  0              1            0        2         0         0         0    0   11          3       6                0
+4       1         1          1   24       0       0                     0             1       1        1                  0              1            0        2         3         0         0    0   11          5       4                0
 </pre></div>
 </div>
 </div>
 </div>
+<hr class="docutils" />
+<p>Se muestran las últimas filas del DataFrame con todos los detalles.<br />
+Se usa <code class="docutils literal notranslate"><span class="pre">.to_string()</span></code> para evitar el truncamiento de columnas y lograr mostrar todas las variables.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        HighBP  HighChol  CholCheck  BMI  Smoker  Stroke  HeartDiseaseorAttack  PhysActivity  Fruits  Veggies  HvyAlcoholConsump  AnyHealthcare  NoDocbcCost  GenHlth  MentHlth  PhysHlth  DiffWalk  Sex  Age  Education  Income  Diabetes_binary
+253675       1         1          1   45       0       0                     0             0       1        1                  0              1            0        3         0         5         0    1    5          6       7                0
+253676       1         1          1   18       0       0                     0             0       0        0                  0              1            0        4         0         0         1    0   11          2       4                1
+253677       0         0          1   28       0       0                     0             1       1        0                  0              1            0        1         0         0         0    0    2          5       2                0
+253678       1         0          1   23       0       0                     0             0       1        1                  0              1            0        3         0         0         0    1    7          5       1                0
+253679       1         1          1   25       0       0                     1             1       1        0                  0              1            0        2         0         0         0    0    9          6       2                1
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p>Se presenta un resumen detallado de todas las variables del dataset, incluyendo su rol (predictora o objetivo), el tipo de dato (numérico, categórico, binario) y la identificación de valores faltantes, lo que permite evaluar la integridad y estructura de los datos para su posterior procesamiento.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cdc_diabetes_health_indicators</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                    name     role     type      demographic  \
+0                     ID       ID  Integer             None   
+1        Diabetes_binary   Target   Binary             None   
+2                 HighBP  Feature   Binary             None   
+3               HighChol  Feature   Binary             None   
+4              CholCheck  Feature   Binary             None   
+5                    BMI  Feature  Integer             None   
+6                 Smoker  Feature   Binary             None   
+7                 Stroke  Feature   Binary             None   
+8   HeartDiseaseorAttack  Feature   Binary             None   
+9           PhysActivity  Feature   Binary             None   
+10                Fruits  Feature   Binary             None   
+11               Veggies  Feature   Binary             None   
+12     HvyAlcoholConsump  Feature   Binary             None   
+13         AnyHealthcare  Feature   Binary             None   
+14           NoDocbcCost  Feature   Binary             None   
+15               GenHlth  Feature  Integer             None   
+16              MentHlth  Feature  Integer             None   
+17              PhysHlth  Feature  Integer             None   
+18              DiffWalk  Feature   Binary             None   
+19                   Sex  Feature   Binary              Sex   
+20                   Age  Feature  Integer              Age   
+21             Education  Feature  Integer  Education Level   
+22                Income  Feature  Integer           Income   
+
+                                          description units missing_values  
+0                                          Patient ID  None             no  
+1         0 = no diabetes 1 = prediabetes or diabetes  None             no  
+2                          0 = no high BP 1 = high BP  None             no  
+3        0 = no high cholesterol 1 = high cholesterol  None             no  
+4   0 = no cholesterol check in 5 years 1 = yes ch...  None             no  
+5                                     Body Mass Index  None             no  
+6   Have you smoked at least 100 cigarettes in you...  None             no  
+7        (Ever told) you had a stroke. 0 = no 1 = yes  None             no  
+8   coronary heart disease (CHD) or myocardial inf...  None             no  
+9   physical activity in past 30 days - not includ...  None             no  
+10  Consume Fruit 1 or more times per day 0 = no 1...  None             no  
+11  Consume Vegetables 1 or more times per day 0 =...  None             no  
+12  Heavy drinkers (adult men having more than 14 ...  None             no  
+13  Have any kind of health care coverage, includi...  None             no  
+14  Was there a time in the past 12 months when yo...  None             no  
+15  Would you say that in general your health is: ...  None             no  
+16  Now thinking about your mental health, which i...  None             no  
+17  Now thinking about your physical health, which...  None             no  
+18  Do you have serious difficulty walking or clim...  None             no  
+19                                0 = female 1 = male  None             no  
+20  13-level age category (_AGEG5YR see codebook) ...  None             no  
+21  Education level (EDUCA see codebook) scale 1-6...  None             no  
+22  Income scale (INCOME2 see codebook) scale 1-8 ...  None             no  
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Interpretación del Dataset:</strong></p>
+<p>Este conjunto de datos contiene información relacionada con factores de salud y demográficos asociados a la diabetes. La variable objetivo (<code class="docutils literal notranslate"><span class="pre">Diabetes_binary</span></code>) indica si un paciente tiene diabetes o prediabetes (1) o no (0). Entre las características destacan variables binarias como <code class="docutils literal notranslate"><span class="pre">HighBP</span></code> (hipertensión), <code class="docutils literal notranslate"><span class="pre">HighChol</span></code> (colesterol alto) y <code class="docutils literal notranslate"><span class="pre">Smoker</span></code> (fumador), que representan condiciones médicas o hábitos relevantes. También se incluyen variables numéricas como <code class="docutils literal notranslate"><span class="pre">BMI</span></code> (índice de masa corporal) y escalas de salud general (<code class="docutils literal notranslate"><span class="pre">GenHlth</span></code>, <code class="docutils literal notranslate"><span class="pre">MentHlth</span></code>, <code class="docutils literal notranslate"><span class="pre">PhysHlth</span></code>), que miden percepciones y estados de salud física y mental. Además, hay atributos demográficos como <code class="docutils literal notranslate"><span class="pre">Sex</span></code> (sexo), <code class="docutils literal notranslate"><span class="pre">Age</span></code> (edad), <code class="docutils literal notranslate"><span class="pre">Education</span></code> (nivel educativo) e <code class="docutils literal notranslate"><span class="pre">Income</span></code> (ingresos), que permiten analizar patrones según grupos poblacionales. La ausencia de valores faltantes facilita el análisis, y las descripciones detalladas de cada campo ayudan a contextualizar su relevancia clínica.</p>
+<hr class="docutils" />
+<p>Se calcula el número de valores únicos para cada variable del DataFrame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HighBP                   2
+HighChol                 2
+CholCheck                2
+BMI                     84
+Smoker                   2
+Stroke                   2
+HeartDiseaseorAttack     2
+PhysActivity             2
+Fruits                   2
+Veggies                  2
+HvyAlcoholConsump        2
+AnyHealthcare            2
+NoDocbcCost              2
+GenHlth                  5
+MentHlth                31
+PhysHlth                31
+DiffWalk                 2
+Sex                      2
+Age                     13
+Education                6
+Income                   8
+Diabetes_binary          2
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Interpretación del Conteo de Valores Únicos:</strong></p>
+<p>El análisis de valores únicos revela una estructura clara y consistente con la naturaleza de las variables descritas. Las variables binarias muestran exactamente 2 valores únicos (0 y 1), confirmando su correcta codificación como indicadores binarios de presencia/ausencia de condiciones médicas, hábitos o características demográficas. Las variables numéricas muestran mayor dispersión: <code class="docutils literal notranslate"><span class="pre">BMI</span></code> presenta 84 valores únicos, reflejando la diversidad esperada en índices de masa corporal, mientras que <code class="docutils literal notranslate"><span class="pre">MentHlth</span></code> y <code class="docutils literal notranslate"><span class="pre">PhysHlth</span></code> muestran 31 valores cada una (correspondiendo a los posibles días de afectación de salud en un mes). Estos resultados validan la integridad del conjunto de datos y confirman que todas las variables mantienen los rangos y categorías esperados según su descripción.</p>
+</section>
+<section id="analisis-univariado">
+<h2>Análisis univariado<a class="headerlink" href="#analisis-univariado" title="Link to this heading">#</a></h2>
+<section id="variables-binarias">
+<h3>Variables Binarias<a class="headerlink" href="#variables-binarias" title="Link to this heading">#</a></h3>
+<p>Se identifican y analizan las variables binarias (aquellas con solo 2 valores únicos) en el DataFrame.<br />
+Mostrando:</p>
+<ol class="arabic simple">
+<li><p>Conteo absoluto de ocurrencias para cada valor (0 y 1).</p></li>
+<li><p>Porcentaje respecto al total (redondeado a 1 decimal).</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filtrar variables binarias </span>
+<span class="n">binarias</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="c1"># Calcular proporciones y crear DataFrame</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">col</span><span class="p">:</span> <span class="p">[</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">,</span>  <span class="c1"># No (0)</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">%)&quot;</span>   <span class="c1"># Sí (1)</span>
+    <span class="p">]</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">binarias</span>
+<span class="p">}</span>
+
+<span class="n">tabla_porcentajes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;No (0)&#39;</span><span class="p">,</span> <span class="s1">&#39;Si (1)&#39;</span><span class="p">])</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">tabla_porcentajes</span><span class="p">)</span>  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>HighBP</th>
+      <th>HighChol</th>
+      <th>CholCheck</th>
+      <th>Smoker</th>
+      <th>Stroke</th>
+      <th>HeartDiseaseorAttack</th>
+      <th>PhysActivity</th>
+      <th>Fruits</th>
+      <th>Veggies</th>
+      <th>HvyAlcoholConsump</th>
+      <th>AnyHealthcare</th>
+      <th>NoDocbcCost</th>
+      <th>DiffWalk</th>
+      <th>Sex</th>
+      <th>Diabetes_binary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>No (0)</th>
+      <td>144851 (57.1%)</td>
+      <td>146089 (57.6%)</td>
+      <td>9470 (3.7%)</td>
+      <td>141257 (55.7%)</td>
+      <td>243388 (95.9%)</td>
+      <td>229787 (90.6%)</td>
+      <td>61760 (24.3%)</td>
+      <td>92782 (36.6%)</td>
+      <td>47839 (18.9%)</td>
+      <td>239424 (94.4%)</td>
+      <td>12417 (4.9%)</td>
+      <td>232326 (91.6%)</td>
+      <td>211005 (83.2%)</td>
+      <td>141974 (56.0%)</td>
+      <td>218334 (86.1%)</td>
+    </tr>
+    <tr>
+      <th>Si (1)</th>
+      <td>108829 (42.9%)</td>
+      <td>107591 (42.4%)</td>
+      <td>244210 (96.3%)</td>
+      <td>112423 (44.3%)</td>
+      <td>10292 (4.1%)</td>
+      <td>23893 (9.4%)</td>
+      <td>191920 (75.7%)</td>
+      <td>160898 (63.4%)</td>
+      <td>205841 (81.1%)</td>
+      <td>14256 (5.6%)</td>
+      <td>241263 (95.1%)</td>
+      <td>21354 (8.4%)</td>
+      <td>42675 (16.8%)</td>
+      <td>111706 (44.0%)</td>
+      <td>35346 (13.9%)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<hr class="docutils" />
+<p>Se genera un doble gráfico para cada variable binaria, permitiendo comparar su distribución mediante:</p>
+<ol class="arabic simple">
+<li><p>Gráfico de Barras:<br />
+Muestra el conteo absoluto de cada categoría (0 y 1).<br />
+Ideal para comparar magnitudes visualmente.</p></li>
+<li><p>Gráfico de Torta:<br />
+Muestra la proporción porcentual de cada categoría.<br />
+Útil para entender el balance/imbalance entre clases.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">labels_binarias</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;1 = si&quot;</span><span class="p">,</span> <span class="s2">&quot;2 = No&quot;</span><span class="p">]</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">font_scale</span><span class="o">=</span><span class="mf">1.4</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">binarias</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Column:&#39;</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+    
+    <span class="c1"># Definir el orden y los colores consistentes</span>
+    <span class="n">value_order</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;pastel&#39;</span><span class="p">)</span>  <span class="c1"># Misma paleta para ambos gráficos</span>
+    
+    <span class="c1"># Primer subplot - Gráfico de barras</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">palette</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">value_order</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Conteo de </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Añadir los valores encima de las barras</span>
+    <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">label_type</span><span class="o">=</span><span class="s1">&#39;edge&#39;</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">labels_binarias</span><span class="p">)</span>
+    
+    <span class="c1"># Segundo subplot - Diagrama de torta</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">value_order</span><span class="p">]</span>  <span class="c1"># Ordenar los conteos</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> 
+            <span class="n">labels</span><span class="o">=</span><span class="n">counts</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> 
+            <span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.1f%%</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span>  <span class="c1"># Usar la misma paleta ordenada</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Distribución de </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column: HighBP
+</pre></div>
+</div>
+<img alt="_images/1c0fca7d3aa835f3f080da74d2c9efb962e773393f394d458e53005461b19fc6.png" src="_images/1c0fca7d3aa835f3f080da74d2c9efb962e773393f394d458e53005461b19fc6.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column: HighChol
+</pre></div>
+</div>
+<img alt="_images/3c38b8d97b0e8641a171b1029649477aafb9328654278d5d5f1a0042437929cc.png" src="_images/3c38b8d97b0e8641a171b1029649477aafb9328654278d5d5f1a0042437929cc.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column: CholCheck
+</pre></div>
+</div>
+<img alt="_images/51cd899bc4b807b76a4f298fcd0fd66ac16f20683382c10a45ed15f41ced9524.png" src="_images/51cd899bc4b807b76a4f298fcd0fd66ac16f20683382c10a45ed15f41ced9524.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column: Smoker
+</pre></div>
+</div>
+<img alt="_images/8fec1ef5136236da1b84d33ba3cc341e6bbfce9fcf8aefe80099da42566406b9.png" src="_images/8fec1ef5136236da1b84d33ba3cc341e6bbfce9fcf8aefe80099da42566406b9.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column: Stroke
+</pre></div>
+</div>
+<img alt="_images/18f56fad41723f87f37d1f87c0c55c420347217a4b7d14663594da9e9639819c.png" src="_images/18f56fad41723f87f37d1f87c0c55c420347217a4b7d14663594da9e9639819c.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column: HeartDiseaseorAttack
+</pre></div>
+</div>
+<img alt="_images/e1e2cdb8434f7b51bcaca0f331dcf997122f231bd58e77827fa706cc6df06a68.png" src="_images/e1e2cdb8434f7b51bcaca0f331dcf997122f231bd58e77827fa706cc6df06a68.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column: PhysActivity
+</pre></div>
+</div>
+<img alt="_images/dd4a7816de82a1b589b860927334ea3d32ab2e75d8bd4c026ff11ef6ea410103.png" src="_images/dd4a7816de82a1b589b860927334ea3d32ab2e75d8bd4c026ff11ef6ea410103.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column: Fruits
+</pre></div>
+</div>
+<img alt="_images/90330d92dfdbeb8586d600df77998071e464ce029295d921412e24d56b9a4886.png" src="_images/90330d92dfdbeb8586d600df77998071e464ce029295d921412e24d56b9a4886.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column: Veggies
+</pre></div>
+</div>
+<img alt="_images/dc6290665b54b64bb44e8bc861f6f6f8b4d1e69e7d09ccf41c8d2acdd113af2f.png" src="_images/dc6290665b54b64bb44e8bc861f6f6f8b4d1e69e7d09ccf41c8d2acdd113af2f.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column: HvyAlcoholConsump
+</pre></div>
+</div>
+<img alt="_images/d512a6b3d04e363114dcbcd4a12fd3fa38abfea2e226ef163623782e6dd064ca.png" src="_images/d512a6b3d04e363114dcbcd4a12fd3fa38abfea2e226ef163623782e6dd064ca.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column: AnyHealthcare
+</pre></div>
+</div>
+<img alt="_images/ce183616a560b1d57f58dc08e245fbbc3f2323bef413c61033ff30351243277f.png" src="_images/ce183616a560b1d57f58dc08e245fbbc3f2323bef413c61033ff30351243277f.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column: NoDocbcCost
+</pre></div>
+</div>
+<img alt="_images/be9a4330ef6d1d8f8cbb740007b7b2176e7209b9cdda5a2609e03b910d1ac833.png" src="_images/be9a4330ef6d1d8f8cbb740007b7b2176e7209b9cdda5a2609e03b910d1ac833.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column: DiffWalk
+</pre></div>
+</div>
+<img alt="_images/c656023a9b98be42b583a168b5810812f17c25d1d8b048d5570a4eca5e05bebb.png" src="_images/c656023a9b98be42b583a168b5810812f17c25d1d8b048d5570a4eca5e05bebb.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column: Sex
+</pre></div>
+</div>
+<img alt="_images/49ef920a5b1ba643f2383900c85bd6829fd3bd77814199447a7938146319ad0c.png" src="_images/49ef920a5b1ba643f2383900c85bd6829fd3bd77814199447a7938146319ad0c.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column: Diabetes_binary
+</pre></div>
+</div>
+<img alt="_images/4a5603a824598ba0b5165901cff262c5afeeacffe87d379fce2bd8c7e29a5b74.png" src="_images/4a5603a824598ba0b5165901cff262c5afeeacffe87d379fce2bd8c7e29a5b74.png" />
+</div>
+</div>
+<p><strong>Interpretación de Variables Binarias:</strong></p>
+<p>El análisis de las proporciones revela un marcado desbalance en varias variables binarias, lo que tiene implicaciones importantes para el análisis y modelado:</p>
+<ul class="simple">
+<li><p>Variables con Distribución Relativamente Equilibrada: Algunas características como <code class="docutils literal notranslate"><span class="pre">HighBP</span></code> (42.9% positivos) y <code class="docutils literal notranslate"><span class="pre">HighChol</span></code> (42.4% positivos) presentan una distribución cercana al equilibrio, lo que facilita su análisis sin necesidad de ajustes especiales. Esto sugiere que estas condiciones son comunes en la población estudiada, lo que podría reflejar factores de riesgo prevalentes en el perfil demográfico de la muestra.</p></li>
+<li><p>Desbalance Moderado: Variables como <code class="docutils literal notranslate"><span class="pre">Fruits</span></code> (36.6% negativos) y <code class="docutils literal notranslate"><span class="pre">Veggies</span></code> (18.9% negativos) muestran un desbalance moderado. Aunque no son extremos, estos casos podrían beneficiarse de técnicas en modelos predictivos para asegurar que la clase minoritaria tenga suficiente representación en las predicciones.</p></li>
+<li><p>Desbalance Extremo: En contraste, variables como <code class="docutils literal notranslate"><span class="pre">Stroke</span></code> (4.1% positivos), <code class="docutils literal notranslate"><span class="pre">HvyAlcoholConsump</span></code> (5.6% positivos) exhiben un desbalance pronunciado, donde la clase positiva es significativamente menor. Esto implica riesgos como:</p>
+<ul>
+<li><p>Sesgo en Modelos: Los algoritmos podrían ignorar la clase minoritaria al optimizar la precisión global, subestimando patrones críticos.</p></li>
+<li><p>Sobreajuste: Con tan pocos casos positivos, el modelo podría memorizar ruido en lugar de aprender relaciones generalizables.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="variables-categoricas">
+<h3>Variables Categóricas<a class="headerlink" href="#variables-categoricas" title="Link to this heading">#</a></h3>
+<p>Se generan gráficos de barras para visualizar la distribución de cada variable categórica. Cada gráfico muestra:</p>
+<ul class="simple">
+<li><p>El número absoluto de observaciones (conteo)</p></li>
+<li><p>El porcentaje relativo respecto al total</p></li>
+<li><p>Las categorías ordenadas según su escala natural.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">categoricas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GenHlth&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Education&#39;</span><span class="p">,</span> <span class="s1">&#39;Income&#39;</span><span class="p">]</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">font_scale</span><span class="o">=</span><span class="mf">1.4</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">categoricas</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Column:&#39;</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+    
+    <span class="c1"># Obtener el orden de las categorías según el diccionario</span>
+    <span class="n">value_order</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>  
+    
+    <span class="c1"># Crear el gráfico de barras ordenado</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="n">value_order</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;pastel&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">patches</span><span class="p">:</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">())</span>
+        <span class="n">percent</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="se">\n</span><span class="s1">(</span><span class="si">{</span><span class="n">percent</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%)&#39;</span><span class="p">,</span>
+                    <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span><span class="o">/</span><span class="mf">2.</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">()),</span>
+                    <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+                    <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+                    <span class="n">textcoords</span><span class="o">=</span><span class="s1">&#39;offset points&#39;</span><span class="p">,</span>
+                    <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Conteo y porcentaje de </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column: GenHlth
+</pre></div>
+</div>
+<img alt="_images/88b8982d51ea44430e87cf4f8f7445601a15f9e9749a26738028895fa0df1590.png" src="_images/88b8982d51ea44430e87cf4f8f7445601a15f9e9749a26738028895fa0df1590.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column: Age
+</pre></div>
+</div>
+<img alt="_images/a1719db6a3d243b21373d21e865d43078bca8ceb87285ec7e7402ceb17c0a1b5.png" src="_images/a1719db6a3d243b21373d21e865d43078bca8ceb87285ec7e7402ceb17c0a1b5.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column: Education
+</pre></div>
+</div>
+<img alt="_images/0bbed6c6dea5ae48fbbd00108a351e53525b206694c36a40de1975ce14580634.png" src="_images/0bbed6c6dea5ae48fbbd00108a351e53525b206694c36a40de1975ce14580634.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column: Income
+</pre></div>
+</div>
+<img alt="_images/ede2e5b5fe253cbe5780e2e80d7626f563a3bf9e9a68dbdd25c28b5f21bb5dfe.png" src="_images/ede2e5b5fe253cbe5780e2e80d7626f563a3bf9e9a68dbdd25c28b5f21bb5dfe.png" />
+</div>
+</div>
+<p><strong>Interpretación de Variables Categóricas:</strong></p>
+<p>El análisis de las distribuciones revela patrones demográficos y socioeconómicos clave en la población estudiada:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GenHlth</span></code>
+La distribución muestra una tendencia hacia percepciones positivas de salud: el 53.0% de los encuestados reporta salud “muy buena” (35.1%) o “excelente” (17.9%), mientras solo el 4.8% la califica como “pobre”.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Age</span></code>
+Se observa una concentración alta en edades entre 50 y 69 años (grupos 7 a 10), lo cual sugiere que la mayoría de los participantes o casos en este conjunto de datos son personas de mediana edad a adultos mayores. Los grupos con menor representación son:</p>
+<ul>
+<li><p>18–24 años (grupo 1): 5,700 personas (2.2%)</p></li>
+<li><p>25–29 años (grupo 2): 7,598 personas (3.0%)
+Esto indica que hay menos jóvenes en el conjunto de datos, posiblemente porque se trata de una muestra relacionada con condiciones de salud que afectan más a personas mayores.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Education</span></code>
+Se observa una marcada sobrerrepresentación de educación superior: el 42.3% corresponde a graduados universitarios (categoría 6), seguido por “algo de universidad” (27.6%). Esto se evidencia al compararlo con el 0.1%, 1.6% y 3.7% de las categorias 1, 2 y 3 respectivamente. Este perfil sugiere un sesgo de selección hacia población con mayor acceso a educación, lo que podría limitar la generalización de hallazgos a grupos menos educados.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Income</span></code>
+La distribución económica muestra una concentración en la clase media-alta: el 35.6% pertenece a la categoría más alta, seguido por la segunda categoría mas alta con 17%. Esta estructura, combinada con los datos educativos, refuerza la hipótesis de que la muestra subrepresenta poblaciones vulnerables.</p></li>
+</ul>
+</section>
+<section id="variables-numericas">
+<h3>Variables Númericas<a class="headerlink" href="#variables-numericas" title="Link to this heading">#</a></h3>
+<p>Se genera una tabla para visualizar algunos estadísticos descriptivos para las variables númericas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;MentHlth&#39;</span><span class="p">,</span> <span class="s1">&#39;PhysHlth&#39;</span><span class="p">,</span><span class="s1">&#39;BMI&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>MentHlth</th>
+      <td>253680.0</td>
+      <td>3.184772</td>
+      <td>7.412847</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>30.0</td>
+    </tr>
+    <tr>
+      <th>PhysHlth</th>
+      <td>253680.0</td>
+      <td>4.242081</td>
+      <td>8.717951</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>30.0</td>
+    </tr>
+    <tr>
+      <th>BMI</th>
+      <td>253680.0</td>
+      <td>28.382364</td>
+      <td>6.608694</td>
+      <td>12.0</td>
+      <td>24.0</td>
+      <td>27.0</td>
+      <td>31.0</td>
+      <td>98.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Interpretación de Variables Númericas:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MentHlth</span></code>: Los participantes reportaron un promedio de 3.18 días con salud mental afectada en los últimos 30 días. Con una desviación estándar de 7.41 días, indicando una variabilidad moderada en las respuestas.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PhysHlth</span></code>: El promedio fue ligeramente mayor (4.24 días), sugiriendo que los problemas físicos son más frecuentes que los mentales en esta muestra. Con una dispersión mayor (desviación estándar de 8.72 días), lo que sugiere que los problemas físicos muestran mayor variabilidad entre los individuos.</p></li>
+</ul>
+<p>Ambas variables comparten un patrón similar en los percentiles:</p>
+<ul class="simple">
+<li><p>25% inferior: 0 días de afectación</p></li>
+<li><p>Mediana (50%): 0 días</p></li>
+<li><p>75% superior: 2 días para salud mental y 3 días para salud física</p></li>
+</ul>
+<p>Este patrón revela que la mayoría de la población (al menos 50%) no reportó días con problemas de salud.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">BMI</span></code>: El Índice de Masa Corporal (BMI) muestra una media de 28.38 y una desviación estándar de 6.61, indicando que la mayoría de los valores se agrupan alrededor de 28.38, con una dispersión moderada. La distribución está sesgada hacia valores más altos.</p>
+<ul>
+<li><p>Mediana (50%): 27.0 &lt; Media (28.38), lo que sugiere una cola derecha (presencia de valores atípicos altos).</p></li>
+<li><p>Rango intercuartílico (IQR): 7.0 (Q3-Q1 = 31.0 - 24.0), capturando el 50% central de los datos.</p></li>
+<li><p>Valores extremos: El mínimo (12.0) y máximo (98.0) son atípicos, especialmente el máximo (98.0), que está muy alejado del percentil 75% (31.0).</p></li>
+</ul>
+</li>
+</ul>
+<hr class="docutils" />
+<p>Se genera un histograma y un boxplot para visualizar la distribución de frecuencias e identificar outliers (puntos fuera de los bigotes) y la dispersión de los datos. Además se evalua:</p>
+<ul class="simple">
+<li><p>Asimetría:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">skew</span> <span class="pre">=</span> <span class="pre">0</span></code>: Distribución simétrica (valores aceptables skew <span class="math notranslate nohighlight">\(\in (-1,1)\)</span>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">skew</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>: Mayor peso en la cola izquierda de la distribución (sesgo positivo).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">skew</span> <span class="pre">&lt;</span> <span class="pre">0</span></code>: Mayor peso en la cola derecha de la distribución (sesgo negativo).</p></li>
+</ul>
+</li>
+<li><p>Kurtosis: Determina si una distribución tiene colas gruesas con respecto a la distribución normal. Proporciona información sobre la forma de una distribución de frecuencias.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">kurtosis</span> <span class="pre">=</span> <span class="pre">3</span></code>: se denomina mesocúrtica (distribución normal).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kurtosis</span> <span class="pre">&lt;</span> <span class="pre">3</span></code>: se denomina platicúrtica (distribución con colas menos gruesas que la normal).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kurtosis</span> <span class="pre">&gt;</span> <span class="pre">3</span></code>: se denomina leptocúrtica (distribución con colas más gruesas que la normal) y significa que trata de producir más valores atípicos que la distribución normal.</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numericas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MentHlth&#39;</span><span class="p">,</span> <span class="s1">&#39;PhysHlth&#39;</span><span class="p">,</span> <span class="s1">&#39;BMI&#39;</span><span class="p">]</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">kurtosis</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">font_scale</span><span class="o">=</span><span class="mf">1.4</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">numericas</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Column:&#39;</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Skew:&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">skew</span><span class="p">(),</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Kurtosis: &#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">kurtosis</span><span class="p">(),</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">grid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Distribución de </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Distribución de </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column: MentHlth
+Skew: 2.72
+Kurtosis:  6.44
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 1600x700 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="_images/1aa02f2e07c2759e6c006ff622cac0c8d92a1d838b65a576445d8659ba3251c5.png" src="_images/1aa02f2e07c2759e6c006ff622cac0c8d92a1d838b65a576445d8659ba3251c5.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column: PhysHlth
+Skew: 2.21
+Kurtosis:  3.5
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 1600x700 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="_images/5ef7976022eb3cd8a0b63e2177c4dad4d7420e5b1001fc87f7a50e3e75d11551.png" src="_images/5ef7976022eb3cd8a0b63e2177c4dad4d7420e5b1001fc87f7a50e3e75d11551.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column: BMI
+Skew: 2.12
+Kurtosis:  11.0
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 1600x700 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="_images/85e71fbe98e13a3c59e71c5e565890c8c84881447df2bba640d49c8b82e5d476.png" src="_images/85e71fbe98e13a3c59e71c5e565890c8c84881447df2bba640d49c8b82e5d476.png" />
+</div>
+</div>
+<p><strong>Interpretación Variables Númericas:</strong></p>
+<p>Los datos muestran que la variable <code class="docutils literal notranslate"><span class="pre">MentHlth</span></code> presenta una distribución fuertemente sesgada a la derecha (skewness = 2.72) con una kurtosis elevada (6.44), indicando:</p>
+<ul class="simple">
+<li><p>Una concentración extrema de valores bajos (cerca de 0 días)</p></li>
+<li><p>Una larga cola hacia valores altos</p></li>
+<li><p>Presencia significativa de outliers, como evidencia el boxplot
+Esta distribución sugiere que la mayoría de la población reporta pocos o ningún día de afectación mental, mientras que un pequeño grupo muestra afectación persistente.</p></li>
+</ul>
+<p>La variable <code class="docutils literal notranslate"><span class="pre">PhysHlth</span></code> también muestra sesgo positivo (skewness = 2.21) pero con una kurtosis menos pronunciada (3.5), lo que revela:</p>
+<ul class="simple">
+<li><p>Similar concentración en valores bajos</p></li>
+<li><p>Cola derecha menos extrema que MentHlth</p></li>
+<li><p>Menor cantidad de outliers extremos</p></li>
+</ul>
+<p>Los datos muestran que la variable <code class="docutils literal notranslate"><span class="pre">BMI</span></code> presenta una distribución fuertemente sesgada a la derecha (skewness = 2.12) con una kurtosis muy elevada (11.0), lo que indica:</p>
+<ul class="simple">
+<li><p>Una concentración extrema de valores en el rango bajo a moderado (probablemente entre 20-30)</p></li>
+<li><p>Una cola derecha muy larga que se extiende hacia valores altos de BMI</p></li>
+<li><p>Presencia significativa de outliers extremos en los valores superiores</p></li>
+</ul>
+<p>Esta distribución sugiere que:</p>
+<ul class="simple">
+<li><p>La mayoría de la población tiene valores de BMI dentro del rango normal o ligeramente elevado</p></li>
+<li><p>Existe un grupo más pequeño pero significativo con obesidad moderada</p></li>
+<li><p>Un grupo muy reducido presenta valores extremadamente altos (obesidad mórbida)</p></li>
+</ul>
+<p>La kurtosis excepcionalmente alta (11.0 vs 3.5 en PhysHlth) indica que:</p>
+<ul class="simple">
+<li><p>Los datos están mucho más concentrados alrededor de la media que en una distribución normal</p></li>
+<li><p>Las colas son más pesadas de lo esperado</p></li>
+<li><p>Los outliers son más extremos que en otras variables de salud analizadas</p></li>
+</ul>
+<p>Comparado con <code class="docutils literal notranslate"><span class="pre">MentHlth</span></code> y <code class="docutils literal notranslate"><span class="pre">PhysHlth</span></code>:</p>
+<ul class="simple">
+<li><p>El sesgo es similar pero ligeramente menos pronunciado</p></li>
+<li><p>La kurtosis es notablemente más alta, mostrando mayor concentración en valores centrales</p></li>
+<li><p>Los outliers parecen ser más extremos en BMI que en las variables de salud mental/física, debido a que en las variables de percepción el rango va desde 0 a 30 días del mes, en cambio el BMI no tiene limite</p></li>
+</ul>
+<p>En estos casos podemos realizar una transformación logarítmica que puede ayudar en la normalización, por lo que esta variable puede mantener la escala estándar con otras variables.</p>
+</section>
+</section>
+<section id="analisis-bivariado">
+<h2>Análisis Bivariado<a class="headerlink" href="#analisis-bivariado" title="Link to this heading">#</a></h2>
+<p>Se generan graficos de barras para analizar la relación entre un conjunto de variables binarias y la presencia de diabetes con el fin de identificar qué variables binarias están asociadas a mayores proporciones de diabetes en el conjunto de datos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">font_scale</span><span class="o">=</span><span class="mf">1.4</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">7</span> <span class="o">*</span> <span class="mi">5</span><span class="p">))</span> 
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">binarias</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>  
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> 
+    <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> 
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Diabetes_binary&#39;</span><span class="p">,</span> 
+    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> 
+    <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;pastel&#39;</span><span class="p">,</span>
+    <span class="n">errorbar</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Diabetes vs </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Proporción con Diabetes&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e7aaf24dc270e2b2d434b59e69ae2b06bc90189b9794d0db7ec85b44bf84d7e2.png" src="_images/e7aaf24dc270e2b2d434b59e69ae2b06bc90189b9794d0db7ec85b44bf84d7e2.png" />
+</div>
+</div>
+<p><strong>Interpretación:</strong></p>
+<p>Los resultados visualizados muestran que la proporción de personas con diabetes es notablemente mayor en aquellos que presentan condiciones crónicas como hipertensión, colesterol alto, enfermedades cardiovasculares, antecedentes de derrame cerebral y dificultades físicas para caminar. Esta tendencia sugiere una fuerte asociación entre la diabetes y la presencia de otras enfermedades no transmisibles. Además, se observa que ciertos comportamientos y estilos de vida, como la inactividad física y el consumo de tabaco, también están relacionados con una mayor prevalencia de diabetes. Por otro lado, factores como la actividad física regular y una alimentación con frutas y verduras parecen asociarse con una menor proporción de personas con diabetes. Finalmente, las barreras económicas y el acceso limitado a servicios de salud también muestran una posible relación con una mayor proporción de casos, lo cual resalta la importancia del contexto socioeconómico en el manejo y prevención de esta enfermedad. En conjunto, los gráficos evidencian que la diabetes no solo está influenciada por condiciones médicas, sino también por determinantes sociales y conductuales de la salud.</p>
+<hr class="docutils" />
+<p>Se generan graficos de barras para analizar la relación entre variables categóricas y la presencia de diabetes en la población estudiada. Con el fin de identificar qué categorías dentro de cada variable presentan mayores proporciones de diabetes, lo que podría indicar posibles factores de riesgo asociados.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">font_scale</span><span class="o">=</span><span class="mf">1.4</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">categoricas</span><span class="p">:</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> 
+        <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Diabetes_binary&#39;</span><span class="p">,</span> 
+        <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> 
+        <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;pastel&#39;</span><span class="p">,</span>
+        <span class="n">errorbar</span><span class="o">=</span><span class="kc">None</span>  
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Diabetes vs </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Proporción con Diabetes&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5aa010e9cfb2e70420af984887e96dc5f6b3d56a4f2bc51aa6a634741bd5a321.png" src="_images/5aa010e9cfb2e70420af984887e96dc5f6b3d56a4f2bc51aa6a634741bd5a321.png" />
+<img alt="_images/fd54bf43d6464c39489d661767b20c1a32b9d47153f934eae66996b431dd1a9f.png" src="_images/fd54bf43d6464c39489d661767b20c1a32b9d47153f934eae66996b431dd1a9f.png" />
+<img alt="_images/711449eb13e7fb9a604b2a4ec15bd626ff4accfc4ecfc01e8c9d2434e41c9c89.png" src="_images/711449eb13e7fb9a604b2a4ec15bd626ff4accfc4ecfc01e8c9d2434e41c9c89.png" />
+<img alt="_images/78b7d6bcd2d949d4ca107f905a3a9c2c57d8be98b0ea75810763c03d3bfc07ee.png" src="_images/78b7d6bcd2d949d4ca107f905a3a9c2c57d8be98b0ea75810763c03d3bfc07ee.png" />
+</div>
+</div>
+<p><strong>Interpretación:</strong></p>
+<p>Los resultados muestran una relación clara entre la proporción de personas con diabetes y diversas variables sociodemográficas. En cuanto al estado general de salud percibido <code class="docutils literal notranslate"><span class="pre">GenHlth</span></code>, se observa que a medida que las personas reportan una peor salud (del valor 1 al 5), la proporción de casos de diabetes aumenta progresivamente, lo que indica una fuerte asociación entre la autopercepción negativa de la salud y la presencia de diabetes. En relación con la <code class="docutils literal notranslate"><span class="pre">Age</span></code>, los datos revelan una tendencia ascendente en la proporción de diabetes conforme se avanza en los grupos etarios, alcanzando su punto máximo en los grupos de mayor edad, lo que sugiere que la diabetes es más común en adultos mayores. Por otro lado, los niveles de <code class="docutils literal notranslate"><span class="pre">Education</span></code> muestran una tendencia inversa: las personas con menor nivel educativo presentan una mayor proporción de diabetes, mientras que a mayor nivel educativo, esta proporción disminuye gradualmente. Esta misma tendencia se refleja en los niveles de <code class="docutils literal notranslate"><span class="pre">Income</span></code>, donde las personas con ingresos más bajos muestran una mayor prevalencia de diabetes en comparación con aquellas que pertenecen a grupos de ingresos más altos. En conjunto, estos resultados evidencian la influencia significativa de factores sociales como la edad, la educación, el ingreso económico y la percepción de salud en la prevalencia de la diabetes, resaltando la importancia de abordar esta enfermedad desde un enfoque multidimensional..</p>
+<hr class="docutils" />
+<p>Se visualiza la asociación entre variables numéricas y la diabetes. Los gráficos combinan barras (proporción de diabetes por categoría) y una línea de tendencia (roja), permitiendo identificar patrones o relaciones monotónicas entre las variables y la variable objetivo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">font_scale</span><span class="o">=</span><span class="mf">1.4</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">numericas</span><span class="p">:</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">col</span> <span class="o">!=</span> <span class="s2">&quot;BMI&quot;</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> 
+            <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Diabetes_binary&#39;</span><span class="p">,</span> 
+            <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> 
+            <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;pastel&#39;</span><span class="p">,</span>
+            <span class="n">errorbar</span><span class="o">=</span><span class="kc">None</span>  
+        <span class="p">)</span>
+        
+        <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> 
+        <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Diabetes_binary&#39;</span><span class="p">,</span> 
+        <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+        <span class="n">sort</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Diabetes vs </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Proporción con Diabetes&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        
+             
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;BMI&#39;</span><span class="p">,</span> 
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Diabetes_binary&#39;</span><span class="p">,</span> 
+    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+    <span class="n">estimator</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> 
+    <span class="n">errorbar</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Diabetes vs BMI&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Proporción con Diabetes&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\seaborn\_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
+  with pd.option_context(&#39;mode.use_inf_as_na&#39;, True):
+C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\seaborn\_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
+  with pd.option_context(&#39;mode.use_inf_as_na&#39;, True):
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\seaborn\relational.py:441: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  sub_data = grouped.apply(agg, other).reset_index()
+</pre></div>
+</div>
+<img alt="_images/d648c1e99bd94d9784fcfa2d20cd59a77ab6680bfe8e9ee7fa6a0991674f822e.png" src="_images/d648c1e99bd94d9784fcfa2d20cd59a77ab6680bfe8e9ee7fa6a0991674f822e.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\seaborn\_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
+  with pd.option_context(&#39;mode.use_inf_as_na&#39;, True):
+C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\seaborn\_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
+  with pd.option_context(&#39;mode.use_inf_as_na&#39;, True):
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\seaborn\relational.py:441: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  sub_data = grouped.apply(agg, other).reset_index()
+</pre></div>
+</div>
+<img alt="_images/89a06c3e83e34a6002cea6e7c409e35f57749606726bea2545fddca50e5e2427.png" src="_images/89a06c3e83e34a6002cea6e7c409e35f57749606726bea2545fddca50e5e2427.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\seaborn\_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
+  with pd.option_context(&#39;mode.use_inf_as_na&#39;, True):
+C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\seaborn\_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
+  with pd.option_context(&#39;mode.use_inf_as_na&#39;, True):
+C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\seaborn\relational.py:441: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  sub_data = grouped.apply(agg, other).reset_index()
+</pre></div>
+</div>
+<img alt="_images/35de6c90b9fc64f934704ecc00409e3ec3e42232a4a0b8a038856bfb26268c19.png" src="_images/35de6c90b9fc64f934704ecc00409e3ec3e42232a4a0b8a038856bfb26268c19.png" />
+</div>
+</div>
+<p><strong>Interpretación:</strong></p>
+<p>Los gráficos muestran la relación entre la salud mental <code class="docutils literal notranslate"><span class="pre">MentHith</span></code> y física <code class="docutils literal notranslate"><span class="pre">PhysHith</span></code> con la proporción de casos de diabetes. En ambos casos, se observa una tendencia clara: a medida que empeora el estado de salud (aumentan los valores en los ejes horizontales), la proporción de personas con diabetes incrementa. Para la salud mental, la línea de tendencia roja presenta un ascenso sostenido, aunque con cierta variabilidad en los valores intermedios, lo que sugiere que los días con mayor afectación mental están asociados a una mayor prevalencia de diabetes. Por otro lado, en la salud física, la tendencia es más marcada y consistente, especialmente en los valores más altos, indicando una fuerte correlación entre el deterioro físico y la presencia de diabetes. Estos resultados refuerzan la hipótesis de que tanto la salud mental como física están vinculadas al riesgo de diabetes, siendo el impacto particularmente evidente en estados de salud más críticos.</p>
+<p>El grafico del índice de masa corporal <code class="docutils literal notranslate"><span class="pre">BMI</span></code> no parace muy claro luego de 60 BMI debido a los cambios bruscos que se observan, aunque puede estar ocurriendo que al ser valores altos de BMI tenemos menos muestras y puede ocurrir que en un valor especifico el 100% tiene diabetes pero luego en el siguiente valor especifico el 0% de esas pocas muestras no tiene diabetes.</p>
+<hr class="docutils" />
+<p>Para evaluar la tendencia entre las variables númericas y la prevalencia de diabetes de manera más clara se implementó un análisis basado en categorización de rangos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Diccionario con bins y labels para cada variable</span>
+<span class="n">config_categorias</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;BMI&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;bins&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
+        <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;(0,16]&#39;</span><span class="p">,</span> <span class="s1">&#39;(16,17]&#39;</span><span class="p">,</span> <span class="s1">&#39;(17,19]&#39;</span><span class="p">,</span> <span class="s1">&#39;(19,25]&#39;</span><span class="p">,</span> <span class="s1">&#39;(25,30]&#39;</span><span class="p">,</span> <span class="s1">&#39;(30,35]&#39;</span><span class="p">,</span> <span class="s1">&#39;(35,40]&#39;</span><span class="p">,</span> <span class="s1">&#39;(40,100]&#39;</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;MentHlth&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;bins&quot;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">31</span><span class="p">],</span>
+        <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;[0,5]&#39;</span><span class="p">,</span> <span class="s1">&#39;(5,10]&#39;</span><span class="p">,</span> <span class="s1">&#39;(10,15]&#39;</span><span class="p">,</span> <span class="s1">&#39;(15,20]&#39;</span><span class="p">,</span> <span class="s1">&#39;(20,25]&#39;</span><span class="p">,</span> <span class="s1">&#39;(25,30]&#39;</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;PhysHlth&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;bins&quot;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">31</span><span class="p">],</span>
+        <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;[0,5]&#39;</span><span class="p">,</span> <span class="s1">&#39;(5,10]&#39;</span><span class="p">,</span> <span class="s1">&#39;(10,15]&#39;</span><span class="p">,</span> <span class="s1">&#39;(15,20]&#39;</span><span class="p">,</span> <span class="s1">&#39;(20,25]&#39;</span><span class="p">,</span> <span class="s1">&#39;(25,30]&#39;</span><span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">numericas</span><span class="p">:</span>
+    <span class="c1"># Obtener bins y labels para la columna actual</span>
+    <span class="n">bins</span> <span class="o">=</span> <span class="n">config_categorias</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="s2">&quot;bins&quot;</span><span class="p">]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">config_categorias</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="s2">&quot;labels&quot;</span><span class="p">]</span>
+    
+    <span class="c1"># Calcular los grupos directamente con pd.cut() sin almacenar en el DataFrame</span>
+    <span class="n">grupos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+    
+    <span class="c1"># Calcular el porcentaje de diabetes</span>
+    <span class="n">diabetes_percent</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">grupos</span><span class="p">)[</span><span class="s1">&#39;Diabetes_binary&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span>
+    
+    <span class="c1"># Crear el gráfico</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+    <span class="n">diabetes_percent</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Diabetes vs </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Porcentaje con diabetes (%)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\david\AppData\Local\Temp\ipykernel_19656\2871714856.py:26: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+  diabetes_percent = df.groupby(grupos)[&#39;Diabetes_binary&#39;].mean() * 100
+</pre></div>
+</div>
+<img alt="_images/333401b7f27e934ae3422ce93373644e54fe7abc44c3d5c65b56cb6def2ef011.png" src="_images/333401b7f27e934ae3422ce93373644e54fe7abc44c3d5c65b56cb6def2ef011.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\david\AppData\Local\Temp\ipykernel_19656\2871714856.py:26: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+  diabetes_percent = df.groupby(grupos)[&#39;Diabetes_binary&#39;].mean() * 100
+</pre></div>
+</div>
+<img alt="_images/72f696ab36fb7fb2b1421d0f6a6ec1a7c2fd0cf4427d5e21720133f8e329127c.png" src="_images/72f696ab36fb7fb2b1421d0f6a6ec1a7c2fd0cf4427d5e21720133f8e329127c.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\david\AppData\Local\Temp\ipykernel_19656\2871714856.py:26: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+  diabetes_percent = df.groupby(grupos)[&#39;Diabetes_binary&#39;].mean() * 100
+</pre></div>
+</div>
+<img alt="_images/fc235f7bac6bba35b90ef5713f83a452b1d15fc7da77f040cb6ad0401a26dbc0.png" src="_images/fc235f7bac6bba35b90ef5713f83a452b1d15fc7da77f040cb6ad0401a26dbc0.png" />
+</div>
+</div>
+<p><strong>Interpretación:</strong></p>
+<p>Estos gráficos corroboran claras asociaciones entre la diabetes y diversos factores relacionados con la salud física, mental y el Índice de Masa Corporal.</p>
+<p>En primer lugar, se evidencia una relación directa entre el deterioro de la salud mental y el aumento en la proporción de personas con diabetes. A medida que se incrementan los días con problemas de salud mental, también aumenta el porcentaje de personas con diagnóstico de diabetes, lo que sugiere una posible interacción entre el bienestar psicológico y el desarrollo o manejo de esta enfermedad.</p>
+<p>De manera similar, la salud física también muestra una tendencia marcada: las personas que reportan más días con limitaciones físicas o problemas de salud presentan una mayor prevalencia de diabetes. Esto podría indicar que la diabetes tiende a coexistir con otras condiciones físicas crónicas o que su presencia contribuye al deterioro del estado físico general.</p>
+<p>Finalmente, el índice de masa corporal (IMC) muestra una relación especialmente clara: a medida que el IMC aumenta, también lo hace el porcentaje de personas con diabetes. Las tasas más altas se encuentran en los grupos con obesidad severa, lo que refuerza la fuerte asociación entre el exceso de peso y el riesgo de desarrollar diabetes.</p>
+</section>
+<section id="analisis-multivariado">
+<h2>Análisis Multivariado<a class="headerlink" href="#analisis-multivariado" title="Link to this heading">#</a></h2>
+<p>Para identificar relaciones lineales entre las variables del dataset, se generó una matriz de correlación mediante un heatmap. Este gráfico muestra el coeficiente de correlación de Pearson (rango: -1 a 1) entre cada par de variables, utilizando una escala de colores (azul para correlaciones negativas, rojo para positivas). Los valores numéricos anotados permiten evaluar posibles dependencias entre variables.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">font_scale</span><span class="o">=</span><span class="mf">1.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">(),</span>
+    <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">,</span>          
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">,</span>    
+    <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+    <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span>      
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Matriz de Correlación&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e402c16e3143be30cd4a7780b9025afa1a2a8eac90732c131325a323f2eb90b7.png" src="_images/e402c16e3143be30cd4a7780b9025afa1a2a8eac90732c131325a323f2eb90b7.png" />
+</div>
+</div>
+<p><strong>Interpretación:</strong></p>
+<p>El análisis de la matriz de correlación revela patrones clave entre las variables y su asociación con la diabetes (Diabetes_binary). Se destacan las siguientes observaciones:</p>
+<ol class="arabic simple">
+<li><p>Variables con mayor correlación positiva con diabetes:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Presión arterial alta <code class="docutils literal notranslate"><span class="pre">HighBP</span></code> (0.26) y índice de masa corporal <code class="docutils literal notranslate"><span class="pre">BMI</span></code> (0.22) muestran una asociación moderada pero significativa, lo que sugiere que estos factores están vinculados a un mayor riesgo de diabetes.</p></li>
+<li><p>Salud general autopercibida <code class="docutils literal notranslate"><span class="pre">GenHith</span></code> (0.29) y dificultad para caminar <code class="docutils literal notranslate"><span class="pre">DiffWalk</span></code> (0.22) también presentan correlaciones positivas, indicando que un peor estado de salud físico y movilidad reducida pueden estar relacionados con la presencia de diabetes.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Variables con correlaciones negativas:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Actividad física <code class="docutils literal notranslate"><span class="pre">PhysActivity</span></code> (-0.12) y nivel de ingresos <code class="docutils literal notranslate"><span class="pre">Income</span></code> (-0.16) muestran una relación inversa débil con diabetes, lo que apunta a que estilos de vida más activos y mayores recursos económicos podrían asociarse a menor prevalencia de la enfermedad.</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p>Relaciones entre variables predictoras:</p></li>
+</ol>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GenHith</span></code> está fuertemente correlacionada con PhysHith 0.52 y DiffWalk 0.46, lo que refleja una interconexión entre salud física, movilidad y percepción general de salud.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Education</span></code> e <code class="docutils literal notranslate"><span class="pre">Income</span></code> presentan una correlación positiva entre sí (0.45), sugiriendo que factores socioeconómicos podrían influir en conjunto en los resultados de salud.</p></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li><p>Correlaciones débiles o nulas:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Variables como consumo de alcohol <code class="docutils literal notranslate"><span class="pre">HvyAlcoholConsump</span></code> o sexo <code class="docutils literal notranslate"><span class="pre">Sex</span></code> muestran asociaciones cercanas a cero con diabetes, indicando que su impacto directo es marginal según estos datos.</p></li>
+</ul>
+<hr class="docutils" />
+<p>A continuación hallamos el VIF el cual determina la fuerza de la correlación entre las variables independientes. Se pronostica tomando una variable y comparándola con todas las demás. La puntuación VIF de una variable independiente representa hasta qué punto la variable se explica por otras variables independientes.</p>
+<ul class="simple">
+<li><p>Un valor <code class="docutils literal notranslate"><span class="pre">VIF</span> <span class="pre">de</span> <span class="pre">1</span></code>: Sin multicolinealidad (variable perfectamente independiente).</p></li>
+<li><p>Un valor <code class="docutils literal notranslate"><span class="pre">VIF</span> <span class="pre">entre</span> <span class="pre">1</span> <span class="pre">y</span> <span class="pre">5</span></code>: Multicolinealidad baja a moderada (no se considera problemática).</p></li>
+<li><p>Un valor <code class="docutils literal notranslate"><span class="pre">VIF</span> <span class="pre">entre</span> <span class="pre">5</span> <span class="pre">y</span> <span class="pre">10</span></code>: Multicolinealidad moderada a alta (considerada problemática).</p></li>
+<li><p>Un valor <code class="docutils literal notranslate"><span class="pre">VIF</span> <span class="pre">superior</span> <span class="pre">a</span> <span class="pre">10</span></code>: Multicolinealidad alta (preocupación grave, requiere medidas).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.outliers_influence</span><span class="w"> </span><span class="kn">import</span> <span class="n">variance_inflation_factor</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">VIF_calculation</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">VIF</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">VIF</span><span class="p">[</span><span class="s2">&quot;variable&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span>
+    <span class="n">VIF</span><span class="p">[</span><span class="s2">&quot;VIF&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+    <span class="n">VIF</span> <span class="o">=</span> <span class="n">VIF</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;VIF&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">VIF</span><span class="p">)</span>
+
+<span class="n">VIF_mat</span> <span class="o">=</span> <span class="n">VIF_calculation</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">VIF_mat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>variable</th>
+      <th>VIF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Education</td>
+      <td>29.507416</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CholCheck</td>
+      <td>23.187436</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>AnyHealthcare</td>
+      <td>20.839710</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>BMI</td>
+      <td>18.149913</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Income</td>
+      <td>14.156118</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>GenHlth</td>
+      <td>10.740162</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Age</td>
+      <td>9.886830</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Veggies</td>
+      <td>5.826886</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>PhysActivity</td>
+      <td>4.645314</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Fruits</td>
+      <td>3.032775</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>HighBP</td>
+      <td>2.299761</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>HighChol</td>
+      <td>2.029660</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>PhysHlth</td>
+      <td>1.999556</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Smoker</td>
+      <td>1.933042</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Sex</td>
+      <td>1.910708</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>DiffWalk</td>
+      <td>1.838551</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>MentHlth</td>
+      <td>1.463103</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>HeartDiseaseorAttack</td>
+      <td>1.289820</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>NoDocbcCost</td>
+      <td>1.215834</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Stroke</td>
+      <td>1.126777</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>HvyAlcoholConsump</td>
+      <td>1.083523</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Interpretación:</strong></p>
+<p>Los valores de VIF obtenidos indican la presencia de multicolinealidad entre las variables predictoras del modelo. Se observa que las variables <code class="docutils literal notranslate"><span class="pre">Education</span></code>, <code class="docutils literal notranslate"><span class="pre">CholCheck</span></code> y <code class="docutils literal notranslate"><span class="pre">AnyHealthcare</span></code> presentan los valores de VIF más elevados (29.51, 23.19 y 20.84, respectivamente), lo que sugiere una fuerte dependencia lineal con otras variables del modelo. Estos resultados superan ampliamente el umbral crítico de <code class="docutils literal notranslate"><span class="pre">VIF</span> <span class="pre">=</span> <span class="pre">5</span></code>, e incluso el más estricto de <code class="docutils literal notranslate"><span class="pre">VIF</span> <span class="pre">=</span> <span class="pre">10</span></code>, lo que implica que la multicolinealidad podría estar inflando la varianza de los coeficientes de regresión y, por ende, afectando la estabilidad e interpretación del modelo. Variables como <code class="docutils literal notranslate"><span class="pre">BMI</span></code>, <code class="docutils literal notranslate"><span class="pre">Income</span></code> y <code class="docutils literal notranslate"><span class="pre">GenHlth</span></code> también muestran valores preocupantes (18.15, 14.16 y 10.74), aunque en menor grado.</p>
+<p>En contraste, las variables restantes (como <code class="docutils literal notranslate"><span class="pre">Veggies</span></code>, <code class="docutils literal notranslate"><span class="pre">PhysActivity</span></code>, <code class="docutils literal notranslate"><span class="pre">HighBP</span></code>, <code class="docutils literal notranslate"><span class="pre">HighChol</span></code> y aquellas con <code class="docutils literal notranslate"><span class="pre">VIF</span> <span class="pre">&lt;</span> <span class="pre">5</span></code>) no presentan multicolinealidad significativa, lo que indica que aportan información independiente al modelo. Especialmente, variables como <code class="docutils literal notranslate"><span class="pre">HvyAlcoholConsump</span></code>, <code class="docutils literal notranslate"><span class="pre">Stroke</span></code> y <code class="docutils literal notranslate"><span class="pre">NoDocbcCost</span></code> (<code class="docutils literal notranslate"><span class="pre">VIF</span> <span class="pre">&lt;</span> <span class="pre">1.3</span></code>) son prácticamente libres de redundancia.</p>
+<p>Estos hallazgos resaltan la necesidad de depurar el modelo para garantizar estimaciones robustas y evitar conclusiones sesgadas.</p>
 </section>
 </section>
 
@@ -536,22 +1588,13 @@ Accessible GPUs are:
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="markdown.html"
+       href="intro.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Markdown Files</p>
+        <p class="prev-next-title">Información del Dataset</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="markdown-notebooks.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Notebooks with MyST Markdown</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -569,9 +1612,16 @@ Accessible GPUs are:
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markdown-notebooks">Markdown + notebooks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#myst-markdown">MyST markdown</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-blocks-and-outputs">Code blocks and outputs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importar-librerias">Importar librerías</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">Lectura de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-univariado">Análisis univariado</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-binarias">Variables Binarias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-categoricas">Variables Categóricas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-numericas">Variables Númericas</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-bivariado">Análisis Bivariado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-multivariado">Análisis Multivariado</a></li>
 </ul>
   </nav></div>
 
@@ -586,7 +1636,7 @@ Accessible GPUs are:
   <div class="footer-item">
     
 <p class="component-author">
-By David Marquez
+By David Marquez y Cristian Linero
 </p>
 
   </div>
