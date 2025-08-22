@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -387,6 +387,22 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-bivariado">Análisis Bivariado</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-multivariado">Análisis Multivariado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-de-pipelines">Construcción de Pipelines</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-del-preprocesador-central-con-columntransformer">Construcción del Preprocesador Central con ColumnTransformer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-de-pipeline-para-el-modelo-de-clasificacion">Construcción de Pipeline para el Modelo de Clasificación</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-y-ajuste">Entrenamiento y Ajuste</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-de-la-busqueda-de-hiperparametro-con-gridsearchcv">Configuración de la Búsqueda de Hiperparámetro con GridSearchCV</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejecucion-de-la-busqueda-de-hiperparametro-y-entrenamiento-del-modelo">Ejecución de la Búsqueda de Hiperparámetro y Entrenamiento del Modelo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-del-resultado-de-la-busqueda-de-hiperparametro">Análisis del Resultado de la Búsqueda de Hiperparámetro</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-de-desempeno">Evaluación de desempeño</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-del-conjunto-de-entrenamiento-y-prueba">Creación del Conjunto de Entrenamiento y Prueba</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-final-del-modelo-de-clasificacion-en-el-conjunto-de-prueba">Evaluación Final del Modelo de Clasificación en el Conjunto de Prueba</a></li>
 </ul>
             </nav>
         </div>
@@ -405,10 +421,19 @@ document.write(`
 <p>Se importan las librerías esenciales para facilitar el análisis que abarca la carga de datos, la evaluación estadística, la visualización, la transformación de datos, la fusión y la unión.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span> 
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.compose</span><span class="w"> </span><span class="kn">import</span> <span class="n">ColumnTransformer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">OneHotEncoder</span><span class="p">,</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">GridSearchCV</span><span class="p">,</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">StratifiedKFold</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">,</span> <span class="n">roc_curve</span><span class="p">,</span> <span class="n">auc</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -461,7 +486,120 @@ Note: you may need to restart the kernel to use updated packages.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;uci_id&#39;: 891, &#39;name&#39;: &#39;CDC Diabetes Health Indicators&#39;, &#39;repository_url&#39;: &#39;https://archive.ics.uci.edu/dataset/891/cdc+diabetes+health+indicators&#39;, &#39;data_url&#39;: &#39;https://archive.ics.uci.edu/static/public/891/data.csv&#39;, &#39;abstract&#39;: &#39;The Diabetes Health Indicators Dataset contains healthcare statistics and lifestyle survey information about people in general along with their diagnosis of diabetes. The 35 features consist of some demographics, lab test results, and answers to survey questions for each patient. The target variable for classification is whether a patient has diabetes, is pre-diabetic, or healthy. &#39;, &#39;area&#39;: &#39;Health and Medicine&#39;, &#39;tasks&#39;: [&#39;Classification&#39;], &#39;characteristics&#39;: [&#39;Tabular&#39;, &#39;Multivariate&#39;], &#39;num_instances&#39;: 253680, &#39;num_features&#39;: 21, &#39;feature_types&#39;: [&#39;Categorical&#39;, &#39;Integer&#39;], &#39;demographics&#39;: [&#39;Sex&#39;, &#39;Age&#39;, &#39;Education Level&#39;, &#39;Income&#39;], &#39;target_col&#39;: [&#39;Diabetes_binary&#39;], &#39;index_col&#39;: [&#39;ID&#39;], &#39;has_missing_values&#39;: &#39;no&#39;, &#39;missing_values_symbol&#39;: None, &#39;year_of_dataset_creation&#39;: 2017, &#39;last_updated&#39;: &#39;Fri Nov 03 2023&#39;, &#39;dataset_doi&#39;: &#39;10.24432/C53919&#39;, &#39;creators&#39;: [], &#39;intro_paper&#39;: {&#39;ID&#39;: 308, &#39;type&#39;: &#39;NATIVE&#39;, &#39;title&#39;: &#39;Incidence of End-Stage Renal Disease Attributed to Diabetes Among Persons with Diagnosed Diabetes — United States and Puerto Rico, 2000–2014&#39;, &#39;authors&#39;: &#39;Nilka Rios Burrows, MPH; Israel Hora, PhD; Linda S. Geiss, MA; Edward W. Gregg, PhD; Ann Albright, PhD&#39;, &#39;venue&#39;: &#39;Morbidity and Mortality Weekly Report&#39;, &#39;year&#39;: 2017, &#39;journal&#39;: None, &#39;DOI&#39;: None, &#39;URL&#39;: &#39;https://www.cdc.gov/mmwr/volumes/66/wr/mm6643a2.htm&#39;, &#39;sha&#39;: None, &#39;corpus&#39;: None, &#39;arxiv&#39;: None, &#39;mag&#39;: None, &#39;acl&#39;: None, &#39;pmid&#39;: None, &#39;pmcid&#39;: None}, &#39;additional_info&#39;: {&#39;summary&#39;: &#39;Dataset link: https://www.cdc.gov/brfss/annual_data/annual_2014.html&#39;, &#39;purpose&#39;: &#39;To better understand the relationship between  lifestyle and diabetes in the US&#39;, &#39;funded_by&#39;: &#39;The CDC&#39;, &#39;instances_represent&#39;: &#39;Each row represents a person participating in this study.&#39;, &#39;recommended_data_splits&#39;: &#39;Cross validation or a fixed train-test split could be used.&#39;, &#39;sensitive_data&#39;: &#39;- Gender\n- Income\n- Education level&#39;, &#39;preprocessing_description&#39;: &#39;Bucketing of age&#39;, &#39;variable_info&#39;: &#39;- Diabetes diagnosis\n- Demographics (race, sex)\n- Personal information (income, educations)\n- Health history (drinking, smoking, mental health, physical health)&#39;, &#39;citation&#39;: None}, &#39;external_url&#39;: &#39;https://www.kaggle.com/datasets/alexteboul/diabetes-health-indicators-dataset&#39;}
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TimeoutError</span><span class="g g-Whitespace">                              </span>Traceback (most recent call last)
+<span class="nn">File ~\miniconda3\envs\ml_venv\lib\urllib\request.py:1346,</span> in <span class="ni">AbstractHTTPHandler.do_open</span><span class="nt">(self, http_class, req, **http_conn_args)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1345</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1346</span>     <span class="n">h</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">get_method</span><span class="p">(),</span> <span class="n">req</span><span class="o">.</span><span class="n">selector</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1347</span>               <span class="n">encode_chunked</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">has_header</span><span class="p">(</span><span class="s1">&#39;Transfer-encoding&#39;</span><span class="p">))</span>
+<span class="g g-Whitespace">   </span><span class="mi">1348</span> <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span> <span class="c1"># timeout error</span>
+
+<span class="nn">File ~\miniconda3\envs\ml_venv\lib\http\client.py:1285,</span> in <span class="ni">HTTPConnection.request</span><span class="nt">(self, method, url, body, headers, encode_chunked)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1284</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Send a complete request to the server.&quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1285</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_request</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="p">)</span>
+
+<span class="nn">File ~\miniconda3\envs\ml_venv\lib\http\client.py:1331,</span> in <span class="ni">HTTPConnection._send_request</span><span class="nt">(self, method, url, body, headers, encode_chunked)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1330</span>     <span class="n">body</span> <span class="o">=</span> <span class="n">_encode</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1331</span> <span class="bp">self</span><span class="o">.</span><span class="n">endheaders</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="o">=</span><span class="n">encode_chunked</span><span class="p">)</span>
+
+<span class="nn">File ~\miniconda3\envs\ml_venv\lib\http\client.py:1280,</span> in <span class="ni">HTTPConnection.endheaders</span><span class="nt">(self, message_body, encode_chunked)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1279</span>     <span class="k">raise</span> <span class="n">CannotSendHeader</span><span class="p">()</span>
+<span class="ne">-&gt; </span><span class="mi">1280</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_output</span><span class="p">(</span><span class="n">message_body</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="o">=</span><span class="n">encode_chunked</span><span class="p">)</span>
+
+<span class="nn">File ~\miniconda3\envs\ml_venv\lib\http\client.py:1040,</span> in <span class="ni">HTTPConnection._send_output</span><span class="nt">(self, message_body, encode_chunked)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1039</span> <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="p">[:]</span>
+<span class="ne">-&gt; </span><span class="mi">1040</span> <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1042</span> <span class="k">if</span> <span class="n">message_body</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1043</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1044</span>     <span class="c1"># create a consistent interface to message_body</span>
+
+<span class="nn">File ~\miniconda3\envs\ml_venv\lib\http\client.py:980,</span> in <span class="ni">HTTPConnection.send</span><span class="nt">(self, data)</span>
+<span class="g g-Whitespace">    </span><span class="mi">979</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_open</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">980</span>     <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">981</span> <span class="k">else</span><span class="p">:</span>
+
+<span class="nn">File ~\miniconda3\envs\ml_venv\lib\http\client.py:1447,</span> in <span class="ni">HTTPSConnection.connect</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1445</span> <span class="s2">&quot;Connect to a host on a given (SSL) port.&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1447</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1449</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tunnel_host</span><span class="p">:</span>
+
+<span class="nn">File ~\miniconda3\envs\ml_venv\lib\http\client.py:946,</span> in <span class="ni">HTTPConnection.connect</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">945</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Connect to the host and port specified in __init__.&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">946</span> <span class="bp">self</span><span class="o">.</span><span class="n">sock</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_connection</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">947</span>     <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_address</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">948</span> <span class="c1"># Might fail in OSs that don&#39;t implement TCP_NODELAY</span>
+
+<span class="nn">File ~\miniconda3\envs\ml_venv\lib\socket.py:856,</span> in <span class="ni">create_connection</span><span class="nt">(address, timeout, source_address)</span>
+<span class="g g-Whitespace">    </span><span class="mi">855</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">856</span>     <span class="k">raise</span> <span class="n">err</span>
+<span class="g g-Whitespace">    </span><span class="mi">857</span> <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">858</span>     <span class="c1"># Break explicitly a reference cycle</span>
+
+<span class="nn">File ~\miniconda3\envs\ml_venv\lib\socket.py:844,</span> in <span class="ni">create_connection</span><span class="nt">(address, timeout, source_address)</span>
+<span class="g g-Whitespace">    </span><span class="mi">843</span>     <span class="n">sock</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">source_address</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">844</span> <span class="n">sock</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">sa</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">845</span> <span class="c1"># Break explicitly a reference cycle</span>
+
+<span class="ne">TimeoutError</span>: [WinError 10060] Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">URLError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="nn">File ~\miniconda3\envs\ml_venv\lib\site-packages\ucimlrepo\fetch.py:68,</span> in <span class="ni">fetch_ucirepo</span><span class="nt">(name, id)</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">68</span>     <span class="n">response</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">api_url</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">ssl</span><span class="o">.</span><span class="n">create_default_context</span><span class="p">(</span><span class="n">cafile</span><span class="o">=</span><span class="n">certifi</span><span class="o">.</span><span class="n">where</span><span class="p">()))</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span>     <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+<span class="nn">File ~\miniconda3\envs\ml_venv\lib\urllib\request.py:214,</span> in <span class="ni">urlopen</span><span class="nt">(url, data, timeout, cafile, capath, cadefault, context)</span>
+<span class="g g-Whitespace">    </span><span class="mi">213</span>     <span class="n">opener</span> <span class="o">=</span> <span class="n">_opener</span>
+<span class="ne">--&gt; </span><span class="mi">214</span> <span class="k">return</span> <span class="n">opener</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
+
+<span class="nn">File ~\miniconda3\envs\ml_venv\lib\urllib\request.py:517,</span> in <span class="ni">OpenerDirector.open</span><span class="nt">(self, fullurl, data, timeout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">516</span> <span class="n">sys</span><span class="o">.</span><span class="n">audit</span><span class="p">(</span><span class="s1">&#39;urllib.Request&#39;</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">full_url</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">get_method</span><span class="p">())</span>
+<span class="ne">--&gt; </span><span class="mi">517</span> <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_open</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">519</span> <span class="c1"># post-process response</span>
+
+<span class="nn">File ~\miniconda3\envs\ml_venv\lib\urllib\request.py:534,</span> in <span class="ni">OpenerDirector._open</span><span class="nt">(self, req, data)</span>
+<span class="g g-Whitespace">    </span><span class="mi">533</span> <span class="n">protocol</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">type</span>
+<span class="ne">--&gt; </span><span class="mi">534</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_chain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle_open</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">protocol</span> <span class="o">+</span>
+<span class="g g-Whitespace">    </span><span class="mi">535</span>                           <span class="s1">&#39;_open&#39;</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">536</span> <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+
+<span class="nn">File ~\miniconda3\envs\ml_venv\lib\urllib\request.py:494,</span> in <span class="ni">OpenerDirector._call_chain</span><span class="nt">(self, chain, kind, meth_name, *args)</span>
+<span class="g g-Whitespace">    </span><span class="mi">493</span> <span class="n">func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">handler</span><span class="p">,</span> <span class="n">meth_name</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">494</span> <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">495</span> <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">File ~\miniconda3\envs\ml_venv\lib\urllib\request.py:1389,</span> in <span class="ni">HTTPSHandler.https_open</span><span class="nt">(self, req)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1388</span> <span class="k">def</span><span class="w"> </span><span class="nf">https_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1389</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_open</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPSConnection</span><span class="p">,</span> <span class="n">req</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1390</span>         <span class="n">context</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="p">,</span> <span class="n">check_hostname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_hostname</span><span class="p">)</span>
+
+<span class="nn">File ~\miniconda3\envs\ml_venv\lib\urllib\request.py:1349,</span> in <span class="ni">AbstractHTTPHandler.do_open</span><span class="nt">(self, http_class, req, **http_conn_args)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1348</span> <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span> <span class="c1"># timeout error</span>
+<span class="ne">-&gt; </span><span class="mi">1349</span>     <span class="k">raise</span> <span class="n">URLError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1350</span> <span class="n">r</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span>
+
+<span class="ne">URLError</span>: &lt;urlopen error [WinError 10060] Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder&gt;
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">ConnectionError</span><span class="g g-Whitespace">                           </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">ucimlrepo</span><span class="w"> </span><span class="kn">import</span> <span class="n">fetch_ucirepo</span> 
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># fetch dataset </span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">cdc_diabetes_health_indicators</span> <span class="o">=</span> <span class="n">fetch_ucirepo</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">891</span><span class="p">)</span> 
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># data (as pandas dataframes) </span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">X</span> <span class="o">=</span> <span class="n">cdc_diabetes_health_indicators</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span> 
+
+<span class="nn">File ~\miniconda3\envs\ml_venv\lib\site-packages\ucimlrepo\fetch.py:71,</span> in <span class="ni">fetch_ucirepo</span><span class="nt">(name, id)</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span>     <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span> <span class="k">except</span> <span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">URLError</span><span class="p">,</span> <span class="n">urllib</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">HTTPError</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">71</span>     <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s1">&#39;Error connecting to server&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span> <span class="c1"># verify that dataset exists </span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span> <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+
+<span class="ne">ConnectionError</span>: Error connecting to server
 </pre></div>
 </div>
 </div>
@@ -611,6 +749,7 @@ dtype: int64
 </section>
 <section id="analisis-univariado">
 <h2>Análisis Univariado<a class="headerlink" href="#analisis-univariado" title="Link to this heading">#</a></h2>
+<p>El Análisis Univariado es la primera fase del análisis exploratorio de datos. Se enfoca en el estudio individual de cada variable para entender su distribución, características y valores atípicos. Esto permite identificar patrones y la calidad de los datos antes de un análisis más complejo.</p>
 <section id="variables-binarias">
 <h3>Variables Binarias<a class="headerlink" href="#variables-binarias" title="Link to this heading">#</a></h3>
 <p>Se identifican y analizan las variables binarias (aquellas con solo 2 valores únicos) en el DataFrame.<br />
@@ -1241,36 +1380,8 @@ Esta distribución sugiere que la mayoría de la población reporta pocos o ning
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\seaborn\_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
-  with pd.option_context(&#39;mode.use_inf_as_na&#39;, True):
-C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\seaborn\_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
-  with pd.option_context(&#39;mode.use_inf_as_na&#39;, True):
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\seaborn\relational.py:441: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
-  sub_data = grouped.apply(agg, other).reset_index()
-</pre></div>
-</div>
-<img alt="_images/ddca589457e4ad3680295b6d1b2636b7ad326e4f62c82c29e656f6dfddae5a1e.png" src="_images/ddca589457e4ad3680295b6d1b2636b7ad326e4f62c82c29e656f6dfddae5a1e.png" />
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\seaborn\_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
-  with pd.option_context(&#39;mode.use_inf_as_na&#39;, True):
-C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\seaborn\_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
-  with pd.option_context(&#39;mode.use_inf_as_na&#39;, True):
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\seaborn\relational.py:441: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
-  sub_data = grouped.apply(agg, other).reset_index()
-</pre></div>
-</div>
-<img alt="_images/3a26bc9c19920b227e50fc580835c4e53927be9fdfc3bf0725469876b6a2a509.png" src="_images/3a26bc9c19920b227e50fc580835c4e53927be9fdfc3bf0725469876b6a2a509.png" />
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\seaborn\_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
-  with pd.option_context(&#39;mode.use_inf_as_na&#39;, True):
-C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\seaborn\_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
-  with pd.option_context(&#39;mode.use_inf_as_na&#39;, True):
-C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\seaborn\relational.py:441: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
-  sub_data = grouped.apply(agg, other).reset_index()
-</pre></div>
-</div>
+<img alt="_images/bac9a22e44322e4b5551d1927daf99e31a99cddd149b45bdde381a98fe573e63.png" src="_images/bac9a22e44322e4b5551d1927daf99e31a99cddd149b45bdde381a98fe573e63.png" />
+<img alt="_images/66abd3839647a0abb7854cb381a39c43ca55da796893f41e734243ee0f03da22.png" src="_images/66abd3839647a0abb7854cb381a39c43ca55da796893f41e734243ee0f03da22.png" />
 <img alt="_images/35de6c90b9fc64f934704ecc00409e3ec3e42232a4a0b8a038856bfb26268c19.png" src="_images/35de6c90b9fc64f934704ecc00409e3ec3e42232a4a0b8a038856bfb26268c19.png" />
 </div>
 </div>
@@ -1320,20 +1431,8 @@ C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\seaborn\relational.py:4
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\david\AppData\Local\Temp\ipykernel_18816\2871714856.py:26: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
-  diabetes_percent = df.groupby(grupos)[&#39;Diabetes_binary&#39;].mean() * 100
-</pre></div>
-</div>
 <img alt="_images/333401b7f27e934ae3422ce93373644e54fe7abc44c3d5c65b56cb6def2ef011.png" src="_images/333401b7f27e934ae3422ce93373644e54fe7abc44c3d5c65b56cb6def2ef011.png" />
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\david\AppData\Local\Temp\ipykernel_18816\2871714856.py:26: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
-  diabetes_percent = df.groupby(grupos)[&#39;Diabetes_binary&#39;].mean() * 100
-</pre></div>
-</div>
 <img alt="_images/72f696ab36fb7fb2b1421d0f6a6ec1a7c2fd0cf4427d5e21720133f8e329127c.png" src="_images/72f696ab36fb7fb2b1421d0f6a6ec1a7c2fd0cf4427d5e21720133f8e329127c.png" />
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\david\AppData\Local\Temp\ipykernel_18816\2871714856.py:26: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
-  diabetes_percent = df.groupby(grupos)[&#39;Diabetes_binary&#39;].mean() * 100
-</pre></div>
-</div>
 <img alt="_images/fc235f7bac6bba35b90ef5713f83a452b1d15fc7da77f040cb6ad0401a26dbc0.png" src="_images/fc235f7bac6bba35b90ef5713f83a452b1d15fc7da77f040cb6ad0401a26dbc0.png" />
 </div>
 </div>
@@ -1558,6 +1657,277 @@ C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\seaborn\relational.py:4
 <p>En contraste, las variables restantes (como <code class="docutils literal notranslate"><span class="pre">Veggies</span></code>, <code class="docutils literal notranslate"><span class="pre">PhysActivity</span></code>, <code class="docutils literal notranslate"><span class="pre">HighBP</span></code>, <code class="docutils literal notranslate"><span class="pre">HighChol</span></code> y aquellas con <code class="docutils literal notranslate"><span class="pre">VIF</span> <span class="pre">&lt;</span> <span class="pre">5</span></code>) no presentan multicolinealidad significativa, lo que indica que aportan información independiente al modelo. Especialmente, variables como <code class="docutils literal notranslate"><span class="pre">HvyAlcoholConsump</span></code>, <code class="docutils literal notranslate"><span class="pre">Stroke</span></code> y <code class="docutils literal notranslate"><span class="pre">NoDocbcCost</span></code> (<code class="docutils literal notranslate"><span class="pre">VIF</span> <span class="pre">&lt;</span> <span class="pre">1.3</span></code>) son prácticamente libres de redundancia.</p>
 <p>Estos hallazgos resaltan la necesidad de depurar el modelo para garantizar estimaciones robustas y evitar conclusiones sesgadas.</p>
 </section>
+<section id="construccion-de-pipelines">
+<h2>Construcción de Pipelines<a class="headerlink" href="#construccion-de-pipelines" title="Link to this heading">#</a></h2>
+<p>La construcción de pipelines constituye una herramienta fundamental para garantizar procesos de análisis ordenados, reproducibles y eficientes. Un pipeline permite encadenar de manera estructurada todas las etapas del flujo de trabajo, desde la preparación de los datos (limpieza, transformación y selección de variables) hasta la aplicación de algoritmos de modelado y la evaluación de resultados. Esta integración facilita la automatización, reduce el riesgo de errores y asegura que el mismo procedimiento pueda aplicarse a nuevos conjuntos de datos con consistencia. Además, los pipelines son especialmente útiles cuando se combinan con técnicas de validación cruzada y búsqueda de hiperparámetros, ya que permiten optimizar el desempeño de los modelos dentro de un marco sistemático y escalable.</p>
+<section id="construccion-del-preprocesador-central-con-columntransformer">
+<h3>Construcción del Preprocesador Central con ColumnTransformer<a class="headerlink" href="#construccion-del-preprocesador-central-con-columntransformer" title="Link to this heading">#</a></h3>
+<p>Para integrar de manera segura y eficiente todas las transformaciones de preprocesamiento en un flujo único y reproducible, se construye un <code class="docutils literal notranslate"><span class="pre">ColumnTransformer</span></code>. Este objeto es el núcleo del pipeline, ya que permite aplicar diferentes transformaciones a subconjuntos específicos de columnas, garantizando que cada paso se ejecute en el orden correcto y sin fugas de información (data leakage) durante la validación cruzada.</p>
+<p>La configuración del preprocesador especifica dos transformaciones en paralelo:</p>
+<ol class="arabic simple">
+<li><p><strong>Escalado estandarizado</strong> para variables numéricas continuas.</p></li>
+<li><p><strong>Codificación one-hot</strong> con eliminación de la primera categoría para evitar multicolinealidad en las variables categóricas.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preprocessor</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
+    <span class="n">transformers</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">numericas</span><span class="p">),</span>  
+        <span class="p">(</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">),</span> <span class="n">categoricas</span><span class="p">)</span>  
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="construccion-de-pipeline-para-el-modelo-de-clasificacion">
+<h3>Construcción de Pipeline para el Modelo de Clasificación<a class="headerlink" href="#construccion-de-pipeline-para-el-modelo-de-clasificacion" title="Link to this heading">#</a></h3>
+<p>Para cumplir con el objetivo de integrar un flujo completo de machine learning, se construyen un pipeline para el algoritmo clasificación (Regresión Logística). Un pipeline encapsula de manera secuencial y automatizada todas las etapas del proceso de modelado, desde el preprocesamiento de los datos hasta la ejecución del algoritmo de aprendizaje. Esto garantiza que cada transformación se aplique de manera consistente durante el entrenamiento y la predicción, eliminando el riesgo de data leakage y asegurando la reproducibilidad de los resultados.</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">preprocessor</span></code>: La transformación de características definida previamente en el ColumnTransformer, que se encarga de escalar las variables numéricas y codificar las categóricas.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model</span></code>: El estimador o algoritmo de machine learning que aprenderá a predecir la diabetes a partir de las características transformadas.</p></li>
+</ol>
+<p><strong>Regresión Logística</strong>: Proporciona un modelo lineal base para la tarea de clasificación binaria (predecir diatetes/prediabetes), cuya optimización se controla con el hiperparámetro de regularización <code class="docutils literal notranslate"><span class="pre">C</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline_logreg</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s1">&#39;preprocessor&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="entrenamiento-y-ajuste">
+<h2>Entrenamiento y Ajuste<a class="headerlink" href="#entrenamiento-y-ajuste" title="Link to this heading">#</a></h2>
+<p>Durante el entrenamiento, el algoritmo ajusta sus parámetros internos en función de los ejemplos disponibles, minimizando el error entre las predicciones y los valores reales. Posteriormente, el ajuste implica la selección de los mejores hiperparámetros mediante técnicas como la validación cruzada o la búsqueda en malla, con el fin de mejorar la capacidad predictiva del modelo y evitar problemas como el sobreajuste o el subajuste. Este proceso garantiza que el modelo no solo funcione adecuadamente con los datos de entrenamiento, sino que también tenga un buen desempeño al generalizar en nuevos escenarios.</p>
+<section id="configuracion-de-la-busqueda-de-hiperparametro-con-gridsearchcv">
+<h3>Configuración de la Búsqueda de Hiperparámetro con GridSearchCV<a class="headerlink" href="#configuracion-de-la-busqueda-de-hiperparametro-con-gridsearchcv" title="Link to this heading">#</a></h3>
+<p>Para optimizar el rendimiento del modelo y encontrar la mejor combinación de hiperparámetro, se configura una búsqueda exhaustiva mediante <code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code>. Esta estrategia prueba de manera sistemática todas las combinaciones de los valores especificados, utilizando validación cruzada para evaluar de forma robusta el desempeño de cada configuración.</p>
+<p>Se implementa la estrategia de validación cruzada:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">StratifiedKFold</span></code> para el problema de clasificación, que garantiza que cada fold tenga aproximadamente la misma proporción de la variable objetivo, crucial para conjuntos desbalanceados.</p></li>
+</ul>
+<p>Además, se define la métrica de evaluación:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">accuracy</span></code> para clasificación, que mide la proporción de predicciones correctas.</p></li>
+</ul>
+<p>El hiperparámetro a optimizar es:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">C</span></code> para Regresión Logística, que controla la inversa de la fuerza de la regularización.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cv_clf</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+
+<span class="n">grid_logreg</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span>
+    <span class="n">estimator</span><span class="o">=</span><span class="n">pipeline_logreg</span><span class="p">,</span>
+    <span class="n">param_grid</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;model__C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">]},</span>
+    <span class="n">cv</span><span class="o">=</span><span class="n">cv_clf</span><span class="p">,</span>
+    <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejecucion-de-la-busqueda-de-hiperparametro-y-entrenamiento-del-modelo">
+<h3>Ejecución de la Búsqueda de Hiperparámetro y Entrenamiento del Modelo<a class="headerlink" href="#ejecucion-de-la-busqueda-de-hiperparametro-y-entrenamiento-del-modelo" title="Link to this heading">#</a></h3>
+<p>Una vez configurado el pipeline y la estrategia de búsqueda, se procede a ejecutar el entrenamiento del modelo. Este paso es donde se implementa de manera práctica el flujo completo de machine learning definido teóricamente. El método <code class="docutils literal notranslate"><span class="pre">fit()</span></code> de cada objeto <code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code> no solo entrena el modelo final con la mejor combinación de hiperparámetro encontrada, sino que realiza de manera automatizada y segura todo el proceso de validación cruzada, preprocesamiento y optimización.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid_logreg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>#sk-container-id-1 {color: black;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>GridSearchCV(cv=StratifiedKFold(n_splits=5, random_state=42, shuffle=True),
+             estimator=Pipeline(steps=[(&#x27;preprocessor&#x27;,
+                                        ColumnTransformer(transformers=[(&#x27;num&#x27;,
+                                                                         StandardScaler(),
+                                                                         [&#x27;MentHlth&#x27;,
+                                                                          &#x27;PhysHlth&#x27;,
+                                                                          &#x27;BMI&#x27;]),
+                                                                        (&#x27;cat&#x27;,
+                                                                         OneHotEncoder(drop=&#x27;first&#x27;),
+                                                                         [&#x27;GenHlth&#x27;,
+                                                                          &#x27;Age&#x27;,
+                                                                          &#x27;Education&#x27;,
+                                                                          &#x27;Income&#x27;])])),
+                                       (&#x27;model&#x27;,
+                                        LogisticRegression(max_iter=1000))]),
+             param_grid={&#x27;model__C&#x27;: [0.01, 0.1, 1, 10, 100]},
+             scoring=&#x27;accuracy&#x27;)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" ><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">GridSearchCV</label><div class="sk-toggleable__content"><pre>GridSearchCV(cv=StratifiedKFold(n_splits=5, random_state=42, shuffle=True),
+             estimator=Pipeline(steps=[(&#x27;preprocessor&#x27;,
+                                        ColumnTransformer(transformers=[(&#x27;num&#x27;,
+                                                                         StandardScaler(),
+                                                                         [&#x27;MentHlth&#x27;,
+                                                                          &#x27;PhysHlth&#x27;,
+                                                                          &#x27;BMI&#x27;]),
+                                                                        (&#x27;cat&#x27;,
+                                                                         OneHotEncoder(drop=&#x27;first&#x27;),
+                                                                         [&#x27;GenHlth&#x27;,
+                                                                          &#x27;Age&#x27;,
+                                                                          &#x27;Education&#x27;,
+                                                                          &#x27;Income&#x27;])])),
+                                       (&#x27;model&#x27;,
+                                        LogisticRegression(max_iter=1000))]),
+             param_grid={&#x27;model__C&#x27;: [0.01, 0.1, 1, 10, 100]},
+             scoring=&#x27;accuracy&#x27;)</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" ><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">estimator: Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[(&#x27;preprocessor&#x27;,
+                 ColumnTransformer(transformers=[(&#x27;num&#x27;, StandardScaler(),
+                                                  [&#x27;MentHlth&#x27;, &#x27;PhysHlth&#x27;,
+                                                   &#x27;BMI&#x27;]),
+                                                 (&#x27;cat&#x27;,
+                                                  OneHotEncoder(drop=&#x27;first&#x27;),
+                                                  [&#x27;GenHlth&#x27;, &#x27;Age&#x27;,
+                                                   &#x27;Education&#x27;, &#x27;Income&#x27;])])),
+                (&#x27;model&#x27;, LogisticRegression(max_iter=1000))])</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" ><label for="sk-estimator-id-3" class="sk-toggleable__label sk-toggleable__label-arrow">preprocessor: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(transformers=[(&#x27;num&#x27;, StandardScaler(),
+                                 [&#x27;MentHlth&#x27;, &#x27;PhysHlth&#x27;, &#x27;BMI&#x27;]),
+                                (&#x27;cat&#x27;, OneHotEncoder(drop=&#x27;first&#x27;),
+                                 [&#x27;GenHlth&#x27;, &#x27;Age&#x27;, &#x27;Education&#x27;, &#x27;Income&#x27;])])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" ><label for="sk-estimator-id-4" class="sk-toggleable__label sk-toggleable__label-arrow">num</label><div class="sk-toggleable__content"><pre>[&#x27;MentHlth&#x27;, &#x27;PhysHlth&#x27;, &#x27;BMI&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" ><label for="sk-estimator-id-5" class="sk-toggleable__label sk-toggleable__label-arrow">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox" ><label for="sk-estimator-id-6" class="sk-toggleable__label sk-toggleable__label-arrow">cat</label><div class="sk-toggleable__content"><pre>[&#x27;GenHlth&#x27;, &#x27;Age&#x27;, &#x27;Education&#x27;, &#x27;Income&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox" ><label for="sk-estimator-id-7" class="sk-toggleable__label sk-toggleable__label-arrow">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(drop=&#x27;first&#x27;)</pre></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-8" type="checkbox" ><label for="sk-estimator-id-8" class="sk-toggleable__label sk-toggleable__label-arrow">LogisticRegression</label><div class="sk-toggleable__content"><pre>LogisticRegression(max_iter=1000)</pre></div></div></div></div></div></div></div></div></div></div></div></div></div></div>
+</div>
+</section>
+<section id="analisis-del-resultado-de-la-busqueda-de-hiperparametro">
+<h3>Análisis del Resultado de la Búsqueda de Hiperparámetro<a class="headerlink" href="#analisis-del-resultado-de-la-busqueda-de-hiperparametro" title="Link to this heading">#</a></h3>
+<p>Tras completar el proceso de búsqueda exhaustiva, se extrae y analiza el resultado óptimo para el modelo. Esta etapa es crucial para identificar la configuración de hiperparámetro que maximiza el rendimiento. El resultados se presenta mostrando la mejor combinación de parámetros encontrada y su score de validación cruzada correspondiente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mejor LogReg:&quot;</span><span class="p">,</span> <span class="n">grid_logreg</span><span class="o">.</span><span class="n">best_params_</span><span class="p">,</span> <span class="s2">&quot;Score (Accuracy):&quot;</span><span class="p">,</span> <span class="n">grid_logreg</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mejor LogReg: {&#39;model__C&#39;: 1} Score (Accuracy): 0.8619362976978872
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Interpretación</strong></p>
+<p>El proceso de optimización mediante Grid Search identificó que el mejor modelo de Regresión Logística se obtiene con los siguientes parámetros:</p>
+<p><strong>Parámetro Óptimo Identificado:</strong></p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">=</span> <span class="pre">1</span></code></strong>: Este valor indica un nivel moderado de regularización, donde el modelo busca un equilibrio entre el ajuste a los datos y la generalización. Si bien es una configuración sólida, su simplicidad sugiere que existe espacio para modelos más complejos.</p></li>
+</ul>
+<p><strong>Rendimiento Actual del Modelo:</strong></p>
+<ul class="simple">
+<li><p><strong>Accuracy Score: 86.19%</strong> Si bien este resultado representa un punto de partida aceptable, evidencia una oportunidad significativa de mejora:</p>
+<ul>
+<li><p>Un 13.81% de error indica que aproximadamente 1 de cada 7 predicciones es incorrecta.</p></li>
+<li><p>Este nivel de precisión, aunque útil como base, no es suficientemente robusto para aplicaciones críticas.</p></li>
+<li><p>La brecha del 13.81% representa un margen de mejora sustancial que justifica explorar modelos más sofisticados.</p></li>
+</ul>
+</li>
+</ul>
+<p>El resultado actual señala claramente la necesidad de implementar modelos más avanzados para alcanzar los niveles de precisión requeridos en aplicaciones productivas.</p>
+</section>
+</section>
+<section id="evaluacion-de-desempeno">
+<h2>Evaluación de desempeño<a class="headerlink" href="#evaluacion-de-desempeno" title="Link to this heading">#</a></h2>
+<p>La evaluación de desempeño es una etapa fundamental en el desarrollo de modelos de machine learning, ya que permite medir qué tan bien se ajusta el modelo a los datos y, sobre todo, qué capacidad tiene para generalizar en situaciones no vistas. A través de métricas específicas (que varían según si se trata de un problema de regresión o de clasificación) es posible identificar fortalezas y debilidades del modelo, así como comparar diferentes enfoques y versiones durante el proceso de experimentación. Además de las métricas numéricas, las visualizaciones como matrices de confusión, curvas ROC o gráficos de predicciones frente a valores reales ofrecen una perspectiva más clara sobre el rendimiento alcanzado. De esta manera, la evaluación del desempeño no solo valida la efectividad del modelo, sino que también orienta la toma de decisiones para su mejora continua.</p>
+<section id="creacion-del-conjunto-de-entrenamiento-y-prueba">
+<h3>Creación del Conjunto de Entrenamiento y Prueba<a class="headerlink" href="#creacion-del-conjunto-de-entrenamiento-y-prueba" title="Link to this heading">#</a></h3>
+<p>Para evaluar de manera rigurosa y justa el desempeño final del modelo optimizado, es esencial probarlo en datos que no hayan sido vistos durante el proceso de ajuste de hiperparámetro. Por esta razón, se divide el dataset en subconjuntos de entrenamiento y prueba. El conjunto de entrenamiento (<code class="docutils literal notranslate"><span class="pre">X_train</span></code>, <code class="docutils literal notranslate"><span class="pre">y_train</span></code>) se utilizará para reentrenar el mejor modelo encontrado por <code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code> con todos los datos disponibles de entrenamiento, mientras que el conjunto de prueba (<code class="docutils literal notranslate"><span class="pre">X_test</span></code>, <code class="docutils literal notranslate"><span class="pre">y_test</span></code>) se reservará exclusivamente para la evaluación final, proporcionando una estimación no sesgada del rendimiento del modelo en datos nuevos.</p>
+<p>Se divide las features (<code class="docutils literal notranslate"><span class="pre">X</span></code>) y la variable objetivo binaria (<code class="docutils literal notranslate"><span class="pre">y</span></code>), utilizando el parámetro <code class="docutils literal notranslate"><span class="pre">stratify</span></code> para garantizar que la proporción de las clases <code class="docutils literal notranslate"><span class="pre">Diabetes_binary</span></code> se mantenga igual en ambos conjuntos, preservando así el balance original.</p>
+<p>Un 20% de los datos se asigna para prueba en ambos casos, utilizando una semilla (<code class="docutils literal notranslate"><span class="pre">random_state=42</span></code>) para asegurar la reproducibilidad de la partición.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_clf</span><span class="p">,</span> <span class="n">X_test_clf</span><span class="p">,</span> <span class="n">y_train_clf</span><span class="p">,</span> <span class="n">y_test_clf</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="evaluacion-final-del-modelo-de-clasificacion-en-el-conjunto-de-prueba">
+<h2>Evaluación Final del Modelo de Clasificación en el Conjunto de Prueba<a class="headerlink" href="#evaluacion-final-del-modelo-de-clasificacion-en-el-conjunto-de-prueba" title="Link to this heading">#</a></h2>
+<p>Para completar el análisis del objetivo de clasificación binaria, se evaluó el desempeño del mejor modelo de Regresión Logística identificado mediante <code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code> en el conjunto de prueba reservado para esta tarea. La evaluación de un modelo de clasificación requiere un análisis más multidimensional que la regresión, ya que es necesario considerar no solo la capacidad de predicción general (accuracy) sino también el equilibrio entre los diferentes tipos de error (falsos positivos y falsos negativos), lo cual es crucial dependiendo del contexto de aplicación.</p>
+<p>El modelo se reentrenó con la totalidad del conjunto de entrenamiento de clasificación (<code class="docutils literal notranslate"><span class="pre">X_train_clf</span></code>, <code class="docutils literal notranslate"><span class="pre">y_train_clf</span></code>) y se generaron tanto predicciones de clase (<code class="docutils literal notranslate"><span class="pre">predict</span></code>) como probabilidades (<code class="docutils literal notranslate"><span class="pre">predict_proba</span></code>) para el conjunto de prueba. El desempeño se evaluó mediante un conjunto exhaustivo de métricas y visualizaciones:</p>
+<ul class="simple">
+<li><p><strong>Métricas de Evaluación</strong>:</p>
+<ul>
+<li><p><strong>Accuracy</strong>: Proporción general de predicciones correctas.</p></li>
+<li><p><strong>Precision</strong>: Capacidad del modelo de evitar falsos positivos.</p></li>
+<li><p><strong>Recall</strong>: Capacidad del modelo de evitar falsos negativos.</p></li>
+<li><p><strong>F1-score</strong>: Media armónica entre Precision y Recall, ideal para conjuntos balanceados.</p></li>
+</ul>
+</li>
+<li><p><strong>Visualizaciones</strong>:</p>
+<ul>
+<li><p><strong>Matriz de Confusión</strong>: Muestra de forma explícita los aciertos (diagonal) y los errores (falsos positivos y falsos negativos) del modelo.</p></li>
+<li><p><strong>Curva ROC y AUC</strong>: Evalúa la capacidad del modelo para distinguir entre clases a través de todos los posibles umbrales de clasificación. Un AUC de 0.5 representa un modelo aleatorio, mientras que 1.0 representa una separación perfecta.</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_logreg</span> <span class="o">=</span> <span class="n">grid_logreg</span><span class="o">.</span><span class="n">best_estimator_</span>
+<span class="n">best_logreg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_clf</span><span class="p">,</span> <span class="n">y_train_clf</span><span class="p">)</span>
+
+<span class="n">y_pred_clf</span> <span class="o">=</span> <span class="n">best_logreg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_clf</span><span class="p">)</span>
+<span class="n">y_pred_proba</span> <span class="o">=</span> <span class="n">best_logreg</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test_clf</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">acc</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test_clf</span><span class="p">,</span> <span class="n">y_pred_clf</span><span class="p">)</span>
+<span class="n">prec</span> <span class="o">=</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_test_clf</span><span class="p">,</span> <span class="n">y_pred_clf</span><span class="p">)</span>
+<span class="n">rec</span> <span class="o">=</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_test_clf</span><span class="p">,</span> <span class="n">y_pred_clf</span><span class="p">)</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test_clf</span><span class="p">,</span> <span class="n">y_pred_clf</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Evaluación Logistic Regression&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy:&quot;</span><span class="p">,</span> <span class="n">acc</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Precision:&quot;</span><span class="p">,</span> <span class="n">prec</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Recall:&quot;</span><span class="p">,</span> <span class="n">rec</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;F1-score:&quot;</span><span class="p">,</span> <span class="n">f1</span><span class="p">)</span>
+
+<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test_clf</span><span class="p">,</span> <span class="n">y_pred_clf</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">,</span> <span class="n">xticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;no diabetes&quot;</span><span class="p">,</span><span class="s2">&quot;prediabetes or diabetes&quot;</span><span class="p">],</span> <span class="n">yticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;no diabetes&quot;</span><span class="p">,</span><span class="s2">&quot;prediabetes or diabetes&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Predicción&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Real&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Matriz de confusión&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test_clf</span><span class="p">,</span> <span class="n">y_pred_proba</span><span class="p">)</span>
+<span class="n">roc_auc</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;AUC = </span><span class="si">{</span><span class="n">roc_auc</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;False Positive Rate&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;True Positive Rate&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Curva ROC&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Evaluación Logistic Regression
+Accuracy: 0.8599416587827183
+Precision: 0.4852354349561053
+Recall: 0.08600933653982176
+F1-score: 0.1461187214611872
+</pre></div>
+</div>
+<img alt="_images/9316a276878ff21779039f234074e158ec4dfde65fad214d45e26ded6fdea45c.png" src="_images/9316a276878ff21779039f234074e158ec4dfde65fad214d45e26ded6fdea45c.png" />
+<img alt="_images/b45f208e9ddd387816b92b9d1d88af6cd96b73ac6854de713a82c8052679e0ac.png" src="_images/b45f208e9ddd387816b92b9d1d88af6cd96b73ac6854de713a82c8052679e0ac.png" />
+</div>
+</div>
+<p><strong>Interpretación</strong></p>
+<p>El modelo de Regresión Logística muestra un panorama mixto que revela importantes oportunidades de optimización:</p>
+<p><strong>Accuracy: 85.99%</strong> Esta métrica superficialmente sugiere un buen desempeño, pero enmascara graves deficiencias en la capacidad predictiva real del modelo.</p>
+<p><strong>Problemas Críticos Identificados:</strong></p>
+<ul class="simple">
+<li><p><strong>Precision: 48.52%</strong>: Cuando el modelo predice positivo, solo acierta la mitad de las veces (casi equivalente a lanzar una moneda).</p></li>
+<li><p><strong>Recall: 8.60%</strong>: Solo detecta el 8.6% de los casos positivos reales, perdiendo más del 91% de los verdaderos positivos.</p></li>
+<li><p><strong>F1-score: 14.61%</strong>: La métrica balanceada confirma el desempeño extremadamente pobre en la clase minoritaria.</p></li>
+</ul>
+<p><strong>Diagnóstico del Modelo:</strong>
+El modelo presenta un fuerte sesgo hacia la clase mayoritaria, prediciendo en la mayoria de los casos la clase negativa, pero falla completamente en identificar los patrones de la clase positiva.</p>
+<p>Estos resultados no representan el potencial real de machine learning para este problema. El bajo F1-score indica que tenemos un margen de mejora del más del 85% con las estrategias adecuadas, lo que vuelve obligatorio el uso de modelos más avanzados y técnicas específicas para datos desbalanceados.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1625,6 +1995,22 @@ C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\seaborn\relational.py:4
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-bivariado">Análisis Bivariado</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-multivariado">Análisis Multivariado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-de-pipelines">Construcción de Pipelines</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-del-preprocesador-central-con-columntransformer">Construcción del Preprocesador Central con ColumnTransformer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-de-pipeline-para-el-modelo-de-clasificacion">Construcción de Pipeline para el Modelo de Clasificación</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-y-ajuste">Entrenamiento y Ajuste</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-de-la-busqueda-de-hiperparametro-con-gridsearchcv">Configuración de la Búsqueda de Hiperparámetro con GridSearchCV</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejecucion-de-la-busqueda-de-hiperparametro-y-entrenamiento-del-modelo">Ejecución de la Búsqueda de Hiperparámetro y Entrenamiento del Modelo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-del-resultado-de-la-busqueda-de-hiperparametro">Análisis del Resultado de la Búsqueda de Hiperparámetro</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-de-desempeno">Evaluación de desempeño</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-del-conjunto-de-entrenamiento-y-prueba">Creación del Conjunto de Entrenamiento y Prueba</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-final-del-modelo-de-clasificacion-en-el-conjunto-de-prueba">Evaluación Final del Modelo de Clasificación en el Conjunto de Prueba</a></li>
 </ul>
   </nav></div>
 

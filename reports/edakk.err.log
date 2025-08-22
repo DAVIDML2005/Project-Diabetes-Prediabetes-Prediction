@@ -1,0 +1,148 @@
+Traceback (most recent call last):
+  File "C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
+    executenb(
+  File "C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\nbclient\client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\jupyter_core\utils\__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+  File "C:\Users\david\miniconda3\envs\ml_venv\lib\asyncio\base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\nbclient\client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\nbclient\client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\Users\david\miniconda3\envs\ml_venv\lib\site-packages\nbclient\client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from ucimlrepo import fetch_ucirepo 
+  
+# fetch dataset 
+predict_students_dropout_and_academic_success = fetch_ucirepo(id=697) 
+  
+# data (as pandas dataframes) 
+X = predict_students_dropout_and_academic_success.data.features 
+y = predict_students_dropout_and_academic_success.data.targets 
+  
+# metadata 
+print(predict_students_dropout_and_academic_success.metadata) 
+
+df = pd.concat([X, y], axis=1) 
+------------------
+
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mTimeoutError[0m                              Traceback (most recent call last)
+File [1;32m~\miniconda3\envs\ml_venv\lib\urllib\request.py:1346[0m, in [0;36mAbstractHTTPHandler.do_open[1;34m(self, http_class, req, **http_conn_args)[0m
+[0;32m   1345[0m [38;5;28;01mtry[39;00m:
+[1;32m-> 1346[0m     [43mh[49m[38;5;241;43m.[39;49m[43mrequest[49m[43m([49m[43mreq[49m[38;5;241;43m.[39;49m[43mget_method[49m[43m([49m[43m)[49m[43m,[49m[43m [49m[43mreq[49m[38;5;241;43m.[39;49m[43mselector[49m[43m,[49m[43m [49m[43mreq[49m[38;5;241;43m.[39;49m[43mdata[49m[43m,[49m[43m [49m[43mheaders[49m[43m,[49m
+[0;32m   1347[0m [43m              [49m[43mencode_chunked[49m[38;5;241;43m=[39;49m[43mreq[49m[38;5;241;43m.[39;49m[43mhas_header[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43mTransfer-encoding[39;49m[38;5;124;43m'[39;49m[43m)[49m[43m)[49m
+[0;32m   1348[0m [38;5;28;01mexcept[39;00m [38;5;167;01mOSError[39;00m [38;5;28;01mas[39;00m err: [38;5;66;03m# timeout error[39;00m
+
+File [1;32m~\miniconda3\envs\ml_venv\lib\http\client.py:1285[0m, in [0;36mHTTPConnection.request[1;34m(self, method, url, body, headers, encode_chunked)[0m
+[0;32m   1284[0m [38;5;250m[39m[38;5;124;03m"""Send a complete request to the server."""[39;00m
+[1;32m-> 1285[0m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_send_request[49m[43m([49m[43mmethod[49m[43m,[49m[43m [49m[43murl[49m[43m,[49m[43m [49m[43mbody[49m[43m,[49m[43m [49m[43mheaders[49m[43m,[49m[43m [49m[43mencode_chunked[49m[43m)[49m
+
+File [1;32m~\miniconda3\envs\ml_venv\lib\http\client.py:1331[0m, in [0;36mHTTPConnection._send_request[1;34m(self, method, url, body, headers, encode_chunked)[0m
+[0;32m   1330[0m     body [38;5;241m=[39m _encode(body, [38;5;124m'[39m[38;5;124mbody[39m[38;5;124m'[39m)
+[1;32m-> 1331[0m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mendheaders[49m[43m([49m[43mbody[49m[43m,[49m[43m [49m[43mencode_chunked[49m[38;5;241;43m=[39;49m[43mencode_chunked[49m[43m)[49m
+
+File [1;32m~\miniconda3\envs\ml_venv\lib\http\client.py:1280[0m, in [0;36mHTTPConnection.endheaders[1;34m(self, message_body, encode_chunked)[0m
+[0;32m   1279[0m     [38;5;28;01mraise[39;00m CannotSendHeader()
+[1;32m-> 1280[0m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_send_output[49m[43m([49m[43mmessage_body[49m[43m,[49m[43m [49m[43mencode_chunked[49m[38;5;241;43m=[39;49m[43mencode_chunked[49m[43m)[49m
+
+File [1;32m~\miniconda3\envs\ml_venv\lib\http\client.py:1040[0m, in [0;36mHTTPConnection._send_output[1;34m(self, message_body, encode_chunked)[0m
+[0;32m   1039[0m [38;5;28;01mdel[39;00m [38;5;28mself[39m[38;5;241m.[39m_buffer[:]
+[1;32m-> 1040[0m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43msend[49m[43m([49m[43mmsg[49m[43m)[49m
+[0;32m   1042[0m [38;5;28;01mif[39;00m message_body [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+[0;32m   1043[0m 
+[0;32m   1044[0m     [38;5;66;03m# create a consistent interface to message_body[39;00m
+
+File [1;32m~\miniconda3\envs\ml_venv\lib\http\client.py:980[0m, in [0;36mHTTPConnection.send[1;34m(self, data)[0m
+[0;32m    979[0m [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39mauto_open:
+[1;32m--> 980[0m     [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mconnect[49m[43m([49m[43m)[49m
+[0;32m    981[0m [38;5;28;01melse[39;00m:
+
+File [1;32m~\miniconda3\envs\ml_venv\lib\http\client.py:1447[0m, in [0;36mHTTPSConnection.connect[1;34m(self)[0m
+[0;32m   1445[0m [38;5;124m"[39m[38;5;124mConnect to a host on a given (SSL) port.[39m[38;5;124m"[39m
+[1;32m-> 1447[0m [38;5;28;43msuper[39;49m[43m([49m[43m)[49m[38;5;241;43m.[39;49m[43mconnect[49m[43m([49m[43m)[49m
+[0;32m   1449[0m [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39m_tunnel_host:
+
+File [1;32m~\miniconda3\envs\ml_venv\lib\http\client.py:946[0m, in [0;36mHTTPConnection.connect[1;34m(self)[0m
+[0;32m    945[0m [38;5;250m[39m[38;5;124;03m"""Connect to the host and port specified in __init__."""[39;00m
+[1;32m--> 946[0m [38;5;28mself[39m[38;5;241m.[39msock [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_create_connection[49m[43m([49m
+[0;32m    947[0m [43m    [49m[43m([49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mhost[49m[43m,[49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mport[49m[43m)[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mtimeout[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43msource_address[49m[43m)[49m
+[0;32m    948[0m [38;5;66;03m# Might fail in OSs that don't implement TCP_NODELAY[39;00m
+
+File [1;32m~\miniconda3\envs\ml_venv\lib\socket.py:856[0m, in [0;36mcreate_connection[1;34m(address, timeout, source_address)[0m
+[0;32m    855[0m [38;5;28;01mtry[39;00m:
+[1;32m--> 856[0m     [38;5;28;01mraise[39;00m err
+[0;32m    857[0m [38;5;28;01mfinally[39;00m:
+[0;32m    858[0m     [38;5;66;03m# Break explicitly a reference cycle[39;00m
+
+File [1;32m~\miniconda3\envs\ml_venv\lib\socket.py:844[0m, in [0;36mcreate_connection[1;34m(address, timeout, source_address)[0m
+[0;32m    843[0m     sock[38;5;241m.[39mbind(source_address)
+[1;32m--> 844[0m [43msock[49m[38;5;241;43m.[39;49m[43mconnect[49m[43m([49m[43msa[49m[43m)[49m
+[0;32m    845[0m [38;5;66;03m# Break explicitly a reference cycle[39;00m
+
+[1;31mTimeoutError[0m: [WinError 10060] Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder
+
+During handling of the above exception, another exception occurred:
+
+[1;31mURLError[0m                                  Traceback (most recent call last)
+File [1;32m~\miniconda3\envs\ml_venv\lib\site-packages\ucimlrepo\fetch.py:68[0m, in [0;36mfetch_ucirepo[1;34m(name, id)[0m
+[0;32m     67[0m [38;5;28;01mtry[39;00m:
+[1;32m---> 68[0m     response [38;5;241m=[39m [43murllib[49m[38;5;241;43m.[39;49m[43mrequest[49m[38;5;241;43m.[39;49m[43murlopen[49m[43m([49m[43mapi_url[49m[43m,[49m[43m [49m[43mcontext[49m[38;5;241;43m=[39;49m[43mssl[49m[38;5;241;43m.[39;49m[43mcreate_default_context[49m[43m([49m[43mcafile[49m[38;5;241;43m=[39;49m[43mcertifi[49m[38;5;241;43m.[39;49m[43mwhere[49m[43m([49m[43m)[49m[43m)[49m[43m)[49m
+[0;32m     69[0m     data [38;5;241m=[39m json[38;5;241m.[39mload(response)
+
+File [1;32m~\miniconda3\envs\ml_venv\lib\urllib\request.py:214[0m, in [0;36murlopen[1;34m(url, data, timeout, cafile, capath, cadefault, context)[0m
+[0;32m    213[0m     opener [38;5;241m=[39m _opener
+[1;32m--> 214[0m [38;5;28;01mreturn[39;00m [43mopener[49m[38;5;241;43m.[39;49m[43mopen[49m[43m([49m[43murl[49m[43m,[49m[43m [49m[43mdata[49m[43m,[49m[43m [49m[43mtimeout[49m[43m)[49m
+
+File [1;32m~\miniconda3\envs\ml_venv\lib\urllib\request.py:517[0m, in [0;36mOpenerDirector.open[1;34m(self, fullurl, data, timeout)[0m
+[0;32m    516[0m sys[38;5;241m.[39maudit([38;5;124m'[39m[38;5;124murllib.Request[39m[38;5;124m'[39m, req[38;5;241m.[39mfull_url, req[38;5;241m.[39mdata, req[38;5;241m.[39mheaders, req[38;5;241m.[39mget_method())
+[1;32m--> 517[0m response [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_open[49m[43m([49m[43mreq[49m[43m,[49m[43m [49m[43mdata[49m[43m)[49m
+[0;32m    519[0m [38;5;66;03m# post-process response[39;00m
+
+File [1;32m~\miniconda3\envs\ml_venv\lib\urllib\request.py:534[0m, in [0;36mOpenerDirector._open[1;34m(self, req, data)[0m
+[0;32m    533[0m protocol [38;5;241m=[39m req[38;5;241m.[39mtype
+[1;32m--> 534[0m result [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_call_chain[49m[43m([49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mhandle_open[49m[43m,[49m[43m [49m[43mprotocol[49m[43m,[49m[43m [49m[43mprotocol[49m[43m [49m[38;5;241;43m+[39;49m
+[0;32m    535[0m [43m                          [49m[38;5;124;43m'[39;49m[38;5;124;43m_open[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[43mreq[49m[43m)[49m
+[0;32m    536[0m [38;5;28;01mif[39;00m result:
+
+File [1;32m~\miniconda3\envs\ml_venv\lib\urllib\request.py:494[0m, in [0;36mOpenerDirector._call_chain[1;34m(self, chain, kind, meth_name, *args)[0m
+[0;32m    493[0m func [38;5;241m=[39m [38;5;28mgetattr[39m(handler, meth_name)
+[1;32m--> 494[0m result [38;5;241m=[39m [43mfunc[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m)[49m
+[0;32m    495[0m [38;5;28;01mif[39;00m result [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+
+File [1;32m~\miniconda3\envs\ml_venv\lib\urllib\request.py:1389[0m, in [0;36mHTTPSHandler.https_open[1;34m(self, req)[0m
+[0;32m   1388[0m [38;5;28;01mdef[39;00m[38;5;250m [39m[38;5;21mhttps_open[39m([38;5;28mself[39m, req):
+[1;32m-> 1389[0m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mdo_open[49m[43m([49m[43mhttp[49m[38;5;241;43m.[39;49m[43mclient[49m[38;5;241;43m.[39;49m[43mHTTPSConnection[49m[43m,[49m[43m [49m[43mreq[49m[43m,[49m
+[0;32m   1390[0m [43m        [49m[43mcontext[49m[38;5;241;43m=[39;49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_context[49m[43m,[49m[43m [49m[43mcheck_hostname[49m[38;5;241;43m=[39;49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_check_hostname[49m[43m)[49m
+
+File [1;32m~\miniconda3\envs\ml_venv\lib\urllib\request.py:1349[0m, in [0;36mAbstractHTTPHandler.do_open[1;34m(self, http_class, req, **http_conn_args)[0m
+[0;32m   1348[0m [38;5;28;01mexcept[39;00m [38;5;167;01mOSError[39;00m [38;5;28;01mas[39;00m err: [38;5;66;03m# timeout error[39;00m
+[1;32m-> 1349[0m     [38;5;28;01mraise[39;00m URLError(err)
+[0;32m   1350[0m r [38;5;241m=[39m h[38;5;241m.[39mgetresponse()
+
+[1;31mURLError[0m: <urlopen error [WinError 10060] Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder>
+
+During handling of the above exception, another exception occurred:
+
+[1;31mConnectionError[0m                           Traceback (most recent call last)
+Cell [1;32mIn[4], line 4[0m
+[0;32m      1[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mucimlrepo[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m fetch_ucirepo 
+[0;32m      3[0m [38;5;66;03m# fetch dataset [39;00m
+[1;32m----> 4[0m predict_students_dropout_and_academic_success [38;5;241m=[39m [43mfetch_ucirepo[49m[43m([49m[38;5;28;43mid[39;49m[38;5;241;43m=[39;49m[38;5;241;43m697[39;49m[43m)[49m 
+[0;32m      6[0m [38;5;66;03m# data (as pandas dataframes) [39;00m
+[0;32m      7[0m X [38;5;241m=[39m predict_students_dropout_and_academic_success[38;5;241m.[39mdata[38;5;241m.[39mfeatures 
+
+File [1;32m~\miniconda3\envs\ml_venv\lib\site-packages\ucimlrepo\fetch.py:71[0m, in [0;36mfetch_ucirepo[1;34m(name, id)[0m
+[0;32m     69[0m     data [38;5;241m=[39m json[38;5;241m.[39mload(response)
+[0;32m     70[0m [38;5;28;01mexcept[39;00m (urllib[38;5;241m.[39merror[38;5;241m.[39mURLError, urllib[38;5;241m.[39merror[38;5;241m.[39mHTTPError):
+[1;32m---> 71[0m     [38;5;28;01mraise[39;00m [38;5;167;01mConnectionError[39;00m([38;5;124m'[39m[38;5;124mError connecting to server[39m[38;5;124m'[39m)
+[0;32m     73[0m [38;5;66;03m# verify that dataset exists [39;00m
+[0;32m     74[0m [38;5;28;01mif[39;00m data[[38;5;124m'[39m[38;5;124mstatus[39m[38;5;124m'[39m] [38;5;241m!=[39m [38;5;241m200[39m:
+
+[1;31mConnectionError[0m: Error connecting to server
+
