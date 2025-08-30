@@ -30,6 +30,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-grid_logreg.fit(X, y)
+['from ucimlrepo import fetch_ucirepo ', '  ', '# fetch dataset ', 'cdc_diabetes_health_indicators = fetch_ucirepo(id=891) ', '  ']
+...
+['# metadata ', 'print(cdc_diabetes_health_indicators.metadata)', '', '# Se X e y (ambos son DataFrames)', 'df = pd.concat([X, y], axis=1)']
 -------------------
 
