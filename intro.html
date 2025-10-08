@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Información del Dataset &#8212; EDA</title>
+    <title>Introducción y Contextualización &#8212; EDA</title>
   
   
   
@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="EDA + Modelos: KNN, Logistic" href="notebooks.html" />
+    <link rel="next" title="Diabetes Health Indicators" href="notebooks.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,12 +178,12 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
                 <a class="reference internal" href="#">
-                    Información del Dataset
+                    Introducción y Contextualización
                 </a>
             </li>
         </ul>
         <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html">EDA + Modelos: KNN, Logistic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html"><strong>Diabetes Health Indicators</strong></a></li>
 </ul>
 
     </div>
@@ -369,7 +369,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Información del Dataset</h1>
+    <h1>Introducción y Contextualización</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -379,11 +379,20 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#con-que-proposito-se-creo-el-conjunto-de-datos">¿Con qué propósito se creó el conjunto de datos?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quien-financio-la-creacion-del-conjunto-de-datos">¿Quién financió la creación del conjunto de datos?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-representan-las-instancias-de-este-conjunto-de-datos">¿Qué representan las instancias de este conjunto de datos?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#informacion-adicional">Información adicional</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lista-de-variables">Lista de variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#presentacion-del-dataset"><strong>Presentación del Dataset</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-variables"><strong>Clasificación de Variables</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-demograficas"><strong>Variables Demográficas</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#condiciones-medicas-cronicas"><strong>Condiciones Médicas Crónicas</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#comportamientos-de-salud"><strong>Comportamientos de Salud</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#acceso-a-servicios-de-salud"><strong>Acceso a Servicios de Salud</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mediciones-de-salud-autoreportada"><strong>Mediciones de Salud Autoreportada</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-objetivo"><strong>Variable Objetivo</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos-del-proyecto"><strong>Objetivos del Proyecto</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relevancia-e-impacto-potencial"><strong>Relevancia e Impacto Potencial</strong></a></li>
 </ul>
             </nav>
         </div>
@@ -395,83 +404,147 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="informacion-del-dataset">
-<h1>Información del Dataset<a class="headerlink" href="#informacion-del-dataset" title="Link to this heading">#</a></h1>
-<section id="con-que-proposito-se-creo-el-conjunto-de-datos">
-<h2>¿Con qué propósito se creó el conjunto de datos?<a class="headerlink" href="#con-que-proposito-se-creo-el-conjunto-de-datos" title="Link to this heading">#</a></h2>
-<p>Para comprender mejor la relación entre el estilo de vida y la diabetes en EE. UU.</p>
-</section>
-<section id="quien-financio-la-creacion-del-conjunto-de-datos">
-<h2>¿Quién financió la creación del conjunto de datos?<a class="headerlink" href="#quien-financio-la-creacion-del-conjunto-de-datos" title="Link to this heading">#</a></h2>
-<p>U.S. Centers for Disease Control and Prevention (CDC)</p>
-</section>
-<section id="que-representan-las-instancias-de-este-conjunto-de-datos">
-<h2>¿Qué representan las instancias de este conjunto de datos?<a class="headerlink" href="#que-representan-las-instancias-de-este-conjunto-de-datos" title="Link to this heading">#</a></h2>
-<p>Cada fila representa una persona que participa en este estudio.</p>
-</section>
-<section id="informacion-adicional">
-<h2>Información adicional<a class="headerlink" href="#informacion-adicional" title="Link to this heading">#</a></h2>
-<p>Dataset: <a class="reference external" href="https://archive.ics.uci.edu/dataset/891/cdc+diabetes+health+indicators">https://archive.ics.uci.edu/dataset/891/cdc+diabetes+health+indicators</a><br />
-Codebook: <a class="reference external" href="https://www.cdc.gov/brfss/annual_data/2015/pdf/codebook15_llcp.pdf">https://www.cdc.gov/brfss/annual_data/2015/pdf/codebook15_llcp.pdf</a></p>
-</section>
-<section id="lista-de-variables">
-<h2>Lista de variables<a class="headerlink" href="#lista-de-variables" title="Link to this heading">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="introduccion-y-contextualizacion">
+<h1><strong>Introducción y Contextualización</strong><a class="headerlink" href="#introduccion-y-contextualizacion" title="Link to this heading">#</a></h1>
+<p>La diabetes representa uno de los mayores desafíos de salud pública a nivel global, afectando a más de 537 millones de adultos en el mundo según la Federación Internacional de Diabetes. En Estados Unidos específicamente, aproximadamente 37.3 millones de personas padecen diabetes, lo que equivale al 11.3% de la población, mientras que 96 millones de adultos (38.0% de la población adulta) presentan prediabetes. Esta enfermedad crónica no solo impacta la calidad de vida de las personas, sino que también genera una carga económica significativa para los sistemas de salud, con un costo estimado de $327 mil millones anuales en EE. UU.</p>
+<p>La detección temprana y la identificación de factores de riesgo modificables son cruciales para prevenir o retrasar la aparición de diabetes y sus complicaciones asociadas, como enfermedades cardiovasculares, neuropatía, retinopatía y nefropatía. En este contexto, el aprendizaje automático (Machine Learning) emerge como una herramienta poderosa para analizar patrones complejos en datos de salud y desarrollar modelos predictivos que puedan identificar individuos en riesgo.</p>
+<section id="presentacion-del-dataset">
+<h2><strong>Presentación del Dataset</strong><a class="headerlink" href="#presentacion-del-dataset" title="Link to this heading">#</a></h2>
+<p>Este proyecto se centra en el análisis del dataset <strong>“CDC Diabetes Health Indicators”</strong>, recolectado por los U.S. Centers for Disease Control and Prevention (CDC) a través del sistema Behavioral Risk Factor Surveillance System (BRFSS). Este conjunto de datos representa una de las encuestas de salud más grandes a nivel mundial, con información de más de 250,000 encuestados.</p>
+<p>El dataset incluye <strong>21 variables</strong> que capturan información demográfica, de comportamientos de salud, condiciones médicas y acceso a servicios de salud. La variable objetivo (<code class="docutils literal notranslate"><span class="pre">Diabetes_binary</span></code>) identifica la presencia de diabetes o prediabetes (1) versus ausencia de la condición (0).</p>
+<p><strong>Dataset</strong>: <a class="reference external" href="https://archive.ics.uci.edu/dataset/891/cdc+diabetes+health+indicators">https://archive.ics.uci.edu/dataset/891/cdc+diabetes+health+indicators</a><br />
+<strong>Codebook</strong>: <a class="reference external" href="https://www.cdc.gov/brfss/annual_data/2015/pdf/codebook15_llcp.pdf">https://www.cdc.gov/brfss/annual_data/2015/pdf/codebook15_llcp.pdf</a></p>
+<section id="clasificacion-de-variables">
+<h3><strong>Clasificación de Variables</strong><a class="headerlink" href="#clasificacion-de-variables" title="Link to this heading">#</a></h3>
+<p>Las variables pueden clasificarse en las siguientes categorías:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">HighBP</span></code>: ¿Alguna vez un médico, enfermero u otro profesional de la salud le ha dicho que tiene presión arterial alta? (0 = no high blood pressure, 1 = high blood pressure)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">HighChol</span></code>: ¿Alguna vez un médico, una enfermera u otro profesional de la salud le ha dicho que su colesterol en sangre es alto? (0 = no high cholesterol, 1 = high cholesterol)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">CholCheck</span></code>: Control de colesterol en los últimos cinco años (0 = no cholesterol check in 5 years, 1 = yes cholesterol check in 5 years)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">BMI</span></code>: Índice de masa corporal</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Smoker</span></code>: ¿Has fumado al menos 100 cigarrillos en toda tu vida? [Nota: 5 paquetes = 100 cigarrillos] (0 = no, 1 = yes)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Stroke</span></code>: ¿Alguna vez te dijeron que sufriste un derrame cerebral? (0 = no, 1 = yes)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">HeartDiseaseorAttack</span></code>: ¿Alguna vez te dijeron que tenías angina de pecho(MI) o enfermedad cardíaca coronaria(CHD)? (0 = no, 1 = yes)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">PhysActivity</span></code>: Durante el último mes, además de su trabajo habitual, ¿participó en alguna actividad física o ejercicio como correr, calistenia, golf, jardinería o caminar para hacer ejercicio? (0 = no, 1 = yes)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Fruits</span></code>: Consume fruta 1 o más veces al día (0 = no, 1 = yes)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Veggies</span></code>: Consume verduras 1 o más veces al día (0 = no, 1 = yes)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">HvyAlcoholConsump</span></code>: Bebedores empedernidos (hombre adulto que consume más de 14 bebidas por semana y mujer adulta que consume más de 7 bebidas por semana) (0 = no, 1 = yes)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">AnyHealthcare</span></code>: ¿Tiene algún tipo de cobertura de atención médica, incluido seguro médico, planes prepagos como HMO o planes gubernamentales como Medicare o el Servicio de Salud Indígena? (0 = no, 1 = yes)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">NoDocbcCost</span></code>: ¿Hubo alguna ocasión en los últimos 12 meses en la que usted necesitó ver a un médico pero no pudo debido al costo? (0 = no, 1 = yes)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">GenHlth</span></code>: ¿Dirías que en general tu salud es?:<br />
-1 = excelente<br />
-2 = muy buena<br />
-3 = buena<br />
-4 = regular<br />
-5 = mala</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MentHlth</span></code>: Ahora, pensando en su salud mental, que incluye estrés, depresión y problemas emocionales, ¿durante cuántos días durante los últimos 30 días su salud mental no fue buena? (escala 0-30 días)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">PhysHlth</span></code>: Ahora, pensando en su salud física, que incluye enfermedades físicas y lesiones, ¿durante cuántos días durante los últimos 30 días su salud física no fue buena? (escala 0-30 días)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">DiffWalk</span></code>: ¿Tiene usted serias dificultades para caminar o subir escaleras? (0 = no, 1 = yes)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Sex</span></code>: (0 = female, 1 = male)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Age</span></code>: Categoría de edades de 13 niveles<br />
-1: 18 &lt;= AGE &lt;= 24<br />
-2: 25 &lt;= AGE &lt;= 29<br />
-3: 30 &lt;= AGE &lt;= 34<br />
-4: 35 &lt;= AGE &lt;= 39<br />
-5: 40 &lt;= AGE &lt;= 44<br />
-6: 45 &lt;= AGE &lt;= 49<br />
-7: 50 &lt;= AGE &lt;= 54<br />
-8: 55 &lt;= AGE &lt;= 59<br />
-9: 60 &lt;= AGE &lt;= 64<br />
-10: 65 &lt;= AGE &lt;= 69<br />
-11: 70 &lt;= AGE &lt;= 74<br />
-12: 75 &lt;= AGE &lt;= 79<br />
-13: 80 or older</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Education</span></code>: ¿Cuál es el grado o año de escuela más alto que completaste?<br />
-1: Nunca asistió a la escuela o solo al jardín de infantes<br />
-2: Grados 1 a 8 (primaria)<br />
-3: Grados 9 a 11 (algunos de secundaria)<br />
-4: Grado 12 o GED (graduado de secundaria)<br />
-5: Universidad 1 año a 3 años (Algunos estudios universitarios o escuelas técnicas)<br />
-6: Universidad 4 años o más (Graduado universitario)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Income</span></code>: Ingresos familiares anuales<br />
-1: Less than $10,000<br />
-2: Less than $15,000 ($10,000 to less than $15,000)<br />
-3: Less than $20,000 ($15,000 to less than $20,000)<br />
-4: Less than $25,000 ($20,000 to less than $25,000)<br />
-5: Less than $35,000 ($25,000 to less than $35,000)<br />
-6: Less than $50,000 ($35,000 to less than $50,000)<br />
-7: Less than $75,000 ($50,000 to less than $75,000)<br />
-8: $75,000 or more</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Diabetes_binary</span></code>: Target (0 = no diabetes, 1 = prediabetes or diabetes)</p></li>
+<li><p><strong>Variables Demográficas</strong>: Edad (<code class="docutils literal notranslate"><span class="pre">Age</span></code>), Sexo (<code class="docutils literal notranslate"><span class="pre">Sex</span></code>), Educación (<code class="docutils literal notranslate"><span class="pre">Education</span></code>), Ingresos (<code class="docutils literal notranslate"><span class="pre">Income</span></code>).</p></li>
+<li><p><strong>Condiciones Médicas Crónicas</strong>: Presión arterial alta (<code class="docutils literal notranslate"><span class="pre">HighBP</span></code>), Colesterol alto (<code class="docutils literal notranslate"><span class="pre">HighChol</span></code>), Antecedente de ACV (<code class="docutils literal notranslate"><span class="pre">Stroke</span></code>), Enfermedad cardíaca (<code class="docutils literal notranslate"><span class="pre">HeartDiseaseorAttack</span></code>).</p></li>
+<li><p><strong>Comportamientos de Salud</strong>: Índice de masa corporal (<code class="docutils literal notranslate"><span class="pre">BMI</span></code>), Tabaquismo (<code class="docutils literal notranslate"><span class="pre">Smoker</span></code>), Actividad física (<code class="docutils literal notranslate"><span class="pre">PhysActivity</span></code>), Consumo de frutas (<code class="docutils literal notranslate"><span class="pre">Fruits</span></code>), Consumo de verduras (<code class="docutils literal notranslate"><span class="pre">Veggies</span></code>), Consumo de alcohol (<code class="docutils literal notranslate"><span class="pre">HvyAlcoholConsump</span></code>).</p></li>
+<li><p><strong>Acceso a Servicios de Salud</strong>: Cobertura de salud (<code class="docutils literal notranslate"><span class="pre">AnyHealthcare</span></code>), Barreras por costo (<code class="docutils literal notranslate"><span class="pre">NoDocbcCost</span></code>), Control de colesterol (<code class="docutils literal notranslate"><span class="pre">CholCheck</span></code>).
+<strong>Mediciones de Salud Autoreportada</strong>: Salud general (<code class="docutils literal notranslate"><span class="pre">GenHlth</span></code>), Salud mental (<code class="docutils literal notranslate"><span class="pre">MentHlth</span></code>), Salud física (<code class="docutils literal notranslate"><span class="pre">PhysHlth</span></code>), Dificultad para caminar (<code class="docutils literal notranslate"><span class="pre">DiffWalk</span></code>).</p></li>
 </ul>
+<section id="variables-demograficas">
+<h4><strong>Variables Demográficas</strong><a class="headerlink" href="#variables-demograficas" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Age</span></code>: Categoría de edades de 13 niveles:</p>
+<ol class="arabic simple">
+<li><p>18 &lt;= AGE &lt;= 24.</p></li>
+<li><p>25 &lt;= AGE &lt;= 29.</p></li>
+<li><p>30 &lt;= AGE &lt;= 34.</p></li>
+<li><p>35 &lt;= AGE &lt;= 39.</p></li>
+<li><p>40 &lt;= AGE &lt;= 44.</p></li>
+<li><p>45 &lt;= AGE &lt;= 49.</p></li>
+<li><p>50 &lt;= AGE &lt;= 54.</p></li>
+<li><p>55 &lt;= AGE &lt;= 59.</p></li>
+<li><p>60 &lt;= AGE &lt;= 64.</p></li>
+<li><p>65 &lt;= AGE &lt;= 69.</p></li>
+<li><p>70 &lt;= AGE &lt;= 74.</p></li>
+<li><p>75 &lt;= AGE &lt;= 79.</p></li>
+<li><p>80 or older.</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Sex</span></code>: (0 = female, 1 = male).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Education</span></code>: Nivel educativo más alto completado:</p>
+<ol class="arabic simple">
+<li><p>Nunca asistió a la escuela o solo al jardín de infantes.</p></li>
+<li><p>Grados 1 a 8 (primaria).</p></li>
+<li><p>Grados 9 a 11 (algunos de secundaria).</p></li>
+<li><p>Grado 12 o GED (graduado de secundaria).</p></li>
+<li><p>Universidad 1 año a 3 años (Algunos estudios universitarios o escuelas técnicas).</p></li>
+<li><p>Universidad 4 años o más (Graduado universitario).</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Income</span></code>: Ingresos familiares anuales:</p>
+<ol class="arabic simple">
+<li><p>Less than $10,000.</p></li>
+<li><p>Less than $15,000 ($10,000 to less than $15,000).</p></li>
+<li><p>Less than $20,000 ($15,000 to less than $20,000).</p></li>
+<li><p>Less than $25,000 ($20,000 to less than $25,000).</p></li>
+<li><p>Less than $35,000 ($25,000 to less than $35,000).</p></li>
+<li><p>Less than $50,000 ($35,000 to less than $50,000).</p></li>
+<li><p>Less than $75,000 ($50,000 to less than $75,000).</p></li>
+<li><p>$75,000 or more.</p></li>
+</ol>
+</li>
+</ul>
+</section>
+<section id="condiciones-medicas-cronicas">
+<h4><strong>Condiciones Médicas Crónicas</strong><a class="headerlink" href="#condiciones-medicas-cronicas" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">HighBP</span></code>: ¿Alguna vez un médico, enfermero u otro profesional de la salud le ha dicho que tiene presión arterial alta? (0 = no high blood pressure, 1 = high blood pressure).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HighChol</span></code>: ¿Alguna vez un médico, una enfermera u otro profesional de la salud le ha dicho que su colesterol en sangre es alto? (0 = no high cholesterol, 1 = high cholesterol).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Stroke</span></code>: ¿Alguna vez te dijeron que sufriste un derrame cerebral? (0 = no, 1 = yes).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HeartDiseaseorAttack</span></code>: ¿Alguna vez te dijeron que tenías angina de pecho(MI) o enfermedad cardíaca coronaria(CHD)? (0 = no, 1 = yes).</p></li>
+</ul>
+</section>
+<section id="comportamientos-de-salud">
+<h4><strong>Comportamientos de Salud</strong><a class="headerlink" href="#comportamientos-de-salud" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">BMI</span></code>: Índice de masa corporal.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Smoker</span></code>: ¿Has fumado al menos 100 cigarrillos en toda tu vida? [Nota: 5 paquetes = 100 cigarrillos] (0 = no, 1 = yes).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PhysActivity</span></code>: ¿Durante cuántos días durante los últimos 30 días su salud física no fue buena? (escala 0-30 días).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Fruits</span></code>: Consume fruta 1 o más veces al día (0 = no, 1 = yes).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Veggies</span></code>: Consume verduras 1 o más veces al día (0 = no, 1 = yes).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HvyAlcoholConsump</span></code>: Bebedores empedernidos (Hombre adulto que consume más de 14 bebidas por semana o Mujer adulta que consume más de 7 bebidas por semana) (0 = no, 1 = yes).</p></li>
+</ul>
+</section>
+<section id="acceso-a-servicios-de-salud">
+<h4><strong>Acceso a Servicios de Salud</strong><a class="headerlink" href="#acceso-a-servicios-de-salud" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">AnyHealthcare</span></code>: ¿Tiene algún tipo de cobertura de atención médica, incluido seguro médico, planes prepagos como HMO o planes gubernamentales como Medicare o el Servicio de Salud Indígena? (0 = no, 1 = yes).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NoDocbcCost</span></code>: ¿Hubo alguna ocasión en los últimos 12 meses en la que usted necesitó ver a un médico pero no pudo debido al costo? (0 = no, 1 = yes)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CholCheck</span></code>: Control de colesterol en los últimos cinco años (0 = no cholesterol check in 5 years, 1 = yes cholesterol check in 5 years).</p></li>
+</ul>
+</section>
+<section id="mediciones-de-salud-autoreportada">
+<h4><strong>Mediciones de Salud Autoreportada</strong><a class="headerlink" href="#mediciones-de-salud-autoreportada" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GenHlth</span></code>: ¿Dirías que en general tu salud es?:</p>
+<ol class="arabic simple">
+<li><p>Excelente</p></li>
+<li><p>Muy buena</p></li>
+<li><p>Buena</p></li>
+<li><p>Regular</p></li>
+<li><p>Mala</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MentHlth</span></code>: ¿Durante cuántos días durante los últimos 30 días su salud mental no fue buena? (escala 0-30 días).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PhysHlth</span></code>: ¿Durante cuántos días durante los últimos 30 días su salud física no fue buena? (escala 0-30 días).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DiffWalk</span></code>: ¿Tiene usted serias dificultades para caminar o subir escaleras? (0 = no, 1 = yes).</p></li>
+</ul>
+</section>
+<section id="variable-objetivo">
+<h4><strong>Variable Objetivo</strong><a class="headerlink" href="#variable-objetivo" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Diabetes_binary</span></code>: Target (0 = no diabetes, 1 = prediabetes or diabetes).</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="objetivos-del-proyecto">
+<h2><strong>Objetivos del Proyecto</strong><a class="headerlink" href="#objetivos-del-proyecto" title="Link to this heading">#</a></h2>
+<p>El presente proyecto tiene como objetivo general <strong>desarrollar y evaluar modelos predictivos de aprendizaje automático para identificar factores de riesgo asociados a diabetes y prediabetes en la población estadounidense, utilizando los indicadores de salud del CDC.</strong></p>
+<p>Para alcanzar este objetivo general, se han definido los siguientes <strong>objetivos específicos</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Análisis Exploratorio de Datos (EDA):</strong> Exploración exhaustiva que incluye análisis de distribuciones, valores atípicos, correlaciones y reducción de dimensionalidad exploratoria para fundamentar las decisiones de modelado.</p></li>
+<li><p><strong>Modelado Benchmark Comprehensivo:</strong> Implementación y comparación de algoritmos de clasificación: K-Nearest Neighbors, Naive Bayes, Regresión Logística (con regularización L1 y L2), Árbol de Decisión, Random Forest, XGBoost y Support Vector Machines.</p></li>
+<li><p><strong>Técnicas de Balanceo de Clases:</strong> Evaluación de métodos como SMOTE, ADASYN o class_weight=’balanced’ para abordar el desbalance inherente en datos de salud y mejorar la detección de casos positivos.</p></li>
+<li><p><strong>Optimización Computacional:</strong> Implementación de técnicas especializadas por modelo (KD-Trees para KNN, solvers optimizados, entrenamiento por lotes, early stopping) para acelerar el entrenamiento sin comprometer el rendimiento predictivo.</p></li>
+<li><p><strong>Evaluación Rigurosa de Modelos:</strong> Uso de métricas comprehensivas (Accuracy, Precision, Recall, F1, AUC), matrices de confusión y curvas ROC, con especial atención a la sensibilidad dado el contexto médico.</p></li>
+<li><p><strong>Tuning e Interpretabilidad Avanzada:</strong> Aplicación de técnicas de optimización de hiperparámetros con validación cruzada, e implementación de métodos de interpretabilidad (LIME, SHAP, feature importance) en los mejores modelos.</p></li>
+</ol>
+</section>
+<section id="relevancia-e-impacto-potencial">
+<h2><strong>Relevancia e Impacto Potencial</strong><a class="headerlink" href="#relevancia-e-impacto-potencial" title="Link to this heading">#</a></h2>
+<p>La culminación exitosa de este proyecto tiene el potencial de identificar patrones críticos y factores de riesgo modificables asociados a la diabetes, contribuyendo al desarrollo de herramientas de proyección más efectivas. Un modelo predictivo preciso podría ser utilizado por profesionales de la salud y diseñadores de políticas públicas para:</p>
+<ul class="simple">
+<li><p>Identificar poblaciones de alto riesgo para intervenciones preventivas.</p></li>
+<li><p>Optimizar la asignación de recursos en programas de salud pública.</p></li>
+<li><p>Desarrollar estrategias personalizadas de prevención basadas en perfiles de riesgo.</p></li>
+<li><p>Reducir los costos asociados al manejo de complicaciones diabéticas.</p></li>
+</ul>
+<p>Este proyecto demuestra la aplicabilidad del machine learning en salud pública, transformando datos epidemiológicos en conocimiento accionable para combatir una de las epidemias más significativas del siglo XXI.</p>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -512,7 +585,7 @@ Codebook: <a class="reference external" href="https://www.cdc.gov/brfss/annual_d
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">EDA + Modelos: KNN, Logistic</p>
+        <p class="prev-next-title"><strong>Diabetes Health Indicators</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -532,11 +605,20 @@ Codebook: <a class="reference external" href="https://www.cdc.gov/brfss/annual_d
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#con-que-proposito-se-creo-el-conjunto-de-datos">¿Con qué propósito se creó el conjunto de datos?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quien-financio-la-creacion-del-conjunto-de-datos">¿Quién financió la creación del conjunto de datos?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-representan-las-instancias-de-este-conjunto-de-datos">¿Qué representan las instancias de este conjunto de datos?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#informacion-adicional">Información adicional</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lista-de-variables">Lista de variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#presentacion-del-dataset"><strong>Presentación del Dataset</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-variables"><strong>Clasificación de Variables</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-demograficas"><strong>Variables Demográficas</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#condiciones-medicas-cronicas"><strong>Condiciones Médicas Crónicas</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#comportamientos-de-salud"><strong>Comportamientos de Salud</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#acceso-a-servicios-de-salud"><strong>Acceso a Servicios de Salud</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mediciones-de-salud-autoreportada"><strong>Mediciones de Salud Autoreportada</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-objetivo"><strong>Variable Objetivo</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos-del-proyecto"><strong>Objetivos del Proyecto</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relevancia-e-impacto-potencial"><strong>Relevancia e Impacto Potencial</strong></a></li>
 </ul>
   </nav></div>
 

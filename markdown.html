@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Markdown Files &#8212; EDA</title>
+    <title>Conclusiones y Hallazgos Principales &#8212; EDA</title>
   
   
   
@@ -175,12 +175,12 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Información del Dataset
+                    Introducción y Contextualización
                 </a>
             </li>
         </ul>
         <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html">EDA + Modelos: KNN, Ridge, Lasso, Logistic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html"><strong>Diabetes Health Indicators</strong></a></li>
 </ul>
 
     </div>
@@ -366,7 +366,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Markdown Files</h1>
+    <h1>Conclusiones y Hallazgos Principales</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -376,10 +376,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-myst">What is MyST?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-roles-and-directives">Sample Roles and Directives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citations">Citations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learn-more">Learn more</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logro-de-los-objetivos-propuestos"><strong>1. Logro de los Objetivos Propuestos</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgos-clinicos-y-epidemiologicos-relevantes"><strong>2. Hallazgos Clínicos y Epidemiológicos Relevantes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#desempeno-comparativo-de-modelos"><strong>3. Desempeño Comparativo de Modelos</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#buenas-practicas-y-estrategias-metodologicas-implementadas"><strong>4. Buenas Prácticas y Estrategias Metodológicas Implementadas</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretabilidad-y-validacion-clinica"><strong>5. Interpretabilidad y Validación Clínica</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones-y-consideraciones"><strong>6. Limitaciones y Consideraciones</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#impacto-potencial-y-proyeccion-futura"><strong>7. Impacto Potencial y Proyección Futura</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reflexion-final"><strong>Reflexión Final</strong></a></li>
 </ul>
             </nav>
         </div>
@@ -391,59 +395,85 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="markdown-files">
-<h1>Markdown Files<a class="headerlink" href="#markdown-files" title="Link to this heading">#</a></h1>
-<p>Whether you write your book’s content in Jupyter Notebooks (<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>) or
-in regular markdown files (<code class="docutils literal notranslate"><span class="pre">.md</span></code>), you’ll write in the same flavor of markdown
-called <strong>MyST Markdown</strong>.
-This is a simple file to help you get started and show off some syntax.</p>
-<section id="what-is-myst">
-<h2>What is MyST?<a class="headerlink" href="#what-is-myst" title="Link to this heading">#</a></h2>
-<p>MyST stands for “Markedly Structured Text”. It
-is a slight variation on a flavor of markdown called “CommonMark” markdown,
-with small syntax extensions to allow you to write <strong>roles</strong> and <strong>directives</strong>
-in the Sphinx ecosystem.</p>
-<p>For more about MyST, see <a class="reference external" href="https://jupyterbook.org/content/myst.html">the MyST Markdown Overview</a>.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="conclusiones-y-hallazgos-principales">
+<h1><strong>Conclusiones y Hallazgos Principales</strong><a class="headerlink" href="#conclusiones-y-hallazgos-principales" title="Link to this heading">#</a></h1>
+<section id="logro-de-los-objetivos-propuestos">
+<h2><strong>1. Logro de los Objetivos Propuestos</strong><a class="headerlink" href="#logro-de-los-objetivos-propuestos" title="Link to this heading">#</a></h2>
+<p>El presente proyecto ha cumplido satisfactoriamente con todos los objetivos planteados inicialmente, demostrando la viabilidad de utilizar algoritmos de machine learning para la predicción temprana de diabetes y prediabetes. A través de un proceso sistemático que incluyó desde el análisis exploratorio hasta la interpretación avanzada de modelos, se ha desarrollado un framework robusto capaz de identificar pacientes con alto riesgo metabólico con métricas competitivas.</p>
 </section>
-<section id="sample-roles-and-directives">
-<h2>Sample Roles and Directives<a class="headerlink" href="#sample-roles-and-directives" title="Link to this heading">#</a></h2>
-<p>Roles and directives are two of the most powerful tools in Jupyter Book. They
-are like functions, but written in a markup language. They both
-serve a similar purpose, but <strong>roles are written in one line</strong>, whereas
-<strong>directives span many lines</strong>. They both accept different kinds of inputs,
-and what they do with those inputs depends on the specific role or directive
-that is being called.</p>
-<p>Here is a “note” directive:</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Here is a note</p>
-</div>
-<p>It will be rendered in a special box when you build your book.</p>
-<p>Here is an inline directive to refer to a document: <a class="reference internal" href="markdown-notebooks.html"><span class="doc">Notebooks with MyST Markdown</span></a>.</p>
+<section id="hallazgos-clinicos-y-epidemiologicos-relevantes">
+<h2><strong>2. Hallazgos Clínicos y Epidemiológicos Relevantes</strong><a class="headerlink" href="#hallazgos-clinicos-y-epidemiologicos-relevantes" title="Link to this heading">#</a></h2>
+<p>El análisis exploratorio y de importancia de variables reveló patrones epidemiológicos significativos que coinciden con la literatura médica existente:</p>
+<ul class="simple">
+<li><p><strong>Perfil de riesgo identificado</strong>: Los pacientes con mayor probabilidad de diabetes presentan <strong>edad avanzada</strong> (categorías cat_Age_10, cat_Age_11), <strong>consumo excesivo de alcohol</strong> (bin_HvyAlcoholConsump), y <strong>condiciones de salud general deficiente</strong> (cat_GenHlth_4, cat_GenHlth_5).</p></li>
+<li><p><strong>Variables críticas identificadas</strong>: Las <strong>variables de edad categorizadas</strong> emergieron como los predictores más potentes en modelos lineales, mientras que <strong>indicadores médicos directos</strong> (HighBP, HighChol) dominaron en modelos basados en árboles.</p></li>
+<li><p><strong>Factores protectores subestimados</strong>: Se identificó que modelos como <strong>XGBoost</strong> consideran adecuadamente factores protectores como <strong>niveles de ingreso alto</strong> (cat_Income_7, cat_Income_8) y <strong>ausencia de consumo excesivo de alcohol</strong>, mientras que otros modelos los ignoran.</p></li>
+</ul>
 </section>
-<section id="citations">
-<h2>Citations<a class="headerlink" href="#citations" title="Link to this heading">#</a></h2>
-<p>You can also cite references that are stored in a <code class="docutils literal notranslate"><span class="pre">bibtex</span></code> file. For example,
-the following syntax: <code class="docutils literal notranslate"><span class="pre">{cite}`holdgraf_evidence_2014`</span></code> will render like
-this: <span id="id1">[<a class="reference internal" href="#id3" title="Christopher Ramsay Holdgraf, Wendy de Heer, Brian N. Pasley, and Robert T. Knight. Evidence for Predictive Coding in Human Auditory Cortex. In International Conference on Cognitive Neuroscience. Brisbane, Australia, Australia, 2014. Frontiers in Neuroscience.">HdHPK14</a>]</span>.</p>
-<p>Moreover, you can insert a bibliography into your page with this syntax:
-The <code class="docutils literal notranslate"><span class="pre">{bibliography}</span></code> directive must be used for all the <code class="docutils literal notranslate"><span class="pre">{cite}</span></code> roles to
-render properly.
-For example, if the references for your book are stored in <code class="docutils literal notranslate"><span class="pre">references.bib</span></code>,
-then the bibliography is inserted with:</p>
-<div class="docutils container" id="id2">
-<div role="list" class="citation-list">
-<div class="citation" id="id3" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">HdHPK14</a><span class="fn-bracket">]</span></span>
-<p>Christopher Ramsay Holdgraf, Wendy de Heer, Brian N. Pasley, and Robert T. Knight. Evidence for Predictive Coding in Human Auditory Cortex. In <em>International Conference on Cognitive Neuroscience</em>. Brisbane, Australia, Australia, 2014. Frontiers in Neuroscience.</p>
-</div>
-</div>
-</div>
+<section id="desempeno-comparativo-de-modelos">
+<h2><strong>3. Desempeño Comparativo de Modelos</strong><a class="headerlink" href="#desempeno-comparativo-de-modelos" title="Link to this heading">#</a></h2>
+<p>La evaluación exhaustiva de diez algoritmos diferentes reveló insights valiosos sobre su aplicabilidad en el contexto de diabetes:</p>
+<ul class="simple">
+<li><p><strong>KNN como sorpresa destacada</strong>: A pesar de su tiempo de predicción elevado, KNN demostró el <strong>mejor Accuracy general</strong> (73.56%) y <strong>segundo mejor AUC-ROC</strong> (0.8695), superando a algoritmos más complejos.</p></li>
+<li><p><strong>BernoulliNB como líder en AUC</strong>: Con el <strong>mejor AUC-ROC</strong> (0.7869) y <strong>buen balance general</strong>, demostró efectividad en la capacidad discriminativa del modelo.</p></li>
+<li><p><strong>Eficiencia de modelos lineales</strong>: Logistic Regression y SVM Linear mostraron <strong>excelente velocidad de predicción</strong> (&lt; 0.07 segundos) con rendimiento competitivo, ideales para aplicaciones en tiempo real.</p></li>
+<li><p><strong>Jerarquía de rendimiento establecida</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>KNN</strong> - Mejor Accuracy y segundo mejor AUC (lento).</p></li>
+<li><p><strong>BernoulliNB</strong> - Mejor AUC y buen balance.</p></li>
+<li><p><strong>XGBoost</strong> - Mejor equilibrio rendimiento-velocidad entre ensembles.</p></li>
+<li><p><strong>Random Forest</strong> - Robustez y buena precisión.</p></li>
+<li><p><strong>Modelos lineales</strong> - Máxima velocidad + rendimiento aceptable.</p></li>
+</ol>
+</li>
+</ul>
 </section>
-<section id="learn-more">
-<h2>Learn more<a class="headerlink" href="#learn-more" title="Link to this heading">#</a></h2>
-<p>This is just a simple starter to get you started.
-You can learn a lot more at <a class="reference external" href="https://jupyterbook.org">jupyterbook.org</a>.</p>
+<section id="buenas-practicas-y-estrategias-metodologicas-implementadas">
+<h2><strong>4. Buenas Prácticas y Estrategias Metodológicas Implementadas</strong><a class="headerlink" href="#buenas-practicas-y-estrategias-metodologicas-implementadas" title="Link to this heading">#</a></h2>
+<p>El proyecto incorporó rigurosas prácticas de ciencia de datos que garantizaron la calidad y validez de los resultados obtenidos:</p>
+<ul class="simple">
+<li><p><strong>Balanceo de datos con SMOTE</strong>: Se aplicó exitosamente técnica de sobremuestreo para manejar el desbalance de clases, mejorando la capacidad de los modelos para detectar casos positivos.</p></li>
+<li><p><strong>Preprocesamiento diferenciado por algoritmos</strong>: Se diseñaron estrategias específicas para cada familia de modelos, optimizando el rendimiento de cada clasificador según sus características técnicas.</p></li>
+<li><p><strong>Optimizaciones computacionales avanzadas</strong>: Implementación de KD-Trees para KNN, solver ‘saga’ para Regresión Logística, tree_method=’hist’ para XGBoost, y dual=False para SVM Linear, asegurando eficiencia en el dataset de 250,000 observaciones.</p></li>
+<li><p><strong>Validación exhaustiva y prevención de sobreajuste</strong>: Se emplearon técnicas de validación cruzada estratificada y múltiples métricas de evaluación, asegurando la generalización de los modelos.</p></li>
+</ul>
+</section>
+<section id="interpretabilidad-y-validacion-clinica">
+<h2><strong>5. Interpretabilidad y Validación Clínica</strong><a class="headerlink" href="#interpretabilidad-y-validacion-clinica" title="Link to this heading">#</a></h2>
+<p>El análisis de importancia de variables y las explicaciones con LIME proporcionaron transparencia a los modelos:</p>
+<ul class="simple">
+<li><p><strong>Consistencia en predictores clave</strong>: Múltiples modelos identificaron <strong>edad avanzada</strong> y <strong>consumo de alcohol</strong> como factores críticos, validando su relevancia clínica.</p></li>
+<li><p><strong>Divergencia en enfoques predictivos</strong>:</p>
+<ul>
+<li><p><strong>Modelos lineales</strong>: Enfatizan variables demográficas (edad).</p></li>
+<li><p><strong>Modelos basados en árboles</strong>: Priorizan indicadores médicos directos (presión arterial, colesterol).</p></li>
+</ul>
+</li>
+<li><p><strong>XGBoost como modelo más inteligente</strong>: Demostró capacidad única para balancear factores de riesgo y protectores, siendo el único que predijo correctamente la instancia de estudio problemática.</p></li>
+</ul>
+</section>
+<section id="limitaciones-y-consideraciones">
+<h2><strong>6. Limitaciones y Consideraciones</strong><a class="headerlink" href="#limitaciones-y-consideraciones" title="Link to this heading">#</a></h2>
+<p>Es importante reconocer las limitaciones del estudio:</p>
+<ul class="simple">
+<li><p><strong>Problema de falsos positivos</strong>: Todos los modelos mostraron Precision baja (&lt;30%), indicando alta tasa de falsas alarmas que requiere ajuste de umbrales para el contexto clínico específico.</p></li>
+<li><p><strong>Tiempo de ejecución de KNN</strong>: Aunque con mejor rendimiento, su tiempo de predicción (565 segundos) lo hace impracticable para aplicaciones en tiempo real.</p></li>
+<li><p><strong>Naturaleza del dataset</strong>: La procedencia de datos del CDC BRFSS limita la generalización a otras poblaciones y contextos clínicos.</p></li>
+</ul>
+</section>
+<section id="impacto-potencial-y-proyeccion-futura">
+<h2><strong>7. Impacto Potencial y Proyección Futura</strong><a class="headerlink" href="#impacto-potencial-y-proyeccion-futura" title="Link to this heading">#</a></h2>
+<p>La implementación exitosa de este sistema predictivo podría transformar la práctica clínica en varias dimensiones:</p>
+<ul class="simple">
+<li><p><strong>Detección temprana</strong>: Identificación de pacientes en riesgo de diabetes antes del desarrollo de complicaciones severas.</p></li>
+<li><p><strong>Estratificación de riesgo</strong>: Asignación más eficiente de recursos de prevención y seguimiento a población de mayor riesgo.</p></li>
+<li><p><strong>Medicina preventiva personalizada</strong>: Desarrollo de intervenciones específicas basadas en perfiles de riesgo individualizados.</p></li>
+</ul>
+</section>
+<section id="reflexion-final">
+<h2><strong>Reflexión Final</strong><a class="headerlink" href="#reflexion-final" title="Link to this heading">#</a></h2>
+<p>Este proyecto demuestra que los algoritmos de machine learning, cuando son aplicados con rigor metodológico y comprensión del dominio clínico, pueden convertirse en herramientas valiosas para la salud pública. El éxito de modelos diversos sugiere que la selección del algoritmo debe considerar no solo el rendimiento predictivo, sino también la velocidad, interpretabilidad y contexto de aplicación específico.</p>
+<p>Los hallazgos no solo validan el potencial de la inteligencia artificial en salud metabólica, sino que también contribuyen al entendimiento de los patrones de diabetes, particularmente la importancia de considerar tanto factores de riesgo como protectores en las decisiones clínicas.</p>
 </section>
 </section>
 
@@ -493,10 +523,14 @@ You can learn a lot more at <a class="reference external" href="https://jupyterb
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-myst">What is MyST?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-roles-and-directives">Sample Roles and Directives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citations">Citations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learn-more">Learn more</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logro-de-los-objetivos-propuestos"><strong>1. Logro de los Objetivos Propuestos</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgos-clinicos-y-epidemiologicos-relevantes"><strong>2. Hallazgos Clínicos y Epidemiológicos Relevantes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#desempeno-comparativo-de-modelos"><strong>3. Desempeño Comparativo de Modelos</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#buenas-practicas-y-estrategias-metodologicas-implementadas"><strong>4. Buenas Prácticas y Estrategias Metodológicas Implementadas</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretabilidad-y-validacion-clinica"><strong>5. Interpretabilidad y Validación Clínica</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones-y-consideraciones"><strong>6. Limitaciones y Consideraciones</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#impacto-potencial-y-proyeccion-futura"><strong>7. Impacto Potencial y Proyección Futura</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reflexion-final"><strong>Reflexión Final</strong></a></li>
 </ul>
   </nav></div>
 
