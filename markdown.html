@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -181,6 +181,7 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="notebooks.html"><strong>Diabetes Health Indicators</strong></a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Conclusiones y Hallazgos Principales</strong></a></li>
+
 </ul>
 
     </div>
@@ -376,15 +377,21 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Conclusiones y Hallazgos Principales</strong></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logro-de-los-objetivos-propuestos"><strong>1. Logro de los Objetivos Propuestos</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgos-clinicos-y-epidemiologicos-relevantes"><strong>2. Hallazgos Clínicos y Epidemiológicos Relevantes</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#desempeno-comparativo-de-modelos"><strong>3. Desempeño Comparativo de Modelos</strong></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#desempeno-comparativo-de-modelos"><strong>3. Desempeño Comparativo de Modelos</strong></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#buenas-practicas-y-estrategias-metodologicas-implementadas"><strong>4. Buenas Prácticas y Estrategias Metodológicas Implementadas</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretabilidad-y-validacion-clinica"><strong>5. Interpretabilidad y Validación Clínica</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones-y-consideraciones"><strong>6. Limitaciones y Consideraciones</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#impacto-potencial-y-proyeccion-futura"><strong>7. Impacto Potencial y Proyección Futura</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reflexion-final"><strong>Reflexión Final</strong></a></li>
 </ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -407,49 +414,64 @@ document.write(`
 <ul class="simple">
 <li><p><strong>Perfil de riesgo identificado</strong>: Los pacientes con mayor probabilidad de diabetes presentan <strong>edad avanzada</strong> (categorías cat_Age_10, cat_Age_11), <strong>consumo excesivo de alcohol</strong> (bin_HvyAlcoholConsump), y <strong>condiciones de salud general deficiente</strong> (cat_GenHlth_4, cat_GenHlth_5).</p></li>
 <li><p><strong>Variables críticas identificadas</strong>: Las <strong>variables de edad categorizadas</strong> emergieron como los predictores más potentes en modelos lineales, mientras que <strong>indicadores médicos directos</strong> (HighBP, HighChol) dominaron en modelos basados en árboles.</p></li>
-<li><p><strong>Factores protectores subestimados</strong>: Se identificó que modelos como <strong>XGBoost</strong> consideran adecuadamente factores protectores como <strong>niveles de ingreso alto</strong> (cat_Income_7, cat_Income_8) y <strong>ausencia de consumo excesivo de alcohol</strong>, mientras que otros modelos los ignoran.</p></li>
+<li><p><strong>Factores protectores consistentes</strong>: La <strong>ausencia de consumo excesivo de alcohol</strong> y la <strong>pertenencia a grupos de edad media</strong> se identificaron como factores protectores clave en múltiples modelos.</p></li>
 </ul>
 </section>
-<section id="desempeno-comparativo-de-modelos">
-<h2><strong>3. Desempeño Comparativo de Modelos</strong><a class="headerlink" href="#desempeno-comparativo-de-modelos" title="Link to this heading">#</a></h2>
-<p>La evaluación exhaustiva de diez algoritmos diferentes reveló insights valiosos sobre su aplicabilidad en el contexto de diabetes:</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="desempeno-comparativo-de-modelos">
+<h1><strong>3. Desempeño Comparativo de Modelos</strong><a class="headerlink" href="#desempeno-comparativo-de-modelos" title="Link to this heading">#</a></h1>
+<p>La evaluación exhaustiva de diez algoritmos en el conjunto de prueba reveló insights valiosos sobre su aplicabilidad en el contexto de diabetes:</p>
 <ul class="simple">
-<li><p><strong>KNN como sorpresa destacada</strong>: A pesar de su tiempo de predicción elevado, KNN demostró el <strong>mejor Accuracy general</strong> (73.56%) y <strong>segundo mejor AUC-ROC</strong> (0.8695), superando a algoritmos más complejos.</p></li>
-<li><p><strong>BernoulliNB como líder en AUC</strong>: Con el <strong>mejor AUC-ROC</strong> (0.7869) y <strong>buen balance general</strong>, demostró efectividad en la capacidad discriminativa del modelo.</p></li>
-<li><p><strong>Eficiencia de modelos lineales</strong>: Logistic Regression y SVM Linear mostraron <strong>excelente velocidad de predicción</strong> (&lt; 0.07 segundos) con rendimiento competitivo, ideales para aplicaciones en tiempo real.</p></li>
-<li><p><strong>Jerarquía de rendimiento establecida</strong>:</p>
+<li><p><strong>SVM Linear como líder en AUC</strong>: Demostró el <strong>mejor AUC-ROC en prueba</strong> (0.7861) combinado con la <strong>mayor velocidad de predicción</strong> (0.0654 segundos), estableciéndose como el modelo más eficiente.</p></li>
+<li><p><strong>BernoulliNB como alternativa competitiva</strong>: Mostró el <strong>segundo mejor AUC</strong> (0.7852) y la <strong>mejor Precision</strong> (29.17%), siendo ideal para minimizar falsos positivos.</p></li>
+<li><p><strong>Logistic Regression como opción balanceada</strong>: Ambas variantes (L1 y L2) alcanzaron <strong>AUC de 0.7843</strong> con excelente velocidad (&lt; 0.08 segundos), ofreciendo robustez y eficiencia.</p></li>
+<li><p><strong>XGBoost como mejor ensemble</strong>: Demostró <strong>AUC sólido</strong> (0.7773) superando a Random Forest (0.7751), con tiempo de predicción razonable (0.1304 segundos).</p></li>
+<li><p><strong>Jerarquía de rendimiento en prueba</strong>:</p>
 <ol class="arabic simple">
-<li><p><strong>KNN</strong> - Mejor Accuracy y segundo mejor AUC (lento).</p></li>
-<li><p><strong>BernoulliNB</strong> - Mejor AUC y buen balance.</p></li>
-<li><p><strong>XGBoost</strong> - Mejor equilibrio rendimiento-velocidad entre ensembles.</p></li>
-<li><p><strong>Random Forest</strong> - Robustez y buena precisión.</p></li>
-<li><p><strong>Modelos lineales</strong> - Máxima velocidad + rendimiento aceptable.</p></li>
+<li><p><strong>SVM Linear</strong> - Mejor AUC (0.786) + Más rápido (0.065s).</p></li>
+<li><p><strong>BernoulliNB</strong> - Alto AUC (0.785) + Mejor Precision (29.17%).</p></li>
+<li><p><strong>Logistic Regression L1/L2</strong> - AUC competitivo (0.784) + Alta velocidad.</p></li>
+<li><p><strong>XGBoost</strong> - Mejor ensemble (AUC 0.777) + Buen balance.</p></li>
+<li><p><strong>Random Forest</strong> - Buen AUC (0.775) + Buen Accuracy (73.10%).</p></li>
 </ol>
 </li>
 </ul>
-</section>
+<p><strong>Hallazgos clave en conjunto de prueba</strong>:</p>
+<ul class="simple">
+<li><p><strong>KNN</strong> mostró caída significativa en AUC (0.6990 vs 0.8747 en validación) indicando posible sobreajuste.</p></li>
+<li><p><strong>GaussianNB</strong> confirmó su bajo rendimiento (AUC 0.7567), el más bajo de todos los modelos.</p></li>
+<li><p><strong>Modelos lineales</strong> mantuvieron consistencia entre validación y prueba, demostrando robustez.</p></li>
+<li><p><strong>Todos los modelos superaron AUC de 0.75</strong>, confirmando capacidad predictiva aceptable en datos no vistos.</p></li>
+</ul>
+<p><strong>Recomendación para implementación</strong>:</p>
+<ul class="simple">
+<li><p><strong>Prioridad velocidad y AUC</strong>: SVM Linear.</p></li>
+<li><p><strong>Prioridad precisión y AUC</strong>: BernoulliNB.</p></li>
+<li><p><strong>Balance general</strong>: Logistic Regression L2.</p></li>
+<li><p><strong>Evitar</strong>: KNN (tiempo excesivo) y GaussianNB (bajo rendimiento).</p></li>
+</ul>
 <section id="buenas-practicas-y-estrategias-metodologicas-implementadas">
 <h2><strong>4. Buenas Prácticas y Estrategias Metodológicas Implementadas</strong><a class="headerlink" href="#buenas-practicas-y-estrategias-metodologicas-implementadas" title="Link to this heading">#</a></h2>
 <p>El proyecto incorporó rigurosas prácticas de ciencia de datos que garantizaron la calidad y validez de los resultados obtenidos:</p>
 <ul class="simple">
 <li><p><strong>Balanceo de datos con SMOTE</strong>: Se aplicó exitosamente técnica de sobremuestreo para manejar el desbalance de clases, mejorando la capacidad de los modelos para detectar casos positivos.</p></li>
-<li><p><strong>Preprocesamiento diferenciado por algoritmos</strong>: Se diseñaron estrategias específicas para cada familia de modelos, optimizando el rendimiento de cada clasificador según sus características técnicas.</p></li>
-<li><p><strong>Optimizaciones computacionales avanzadas</strong>: Implementación de KD-Trees para KNN, solver ‘saga’ para Regresión Logística, tree_method=’hist’ para XGBoost, y dual=False para SVM Linear, asegurando eficiencia en el dataset de 250,000 observaciones.</p></li>
-<li><p><strong>Validación exhaustiva y prevención de sobreajuste</strong>: Se emplearon técnicas de validación cruzada estratificada y múltiples métricas de evaluación, asegurando la generalización de los modelos.</p></li>
+<li><p><strong>Preprocesamiento diferenciado por algoritmos</strong>: Se diseñaron estrategias específicas para cada familia de modelos, incluyendo binarización para BernoulliNB y escalados específicos para otros algoritmos.</p></li>
+<li><p><strong>Optimizaciones computacionales avanzadas</strong>: Implementación de Ball Trees para KNN, solver ‘saga’ para Regresión Logística, tree_method=’hist’ para XGBoost, y paralelización con n_jobs=-1.</p></li>
+<li><p><strong>Validación exhaustiva y prevención de sobreajuste</strong>: Se empleó validación cruzada estratificada (5 folds) con múltiples métricas de evaluación, asegurando la generalización de los modelos.</p></li>
 </ul>
 </section>
 <section id="interpretabilidad-y-validacion-clinica">
 <h2><strong>5. Interpretabilidad y Validación Clínica</strong><a class="headerlink" href="#interpretabilidad-y-validacion-clinica" title="Link to this heading">#</a></h2>
 <p>El análisis de importancia de variables y las explicaciones con LIME proporcionaron transparencia a los modelos:</p>
 <ul class="simple">
-<li><p><strong>Consistencia en predictores clave</strong>: Múltiples modelos identificaron <strong>edad avanzada</strong> y <strong>consumo de alcohol</strong> como factores críticos, validando su relevancia clínica.</p></li>
+<li><p><strong>Consistencia en predictores clave</strong>: Múltiples modelos identificaron <strong>edad avanzada</strong>, <strong>consumo de alcohol</strong> y <strong>presión arterial alta</strong> como factores críticos.</p></li>
 <li><p><strong>Divergencia en enfoques predictivos</strong>:</p>
 <ul>
-<li><p><strong>Modelos lineales</strong>: Enfatizan variables demográficas (edad).</p></li>
-<li><p><strong>Modelos basados en árboles</strong>: Priorizan indicadores médicos directos (presión arterial, colesterol).</p></li>
+<li><p><strong>Modelos lineales</strong>: Enfatizan variables demográficas (edad) y consumo de alcohol.</p></li>
+<li><p><strong>Modelos basados en árboles</strong>: Priorizan indicadores médicos directos (HighBP, PhysHlth, MentHlth).</p></li>
 </ul>
 </li>
-<li><p><strong>XGBoost como modelo más inteligente</strong>: Demostró capacidad única para balancear factores de riesgo y protectores, siendo el único que predijo correctamente la instancia de estudio problemática.</p></li>
+<li><p><strong>Robustez predictiva demostrada</strong>: En la instancia de prueba analizada, 9 de 10 modelos realizaron predicciones correctas, demostrando consistencia en el reconocimiento de patrones protectores.</p></li>
 </ul>
 </section>
 <section id="limitaciones-y-consideraciones">
@@ -457,23 +479,23 @@ document.write(`
 <p>Es importante reconocer las limitaciones del estudio:</p>
 <ul class="simple">
 <li><p><strong>Problema de falsos positivos</strong>: Todos los modelos mostraron Precision baja (&lt;30%), indicando alta tasa de falsas alarmas que requiere ajuste de umbrales para el contexto clínico específico.</p></li>
-<li><p><strong>Tiempo de ejecución de KNN</strong>: Aunque con mejor rendimiento, su tiempo de predicción (565 segundos) lo hace impracticable para aplicaciones en tiempo real.</p></li>
-<li><p><strong>Naturaleza del dataset</strong>: La procedencia de datos del CDC BRFSS limita la generalización a otras poblaciones y contextos clínicos.</p></li>
+<li><p><strong>Tiempo de ejecución de KNN</strong>: Aunque con excelente rendimiento, su tiempo de predicción (2998 segundos) lo hace impracticable para aplicaciones en tiempo real.</p></li>
+<li><p><strong>Sobre-confianza de GaussianNB</strong>: Demostró problemas de calibración con predicciones extremas (90% probabilidad en caso incorrecto).</p></li>
 </ul>
 </section>
 <section id="impacto-potencial-y-proyeccion-futura">
 <h2><strong>7. Impacto Potencial y Proyección Futura</strong><a class="headerlink" href="#impacto-potencial-y-proyeccion-futura" title="Link to this heading">#</a></h2>
 <p>La implementación exitosa de este sistema predictivo podría transformar la práctica clínica en varias dimensiones:</p>
 <ul class="simple">
-<li><p><strong>Detección temprana</strong>: Identificación de pacientes en riesgo de diabetes antes del desarrollo de complicaciones severas.</p></li>
-<li><p><strong>Estratificación de riesgo</strong>: Asignación más eficiente de recursos de prevención y seguimiento a población de mayor riesgo.</p></li>
-<li><p><strong>Medicina preventiva personalizada</strong>: Desarrollo de intervenciones específicas basadas en perfiles de riesgo individualizados.</p></li>
+<li><p><strong>Detección temprana</strong>: Identificación de pacientes en riesgo de diabetes basada en múltiples factores simultáneamente.</p></li>
+<li><p><strong>Estratificación de riesgo</strong>: Asignación más eficiente de recursos según perfiles de riesgo identificados por los modelos.</p></li>
+<li><p><strong>Medicina preventiva personalizada</strong>: Desarrollo de intervenciones específicas basadas en los factores más relevantes para cada perfil demográfico.</p></li>
 </ul>
 </section>
 <section id="reflexion-final">
 <h2><strong>Reflexión Final</strong><a class="headerlink" href="#reflexion-final" title="Link to this heading">#</a></h2>
-<p>Este proyecto demuestra que los algoritmos de machine learning, cuando son aplicados con rigor metodológico y comprensión del dominio clínico, pueden convertirse en herramientas valiosas para la salud pública. El éxito de modelos diversos sugiere que la selección del algoritmo debe considerar no solo el rendimiento predictivo, sino también la velocidad, interpretabilidad y contexto de aplicación específico.</p>
-<p>Los hallazgos no solo validan el potencial de la inteligencia artificial en salud metabólica, sino que también contribuyen al entendimiento de los patrones de diabetes, particularmente la importancia de considerar tanto factores de riesgo como protectores en las decisiones clínicas.</p>
+<p>Este proyecto demuestra que los algoritmos de machine learning, cuando son aplicados con rigor metodológico y comprensión del dominio clínico, pueden convertirse en herramientas valiosas para la salud pública. La superioridad de Random Forest y la solidez de SVM Linear sugieren que la selección del algoritmo debe considerar el balance entre rendimiento predictivo, velocidad e interpretabilidad.</p>
+<p>Los hallazgos no solo validan el potencial de la inteligencia artificial en salud metabólica, sino que también destacan la importancia de considerar múltiples perspectivas algorítmicas para capturar la complejidad de los determinantes de salud en diabetes.</p>
 </section>
 </section>
 
@@ -532,15 +554,21 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Conclusiones y Hallazgos Principales</strong></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logro-de-los-objetivos-propuestos"><strong>1. Logro de los Objetivos Propuestos</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgos-clinicos-y-epidemiologicos-relevantes"><strong>2. Hallazgos Clínicos y Epidemiológicos Relevantes</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#desempeno-comparativo-de-modelos"><strong>3. Desempeño Comparativo de Modelos</strong></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#desempeno-comparativo-de-modelos"><strong>3. Desempeño Comparativo de Modelos</strong></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#buenas-practicas-y-estrategias-metodologicas-implementadas"><strong>4. Buenas Prácticas y Estrategias Metodológicas Implementadas</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretabilidad-y-validacion-clinica"><strong>5. Interpretabilidad y Validación Clínica</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones-y-consideraciones"><strong>6. Limitaciones y Consideraciones</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#impacto-potencial-y-proyeccion-futura"><strong>7. Impacto Potencial y Proyección Futura</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reflexion-final"><strong>Reflexión Final</strong></a></li>
 </ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>
