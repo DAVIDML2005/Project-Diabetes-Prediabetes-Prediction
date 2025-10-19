@@ -13,7 +13,7 @@ El dataset incluye **21 variables** que capturan información demográfica, de c
 **Dataset**: https://archive.ics.uci.edu/dataset/891/cdc+diabetes+health+indicators  
 **Codebook**: https://www.cdc.gov/brfss/annual_data/2015/pdf/codebook15_llcp.pdf
 
-### **Clasificación de Variables**
+## **Clasificación de Variables**
 
 Las variables pueden clasificarse en las siguientes categorías:
 
@@ -23,7 +23,7 @@ Las variables pueden clasificarse en las siguientes categorías:
 - **Acceso a Servicios de Salud**: Cobertura de salud (`AnyHealthcare`), Barreras por costo (`NoDocbcCost`), Control de colesterol (`CholCheck`).
 **Mediciones de Salud Autoreportada**: Salud general (`GenHlth`), Salud mental (`MentHlth`), Salud física (`PhysHlth`), Dificultad para caminar (`DiffWalk`).
 
-#### **Variables Demográficas**
+### **Variables Demográficas**
 - `Age`: Categoría de edades de 13 niveles:
     1. 18 <= AGE <= 24.
     2. 25 <= AGE <= 29. 
@@ -56,13 +56,13 @@ Las variables pueden clasificarse en las siguientes categorías:
     7. Less than \$75,000 (\$50,000 to less than \$75,000). 
     8. \$75,000 or more.
 
-#### **Condiciones Médicas Crónicas**
+### **Condiciones Médicas Crónicas**
 - `HighBP`: ¿Alguna vez un médico, enfermero u otro profesional de la salud le ha dicho que tiene presión arterial alta? (0 = no high blood pressure, 1 = high blood pressure).
 - `HighChol`: ¿Alguna vez un médico, una enfermera u otro profesional de la salud le ha dicho que su colesterol en sangre es alto? (0 = no high cholesterol, 1 = high cholesterol).
 - `Stroke`: ¿Alguna vez te dijeron que sufriste un derrame cerebral? (0 = no, 1 = yes).
 - `HeartDiseaseorAttack`: ¿Alguna vez te dijeron que tenías angina de pecho(MI) o enfermedad cardíaca coronaria(CHD)? (0 = no, 1 = yes).
 
-#### **Comportamientos de Salud**
+### **Comportamientos de Salud**
 - `BMI`: Índice de masa corporal.
 - `Smoker`: ¿Has fumado al menos 100 cigarrillos en toda tu vida? [Nota: 5 paquetes = 100 cigarrillos] (0 = no, 1 = yes).
 - `PhysActivity`: ¿Durante cuántos días durante los últimos 30 días su salud física no fue buena? (escala 0-30 días).
@@ -70,12 +70,12 @@ Las variables pueden clasificarse en las siguientes categorías:
 - `Veggies`: Consume verduras 1 o más veces al día (0 = no, 1 = yes).
 - `HvyAlcoholConsump`: Bebedores empedernidos (Hombre adulto que consume más de 14 bebidas por semana o Mujer adulta que consume más de 7 bebidas por semana) (0 = no, 1 = yes).
 
-#### **Acceso a Servicios de Salud**
+### **Acceso a Servicios de Salud**
 - `AnyHealthcare`: ¿Tiene algún tipo de cobertura de atención médica, incluido seguro médico, planes prepagos como HMO o planes gubernamentales como Medicare o el Servicio de Salud Indígena? (0 = no, 1 = yes).
 - `NoDocbcCost`: ¿Hubo alguna ocasión en los últimos 12 meses en la que usted necesitó ver a un médico pero no pudo debido al costo? (0 = no, 1 = yes)
 - `CholCheck`: Control de colesterol en los últimos cinco años (0 = no cholesterol check in 5 years, 1 = yes cholesterol check in 5 years).
 
-#### **Mediciones de Salud Autoreportada**
+### **Mediciones de Salud Autoreportada**
 - `GenHlth`: ¿Dirías que en general tu salud es?:
     1. Excelente  
     2. Muy buena  
@@ -86,7 +86,7 @@ Las variables pueden clasificarse en las siguientes categorías:
 - `PhysHlth`: ¿Durante cuántos días durante los últimos 30 días su salud física no fue buena? (escala 0-30 días).
 - `DiffWalk`: ¿Tiene usted serias dificultades para caminar o subir escaleras? (0 = no, 1 = yes).
 
-#### **Variable Objetivo**
+### **Variable Objetivo**
 - `Diabetes_binary`: Target (0 = no diabetes, 1 = prediabetes or diabetes).
 
 ## **Objetivos del Proyecto**
@@ -101,11 +101,11 @@ Para alcanzar este objetivo general, se han definido los siguientes **objetivos 
 
 3.  **Técnicas de Balanceo de Clases:** Evaluación de métodos como SMOTE, ADASYN o class_weight='balanced' para abordar el desbalance inherente en datos de salud y mejorar la detección de casos positivos.
 
-4.  **Optimización Computacional:** Implementación de técnicas especializadas por modelo (KD-Trees para KNN, solvers optimizados, entrenamiento por lotes, early stopping) para acelerar el entrenamiento sin comprometer el rendimiento predictivo.
+4.  **Optimización Computacional:** Implementación de técnicas especializadas por modelo (KD-Trees, Ball-Trees para KNN, solvers optimizados para Logistic Regression, tree method=’hist’ para XGBoost y SGDClassifier para SVM) para acelerar el entrenamiento sin comprometer el rendimiento predictivo.
 
 5.  **Evaluación Rigurosa de Modelos:** Uso de métricas comprehensivas (Accuracy, Precision, Recall, F1, AUC), matrices de confusión y curvas ROC, con especial atención a la sensibilidad dado el contexto médico.
 
-6.  **Tuning e Interpretabilidad Avanzada:** Aplicación de técnicas de optimización de hiperparámetros con validación cruzada, e implementación de métodos de interpretabilidad (LIME, SHAP, feature importance) en los mejores modelos.
+6.  **Tuning e Interpretabilidad Avanzada:** Aplicación de técnicas de optimización de hiperparámetros con validación cruzada, e implementación de métodos de interpretabilidad (LIME, SHAP o feature importance) en los mejores modelos.
 
 ## **Relevancia e Impacto Potencial**
 

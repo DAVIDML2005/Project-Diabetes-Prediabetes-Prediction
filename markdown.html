@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'markdown';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Diabetes Health Indicators" href="notebooks.html" />
+    <link rel="prev" title="Modelado Optimizado (class weight y scale_pos_weight (XGBoost))" href="modelado_w.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -179,9 +179,12 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html"><strong>Diabetes Health Indicators</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html"><strong>Análisis Exploratorio</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelado_b.html"><strong>Modelado Benchmark</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelado_smote.html"><strong>Modelado Optimizado (SMOTE)</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelado_adasyn.html"><strong>Modelado Optimizado (ADASYN)</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelado_w.html"><strong>Modelado Optimizado (class weight y scale_pos_weight (XGBoost))</strong></a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Conclusiones y Hallazgos Principales</strong></a></li>
-
 </ul>
 
     </div>
@@ -377,21 +380,57 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Conclusiones y Hallazgos Principales</strong></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logro-de-los-objetivos-propuestos"><strong>1. Logro de los Objetivos Propuestos</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgos-clinicos-y-epidemiologicos-relevantes"><strong>2. Hallazgos Clínicos y Epidemiológicos Relevantes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-comparativo-de-tecnicas-de-balanceo-por-modelo"><strong>3. Análisis Comparativo de Técnicas de Balanceo por Modelo</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mejor-tecnica-de-balanceo-por-modelo"><strong>Mejor Técnica de Balanceo por Modelo</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#patrones-generales-en-tecnicas-de-balanceo"><strong>Patrones Generales en Técnicas de Balanceo</strong></a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#desempeno-comparativo-de-modelos"><strong>3. Desempeño Comparativo de Modelos</strong></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#buenas-practicas-y-estrategias-metodologicas-implementadas"><strong>4. Buenas Prácticas y Estrategias Metodológicas Implementadas</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretabilidad-y-validacion-clinica"><strong>5. Interpretabilidad y Validación Clínica</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones-y-consideraciones"><strong>6. Limitaciones y Consideraciones</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#impacto-potencial-y-proyeccion-futura"><strong>7. Impacto Potencial y Proyección Futura</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reflexion-final"><strong>Reflexión Final</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#desempeno-comparativo-de-modelos"><strong>4. Desempeño Comparativo de Modelos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jerarquia-de-rendimiento-por-metrica-clave"><strong>Jerarquía de Rendimiento por Métrica Clave</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#auc-roc"><strong>AUC-ROC</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#f1-score"><strong>F1-Score</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#precision"><strong>Precision</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#recall"><strong>Recall</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tiempo-de-prediccion"><strong>Tiempo de Predicción</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-detallado-por-familia-de-modelos"><strong>Análisis Detallado por Familia de Modelos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-lineales"><strong>Modelos Lineales:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-basados-en-arboles"><strong>Modelos Basados en Árboles:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-naive-bayes"><strong>Modelos Naive Bayes:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#knn"><strong>KNN:</strong></a></li>
 </ul>
 </li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgos-clave-y-patrones-identificados"><strong>5. Hallazgos Clave y Patrones Identificados</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#patrones-de-comportamiento-por-tipo-de-modelo"><strong>Patrones de Comportamiento por Tipo de Modelo</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trade-offs-identificados"><strong>Trade-offs Identificados:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estrategias-de-seleccion-por-caso-de-uso"><strong>6. Estrategias de Selección por Caso de Uso</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#para-screening-masivo-maximizar-recall"><strong>Para Screening Masivo (Maximizar Recall):</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#para-diagnostico-confirmatorio-maximizar-precision"><strong>Para Diagnóstico Confirmatorio (Maximizar Precisión):</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#impacto-en-practica-clinica-y-salud-publica"><strong>7. Impacto en Práctica Clínica y Salud Pública</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implicaciones-practicas"><strong>Implicaciones Prácticas</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consideraciones-para-implementacion"><strong>Consideraciones para Implementación</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones-y-trabajo-futuro"><strong>8. Limitaciones y Trabajo Futuro</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones-identificadas"><strong>Limitaciones Identificadas:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#direcciones-futuras"><strong>Direcciones Futuras</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones-finales-y-recomendaciones"><strong>9. Conclusiones Finales y Recomendaciones</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgos-fundamentales"><strong>Hallazgos Fundamentales:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recomendacion-final"><strong>Recomendación Final</strong></a></li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
@@ -417,85 +456,251 @@ document.write(`
 <li><p><strong>Factores protectores consistentes</strong>: La <strong>ausencia de consumo excesivo de alcohol</strong> y la <strong>pertenencia a grupos de edad media</strong> se identificaron como factores protectores clave en múltiples modelos.</p></li>
 </ul>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="desempeno-comparativo-de-modelos">
-<h1><strong>3. Desempeño Comparativo de Modelos</strong><a class="headerlink" href="#desempeno-comparativo-de-modelos" title="Link to this heading">#</a></h1>
-<p>La evaluación exhaustiva de diez algoritmos en el conjunto de prueba reveló insights valiosos sobre su aplicabilidad en el contexto de diabetes:</p>
+<section id="analisis-comparativo-de-tecnicas-de-balanceo-por-modelo">
+<h2><strong>3. Análisis Comparativo de Técnicas de Balanceo por Modelo</strong><a class="headerlink" href="#analisis-comparativo-de-tecnicas-de-balanceo-por-modelo" title="Link to this heading">#</a></h2>
+<p>El análisis exhaustivo de las diferentes técnicas de balanceo reveló patrones significativos en el rendimiento de cada modelo:</p>
+<section id="mejor-tecnica-de-balanceo-por-modelo">
+<h3><strong>Mejor Técnica de Balanceo por Modelo</strong><a class="headerlink" href="#mejor-tecnica-de-balanceo-por-modelo" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>SVM Linear como líder en AUC</strong>: Demostró el <strong>mejor AUC-ROC en prueba</strong> (0.7861) combinado con la <strong>mayor velocidad de predicción</strong> (0.0654 segundos), estableciéndose como el modelo más eficiente.</p></li>
-<li><p><strong>BernoulliNB como alternativa competitiva</strong>: Mostró el <strong>segundo mejor AUC</strong> (0.7852) y la <strong>mejor Precision</strong> (29.17%), siendo ideal para minimizar falsos positivos.</p></li>
-<li><p><strong>Logistic Regression como opción balanceada</strong>: Ambas variantes (L1 y L2) alcanzaron <strong>AUC de 0.7843</strong> con excelente velocidad (&lt; 0.08 segundos), ofreciendo robustez y eficiencia.</p></li>
-<li><p><strong>XGBoost como mejor ensemble</strong>: Demostró <strong>AUC sólido</strong> (0.7773) superando a Random Forest (0.7751), con tiempo de predicción razonable (0.1304 segundos).</p></li>
-<li><p><strong>Jerarquía de rendimiento en prueba</strong>:</p>
+<li><p><strong>XGBoost</strong>: <strong>scale_pos_weight</strong> - Logró el <strong>mejor AUC-ROC global</strong> (0.811721) con F1-Score competitivo (0.426087), demostrando superioridad sobre SMOTE y ADASYN.</p></li>
+<li><p><strong>Logistic Regression L1</strong>: <strong>Class Weight (‘balanced’)</strong> - Alcanzó <strong>F1-Score de 0.426976</strong> y AUC-ROC de 0.808035, mostrando mejor balance métrico que SMOTE.</p></li>
+<li><p><strong>Logistic Regression L2</strong>: <strong>Class Weight (‘balanced’)</strong> - Consiguió <strong>AUC-ROC de 0.807979</strong> con un excelente tiempo de predicción (0.068129s) para regresión logística.</p></li>
+<li><p><strong>Random Forest</strong>: <strong>Class Weight (‘balanced’)</strong> - Obteniendo el <strong>mejor F1-Score global</strong> (0.427917) y AUC-ROC competitivo (0.806268).</p></li>
+<li><p><strong>SVM</strong>: <strong>Class Weight (‘balanced’)</strong> - Alcanzó un <strong>buen AUC-ROC para modelos lineales</strong> (0.806949) con tiempo de predicción excelente (0.066463s).</p></li>
+<li><p><strong>BernoulliNB</strong>: <strong>ADASYN</strong> - Logró <strong>AUC-ROC de 0.790196</strong> con precisión competitiva (29.65%).</p></li>
+<li><p><strong>Decision Tree</strong>: <strong>Class Weight (‘balanced’)</strong> - Demostró un <strong>excelente recall global</strong> (0.780591) ideal para maximizar detección.</p></li>
+<li><p><strong>KNN</strong>: <strong>SMOTE</strong> - Alcanzó <strong>AUC-ROC de 0.736694</strong>, superando a ADASYN a pesar de limitaciones temporales.</p></li>
+<li><p><strong>MultinomialNB</strong>: <strong>ADASYN</strong> - Logró <strong>AUC-ROC de 0.778285</strong> con buen balance entre métricas.</p></li>
+<li><p><strong>GaussianNB</strong>: <strong>ADASYN</strong> - Aunque con <strong>AUC-ROC más bajo</strong> (0.755848), mostró el <strong>mejor recall global</strong> (85.37%).</p></li>
+</ul>
+</section>
+<section id="patrones-generales-en-tecnicas-de-balanceo">
+<h3><strong>Patrones Generales en Técnicas de Balanceo</strong><a class="headerlink" href="#patrones-generales-en-tecnicas-de-balanceo" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>SMOTE</strong>: Óptimo para modelos lineales, con <strong>AUC-ROC consistentemente alto</strong> y buen balance general.</p></li>
+<li><p><strong>Class Weight y scale_pos_weight (XGBoost)</strong>: Superior en modelos lineales y basados en árboles, maximizando <strong>F1-Score y AUC-ROC</strong>.</p></li>
+<li><p><strong>ADASYN</strong>:  Superior para modelos <strong>Naive Bayes</strong> presentando un buen balance general.</p></li>
+<li><p><strong>Sin Balanceo</strong>: Produjo <strong>accuracy inflado artificialmente</strong> con recall muy bajo, confirmando la necesidad crítica de técnicas de balanceo.</p></li>
+</ul>
+</section>
+</section>
+<section id="desempeno-comparativo-de-modelos">
+<h2><strong>4. Desempeño Comparativo de Modelos</strong><a class="headerlink" href="#desempeno-comparativo-de-modelos" title="Link to this heading">#</a></h2>
+<section id="jerarquia-de-rendimiento-por-metrica-clave">
+<h3><strong>Jerarquía de Rendimiento por Métrica Clave</strong><a class="headerlink" href="#jerarquia-de-rendimiento-por-metrica-clave" title="Link to this heading">#</a></h3>
+<section id="auc-roc">
+<h4><strong>AUC-ROC</strong><a class="headerlink" href="#auc-roc" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
-<li><p><strong>SVM Linear</strong> - Mejor AUC (0.786) + Más rápido (0.065s).</p></li>
-<li><p><strong>BernoulliNB</strong> - Alto AUC (0.785) + Mejor Precision (29.17%).</p></li>
-<li><p><strong>Logistic Regression L1/L2</strong> - AUC competitivo (0.784) + Alta velocidad.</p></li>
-<li><p><strong>XGBoost</strong> - Mejor ensemble (AUC 0.777) + Buen balance.</p></li>
-<li><p><strong>Random Forest</strong> - Buen AUC (0.775) + Buen Accuracy (73.10%).</p></li>
+<li><p><strong>XGBoost (scale_pos_weight)</strong> - 0.811721.</p></li>
+<li><p><strong>Logistic Regression L1 (Class Weight)</strong> - 0.808035.</p></li>
+<li><p><strong>Logistic Regression L2 (Class Weight)</strong> - 0.807979.</p></li>
+<li><p><strong>SVM (Class Weight)</strong> - 0.806949.</p></li>
+<li><p><strong>Random Forest (Class Weight)</strong> - 0.806268.</p></li>
+<li><p><strong>Decision Tree (Class Weight)</strong> - 0.793718.</p></li>
+<li><p><strong>BernoulliNB (ADASYN)</strong> - 0.790196.</p></li>
+<li><p><strong>MultinomialNB (ADASYN)</strong> - 0.778285.</p></li>
+<li><p><strong>GaussianNB (SMOTE)</strong> - 0.756042.</p></li>
+<li><p><strong>KNN (SMOTE)</strong> - 0.736694.</p></li>
 </ol>
-</li>
-</ul>
-<p><strong>Hallazgos clave en conjunto de prueba</strong>:</p>
+</section>
+<section id="f1-score">
+<h4><strong>F1-Score</strong><a class="headerlink" href="#f1-score" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p><strong>Random Forest (SMOTE)</strong> - 0.435008.</p></li>
+<li><p><strong>XGBoost (SMOTE)</strong> - 0.430538.</p></li>
+<li><p><strong>Logistic Regression L2 (SMOTE)</strong> - 0.427553.</p></li>
+<li><p><strong>Logistic Regression L1 (Class Weight)</strong> - 0.426976.</p></li>
+<li><p><strong>SVM (SMOTE)</strong> - 0.426342.</p></li>
+<li><p><strong>BernoulliNB (SMOTE)</strong> - 0.421779.</p></li>
+<li><p><strong>Decision Tree (ADASYN)</strong> - 0.408646.</p></li>
+<li><p><strong>MultinomialNB (SMOTE)</strong> - 0.407390.</p></li>
+<li><p><strong>KNN (SMOTE)</strong> - 0.375550.</p></li>
+<li><p><strong>GaussianNB (SMOTE)</strong> - 0.350543.</p></li>
+</ol>
+</section>
+<section id="precision">
+<h4><strong>Precision</strong><a class="headerlink" href="#precision" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p><strong>XGBoost (ADASYN)</strong> - 0.447325.</p></li>
+<li><p><strong>Random Forest (SMOTE)</strong> - 0.339803.</p></li>
+<li><p><strong>Decision Tree (ADASYN)</strong> - 0.315745.</p></li>
+<li><p><strong>BernoulliNB (SMOTE)</strong> - 0.306038.</p></li>
+<li><p><strong>Logistic Regression L2 (SMOTE)</strong> - 0.298196.</p></li>
+<li><p><strong>SVM (SMOTE)</strong> - 0.297881.</p></li>
+<li><p><strong>Logistic Regression L1 (SMOTE)</strong> - 0.297523.</p></li>
+<li><p><strong>MultinomialNB (SMOTE)</strong> - 0.289130.</p></li>
+<li><p><strong>KNN (SMOTE)</strong> - 0.275120.</p></li>
+<li><p><strong>GaussianNB (SMOTE)</strong> - 0.221525.</p></li>
+</ol>
+</section>
+<section id="recall">
+<h4><strong>Recall</strong><a class="headerlink" href="#recall" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p><strong>GaussianNB (ADASYN)</strong> - 0.853728.</p></li>
+<li><p><strong>XGBoost (scale_pos_weight)</strong> - 0.781440.</p></li>
+<li><p><strong>Decision Tree (Class Weight)</strong> - 0.780591.</p></li>
+<li><p><strong>Logistic Regression L1 (ADASYN)</strong> - 0.770547.</p></li>
+<li><p><strong>SVM (Class Weight)</strong> - 0.769274.</p></li>
+<li><p><strong>Logistic Regression L2 (ADASYN)</strong> - 0.768426.</p></li>
+<li><p><strong>Random Forest (Class Weight)</strong> - 0.732918.</p></li>
+<li><p><strong>MultinomialNB (ADASYN)</strong> - 0.725421.</p></li>
+<li><p><strong>BernoulliNB (ADASYN)</strong> - 0.707879.</p></li>
+<li><p><strong>KNN (SMOTE)</strong> - 0.600368.</p></li>
+</ol>
+</section>
+<section id="tiempo-de-prediccion">
+<h4><strong>Tiempo de Predicción</strong><a class="headerlink" href="#tiempo-de-prediccion" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p><strong>Logistic Regression L2 (SMOTE)</strong> - 0.058025s.</p></li>
+<li><p><strong>Decision Tree (Class Weight)</strong> - 0.065153s.</p></li>
+<li><p><strong>SVM (Class Weight)</strong> - 0.066463s.</p></li>
+<li><p><strong>MultinomialNB (SMOTE)</strong> - 0.073863s.</p></li>
+<li><p><strong>Logistic Regression L1 (SMOTE)</strong> - 0.091973s.</p></li>
+<li><p><strong>XGBoost (scale_pos_weight)</strong> - 0.099593s.</p></li>
+<li><p><strong>BernoulliNB (SMOTE)</strong> - 0.115966s.</p></li>
+<li><p><strong>GaussianNB (SMOTE)</strong> - 0.125703s.</p></li>
+<li><p><strong>Random Forest (SMOTE)</strong> - 0.376555s.</p></li>
+<li><p><strong>KNN (SMOTE)</strong> - 26.659613s (fuera de escala).</p></li>
+</ol>
+</section>
+</section>
+<section id="analisis-detallado-por-familia-de-modelos">
+<h3><strong>Análisis Detallado por Familia de Modelos</strong><a class="headerlink" href="#analisis-detallado-por-familia-de-modelos" title="Link to this heading">#</a></h3>
+<section id="modelos-lineales">
+<h4><strong>Modelos Lineales:</strong><a class="headerlink" href="#modelos-lineales" title="Link to this heading">#</a></h4>
 <ul class="simple">
-<li><p><strong>KNN</strong> mostró caída significativa en AUC (0.6990 vs 0.8747 en validación) indicando posible sobreajuste.</p></li>
-<li><p><strong>GaussianNB</strong> confirmó su bajo rendimiento (AUC 0.7567), el más bajo de todos los modelos.</p></li>
-<li><p><strong>Modelos lineales</strong> mantuvieron consistencia entre validación y prueba, demostrando robustez.</p></li>
-<li><p><strong>Todos los modelos superaron AUC de 0.75</strong>, confirmando capacidad predictiva aceptable en datos no vistos.</p></li>
-</ul>
-<p><strong>Recomendación para implementación</strong>:</p>
-<ul class="simple">
-<li><p><strong>Prioridad velocidad y AUC</strong>: SVM Linear.</p></li>
-<li><p><strong>Prioridad precisión y AUC</strong>: BernoulliNB.</p></li>
-<li><p><strong>Balance general</strong>: Logistic Regression L2.</p></li>
-<li><p><strong>Evitar</strong>: KNN (tiempo excesivo) y GaussianNB (bajo rendimiento).</p></li>
-</ul>
-<section id="buenas-practicas-y-estrategias-metodologicas-implementadas">
-<h2><strong>4. Buenas Prácticas y Estrategias Metodológicas Implementadas</strong><a class="headerlink" href="#buenas-practicas-y-estrategias-metodologicas-implementadas" title="Link to this heading">#</a></h2>
-<p>El proyecto incorporó rigurosas prácticas de ciencia de datos que garantizaron la calidad y validez de los resultados obtenidos:</p>
-<ul class="simple">
-<li><p><strong>Balanceo de datos con SMOTE</strong>: Se aplicó exitosamente técnica de sobremuestreo para manejar el desbalance de clases, mejorando la capacidad de los modelos para detectar casos positivos.</p></li>
-<li><p><strong>Preprocesamiento diferenciado por algoritmos</strong>: Se diseñaron estrategias específicas para cada familia de modelos, incluyendo binarización para BernoulliNB y escalados específicos para otros algoritmos.</p></li>
-<li><p><strong>Optimizaciones computacionales avanzadas</strong>: Implementación de Ball Trees para KNN, solver ‘saga’ para Regresión Logística, tree_method=’hist’ para XGBoost, y paralelización con n_jobs=-1.</p></li>
-<li><p><strong>Validación exhaustiva y prevención de sobreajuste</strong>: Se empleó validación cruzada estratificada (5 folds) con múltiples métricas de evaluación, asegurando la generalización de los modelos.</p></li>
+<li><p><strong>Logistic Regression L1 vs L2</strong>: L1 muestra <strong>ligera ventaja en Recall</strong> (0.770547 vs 0.768426) mientras L2 ofrece <strong>mejor tiempo de predicción</strong>.</p></li>
+<li><p><strong>SVM</strong>: <strong>Buen equilibrio general</strong> entre AUC-ROC (0.805641) y velocidad (0.066463s).</p></li>
 </ul>
 </section>
-<section id="interpretabilidad-y-validacion-clinica">
-<h2><strong>5. Interpretabilidad y Validación Clínica</strong><a class="headerlink" href="#interpretabilidad-y-validacion-clinica" title="Link to this heading">#</a></h2>
-<p>El análisis de importancia de variables y las explicaciones con LIME proporcionaron transparencia a los modelos:</p>
+<section id="modelos-basados-en-arboles">
+<h4><strong>Modelos Basados en Árboles:</strong><a class="headerlink" href="#modelos-basados-en-arboles" title="Link to this heading">#</a></h4>
 <ul class="simple">
-<li><p><strong>Consistencia en predictores clave</strong>: Múltiples modelos identificaron <strong>edad avanzada</strong>, <strong>consumo de alcohol</strong> y <strong>presión arterial alta</strong> como factores críticos.</p></li>
-<li><p><strong>Divergencia en enfoques predictivos</strong>:</p>
-<ul>
-<li><p><strong>Modelos lineales</strong>: Enfatizan variables demográficas (edad) y consumo de alcohol.</p></li>
-<li><p><strong>Modelos basados en árboles</strong>: Priorizan indicadores médicos directos (HighBP, PhysHlth, MentHlth).</p></li>
-</ul>
-</li>
-<li><p><strong>Robustez predictiva demostrada</strong>: En la instancia de prueba analizada, 9 de 10 modelos realizaron predicciones correctas, demostrando consistencia en el reconocimiento de patrones protectores.</p></li>
+<li><p><strong>XGBoost</strong>: <strong>Máximo poder predictivo</strong> (AUC 0.811721) con <strong>recall excelente</strong> (78.14%).</p></li>
+<li><p><strong>Random Forest</strong>: <strong>Mejor F1-Score global</strong> (0.435008) indicando balance óptimo.</p></li>
+<li><p><strong>Decision Tree</strong>: <strong>Excelente Recall máximo</strong> (78.06%) pero con buena precisión.</p></li>
 </ul>
 </section>
-<section id="limitaciones-y-consideraciones">
-<h2><strong>6. Limitaciones y Consideraciones</strong><a class="headerlink" href="#limitaciones-y-consideraciones" title="Link to this heading">#</a></h2>
-<p>Es importante reconocer las limitaciones del estudio:</p>
+<section id="modelos-naive-bayes">
+<h4><strong>Modelos Naive Bayes:</strong><a class="headerlink" href="#modelos-naive-bayes" title="Link to this heading">#</a></h4>
 <ul class="simple">
-<li><p><strong>Problema de falsos positivos</strong>: Todos los modelos mostraron Precision baja (&lt;30%), indicando alta tasa de falsas alarmas que requiere ajuste de umbrales para el contexto clínico específico.</p></li>
-<li><p><strong>Tiempo de ejecución de KNN</strong>: Aunque con excelente rendimiento, su tiempo de predicción (2998 segundos) lo hace impracticable para aplicaciones en tiempo real.</p></li>
-<li><p><strong>Sobre-confianza de GaussianNB</strong>: Demostró problemas de calibración con predicciones extremas (90% probabilidad en caso incorrecto).</p></li>
+<li><p><strong>BernoulliNB</strong>: <strong>Mejor rendimiento general</strong> en la familia con AUC 0.790196.</p></li>
+<li><p><strong>MultinomialNB</strong>: <strong>Rendimiento sólido</strong> (AUC 0.778285) y velocidad excelente.</p></li>
+<li><p><strong>GaussianNB</strong>: <strong>Especialista en recall</strong> (85.37%) pero con precisión comprometida.</p></li>
 </ul>
 </section>
-<section id="impacto-potencial-y-proyeccion-futura">
-<h2><strong>7. Impacto Potencial y Proyección Futura</strong><a class="headerlink" href="#impacto-potencial-y-proyeccion-futura" title="Link to this heading">#</a></h2>
-<p>La implementación exitosa de este sistema predictivo podría transformar la práctica clínica en varias dimensiones:</p>
+<section id="knn">
+<h4><strong>KNN:</strong><a class="headerlink" href="#knn" title="Link to this heading">#</a></h4>
 <ul class="simple">
-<li><p><strong>Detección temprana</strong>: Identificación de pacientes en riesgo de diabetes basada en múltiples factores simultáneamente.</p></li>
-<li><p><strong>Estratificación de riesgo</strong>: Asignación más eficiente de recursos según perfiles de riesgo identificados por los modelos.</p></li>
-<li><p><strong>Medicina preventiva personalizada</strong>: Desarrollo de intervenciones específicas basadas en los factores más relevantes para cada perfil demográfico.</p></li>
+<li><p><strong>Limitación crítica</strong> en tiempo (26.66s) lo hace <strong>impracticable</strong> a pesar de métricas aceptables.</p></li>
 </ul>
 </section>
-<section id="reflexion-final">
-<h2><strong>Reflexión Final</strong><a class="headerlink" href="#reflexion-final" title="Link to this heading">#</a></h2>
-<p>Este proyecto demuestra que los algoritmos de machine learning, cuando son aplicados con rigor metodológico y comprensión del dominio clínico, pueden convertirse en herramientas valiosas para la salud pública. La superioridad de Random Forest y la solidez de SVM Linear sugieren que la selección del algoritmo debe considerar el balance entre rendimiento predictivo, velocidad e interpretabilidad.</p>
-<p>Los hallazgos no solo validan el potencial de la inteligencia artificial en salud metabólica, sino que también destacan la importancia de considerar múltiples perspectivas algorítmicas para capturar la complejidad de los determinantes de salud en diabetes.</p>
+</section>
+</section>
+<section id="hallazgos-clave-y-patrones-identificados">
+<h2><strong>5. Hallazgos Clave y Patrones Identificados</strong><a class="headerlink" href="#hallazgos-clave-y-patrones-identificados" title="Link to this heading">#</a></h2>
+<section id="patrones-de-comportamiento-por-tipo-de-modelo">
+<h3><strong>Patrones de Comportamiento por Tipo de Modelo</strong><a class="headerlink" href="#patrones-de-comportamiento-por-tipo-de-modelo" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Modelos Lineales</strong>: Responden mejor a <strong>Class Weight</strong>, mostrando <strong>alta consistencia</strong> entre validación y prueba.</p></li>
+<li><p><strong>Modelos Basados en Árboles</strong>: Prefieren <strong>class weight</strong>, logrando <strong>máximo rendimiento predictivo</strong>.</p></li>
+<li><p><strong>Modelos Probabilísticos</strong>: <strong>ADASYN</strong> optimiza su rendimiento, especialmente en BernoulliNB y MultinomialNB.</p></li>
+<li><p><strong>Modelos de Instancia</strong>: <strong>KNN</strong> muestra limitaciones prácticas severas a pesar de métricas teóricas aceptables.</p></li>
+</ol>
+</section>
+<section id="trade-offs-identificados">
+<h3><strong>Trade-offs Identificados:</strong><a class="headerlink" href="#trade-offs-identificados" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Precisión vs Recall</strong>: Claramente demostrado en GaussianNB (alta recall, baja precisión) vs XGBoost (balance óptimo).</p></li>
+<li><p><strong>Rendimiento vs Velocidad</strong>: Logistic Regression ofrece el mejor balance, mientras XGBoost maximiza rendimiento con costo computacional moderado.</p></li>
+<li><p><strong>Complexidad vs Interpretabilidad</strong>: Modelos lineales ofrecen mejor interpretabilidad, ensembles mayor poder predictivo.</p></li>
+</ul>
+</section>
+</section>
+<section id="estrategias-de-seleccion-por-caso-de-uso">
+<h2><strong>6. Estrategias de Selección por Caso de Uso</strong><a class="headerlink" href="#estrategias-de-seleccion-por-caso-de-uso" title="Link to this heading">#</a></h2>
+<section id="para-screening-masivo-maximizar-recall">
+<h3><strong>Para Screening Masivo (Maximizar Recall):</strong><a class="headerlink" href="#para-screening-masivo-maximizar-recall" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>GaussianNB con ADASYN</strong> (Recall: 85.37%).</p></li>
+<li><p><strong>XGBoost con scale_pos_weight</strong> (Recall: 78.14%).</p></li>
+<li><p><strong>Decision Tree con Class Weight</strong> (Recall: 78.06%).</p></li>
+</ul>
+</section>
+<section id="para-diagnostico-confirmatorio-maximizar-precision">
+<h3><strong>Para Diagnóstico Confirmatorio (Maximizar Precisión):</strong><a class="headerlink" href="#para-diagnostico-confirmatorio-maximizar-precision" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>XGBoost con ADASYN</strong> (Precision: 44.73%).</p></li>
+<li><p><strong>Random Forest con SMOTE</strong> (Precision: 33.98%).</p></li>
+<li><p>*<strong>Decision Tree con ADASYN</strong> (Precision: 31.57%).</p></li>
+</ul>
+</section>
+</section>
+<section id="impacto-en-practica-clinica-y-salud-publica">
+<h2><strong>7. Impacto en Práctica Clínica y Salud Pública</strong><a class="headerlink" href="#impacto-en-practica-clinica-y-salud-publica" title="Link to this heading">#</a></h2>
+<section id="implicaciones-practicas">
+<h3><strong>Implicaciones Prácticas</strong><a class="headerlink" href="#implicaciones-practicas" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Estratificación de Riesgo Mejorada</strong>: Capacidad de identificar diferentes perfiles de riesgo según el modelo seleccionado.</p></li>
+<li><p><strong>Optimización de Recursos</strong>: Asignación más eficiente basada en el balance precisión-recall requerido.</p></li>
+<li><p><strong>Detección Temprana Personalizada</strong>: Selección de modelo según características de la población objetivo.</p></li>
+<li><p><strong>Implementación Escalable</strong>: Modelos como SVM y Logistic Regression permiten despliegue en sistemas de salud con infraestructura limitada.</p></li>
+</ol>
+</section>
+<section id="consideraciones-para-implementacion">
+<h3><strong>Consideraciones para Implementación</strong><a class="headerlink" href="#consideraciones-para-implementacion" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Contexto Clínico</strong>: Determinar si se prioriza evitar falsos negativos (alta recall) o falsos positivos (alta precisión).</p></li>
+<li><p><strong>Infraestructura Computacional</strong>: Evaluar capacidades de procesamiento para modelos más complejos.</p></li>
+<li><p><strong>Integración con Sistemas Existentes</strong>: Considerar tiempos de respuesta y compatibilidad.</p></li>
+</ul>
+</section>
+</section>
+<section id="limitaciones-y-trabajo-futuro">
+<h2><strong>8. Limitaciones y Trabajo Futuro</strong><a class="headerlink" href="#limitaciones-y-trabajo-futuro" title="Link to this heading">#</a></h2>
+<section id="limitaciones-identificadas">
+<h3><strong>Limitaciones Identificadas:</strong><a class="headerlink" href="#limitaciones-identificadas" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Precisión Moderada</strong>: Aunque el recall mejoró significativamente, la precisión promedio alcanzada indica necesidad de mejoras adicionales.</p></li>
+<li><p><strong>Dependencia de Preprocesamiento</strong>: Resultados altamente dependientes de técnicas de balanceo y preprocesamiento específico.</p></li>
+<li><p><strong>Complexidad Operacional</strong>: La necesidad de múltiples pipelines según el modelo seleccionado.</p></li>
+<li><p><strong>Validación Externa</strong>: Requerido validar con datasets independientes y diversas poblaciones.</p></li>
+</ol>
+</section>
+<section id="direcciones-futuras">
+<h3><strong>Direcciones Futuras</strong><a class="headerlink" href="#direcciones-futuras" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Ensembles Híbridos</strong>: Combinar modelos complementarios (ej: GaussianNB para recall + Random Forest para precisión).</p></li>
+<li><p><strong>Optimización Avanzada</strong>: Técnicas como Bayesian Optimization para hiperparámetros.</p></li>
+<li><p><strong>Feature Engineering Especializado</strong>: Desarrollo de variables específicas para diabetes.</p></li>
+<li><p><strong>Validación Multicéntrica</strong>: Pruebas en diferentes poblaciones y configuraciones clínicas.</p></li>
+</ol>
+</section>
+</section>
+<section id="conclusiones-finales-y-recomendaciones">
+<h2><strong>9. Conclusiones Finales y Recomendaciones</strong><a class="headerlink" href="#conclusiones-finales-y-recomendaciones" title="Link to this heading">#</a></h2>
+<section id="hallazgos-fundamentales">
+<h3><strong>Hallazgos Fundamentales:</strong><a class="headerlink" href="#hallazgos-fundamentales" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>El balanceo es crucial</strong>: Mejora dramáticamente el recall, manteniendo AUC-ROC competitivo.</p></li>
+<li><p><strong>No hay solución única</strong>: La técnica óptima de balanceo varía significativamente por familia de modelo.</p></li>
+<li><p><strong>Trade-offs inevitables</strong>: La elección del modelo debe alinearse con los objetivos clínicos específicos.</p></li>
+<li><p><strong>Velocidad vs Rendimiento</strong>: SVM y Logistic Regression emergen como el mejor balance para aplicaciones prácticas.</p></li>
+</ol>
+</section>
+<section id="recomendacion-final">
+<h3><strong>Recomendación Final</strong><a class="headerlink" href="#recomendacion-final" title="Link to this heading">#</a></h3>
+<p>Para la mayoría de aplicaciones clínicas en predicción de diabetes, se recomienda la <strong>implementación de SVM con class weigh</strong> como solución balanceada que ofrece:</p>
+<ul class="simple">
+<li><p><strong>Alto AUC-ROC</strong> (0.806949).</p></li>
+<li><p><strong>Excelente velocidad</strong> (0.066463s).</p></li>
+<li><p><strong>Balance métrico sólido</strong> (F1: 0.424811).</p></li>
+<li><p><strong>Interpretabilidad razonable</strong>.</p></li>
+<li><p><strong>Facilidad de implementación</strong>.</p></li>
+</ul>
+<p>Para casos donde se priorice el <strong>máximo rendimiento predictivo</strong>, <strong>XGBoost con scale_pos_weight</strong> constituye la alternativa óptima, aceptando un modesto incremento en complejidad computacional.</p>
+<p>Este trabajo establece un precedente metodológico para la selección sistemática de técnicas de balanceo y modelos en problemas de salud pública con desbalance de clases, proporcionando un framework replicable para futuras investigaciones en predicción de enfermedades crónicas.</p>
+</section>
 </section>
 </section>
 
@@ -530,12 +735,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="notebooks.html"
+       href="modelado_w.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><strong>Diabetes Health Indicators</strong></p>
+        <p class="prev-next-title"><strong>Modelado Optimizado (class weight y scale_pos_weight (XGBoost))</strong></p>
       </div>
     </a>
 </div>
@@ -554,21 +759,57 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Conclusiones y Hallazgos Principales</strong></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logro-de-los-objetivos-propuestos"><strong>1. Logro de los Objetivos Propuestos</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgos-clinicos-y-epidemiologicos-relevantes"><strong>2. Hallazgos Clínicos y Epidemiológicos Relevantes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-comparativo-de-tecnicas-de-balanceo-por-modelo"><strong>3. Análisis Comparativo de Técnicas de Balanceo por Modelo</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mejor-tecnica-de-balanceo-por-modelo"><strong>Mejor Técnica de Balanceo por Modelo</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#patrones-generales-en-tecnicas-de-balanceo"><strong>Patrones Generales en Técnicas de Balanceo</strong></a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#desempeno-comparativo-de-modelos"><strong>3. Desempeño Comparativo de Modelos</strong></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#buenas-practicas-y-estrategias-metodologicas-implementadas"><strong>4. Buenas Prácticas y Estrategias Metodológicas Implementadas</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretabilidad-y-validacion-clinica"><strong>5. Interpretabilidad y Validación Clínica</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones-y-consideraciones"><strong>6. Limitaciones y Consideraciones</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#impacto-potencial-y-proyeccion-futura"><strong>7. Impacto Potencial y Proyección Futura</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reflexion-final"><strong>Reflexión Final</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#desempeno-comparativo-de-modelos"><strong>4. Desempeño Comparativo de Modelos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jerarquia-de-rendimiento-por-metrica-clave"><strong>Jerarquía de Rendimiento por Métrica Clave</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#auc-roc"><strong>AUC-ROC</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#f1-score"><strong>F1-Score</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#precision"><strong>Precision</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#recall"><strong>Recall</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tiempo-de-prediccion"><strong>Tiempo de Predicción</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-detallado-por-familia-de-modelos"><strong>Análisis Detallado por Familia de Modelos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-lineales"><strong>Modelos Lineales:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-basados-en-arboles"><strong>Modelos Basados en Árboles:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-naive-bayes"><strong>Modelos Naive Bayes:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#knn"><strong>KNN:</strong></a></li>
 </ul>
 </li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgos-clave-y-patrones-identificados"><strong>5. Hallazgos Clave y Patrones Identificados</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#patrones-de-comportamiento-por-tipo-de-modelo"><strong>Patrones de Comportamiento por Tipo de Modelo</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trade-offs-identificados"><strong>Trade-offs Identificados:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estrategias-de-seleccion-por-caso-de-uso"><strong>6. Estrategias de Selección por Caso de Uso</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#para-screening-masivo-maximizar-recall"><strong>Para Screening Masivo (Maximizar Recall):</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#para-diagnostico-confirmatorio-maximizar-precision"><strong>Para Diagnóstico Confirmatorio (Maximizar Precisión):</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#impacto-en-practica-clinica-y-salud-publica"><strong>7. Impacto en Práctica Clínica y Salud Pública</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implicaciones-practicas"><strong>Implicaciones Prácticas</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consideraciones-para-implementacion"><strong>Consideraciones para Implementación</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones-y-trabajo-futuro"><strong>8. Limitaciones y Trabajo Futuro</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones-identificadas"><strong>Limitaciones Identificadas:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#direcciones-futuras"><strong>Direcciones Futuras</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones-finales-y-recomendaciones"><strong>9. Conclusiones Finales y Recomendaciones</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgos-fundamentales"><strong>Hallazgos Fundamentales:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recomendacion-final"><strong>Recomendación Final</strong></a></li>
+</ul>
+</li>
+</ul>
   </nav></div>
 
 </div></div>

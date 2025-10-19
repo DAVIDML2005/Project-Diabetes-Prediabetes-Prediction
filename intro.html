@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Diabetes Health Indicators" href="notebooks.html" />
+    <link rel="next" title="Análisis Exploratorio" href="notebooks.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -183,9 +183,12 @@
             </li>
         </ul>
         <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html"><strong>Diabetes Health Indicators</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html"><strong>Análisis Exploratorio</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelado_b.html"><strong>Modelado Benchmark</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelado_smote.html"><strong>Modelado Optimizado (SMOTE)</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelado_adasyn.html"><strong>Modelado Optimizado (ADASYN)</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelado_w.html"><strong>Modelado Optimizado (class weight y scale_pos_weight (XGBoost))</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="markdown.html"><strong>Conclusiones y Hallazgos Principales</strong></a></li>
-
 </ul>
 
     </div>
@@ -381,16 +384,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#presentacion-del-dataset"><strong>Presentación del Dataset</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-variables"><strong>Clasificación de Variables</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-demograficas"><strong>Variables Demográficas</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#condiciones-medicas-cronicas"><strong>Condiciones Médicas Crónicas</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#comportamientos-de-salud"><strong>Comportamientos de Salud</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#acceso-a-servicios-de-salud"><strong>Acceso a Servicios de Salud</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mediciones-de-salud-autoreportada"><strong>Mediciones de Salud Autoreportada</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-objetivo"><strong>Variable Objetivo</strong></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#presentacion-del-dataset"><strong>Presentación del Dataset</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-variables"><strong>Clasificación de Variables</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-demograficas"><strong>Variables Demográficas</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#condiciones-medicas-cronicas"><strong>Condiciones Médicas Crónicas</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comportamientos-de-salud"><strong>Comportamientos de Salud</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acceso-a-servicios-de-salud"><strong>Acceso a Servicios de Salud</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mediciones-de-salud-autoreportada"><strong>Mediciones de Salud Autoreportada</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-objetivo"><strong>Variable Objetivo</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos-del-proyecto"><strong>Objetivos del Proyecto</strong></a></li>
@@ -416,8 +417,9 @@ document.write(`
 <p>El dataset incluye <strong>21 variables</strong> que capturan información demográfica, de comportamientos de salud, condiciones médicas y acceso a servicios de salud. La variable objetivo (<code class="docutils literal notranslate"><span class="pre">Diabetes_binary</span></code>) identifica la presencia de diabetes o prediabetes (1) versus ausencia de la condición (0).</p>
 <p><strong>Dataset</strong>: <a class="reference external" href="https://archive.ics.uci.edu/dataset/891/cdc+diabetes+health+indicators">https://archive.ics.uci.edu/dataset/891/cdc+diabetes+health+indicators</a><br />
 <strong>Codebook</strong>: <a class="reference external" href="https://www.cdc.gov/brfss/annual_data/2015/pdf/codebook15_llcp.pdf">https://www.cdc.gov/brfss/annual_data/2015/pdf/codebook15_llcp.pdf</a></p>
+</section>
 <section id="clasificacion-de-variables">
-<h3><strong>Clasificación de Variables</strong><a class="headerlink" href="#clasificacion-de-variables" title="Link to this heading">#</a></h3>
+<h2><strong>Clasificación de Variables</strong><a class="headerlink" href="#clasificacion-de-variables" title="Link to this heading">#</a></h2>
 <p>Las variables pueden clasificarse en las siguientes categorías:</p>
 <ul class="simple">
 <li><p><strong>Variables Demográficas</strong>: Edad (<code class="docutils literal notranslate"><span class="pre">Age</span></code>), Sexo (<code class="docutils literal notranslate"><span class="pre">Sex</span></code>), Educación (<code class="docutils literal notranslate"><span class="pre">Education</span></code>), Ingresos (<code class="docutils literal notranslate"><span class="pre">Income</span></code>).</p></li>
@@ -427,7 +429,7 @@ document.write(`
 <strong>Mediciones de Salud Autoreportada</strong>: Salud general (<code class="docutils literal notranslate"><span class="pre">GenHlth</span></code>), Salud mental (<code class="docutils literal notranslate"><span class="pre">MentHlth</span></code>), Salud física (<code class="docutils literal notranslate"><span class="pre">PhysHlth</span></code>), Dificultad para caminar (<code class="docutils literal notranslate"><span class="pre">DiffWalk</span></code>).</p></li>
 </ul>
 <section id="variables-demograficas">
-<h4><strong>Variables Demográficas</strong><a class="headerlink" href="#variables-demograficas" title="Link to this heading">#</a></h4>
+<h3><strong>Variables Demográficas</strong><a class="headerlink" href="#variables-demograficas" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Age</span></code>: Categoría de edades de 13 niveles:</p>
 <ol class="arabic simple">
@@ -472,7 +474,7 @@ document.write(`
 </ul>
 </section>
 <section id="condiciones-medicas-cronicas">
-<h4><strong>Condiciones Médicas Crónicas</strong><a class="headerlink" href="#condiciones-medicas-cronicas" title="Link to this heading">#</a></h4>
+<h3><strong>Condiciones Médicas Crónicas</strong><a class="headerlink" href="#condiciones-medicas-cronicas" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">HighBP</span></code>: ¿Alguna vez un médico, enfermero u otro profesional de la salud le ha dicho que tiene presión arterial alta? (0 = no high blood pressure, 1 = high blood pressure).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">HighChol</span></code>: ¿Alguna vez un médico, una enfermera u otro profesional de la salud le ha dicho que su colesterol en sangre es alto? (0 = no high cholesterol, 1 = high cholesterol).</p></li>
@@ -481,7 +483,7 @@ document.write(`
 </ul>
 </section>
 <section id="comportamientos-de-salud">
-<h4><strong>Comportamientos de Salud</strong><a class="headerlink" href="#comportamientos-de-salud" title="Link to this heading">#</a></h4>
+<h3><strong>Comportamientos de Salud</strong><a class="headerlink" href="#comportamientos-de-salud" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">BMI</span></code>: Índice de masa corporal.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Smoker</span></code>: ¿Has fumado al menos 100 cigarrillos en toda tu vida? [Nota: 5 paquetes = 100 cigarrillos] (0 = no, 1 = yes).</p></li>
@@ -492,7 +494,7 @@ document.write(`
 </ul>
 </section>
 <section id="acceso-a-servicios-de-salud">
-<h4><strong>Acceso a Servicios de Salud</strong><a class="headerlink" href="#acceso-a-servicios-de-salud" title="Link to this heading">#</a></h4>
+<h3><strong>Acceso a Servicios de Salud</strong><a class="headerlink" href="#acceso-a-servicios-de-salud" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">AnyHealthcare</span></code>: ¿Tiene algún tipo de cobertura de atención médica, incluido seguro médico, planes prepagos como HMO o planes gubernamentales como Medicare o el Servicio de Salud Indígena? (0 = no, 1 = yes).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">NoDocbcCost</span></code>: ¿Hubo alguna ocasión en los últimos 12 meses en la que usted necesitó ver a un médico pero no pudo debido al costo? (0 = no, 1 = yes)</p></li>
@@ -500,7 +502,7 @@ document.write(`
 </ul>
 </section>
 <section id="mediciones-de-salud-autoreportada">
-<h4><strong>Mediciones de Salud Autoreportada</strong><a class="headerlink" href="#mediciones-de-salud-autoreportada" title="Link to this heading">#</a></h4>
+<h3><strong>Mediciones de Salud Autoreportada</strong><a class="headerlink" href="#mediciones-de-salud-autoreportada" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">GenHlth</span></code>: ¿Dirías que en general tu salud es?:</p>
 <ol class="arabic simple">
@@ -517,11 +519,10 @@ document.write(`
 </ul>
 </section>
 <section id="variable-objetivo">
-<h4><strong>Variable Objetivo</strong><a class="headerlink" href="#variable-objetivo" title="Link to this heading">#</a></h4>
+<h3><strong>Variable Objetivo</strong><a class="headerlink" href="#variable-objetivo" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Diabetes_binary</span></code>: Target (0 = no diabetes, 1 = prediabetes or diabetes).</p></li>
 </ul>
-</section>
 </section>
 </section>
 <section id="objetivos-del-proyecto">
@@ -532,9 +533,9 @@ document.write(`
 <li><p><strong>Análisis Exploratorio de Datos (EDA):</strong> Exploración exhaustiva que incluye análisis de distribuciones, valores atípicos, correlaciones y reducción de dimensionalidad exploratoria para fundamentar las decisiones de modelado.</p></li>
 <li><p><strong>Modelado Benchmark Comprehensivo:</strong> Implementación y comparación de algoritmos de clasificación: K-Nearest Neighbors, Naive Bayes, Regresión Logística (con regularización L1 y L2), Árbol de Decisión, Random Forest, XGBoost y Support Vector Machines.</p></li>
 <li><p><strong>Técnicas de Balanceo de Clases:</strong> Evaluación de métodos como SMOTE, ADASYN o class_weight=’balanced’ para abordar el desbalance inherente en datos de salud y mejorar la detección de casos positivos.</p></li>
-<li><p><strong>Optimización Computacional:</strong> Implementación de técnicas especializadas por modelo (KD-Trees para KNN, solvers optimizados, entrenamiento por lotes, early stopping) para acelerar el entrenamiento sin comprometer el rendimiento predictivo.</p></li>
+<li><p><strong>Optimización Computacional:</strong> Implementación de técnicas especializadas por modelo (KD-Trees, Ball-Trees para KNN, solvers optimizados para Logistic Regression, tree method=’hist’ para XGBoost y SGDClassifier para SVM) para acelerar el entrenamiento sin comprometer el rendimiento predictivo.</p></li>
 <li><p><strong>Evaluación Rigurosa de Modelos:</strong> Uso de métricas comprehensivas (Accuracy, Precision, Recall, F1, AUC), matrices de confusión y curvas ROC, con especial atención a la sensibilidad dado el contexto médico.</p></li>
-<li><p><strong>Tuning e Interpretabilidad Avanzada:</strong> Aplicación de técnicas de optimización de hiperparámetros con validación cruzada, e implementación de métodos de interpretabilidad (LIME, SHAP, feature importance) en los mejores modelos.</p></li>
+<li><p><strong>Tuning e Interpretabilidad Avanzada:</strong> Aplicación de técnicas de optimización de hiperparámetros con validación cruzada, e implementación de métodos de interpretabilidad (LIME, SHAP o feature importance) en los mejores modelos.</p></li>
 </ol>
 </section>
 <section id="relevancia-e-impacto-potencial">
@@ -587,7 +588,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><strong>Diabetes Health Indicators</strong></p>
+        <p class="prev-next-title"><strong>Análisis Exploratorio</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -607,16 +608,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#presentacion-del-dataset"><strong>Presentación del Dataset</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-variables"><strong>Clasificación de Variables</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-demograficas"><strong>Variables Demográficas</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#condiciones-medicas-cronicas"><strong>Condiciones Médicas Crónicas</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#comportamientos-de-salud"><strong>Comportamientos de Salud</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#acceso-a-servicios-de-salud"><strong>Acceso a Servicios de Salud</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mediciones-de-salud-autoreportada"><strong>Mediciones de Salud Autoreportada</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-objetivo"><strong>Variable Objetivo</strong></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#presentacion-del-dataset"><strong>Presentación del Dataset</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-variables"><strong>Clasificación de Variables</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-demograficas"><strong>Variables Demográficas</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#condiciones-medicas-cronicas"><strong>Condiciones Médicas Crónicas</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comportamientos-de-salud"><strong>Comportamientos de Salud</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acceso-a-servicios-de-salud"><strong>Acceso a Servicios de Salud</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mediciones-de-salud-autoreportada"><strong>Mediciones de Salud Autoreportada</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-objetivo"><strong>Variable Objetivo</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos-del-proyecto"><strong>Objetivos del Proyecto</strong></a></li>

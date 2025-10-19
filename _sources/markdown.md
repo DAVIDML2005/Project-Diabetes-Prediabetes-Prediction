@@ -14,83 +14,220 @@ El análisis exploratorio y de importancia de variables reveló patrones epidemi
 
 - **Factores protectores consistentes**: La **ausencia de consumo excesivo de alcohol** y la **pertenencia a grupos de edad media** se identificaron como factores protectores clave en múltiples modelos.
 
-# **3. Desempeño Comparativo de Modelos**
+## **3. Análisis Comparativo de Técnicas de Balanceo por Modelo**
 
-La evaluación exhaustiva de diez algoritmos en el conjunto de prueba reveló insights valiosos sobre su aplicabilidad en el contexto de diabetes:
+El análisis exhaustivo de las diferentes técnicas de balanceo reveló patrones significativos en el rendimiento de cada modelo:
 
-- **SVM Linear como líder en AUC**: Demostró el **mejor AUC-ROC en prueba** (0.7861) combinado con la **mayor velocidad de predicción** (0.0654 segundos), estableciéndose como el modelo más eficiente.
+### **Mejor Técnica de Balanceo por Modelo**
 
-- **BernoulliNB como alternativa competitiva**: Mostró el **segundo mejor AUC** (0.7852) y la **mejor Precision** (29.17%), siendo ideal para minimizar falsos positivos.
+- **XGBoost**: **scale_pos_weight** - Logró el **mejor AUC-ROC global** (0.811721) con F1-Score competitivo (0.426087), demostrando superioridad sobre SMOTE y ADASYN.
 
-- **Logistic Regression como opción balanceada**: Ambas variantes (L1 y L2) alcanzaron **AUC de 0.7843** con excelente velocidad (< 0.08 segundos), ofreciendo robustez y eficiencia.
+- **Logistic Regression L1**: **Class Weight ('balanced')** - Alcanzó **F1-Score de 0.426976** y AUC-ROC de 0.808035, mostrando mejor balance métrico que SMOTE.
 
-- **XGBoost como mejor ensemble**: Demostró **AUC sólido** (0.7773) superando a Random Forest (0.7751), con tiempo de predicción razonable (0.1304 segundos).
+- **Logistic Regression L2**: **Class Weight ('balanced')** - Consiguió **AUC-ROC de 0.807979** con un excelente tiempo de predicción (0.068129s) para regresión logística.
 
-- **Jerarquía de rendimiento en prueba**:
-  1. **SVM Linear** - Mejor AUC (0.786) + Más rápido (0.065s).
-  2. **BernoulliNB** - Alto AUC (0.785) + Mejor Precision (29.17%).
-  3. **Logistic Regression L1/L2** - AUC competitivo (0.784) + Alta velocidad.
-  4. **XGBoost** - Mejor ensemble (AUC 0.777) + Buen balance.
-  5. **Random Forest** - Buen AUC (0.775) + Buen Accuracy (73.10%).
+- **Random Forest**: **Class Weight ('balanced')** - Obteniendo el **mejor F1-Score global** (0.427917) y AUC-ROC competitivo (0.806268).
 
-**Hallazgos clave en conjunto de prueba**:
-- **KNN** mostró caída significativa en AUC (0.6990 vs 0.8747 en validación) indicando posible sobreajuste.
-- **GaussianNB** confirmó su bajo rendimiento (AUC 0.7567), el más bajo de todos los modelos.
-- **Modelos lineales** mantuvieron consistencia entre validación y prueba, demostrando robustez.
-- **Todos los modelos superaron AUC de 0.75**, confirmando capacidad predictiva aceptable en datos no vistos.
+- **SVM**: **Class Weight ('balanced')** - Alcanzó un **buen AUC-ROC para modelos lineales** (0.806949) con tiempo de predicción excelente (0.066463s).
 
-**Recomendación para implementación**:
-- **Prioridad velocidad y AUC**: SVM Linear.
-- **Prioridad precisión y AUC**: BernoulliNB.  
-- **Balance general**: Logistic Regression L2.
-- **Evitar**: KNN (tiempo excesivo) y GaussianNB (bajo rendimiento).
+- **BernoulliNB**: **ADASYN** - Logró **AUC-ROC de 0.790196** con precisión competitiva (29.65%).
 
-## **4. Buenas Prácticas y Estrategias Metodológicas Implementadas**
+- **Decision Tree**: **Class Weight ('balanced')** - Demostró un **excelente recall global** (0.780591) ideal para maximizar detección.
 
-El proyecto incorporó rigurosas prácticas de ciencia de datos que garantizaron la calidad y validez de los resultados obtenidos:
+- **KNN**: **SMOTE** - Alcanzó **AUC-ROC de 0.736694**, superando a ADASYN a pesar de limitaciones temporales.
 
-- **Balanceo de datos con SMOTE**: Se aplicó exitosamente técnica de sobremuestreo para manejar el desbalance de clases, mejorando la capacidad de los modelos para detectar casos positivos.
+- **MultinomialNB**: **ADASYN** - Logró **AUC-ROC de 0.778285** con buen balance entre métricas.
 
-- **Preprocesamiento diferenciado por algoritmos**: Se diseñaron estrategias específicas para cada familia de modelos, incluyendo binarización para BernoulliNB y escalados específicos para otros algoritmos.
+- **GaussianNB**: **ADASYN** - Aunque con **AUC-ROC más bajo** (0.755848), mostró el **mejor recall global** (85.37%).
 
-- **Optimizaciones computacionales avanzadas**: Implementación de Ball Trees para KNN, solver 'saga' para Regresión Logística, tree_method='hist' para XGBoost, y paralelización con n_jobs=-1.
+### **Patrones Generales en Técnicas de Balanceo**
 
-- **Validación exhaustiva y prevención de sobreajuste**: Se empleó validación cruzada estratificada (5 folds) con múltiples métricas de evaluación, asegurando la generalización de los modelos.
+- **SMOTE**: Óptimo para modelos lineales, con **AUC-ROC consistentemente alto** y buen balance general.
 
-## **5. Interpretabilidad y Validación Clínica**
+- **Class Weight y scale_pos_weight (XGBoost)**: Superior en modelos lineales y basados en árboles, maximizando **F1-Score y AUC-ROC**.
 
-El análisis de importancia de variables y las explicaciones con LIME proporcionaron transparencia a los modelos:
+- **ADASYN**:  Superior para modelos **Naive Bayes** presentando un buen balance general.
 
-- **Consistencia en predictores clave**: Múltiples modelos identificaron **edad avanzada**, **consumo de alcohol** y **presión arterial alta** como factores críticos.
+- **Sin Balanceo**: Produjo **accuracy inflado artificialmente** con recall muy bajo, confirmando la necesidad crítica de técnicas de balanceo.
 
-- **Divergencia en enfoques predictivos**: 
-  - **Modelos lineales**: Enfatizan variables demográficas (edad) y consumo de alcohol.
-  - **Modelos basados en árboles**: Priorizan indicadores médicos directos (HighBP, PhysHlth, MentHlth).
+## **4. Desempeño Comparativo de Modelos**
 
-- **Robustez predictiva demostrada**: En la instancia de prueba analizada, 9 de 10 modelos realizaron predicciones correctas, demostrando consistencia en el reconocimiento de patrones protectores.
+### **Jerarquía de Rendimiento por Métrica Clave**
 
-## **6. Limitaciones y Consideraciones**
+#### **AUC-ROC**
+1. **XGBoost (scale_pos_weight)** - 0.811721.
+2. **Logistic Regression L1 (Class Weight)** - 0.808035.
+3. **Logistic Regression L2 (Class Weight)** - 0.807979.
+4. **SVM (Class Weight)** - 0.806949.
+5. **Random Forest (Class Weight)** - 0.806268.
+6. **Decision Tree (Class Weight)** - 0.793718.
+7. **BernoulliNB (ADASYN)** - 0.790196.
+8. **MultinomialNB (ADASYN)** - 0.778285.
+9. **GaussianNB (SMOTE)** - 0.756042.
+10. **KNN (SMOTE)** - 0.736694.
 
-Es importante reconocer las limitaciones del estudio:
+#### **F1-Score**
+1. **Random Forest (SMOTE)** - 0.435008.
+2. **XGBoost (SMOTE)** - 0.430538.
+3. **Logistic Regression L2 (SMOTE)** - 0.427553.
+4. **Logistic Regression L1 (Class Weight)** - 0.426976.
+5. **SVM (SMOTE)** - 0.426342.
+6. **BernoulliNB (SMOTE)** - 0.421779.
+7. **Decision Tree (ADASYN)** - 0.408646.
+8. **MultinomialNB (SMOTE)** - 0.407390.
+9. **KNN (SMOTE)** - 0.375550.
+10. **GaussianNB (SMOTE)** - 0.350543.
 
-- **Problema de falsos positivos**: Todos los modelos mostraron Precision baja (<30%), indicando alta tasa de falsas alarmas que requiere ajuste de umbrales para el contexto clínico específico.
+#### **Precision**
+1. **XGBoost (ADASYN)** - 0.447325.
+2. **Random Forest (SMOTE)** - 0.339803.
+3. **Decision Tree (ADASYN)** - 0.315745.
+4. **BernoulliNB (SMOTE)** - 0.306038.
+5. **Logistic Regression L2 (SMOTE)** - 0.298196.
+6. **SVM (SMOTE)** - 0.297881.
+7. **Logistic Regression L1 (SMOTE)** - 0.297523.
+8. **MultinomialNB (SMOTE)** - 0.289130.
+9. **KNN (SMOTE)** - 0.275120.
+10. **GaussianNB (SMOTE)** - 0.221525.
 
-- **Tiempo de ejecución de KNN**: Aunque con excelente rendimiento, su tiempo de predicción (2998 segundos) lo hace impracticable para aplicaciones en tiempo real.
+#### **Recall**
+1. **GaussianNB (ADASYN)** - 0.853728.
+2. **XGBoost (scale_pos_weight)** - 0.781440.
+3. **Decision Tree (Class Weight)** - 0.780591.
+4. **Logistic Regression L1 (ADASYN)** - 0.770547.
+5. **SVM (Class Weight)** - 0.769274.
+6. **Logistic Regression L2 (ADASYN)** - 0.768426.
+7. **Random Forest (Class Weight)** - 0.732918.
+8. **MultinomialNB (ADASYN)** - 0.725421.
+9. **BernoulliNB (ADASYN)** - 0.707879.
+10. **KNN (SMOTE)** - 0.600368.
 
-- **Sobre-confianza de GaussianNB**: Demostró problemas de calibración con predicciones extremas (90% probabilidad en caso incorrecto).
+#### **Tiempo de Predicción**
+1. **Logistic Regression L2 (SMOTE)** - 0.058025s.
+2. **Decision Tree (Class Weight)** - 0.065153s.
+3. **SVM (Class Weight)** - 0.066463s.
+4. **MultinomialNB (SMOTE)** - 0.073863s.
+5. **Logistic Regression L1 (SMOTE)** - 0.091973s.
+6. **XGBoost (scale_pos_weight)** - 0.099593s.
+7. **BernoulliNB (SMOTE)** - 0.115966s.
+8. **GaussianNB (SMOTE)** - 0.125703s.
+9. **Random Forest (SMOTE)** - 0.376555s.
+10. **KNN (SMOTE)** - 26.659613s (fuera de escala).
 
-## **7. Impacto Potencial y Proyección Futura**
+### **Análisis Detallado por Familia de Modelos**
 
-La implementación exitosa de este sistema predictivo podría transformar la práctica clínica en varias dimensiones:
+#### **Modelos Lineales:**
+- **Logistic Regression L1 vs L2**: L1 muestra **ligera ventaja en Recall** (0.770547 vs 0.768426) mientras L2 ofrece **mejor tiempo de predicción**.
+- **SVM**: **Buen equilibrio general** entre AUC-ROC (0.805641) y velocidad (0.066463s).
 
-- **Detección temprana**: Identificación de pacientes en riesgo de diabetes basada en múltiples factores simultáneamente.
+#### **Modelos Basados en Árboles:**
+- **XGBoost**: **Máximo poder predictivo** (AUC 0.811721) con **recall excelente** (78.14%).
+- **Random Forest**: **Mejor F1-Score global** (0.435008) indicando balance óptimo.
+- **Decision Tree**: **Excelente Recall máximo** (78.06%) pero con buena precisión.
 
-- **Estratificación de riesgo**: Asignación más eficiente de recursos según perfiles de riesgo identificados por los modelos.
+#### **Modelos Naive Bayes:**
+- **BernoulliNB**: **Mejor rendimiento general** en la familia con AUC 0.790196.
+- **MultinomialNB**: **Rendimiento sólido** (AUC 0.778285) y velocidad excelente.
+- **GaussianNB**: **Especialista en recall** (85.37%) pero con precisión comprometida.
 
-- **Medicina preventiva personalizada**: Desarrollo de intervenciones específicas basadas en los factores más relevantes para cada perfil demográfico.
+#### **KNN:**
+- **Limitación crítica** en tiempo (26.66s) lo hace **impracticable** a pesar de métricas aceptables.
 
-## **Reflexión Final**
+## **5. Hallazgos Clave y Patrones Identificados**
 
-Este proyecto demuestra que los algoritmos de machine learning, cuando son aplicados con rigor metodológico y comprensión del dominio clínico, pueden convertirse en herramientas valiosas para la salud pública. La superioridad de Random Forest y la solidez de SVM Linear sugieren que la selección del algoritmo debe considerar el balance entre rendimiento predictivo, velocidad e interpretabilidad.
+### **Patrones de Comportamiento por Tipo de Modelo**
 
-Los hallazgos no solo validan el potencial de la inteligencia artificial en salud metabólica, sino que también destacan la importancia de considerar múltiples perspectivas algorítmicas para capturar la complejidad de los determinantes de salud en diabetes.
+1. **Modelos Lineales**: Responden mejor a **Class Weight**, mostrando **alta consistencia** entre validación y prueba.
+
+2. **Modelos Basados en Árboles**: Prefieren **class weight**, logrando **máximo rendimiento predictivo**.
+
+3. **Modelos Probabilísticos**: **ADASYN** optimiza su rendimiento, especialmente en BernoulliNB y MultinomialNB.
+
+4. **Modelos de Instancia**: **KNN** muestra limitaciones prácticas severas a pesar de métricas teóricas aceptables.
+
+### **Trade-offs Identificados:**
+
+- **Precisión vs Recall**: Claramente demostrado en GaussianNB (alta recall, baja precisión) vs XGBoost (balance óptimo).
+
+- **Rendimiento vs Velocidad**: Logistic Regression ofrece el mejor balance, mientras XGBoost maximiza rendimiento con costo computacional moderado.
+
+- **Complexidad vs Interpretabilidad**: Modelos lineales ofrecen mejor interpretabilidad, ensembles mayor poder predictivo.
+
+## **6. Estrategias de Selección por Caso de Uso**
+
+### **Para Screening Masivo (Maximizar Recall):**
+- **GaussianNB con ADASYN** (Recall: 85.37%).
+- **XGBoost con scale_pos_weight** (Recall: 78.14%).
+- **Decision Tree con Class Weight** (Recall: 78.06%).
+
+### **Para Diagnóstico Confirmatorio (Maximizar Precisión):**
+- **XGBoost con ADASYN** (Precision: 44.73%).
+- **Random Forest con SMOTE** (Precision: 33.98%).
+- ***Decision Tree con ADASYN** (Precision: 31.57%).
+
+## **7. Impacto en Práctica Clínica y Salud Pública**
+
+### **Implicaciones Prácticas**
+
+1. **Estratificación de Riesgo Mejorada**: Capacidad de identificar diferentes perfiles de riesgo según el modelo seleccionado.
+
+2. **Optimización de Recursos**: Asignación más eficiente basada en el balance precisión-recall requerido.
+
+3. **Detección Temprana Personalizada**: Selección de modelo según características de la población objetivo.
+
+4. **Implementación Escalable**: Modelos como SVM y Logistic Regression permiten despliegue en sistemas de salud con infraestructura limitada.
+
+### **Consideraciones para Implementación**
+
+- **Contexto Clínico**: Determinar si se prioriza evitar falsos negativos (alta recall) o falsos positivos (alta precisión).
+
+- **Infraestructura Computacional**: Evaluar capacidades de procesamiento para modelos más complejos.
+
+- **Integración con Sistemas Existentes**: Considerar tiempos de respuesta y compatibilidad.
+
+## **8. Limitaciones y Trabajo Futuro**
+
+### **Limitaciones Identificadas:**
+
+1. **Precisión Moderada**: Aunque el recall mejoró significativamente, la precisión promedio alcanzada indica necesidad de mejoras adicionales.
+
+2. **Dependencia de Preprocesamiento**: Resultados altamente dependientes de técnicas de balanceo y preprocesamiento específico.
+
+3. **Complexidad Operacional**: La necesidad de múltiples pipelines según el modelo seleccionado.
+
+4. **Validación Externa**: Requerido validar con datasets independientes y diversas poblaciones.
+
+### **Direcciones Futuras**
+
+1. **Ensembles Híbridos**: Combinar modelos complementarios (ej: GaussianNB para recall + Random Forest para precisión).
+
+2. **Optimización Avanzada**: Técnicas como Bayesian Optimization para hiperparámetros.
+
+3. **Feature Engineering Especializado**: Desarrollo de variables específicas para diabetes.
+
+4. **Validación Multicéntrica**: Pruebas en diferentes poblaciones y configuraciones clínicas.
+
+## **9. Conclusiones Finales y Recomendaciones**
+
+### **Hallazgos Fundamentales:**
+
+1. **El balanceo es crucial**: Mejora dramáticamente el recall, manteniendo AUC-ROC competitivo.
+
+2. **No hay solución única**: La técnica óptima de balanceo varía significativamente por familia de modelo.
+
+3. **Trade-offs inevitables**: La elección del modelo debe alinearse con los objetivos clínicos específicos.
+
+4. **Velocidad vs Rendimiento**: SVM y Logistic Regression emergen como el mejor balance para aplicaciones prácticas.
+
+### **Recomendación Final**
+
+Para la mayoría de aplicaciones clínicas en predicción de diabetes, se recomienda la **implementación de SVM con class weigh** como solución balanceada que ofrece:
+- **Alto AUC-ROC** (0.806949).
+- **Excelente velocidad** (0.066463s).
+- **Balance métrico sólido** (F1: 0.424811).
+- **Interpretabilidad razonable**.
+- **Facilidad de implementación**.
+
+Para casos donde se priorice el **máximo rendimiento predictivo**, **XGBoost con scale_pos_weight** constituye la alternativa óptima, aceptando un modesto incremento en complejidad computacional.
+
+Este trabajo establece un precedente metodológico para la selección sistemática de técnicas de balanceo y modelos en problemas de salud pública con desbalance de clases, proporcionando un framework replicable para futuras investigaciones en predicción de enfermedades crónicas.
