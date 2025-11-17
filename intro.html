@@ -187,9 +187,8 @@
 <li class="toctree-l1"><a class="reference internal" href="modelado_b.html"><strong>Modelado Benchmark</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="modelado_smote.html"><strong>Modelado Optimizado (SMOTE)</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="modelado_adasyn.html"><strong>Modelado Optimizado (ADASYN)</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="modelado_w.html"><strong>Modelado Optimizado (class weight y scale_pos_weight (XGBoost))</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="markdown.html"><strong>Conclusiones y Hallazgos Principales</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="modelo_original2.html"><strong>Modelo Original PWVM - Probabilistic Weight Voting Model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelado_w.html"><strong>Modelado Optimizado (class weight)</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="markdown.html"><strong>Conclusiones y Hallazgos Principales en los Modelados</strong></a></li>
 </ul>
 
     </div>
@@ -532,11 +531,12 @@ document.write(`
 <p>Para alcanzar este objetivo general, se han definido los siguientes <strong>objetivos específicos</strong>:</p>
 <ol class="arabic simple">
 <li><p><strong>Análisis Exploratorio de Datos (EDA):</strong> Exploración exhaustiva que incluye análisis de distribuciones, valores atípicos, correlaciones y reducción de dimensionalidad exploratoria para fundamentar las decisiones de modelado.</p></li>
-<li><p><strong>Modelado Benchmark Comprehensivo:</strong> Implementación y comparación de algoritmos de clasificación: K-Nearest Neighbors, Naive Bayes, Regresión Logística (con regularización L1 y L2), Árbol de Decisión, Random Forest, XGBoost y Support Vector Machines.</p></li>
+<li><p><strong>Modelado Benchmark Comprehensivo:</strong> Implementación y comparación de algoritmos de clasificación: K-Nearest Neighbors, Naive Bayes, Regresión Logística (con regularización L1 y L2), Árbol de Decisión, Random Forest, XGBoost, Support Vector Machines, CatBoost, Gradient Boosting y LightGBM.</p></li>
 <li><p><strong>Técnicas de Balanceo de Clases:</strong> Evaluación de métodos como SMOTE, ADASYN o class_weight=’balanced’ para abordar el desbalance inherente en datos de salud y mejorar la detección de casos positivos.</p></li>
 <li><p><strong>Optimización Computacional:</strong> Implementación de técnicas especializadas por modelo (KD-Trees, Ball-Trees para KNN, solvers optimizados para Logistic Regression, tree method=’hist’ para XGBoost y SGDClassifier para SVM) para acelerar el entrenamiento sin comprometer el rendimiento predictivo.</p></li>
 <li><p><strong>Evaluación Rigurosa de Modelos:</strong> Uso de métricas comprehensivas (Accuracy, Precision, Recall, F1, AUC), matrices de confusión y curvas ROC, con especial atención a la sensibilidad dado el contexto médico.</p></li>
 <li><p><strong>Tuning e Interpretabilidad Avanzada:</strong> Aplicación de técnicas de optimización de hiperparámetros con validación cruzada, e implementación de métodos de interpretabilidad (LIME, SHAP o feature importance) en los mejores modelos.</p></li>
+<li><p><strong>Búsqueda de Modelos Originales</strong>: Investigación e implementación de arquitecturas de machine learning originalmente desarrolladas en otros ámbitos que puedan adaptarse y mejorar el rendimiento predictivo en la detección de diabetes.</p></li>
 </ol>
 </section>
 <section id="relevancia-e-impacto-potencial">

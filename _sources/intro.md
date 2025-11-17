@@ -97,7 +97,7 @@ Para alcanzar este objetivo general, se han definido los siguientes **objetivos 
 
 1.  **Análisis Exploratorio de Datos (EDA):** Exploración exhaustiva que incluye análisis de distribuciones, valores atípicos, correlaciones y reducción de dimensionalidad exploratoria para fundamentar las decisiones de modelado.
 
-2.  **Modelado Benchmark Comprehensivo:** Implementación y comparación de algoritmos de clasificación: K-Nearest Neighbors, Naive Bayes, Regresión Logística (con regularización L1 y L2), Árbol de Decisión, Random Forest, XGBoost y Support Vector Machines.
+2.  **Modelado Benchmark Comprehensivo:** Implementación y comparación de algoritmos de clasificación: K-Nearest Neighbors, Naive Bayes, Regresión Logística (con regularización L1 y L2), Árbol de Decisión, Random Forest, XGBoost, Support Vector Machines, CatBoost, Gradient Boosting y LightGBM.
 
 3.  **Técnicas de Balanceo de Clases:** Evaluación de métodos como SMOTE, ADASYN o class_weight='balanced' para abordar el desbalance inherente en datos de salud y mejorar la detección de casos positivos.
 
@@ -106,6 +106,8 @@ Para alcanzar este objetivo general, se han definido los siguientes **objetivos 
 5.  **Evaluación Rigurosa de Modelos:** Uso de métricas comprehensivas (Accuracy, Precision, Recall, F1, AUC), matrices de confusión y curvas ROC, con especial atención a la sensibilidad dado el contexto médico.
 
 6.  **Tuning e Interpretabilidad Avanzada:** Aplicación de técnicas de optimización de hiperparámetros con validación cruzada, e implementación de métodos de interpretabilidad (LIME, SHAP o feature importance) en los mejores modelos.
+
+7. **Búsqueda de Modelos Originales**: Investigación e implementación de arquitecturas de machine learning originalmente desarrolladas en otros ámbitos que puedan adaptarse y mejorar el rendimiento predictivo en la detección de diabetes.
 
 ## **Relevancia e Impacto Potencial**
 

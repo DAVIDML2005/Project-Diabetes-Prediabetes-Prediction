@@ -186,8 +186,8 @@
 <li class="toctree-l1"><a class="reference internal" href="modelado_b.html"><strong>Modelado Benchmark</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="modelado_smote.html"><strong>Modelado Optimizado (SMOTE)</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="modelado_adasyn.html"><strong>Modelado Optimizado (ADASYN)</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="modelado_w.html"><strong>Modelado Optimizado (class weight y scale_pos_weight (XGBoost))</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="markdown.html"><strong>Conclusiones y Hallazgos Principales</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelado_w.html"><strong>Modelado Optimizado (class weight)</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="markdown.html"><strong>Conclusiones y Hallazgos Principales en los Modelados</strong></a></li>
 </ul>
 
     </div>
@@ -401,15 +401,13 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-bivariado"><strong>Análisis Bivariado</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-binarias-vs-diabetes"><strong>Variables Binarias vs Diabetes</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-categoricas-vs-diabetes"><strong>Variables Categóricas vs Diabetes</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-numericas-vs-diabetes"><strong>Variables Númericas vs Diabetes</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-tendencia-por-categorizacion-para-variables-numericas"><strong>Análisis de Tendencia por Categorización para Variables Numéricas</strong></a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-numericas-vs-diabetes"><strong>Variables Númericas vs Diabetes</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-tendencia-por-categorizacion-para-variables-numericas"><strong>Análisis de Tendencia por Categorización para Variables Numéricas</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-correlaciones-entre-variables-predictoras"><strong>Análisis de Correlaciones entre Variables Predictoras</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-correlaciones-con-la-variable-objetivo"><strong>Análisis de Correlaciones con la Variable Objetivo</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multicolinealidad"><strong>Multicolinealidad</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-multicolinealidad"><strong>Análisis de Multicolinealidad</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tratamiento-de-multicolinealidad"><strong>Tratamiento de Multicolinealidad</strong></a></li>
 </ul>
 </li>
@@ -433,12 +431,14 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span> 
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">stats</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">scipy</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats.mstats</span><span class="w"> </span><span class="kn">import</span> <span class="n">winsorize</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.outliers_influence</span><span class="w"> </span><span class="kn">import</span> <span class="n">variance_inflation_factor</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">OneHotEncoder</span><span class="p">,</span> <span class="n">StandardScaler</span>
@@ -508,6 +508,18 @@ Se usa <code class="docutils literal notranslate"><span class="pre">.to_string()
 <p>Se presenta un resumen detallado de todas las variables del dataset, incluyendo su rol (predictora o objetivo), el tipo de dato (numérico, categórico, binario) y la identificación de valores faltantes, lo que permite evaluar la integridad y estructura de los datos para su posterior procesamiento.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(253680, 22)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cdc_diabetes_health_indicators</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span> 
 </pre></div>
 </div>
@@ -566,7 +578,7 @@ Se usa <code class="docutils literal notranslate"><span class="pre">.to_string()
 </div>
 </div>
 </div>
-<p>Este conjunto de datos contiene información relacionada con factores de salud y demográficos asociados a la diabetes. La variable objetivo (<code class="docutils literal notranslate"><span class="pre">Diabetes_binary</span></code>) indica si un paciente tiene diabetes o prediabetes (1) o no (0). Entre las características destacan variables binarias como <code class="docutils literal notranslate"><span class="pre">HighBP</span></code> (hipertensión), <code class="docutils literal notranslate"><span class="pre">HighChol</span></code> (colesterol alto) y <code class="docutils literal notranslate"><span class="pre">Smoker</span></code> (fumador), que representan condiciones médicas o hábitos relevantes. También se incluyen variables numéricas como <code class="docutils literal notranslate"><span class="pre">BMI</span></code> (índice de masa corporal) y escalas de salud general (<code class="docutils literal notranslate"><span class="pre">GenHlth</span></code>, <code class="docutils literal notranslate"><span class="pre">MentHlth</span></code>, <code class="docutils literal notranslate"><span class="pre">PhysHlth</span></code>), que miden percepciones y estados de salud física y mental. Además, hay atributos demográficos como <code class="docutils literal notranslate"><span class="pre">Sex</span></code> (sexo), <code class="docutils literal notranslate"><span class="pre">Age</span></code> (edad), <code class="docutils literal notranslate"><span class="pre">Education</span></code> (nivel educativo) e <code class="docutils literal notranslate"><span class="pre">Income</span></code> (ingresos), que permiten analizar patrones según grupos poblacionales. La ausencia de valores faltantes facilita el análisis, y las descripciones detalladas de cada campo ayudan a contextualizar su relevancia clínica.</p>
+<p>Este conjunto de datos contiene información relacionada con factores de salud y demográficos asociados a la diabetes. La variable objetivo (<code class="docutils literal notranslate"><span class="pre">Diabetes_binary</span></code>) indica si un paciente tiene diabetes o prediabetes (1) o no (0). Entre las características destacan variables binarias como <code class="docutils literal notranslate"><span class="pre">HighBP</span></code> (hipertensión alta), <code class="docutils literal notranslate"><span class="pre">HighChol</span></code> (colesterol alto) y <code class="docutils literal notranslate"><span class="pre">Smoker</span></code> (fumador), que representan condiciones médicas o hábitos relevantes. También se incluyen variables numéricas como <code class="docutils literal notranslate"><span class="pre">BMI</span></code> (índice de masa corporal) y escalas de salud general (<code class="docutils literal notranslate"><span class="pre">GenHlth</span></code>, <code class="docutils literal notranslate"><span class="pre">MentHlth</span></code>, <code class="docutils literal notranslate"><span class="pre">PhysHlth</span></code>), que miden percepciones y estados de salud física y mental. Además, hay atributos demográficos como <code class="docutils literal notranslate"><span class="pre">Sex</span></code> (sexo), <code class="docutils literal notranslate"><span class="pre">Age</span></code> (edad), <code class="docutils literal notranslate"><span class="pre">Education</span></code> (nivel educativo) e <code class="docutils literal notranslate"><span class="pre">Income</span></code> (ingresos), que permiten analizar patrones según grupos poblacionales. La ausencia de valores faltantes facilita el análisis, y las descripciones detalladas de cada campo ayudan a contextualizar su relevancia clínica.</p>
 <section id="valores-unicos">
 <h3><strong>Valores Únicos</strong><a class="headerlink" href="#valores-unicos" title="Link to this heading">#</a></h3>
 <p>Se calcula el número de valores únicos para cada variable del DataFrame.</p>
@@ -796,7 +808,7 @@ dtype: int64
 <img alt="_images/74466b570c7238822797f4b5d53b113a45f4e5823123b2e4114cde98fc359bbd.png" src="_images/74466b570c7238822797f4b5d53b113a45f4e5823123b2e4114cde98fc359bbd.png" />
 </div>
 </div>
-<p>El análisis de las distribuciones revela patrones demográficos y socioeconómicos clave en la población estudiada:</p>
+<p>El análisis de las distribuciones revela patrones demográficos y socioeconómicos claves en la población estudiada:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">GenHlth</span></code>
 La distribución muestra una tendencia hacia percepciones positivas de salud: el 53.0% de los encuestados reporta salud “muy buena” (35.1%) o “excelente” (17.9%), mientras solo el 4.8% la califica como “pobre”.</p></li>
@@ -912,7 +924,7 @@ La distribución económica muestra una concentración en la clase media-alta: e
 </li>
 </ul>
 <hr class="docutils" />
-<p>Se genera un histograma y un boxplot para visualizar la distribución de frecuencias e identificar outliers (puntos fuera de los bigotes) y la dispersión de los datos. Además se evalua:</p>
+<p>También, se genera un histograma y un boxplot para visualizar la distribución de frecuencias e identificar outliers (puntos fuera de los bigotes) y la dispersión de los datos. Además se evalua:</p>
 <ul class="simple">
 <li><p><strong>Asimetría</strong>:</p>
 <ul>
@@ -1286,7 +1298,7 @@ Coeficiente de Variación:  21.39 %
 </section>
 <section id="variables-numericas-vs-diabetes">
 <h3><strong>Variables Númericas vs Diabetes</strong><a class="headerlink" href="#variables-numericas-vs-diabetes" title="Link to this heading">#</a></h3>
-<p>Se visualiza la asociación entre variables numéricas y la diabetes. Los gráficos combinan barras (proporción de diabetes por valor) y una línea de tendencia (roja), permitiendo identificar patrones o relaciones monotónicas entre las variables y la variable objetivo.</p>
+<p>Se visualiza la asociación entre variables numéricas y la diabetes. Los gráficos combinan barras (proporción de diabetes por valor) y una línea de tendencia (roja), permitiendo identificar patrones o relaciones monotónicas entre las variables predictoras y la variable objetivo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">numericas</span><span class="p">:</span>
@@ -1331,17 +1343,18 @@ Coeficiente de Variación:  21.39 %
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/fdbb5e52461e535c04d2269a463afcebd674ccae3df63ab9ebb89dc693100da9.png" src="_images/fdbb5e52461e535c04d2269a463afcebd674ccae3df63ab9ebb89dc693100da9.png" />
-<img alt="_images/b70e0d5d8b2c594e43d4c37d8f5e74c78153aa777fa88ca05f065b540bb8602e.png" src="_images/b70e0d5d8b2c594e43d4c37d8f5e74c78153aa777fa88ca05f065b540bb8602e.png" />
+<img alt="_images/9b81cd996f985a4af56cd3173f9a78915d5feadfb765f070e2025e4b37dfcaea.png" src="_images/9b81cd996f985a4af56cd3173f9a78915d5feadfb765f070e2025e4b37dfcaea.png" />
+<img alt="_images/4dbca0e602e0cf194c7c1c3ee33dd65610426cd6dfb6f02b49fcf94b92691b83.png" src="_images/4dbca0e602e0cf194c7c1c3ee33dd65610426cd6dfb6f02b49fcf94b92691b83.png" />
 <img alt="_images/cb9f70b678b55349cd218cb3ec683a4ce20890f26d71bfe93706babb0568beac.png" src="_images/cb9f70b678b55349cd218cb3ec683a4ce20890f26d71bfe93706babb0568beac.png" />
 </div>
 </div>
 <p>Los gráficos muestran la relación entre la salud mental <code class="docutils literal notranslate"><span class="pre">MentHith</span></code> y física <code class="docutils literal notranslate"><span class="pre">PhysHith</span></code> con la proporción de casos de diabetes. En ambos casos, se observa una tendencia clara: a medida que empeora el estado de salud (aumentan los valores en los ejes horizontales), la proporción de personas con diabetes incrementa.</p>
 <p>Para la salud mental, la línea de tendencia roja presenta un ascenso sostenido, aunque con cierta variabilidad en los valores intermedios, lo que sugiere que los días con mayor afectación mental están asociados a una mayor prevalencia de diabetes. Por otro lado, en la salud física, la tendencia es más marcada y consistente, especialmente en los valores más altos, indicando una fuerte correlación entre el deterioro físico y la presencia de diabetes. Estos resultados refuerzan la hipótesis de que tanto la salud mental como física están vinculadas al riesgo de diabetes, siendo el impacto particularmente evidente en estados de salud más críticos.</p>
 <p>El gráfico de la relación entre el <code class="docutils literal notranslate"><span class="pre">BMI</span></code> y la proporción de diabetes muestra una tendencia claramente creciente y aparentemente lineal a medida que aumenta el índice de masa corporal, desde valores alrededor de 20 hasta aproximadamente 40-45 BMI. A partir de ese punto, la proporción de diabetes comienza a estabilizarse e incluso a descender ligeramente en el rango de valores más altos (45-50 BMI). Este comportamiento en las colas podría deberse a la menor cantidad de datos disponibles en dichos rangos extremos, lo que introduce una mayor variabilidad y ruido en las estimaciones. Por ejemplo, es posible que en algunos intervalos de BMI muy altos haya muy pocas observaciones, lo que resulta en proporciones que no necesariamente reflejan una tendencia poblacional real, sino fluctuaciones muestrales. Por lo tanto, aunque la relación positiva entre BMI y diabetes es evidente en la mayoría del rango, se debe tener precaución al interpretar las zonas extremas por posibles problemas de representatividad estadística.</p>
+</section>
 <section id="analisis-de-tendencia-por-categorizacion-para-variables-numericas">
-<h4><strong>Análisis de Tendencia por Categorización para Variables Numéricas</strong><a class="headerlink" href="#analisis-de-tendencia-por-categorizacion-para-variables-numericas" title="Link to this heading">#</a></h4>
-<p>Para evaluar patrones de asociación entre las variables numéricas continuas y la prevalencia de diabetes, se implementó una estrategia de categorización basada en rangos clínicamente relevantes. Este abordaje permite:</p>
+<h3><strong>Análisis de Tendencia por Categorización para Variables Numéricas</strong><a class="headerlink" href="#analisis-de-tendencia-por-categorizacion-para-variables-numericas" title="Link to this heading">#</a></h3>
+<p>Para evaluar patrones de asociación entre las variables numéricas y la prevalencia de diabetes, se implementó una estrategia de categorización basada en rangos clínicamente relevantes. Este abordaje permite:</p>
 <ul class="simple">
 <li><p><strong>Visualizar tendencias epidemiológicas</strong> mediante agrupaciones interpretables.</p></li>
 <li><p><strong>Establecer puntos de corte clínicos</strong> que faciliten la interpretación médica.</p></li>
@@ -1408,7 +1421,7 @@ Coeficiente de Variación:  21.39 %
 <p>De manera similar, la salud física también muestra una tendencia marcada: las personas que reportan más días con limitaciones físicas o problemas de salud presentan una mayor prevalencia de diabetes. Esto podría indicar que la diabetes tiende a coexistir con otras condiciones físicas crónicas o que su presencia contribuye al deterioro del estado físico general.</p>
 <p>Finalmente, el índice de masa corporal muestra una relación especialmente clara: a medida que el BMI aumenta, también lo hace el porcentaje de personas con diabetes. Las tasas más altas se encuentran en los grupos con obesidad severa, lo que refuerza la fuerte asociación entre el exceso de peso y el riesgo de desarrollar diabetes.</p>
 <hr class="docutils" />
-<p>Con el objetivo de identificar la relación entre las variables numéricas predictoras y la variable objetivo (<code class="docutils literal notranslate"><span class="pre">Diabetes_binary</span></code>), se genera una serie de diagramas de caja (boxplots). Esta visualización permite comparar la distribución (mediana, rango intercuartílico) de cada variable numérica segmentada por la clase de diagnóstico, facilitando la observación de diferencias significativas entre los grupos que podrían ser patrones predictivos clave.</p>
+<p>También, con el objetivo de identificar la relación entre las variables numéricas predictoras y la variable objetivo (<code class="docutils literal notranslate"><span class="pre">Diabetes_binary</span></code>), se genera una serie de diagramas de caja (boxplots). Esta visualización permite comparar la distribución (mediana, rango intercuartílico) de cada variable numérica segmentada por la clase de diagnóstico, facilitando la observación de diferencias significativas entre los grupos que podrían ser patrones predictivos clave.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">numericas</span><span class="p">:</span>
@@ -1465,7 +1478,6 @@ Coeficiente de Variación:  21.39 %
 <li><p>Mayor índice de masa corporal, lo que refuerza su relación con el riesgo de diabetes.</p></li>
 </ul>
 <p>En conjunto, los boxplots muestran un patrón coherente: la diabetes se asocia con un <strong>deterioro de la salud general</strong> y <strong>mayor peso corporal</strong>.</p>
-</section>
 </section>
 </section>
 <section id="analisis-de-correlaciones-entre-variables-predictoras">
@@ -1554,7 +1566,7 @@ dtype: float64
 </section>
 <section id="analisis-de-correlaciones-con-la-variable-objetivo">
 <h2><strong>Análisis de Correlaciones con la Variable Objetivo</strong><a class="headerlink" href="#analisis-de-correlaciones-con-la-variable-objetivo" title="Link to this heading">#</a></h2>
-<p>Para determinar qué variables presentan la asociación lineal más fuerte con la condición de diabetes/prediabetes, se analizaron las correlaciones específicas con la variable objetivo <code class="docutils literal notranslate"><span class="pre">Diabetes_binary</span></code>. Este análisis permite priorizar los factores de riesgo más influyentes y comprender qué indicadores de salud podrían tener mayor poder predictivo en los modelos. La visualización presenta las 10 variables con mayor correlación absoluta, destacando tanto las relaciones positivas (factores de riesgo) como negativas (factores protectores) con la condición diabética, proporcionando una guía valiosa para la interpretación clínica de los resultados del modelado.</p>
+<p>Para determinar qué variables presentan asociación lineal más fuerte con la condición de diabetes/prediabetes, se analizaron las correlaciones específicas con la variable objetivo <code class="docutils literal notranslate"><span class="pre">Diabetes_binary</span></code>. Este análisis permite priorizar los factores de riesgo más influyentes y comprender qué indicadores de salud podrían tener mayor poder predictivo en los modelos. La visualización presenta las 10 variables con mayor correlación absoluta, destacando tanto las relaciones positivas (factores de riesgo) como negativas (factores protectores) con la condición diabética, proporcionando una guía valiosa para la interpretación clínica de los resultados del modelado.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">target_corr</span> <span class="o">=</span> <span class="n">corr_matrix</span><span class="p">[</span><span class="s1">&#39;Diabetes_binary&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Diabetes_binary&#39;</span><span class="p">)</span>
@@ -1607,8 +1619,8 @@ dtype: float64
 </ul>
 <p><strong>Dominan variables clínicas objetivas</strong> (HighBP, BMI, HighChol) sobre las subjetivas, con un <strong>gradiente claro en salud general</strong>: a mejor autopercepción, menor riesgo diabético. La combinación sugiere que tanto indicadores biomédicos como la autovaloración del paciente son relevantes para la predicción.</p>
 </section>
-<section id="multicolinealidad">
-<h2><strong>Multicolinealidad</strong><a class="headerlink" href="#multicolinealidad" title="Link to this heading">#</a></h2>
+<section id="analisis-de-multicolinealidad">
+<h2><strong>Análisis de Multicolinealidad</strong><a class="headerlink" href="#analisis-de-multicolinealidad" title="Link to this heading">#</a></h2>
 <p>A continuación hallamos el VIF el cual determina la fuerza de la correlación entre las variables independientes. Se pronostica tomando una variable y comparándola con todas las demás. La puntuación VIF de una variable independiente representa hasta qué punto la variable se explica por otras variables independientes.</p>
 <ul class="simple">
 <li><p>Un valor <code class="docutils literal notranslate"><span class="pre">VIF</span> <span class="pre">de</span> <span class="pre">1</span></code>: Sin multicolinealidad (variable perfectamente independiente).</p></li>
@@ -1878,7 +1890,7 @@ Round 2: Eliminando &#39;BMI&#39; con VIF = 20.93
 </div>
 </div>
 </div>
-<p><strong>Para Modelos Lineales (Logistic Regression, SVM Linear)</strong></p>
+<p><strong>Para Modelos Lineales (Logistic Regression, SVM)</strong></p>
 <ul class="simple">
 <li><p><strong>Beneficio crítico</strong>: Coeficientes estables e interpretables.</p></li>
 <li><p><strong>Reducción de varianza</strong> en las estimaciones.</p></li>
@@ -1978,15 +1990,13 @@ El proceso asegura que las <strong>comparaciones entre modelos</strong> sean jus
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-bivariado"><strong>Análisis Bivariado</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-binarias-vs-diabetes"><strong>Variables Binarias vs Diabetes</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-categoricas-vs-diabetes"><strong>Variables Categóricas vs Diabetes</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-numericas-vs-diabetes"><strong>Variables Númericas vs Diabetes</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-tendencia-por-categorizacion-para-variables-numericas"><strong>Análisis de Tendencia por Categorización para Variables Numéricas</strong></a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-numericas-vs-diabetes"><strong>Variables Númericas vs Diabetes</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-tendencia-por-categorizacion-para-variables-numericas"><strong>Análisis de Tendencia por Categorización para Variables Numéricas</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-correlaciones-entre-variables-predictoras"><strong>Análisis de Correlaciones entre Variables Predictoras</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-correlaciones-con-la-variable-objetivo"><strong>Análisis de Correlaciones con la Variable Objetivo</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multicolinealidad"><strong>Multicolinealidad</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-multicolinealidad"><strong>Análisis de Multicolinealidad</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tratamiento-de-multicolinealidad"><strong>Tratamiento de Multicolinealidad</strong></a></li>
 </ul>
 </li>
