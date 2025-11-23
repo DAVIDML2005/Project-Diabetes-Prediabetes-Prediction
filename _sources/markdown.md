@@ -2,7 +2,7 @@
 
 ## **1. Logro de los Objetivos Propuestos**
 
-El presente proyecto ha cumplido satisfactoriamente con todos los objetivos planteados inicialmente, demostrando la viabilidad de utilizar algoritmos de machine learning para la predicción temprana de diabetes y prediabetes. A través de un proceso sistemático que incluyó desde el análisis exploratorio hasta la interpretación avanzada de modelos con **12 algoritmos diferentes**, se ha desarrollado un framework robusto capaz de identificar pacientes con alto riesgo metabólico con métricas competitivas.
+El presente proyecto ha cumplido satisfactoriamente con todos los objetivos planteados inicialmente, demostrando la viabilidad de utilizar algoritmos de machine learning para la predicción temprana de diabetes y prediabetes. A través de un proceso sistemático que incluyó desde el análisis exploratorio hasta la interpretación avanzada de los modelos. Por tanto, se ha desarrollado un framework robusto capaz de identificar pacientes con alto riesgo metabólico con métricas competitivas.
 
 ## **2. Hallazgos Clínicos y Epidemiológicos Relevantes**
 
@@ -10,13 +10,13 @@ El análisis exploratorio y de importancia de variables reveló patrones epidemi
 
 - **Perfil de riesgo identificado**: Los pacientes con mayor probabilidad de diabetes presentan **edad avanzada** (categorías cat_Age_10 - cat_Age_13), **consumo excesivo de alcohol** (bin_HvyAlcoholConsump), **hipertensión y colesterol alto** (bin_HighBP, bin_HighChol) y **condiciones de salud general deficiente** (cat_GenHlth_4, cat_GenHlth_5).
 
-- **Variables críticas identificadas**: Las **variables de salud general autopercibida** emergieron como los predictores más potentes en modelos lineales, mientras que **indicadores médicos directos** (HighBP, HighChol) dominaron en modelos basados en árboles.
+- **Variables críticas identificadas**: Las **variables de salud general autopercibida** emergieron como los predictores más potentes acompañado de **indicadores médicos directos** (HighBP, HighChol)..
 
 - **Factores protectores consistentes**: La **ausencia de consumo excesivo de alcohol** y la **pertenencia a grupos de edad media** se identificaron como factores protectores clave en múltiples modelos.
 
 ## **3. Análisis Comparativo de Técnicas de Balanceo por Modelo**
 
-El análisis exhaustivo de las diferentes técnicas de balanceo reveló patrones significativos en el rendimiento de los **12 modelos evaluados**:
+El análisis exhaustivo de las diferentes técnicas de balanceo reveló patrones significativos en el rendimiento de los modelos evaluados:
 
 ### **Mejor Técnica de Balanceo por Familia de Modelos**
 
@@ -24,14 +24,13 @@ El análisis exhaustivo de las diferentes técnicas de balanceo reveló patrones
 - **Class Weight ('balanced')** - Óptimo para regresión logística y SVM.
 - **SMOTE** - Alternativa competitiva con mejor balance general.
 
-#### **Modelos Basados en Árboles (XGBoost, Random Forest, Decision Tree, Gradient Boosting, CatBoost):**
+#### **Modelos Basados en Árboles (XGBoost, Random Forest, Decision Tree, CatBoost):**
 - **scale_pos_weight (XGBoost)** - Máximo rendimiento predictivo.
 - **Class Weight ('balanced')** - Excelente para Random Forest y Decision Tree.
-- **SMOTE/ADASYN** - Efectivos para ensembles complejos.
 
 #### **Modelos Probabilísticos (GaussianNB, BernoulliNB, MultinomialNB):**
-- **ADASYN** - Superior para toda la familia Naive Bayes.
-- **SMOTE** - Alternativa sólida con mejor estabilidad.
+- **SMOTE** - Superior para toda la familia Naive Bayes.
+- **ADASYN** - Alternativa sólida con buena estabilidad.
 
 #### **Modelos de Instancia (KNN):**
 - **SMOTE** - Mejor rendimiento a pesar de limitaciones temporales.
@@ -46,57 +45,80 @@ El análisis exhaustivo de las diferentes técnicas de balanceo reveló patrones
 
 - **Sin Balanceo**: Produjo **accuracy inflado artificialmente** con recall muy bajo, confirmando la necesidad crítica de técnicas de balanceo.
 
-## **4. Desempeño Comparativo de los 12 Modelos**
+## **4. Desempeño Comparativo de los Modelos**
 
 ### **Jerarquía de Rendimiento por Métrica Clave**
 
 #### **AUC-ROC (Capacidad Discriminativa)**
-1. XGBoost (scale_pos_weight) - 0.811668.
-2. Logistic Regression L1 (Class Weight) - 0.808035.
-3. Logistic Regression L2 (Class Weight) - 0.807979.
-4. Random Forest (Class Weight) - 0.807615.
-5. SVM (Class Weight) - 0.806949.
-6. CatBoost (SMOTE) - 0.796070.
-7. Gradient Boosting (SMOTE) - 0.795424.
-8. Decision Tree (Class Weight) - 0.794252.
-9. BernoulliNB (ADASYN) - 0.790146.
-10. MultinomialNB (ADASYN) - 0.778285.
-11. GaussianNB (SMOTE) - 0.756105.
-12. KNN (SMOTE) - 0.736694.
+1. XGBoost (scale_pos_weight) - 0.825904.
+2. Random Forest (Class Weight) - 0.822041.
+3. Logistic Regression L2 (Class Weight) - 0.819243.
+4. Logistic Regression L1 (Class Weight) - 0.819240.
+5. Decision Tree (Class Weight) - 0.809360.
+6. SVM (Class Weight) - 0.819107.
+7. GaussianNB (SMOTE) - 0.789150.
+8. MultinomialNB (ADASYN) - 0.787713.
+9. CatBoost (SMOTE) - 0.781989.
+10. BernoulliNB (SMOTE) - 0.778384.
+11. KNN (SMOTE) - 0.755207.
 
 #### **F1-Score (Balance Precision-Recall)**
-1. Random Forest (SMOTE) - 0.435063.
-2. Gradient Boosting (SMOTE) - 0.428557.
-3. Logistic Regression L2 (SMOTE) - 0.427553.
-4. SVM (SMOTE) - 0.427481.
-5. Logistic Regression L1 (Class Weight) - 0.426976.
-6. XGBoost (scale_pos_weight) - 0.425763.
-7. BernoulliNB (SMOTE) - 0.421585.
-8. Decision Tree (SMOTE) - 0.416381.
-9. MultinomialNB (SMOTE) - 0.407390.
-10. KNN (SMOTE) - 0.375550.
-11. GaussianNB (SMOTE) - 0.344885.
-12. CatBoost (SMOTE) - 0.271382.
+1. Random Forest (Class Weight) - 0.443151.
+2. XGBoost (scale_pos_weight) - 0.441886.
+3. Logistic Regression L1 (SMOTE) - 0.440772.
+4. Logistic Regression L2 (SMOTE) - 0.440770.
+5. SVM (ADASYN) - 0.438498.
+6. Decision Tree (Class Weight) - 0.427827.
+7. GaussianNB (SMOTE) - 0.427725.
+8. MultinomialNB (SMOTE) - 0.411253.
+9. CatBoost (SMOTE) - 0.410072.
+10. BernoulliNB (SMOTE) - 0.408240.
+11. KNN (SMOTE) - 0.388172.
+
+#### **Sensibilidad (Recall - Detección de Casos Positivos)**
+1. XGBoost (scale_pos_weight) - 0.792757.
+2. SVM (Class Weight) - 0.790494.
+3. Logistic Regression L1 (ADASYN) - 0.780308.
+4. Logistic Regression L2 (ADASYN) - 0.778752.
+5. Random Forest (Class Weight) - 0.764747.
+6. Decision Tree (Class Weight) - 0.761211.
+7. GaussianNB (ADASYN) - 0.749328.
+8. BernoulliNB (ADASYN) - 0.726977.
+9. MultinomialNB (ADASYN) - 0.718206.
+10. KNN (ADASYN) - 0.702362.
+11. CatBoost (SMOTE) - 0.694582.
+
+#### **Precision (Exactitud en Predicciones Positivas)**
+1. Random Forest (Class Weight) - 0.311963.
+2. Logistic Regression L2 (SMOTE) - 0.310735.
+3. Logistic Regression L1 (SMOTE) - 0.310335.
+4. XGBoost (scale_pos_weight) - 0.306313.
+5. SVM (ADASYN) - 0.305689.
+6. GaussianNB (SMOTE) - 0.304195.
+7. Decision Tree (Class Weight) - 0.297523.
+8. MultinomialNB (SMOTE) - 0.294308.
+9. CatBoost (SMOTE) - 0.290911.
+10. BernoulliNB (SMOTE) - 0.287061.
+11. KNN (SMOTE) - 0.270210.
 
 ### **Análisis Detallado por Familia de Modelos**
 
 #### **Modelos Lineales:**
-- **Logistic Regression L1 vs L2**: Diferencias mínimas, L2 con ligera ventaja en interpretabilidad.
+- **Logistic Regression L1 vs L2**: Diferencias mínimas, L1 con ligera ventaja.
 - **SVM**: **Excelente equilibrio** entre rendimiento y velocidad.
 
 #### **Modelos Basados en Árboles:**
-- **XGBoost**: **Máximo poder predictivo** con buen recall.
+- **XGBoost**: **Máximo poder predictivo** con Máximo recall.
 - **Random Forest**: **Mejor F1-Score** indicando balance óptimo.
-- **Gradient Boosting**: Rendimiento sólido y consistente.
 - **Decision Tree**: Buen recall con simplicidad interpretativa.
 
 #### **Modelos Probabilísticos:**
-- **BernoulliNB**: **Mejor rendimiento general** en la familia.
+- **GaussianNB**: **Mejor rendimiento general** en la familia.
 - **MultinomialNB**: **Rendimiento sólido** y velocidad excelente.
-- **GaussianNB**: **Especialista en recall** máximo.
+- **BernoulliNB**: **Buen recall** máximo.
 
 #### **KNN:**
-- **Limitación crítica** en tiempo lo hace impracticable
+- **Limitación crítica** en tiempo lo hace impracticable.
 
 ## **5. Análisis del Caso del Paciente 30: Explicación de las Discrepancias**
 
@@ -106,12 +128,12 @@ Mujer mayor con hipertensión, colesterol alto y dificultad para caminar, pero c
 ### **Análisis de las Discrepancias entre Técnicas de Balanceo**
 
 #### **Benchmark (Sin Balanceo):**
-- **9 modelos acertaron, 3 fallaron**
+- **11 modelos acertaron, 1 falló**
 - **Patrón**: Modelos conservadores que priorizan especificidad.
 - **Razón**: Sin balanceo, los modelos aprenden a ser "cautelosos" y predecir predominantemente la clase mayoritaria (no diabetes).
-- **Naive Bayes falló** por su tendencia natural a sobreestimar probabilidades en clases minoritarias.
+- **GaussianNB falló** por su tendencia natural a sobreestimar probabilidades en clases minoritarias.
 
-#### **SMOTE/ADASYN:**
+#### **SMOTE:**
 - **Solo 2 modelos acertaron (XGBoost, CatBoost)**
 - **Cambio radical**: La mayoría de modelos se volvieron "sensibles".
 - **Explicación**: Las técnicas de sobremuestreo crean instancias sintéticas que modifican los límites de decisión.
@@ -140,13 +162,11 @@ El paciente 30 representa exactamente el tipo de caso donde el criterio clínico
 
 2. **Modelos Basados en Árboles**: Prefieren **class weight/scale_pos_weight**, logrando **máximo rendimiento predictivo**.
 
-3. **Modelos Probabilísticos**: **ADASYN** optimiza su rendimiento, especialmente en BernoulliNB y MultinomialNB.
+3. **Modelos Probabilísticos**: **SMOTE** optimiza su rendimiento, especialmente en BernoulliNB y GaussianNB.
 
 4. **Modelos de Instancia**: **KNN** muestra limitaciones prácticas severas.
 
 ### **Trade-offs Identificados:**
-
-- **Precisión vs Recall**: Claramente demostrado en GaussianNB (alta recall, baja precisión) vs XGBoost (balance óptimo).
 
 - **Rendimiento vs Velocidad**: Logistic Regression ofrece el mejor balance, mientras XGBoost maximiza rendimiento con costo computacional moderado.
 
@@ -155,25 +175,25 @@ El paciente 30 representa exactamente el tipo de caso donde el criterio clínico
 ## **7. Estrategias de Selección por Caso de Uso**
 
 ### **Para Screening Masivo (Maximizar Recall):**
-1. **GaussianNB con ADASYN** (Recall: 85.91%).
-2. **XGBoost con scale_pos_weight** (Recall: 78.27%).
-3. **Decision Tree con Class Weight** (Recall: 78.04%).
+1. **XGBoost (scale_pos_weight)** (Recall: 79.2%).
+2. **SVM (Class Weight)** (Recall: 79.0%).
+3. **Logistic Regression L1 (ADASYN)** (Recall: 78.0%).
 
 ### **Para Diagnóstico Confirmatorio (Maximizar Precisión):**
-1. **CatBoost con ADASYN** (Precision: 44.92%).
-1. **XGBoost con ADASYN** (Precision: 44.32%).
-3. **Random Forest con SMOTE** (Precision: 33.80%)
+1. **Random Forest (Class Weight)** (Precision: 31.1%).
+2. **Logistic Regression L2 (SMOTE)** (Precision: 31.0%).
+3. **Logistic Regression L1 (SMOTE)** (Precision: 31.0%).
 
 ### **Para Balance Óptimo General:**
-1. **XGBoost con scale_pos_weight** (AUC: 0.811668).
-2. **Random Forest con SMOTE** (F1-Score: 0.435063).
+1. **XGBoost con scale_pos_weight** (AUC: 0.825904).
+2. **Random Forest con Class Weight** (F1-Score: 0.443151).
 3. **SVM con Class Weight** (Velocidad + Rendimiento).
 
 ## **8. Impacto en Práctica Clínica y Salud Pública**
 
 ### **Implicaciones Prácticas**
 
-1. **Estratificación de Riesgo Mejorada**: Los 12 modelos permiten seleccionar según necesidad específica.
+1. **Estratificación de Riesgo Mejorada**: Los modelos permiten seleccionar según necesidad específica.
 
 2. **Optimización de Recursos**: Asignación más eficiente basada en el balance precisión-recall requerido.
 
@@ -217,21 +237,17 @@ El paciente 30 representa exactamente el tipo de caso donde el criterio clínico
 
 3. **Trade-offs inevitables**: La elección del modelo debe alinearse con los objetivos clínicos específicos.
 
-4. **Los 12 modelos evaluados ofrecen ventajas complementarias** para diferentes escenarios.
+4. **Los modelos evaluados ofrecen ventajas complementarias** para diferentes escenarios.
 
 ### **Recomendación Final por Escenario**
 
 **Para la mayoría de aplicaciones clínicas** en predicción de diabetes, se recomienda la **implementación de XGBoost con scale_pos_weight** como solución óptima que ofrece:
-- **Máximo AUC-ROC** (0.811668).
+- **Máximo AUC-ROC** (0.825904).
 - **Recall excelente** (78.27%).
 
 **Para implementaciones con restricciones computacionales**, **SVM con Class Weight** constituye la alternativa ideal:
-- **Alto AUC-ROC** (0.806949).
-- **Excelente velocidad** (0.066571s).
-- **Balance métrico sólido** (F1: 0.424811).
+- **Alto AUC-ROC** (0.819107).
+- **Excelente velocidad** (0.036883s).
+- **Balance métrico sólido** (F1: 0.435101).
 
-**Para screening masivo donde el recall es crítico**, **GaussianNB con ADASYN** ofrece:
-- **Máximo recall** (85.37%).
-- **Detección comprehensiva** de casos positivos.
-
-Este trabajo establece un precedente metodológico para la selección sistemática de técnicas de balanceo y modelos en problemas de salud pública con desbalance de clases, proporcionando un framework replicable para futuras investigaciones en predicción de enfermedades crónicas. La evaluación de **12 modelos diferentes** permite una comprensión integral del ecosistema de algoritmos disponibles y sus aplicaciones específicas en el contexto clínico.
+Este trabajo establece un precedente metodológico para la selección sistemática de técnicas de balanceo y modelos en problemas de salud pública con desbalance de clases, proporcionando un framework replicable para futuras investigaciones en predicción de enfermedades crónicas. La evaluación de los diversos modelos permite una comprensión integral del ecosistema de algoritmos disponibles y sus aplicaciones específicas en el contexto clínico.

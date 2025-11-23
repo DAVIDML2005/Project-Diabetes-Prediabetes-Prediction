@@ -188,6 +188,7 @@
 <li class="toctree-l1"><a class="reference internal" href="modelado_adasyn.html"><strong>Modelado Optimizado (ADASYN)</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="modelado_w.html"><strong>Modelado Optimizado (class weight)</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="markdown.html"><strong>Conclusiones y Hallazgos Principales en los Modelados</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelo_origin.html"><strong>Ensemble con Simulated Annealing para Predicción de Diabetes</strong></a></li>
 </ul>
 
     </div>
@@ -405,10 +406,13 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-tendencia-por-categorizacion-para-variables-numericas"><strong>Análisis de Tendencia por Categorización para Variables Numéricas</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-correlaciones-entre-variables-predictoras"><strong>Análisis de Correlaciones entre Variables Predictoras</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-multivariado-de-correlaciones"><strong>Análisis Multivariado de Correlaciones</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-correlaciones-con-la-variable-objetivo"><strong>Análisis de Correlaciones con la Variable Objetivo</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-multicolinealidad"><strong>Análisis de Multicolinealidad</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tratamiento-de-multicolinealidad"><strong>Tratamiento de Multicolinealidad</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-del-proceso-de-eliminacion"><strong>Análisis del Proceso de Eliminación</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-estrategica-preservacion-selectiva"><strong>Decisión Estratégica: Preservación Selectiva</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#impacto-de-la-reduccion-de-multicolinealidad"><strong>Impacto de la Reducción de Multicolinealidad</strong></a></li>
 </ul>
 </li>
 </ul>
@@ -441,7 +445,6 @@ document.write(`
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats.mstats</span><span class="w"> </span><span class="kn">import</span> <span class="n">winsorize</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.outliers_influence</span><span class="w"> </span><span class="kn">import</span> <span class="n">variance_inflation_factor</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">OneHotEncoder</span><span class="p">,</span> <span class="n">StandardScaler</span>
 </pre></div>
 </div>
 </div>
@@ -1343,8 +1346,8 @@ Coeficiente de Variación:  21.39 %
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/9b81cd996f985a4af56cd3173f9a78915d5feadfb765f070e2025e4b37dfcaea.png" src="_images/9b81cd996f985a4af56cd3173f9a78915d5feadfb765f070e2025e4b37dfcaea.png" />
-<img alt="_images/4dbca0e602e0cf194c7c1c3ee33dd65610426cd6dfb6f02b49fcf94b92691b83.png" src="_images/4dbca0e602e0cf194c7c1c3ee33dd65610426cd6dfb6f02b49fcf94b92691b83.png" />
+<img alt="_images/9749b3f95ff63948ce95bae851efbf4b4cf741fb67f5e44ff91628818fba9574.png" src="_images/9749b3f95ff63948ce95bae851efbf4b4cf741fb67f5e44ff91628818fba9574.png" />
+<img alt="_images/db0dfbabd25d9a82e300ff738dc9f24c8dc9b3ecab2c96ae3800b51c672d96b1.png" src="_images/db0dfbabd25d9a82e300ff738dc9f24c8dc9b3ecab2c96ae3800b51c672d96b1.png" />
 <img alt="_images/cb9f70b678b55349cd218cb3ec683a4ce20890f26d71bfe93706babb0568beac.png" src="_images/cb9f70b678b55349cd218cb3ec683a4ce20890f26d71bfe93706babb0568beac.png" />
 </div>
 </div>
@@ -1480,87 +1483,64 @@ Coeficiente de Variación:  21.39 %
 <p>En conjunto, los boxplots muestran un patrón coherente: la diabetes se asocia con un <strong>deterioro de la salud general</strong> y <strong>mayor peso corporal</strong>.</p>
 </section>
 </section>
-<section id="analisis-de-correlaciones-entre-variables-predictoras">
-<h2><strong>Análisis de Correlaciones entre Variables Predictoras</strong><a class="headerlink" href="#analisis-de-correlaciones-entre-variables-predictoras" title="Link to this heading">#</a></h2>
-<p>Para identificar relaciones lineales potenciales entre las variables del dataset y detectar posibles casos de multicolinealidad que podrían afectar el desempeño de modelos sensibles como la Regresión Logística, se realizó un análisis de correlación exhaustivo. Dado que el dataset contiene variables categóricas ordinales y nominales, estas fueron previamente codificadas mediante <code class="docutils literal notranslate"><span class="pre">One-Hot</span> <span class="pre">Encoding</span></code> para permitir el cálculo de coeficientes de correlación con las variables numéricas y binarias.</p>
-<p><strong>Consideración metodológica:</strong> Si bien inicialmente se contempló la visualización mediante heatmap, esta representación gráfica resultó impractical debido a la dimensionalidad resultante del proceso de codificación (aproximadamente 50 variables), donde la densidad de información impedía una interpretación visual efectiva incluso con ajustes en el tamaño del gráfico.</p>
-<p>Como alternativa, se estableció un umbral de |r| &gt; 0.30 para filtrar y presentar únicamente las correlaciones moderadas a fuertes, proporcionando información concisa sobre las interdependencias más significativas entre los indicadores de salud relacionados con la diabetes.</p>
+<section id="analisis-multivariado-de-correlaciones">
+<h2><strong>Análisis Multivariado de Correlaciones</strong><a class="headerlink" href="#analisis-multivariado-de-correlaciones" title="Link to this heading">#</a></h2>
+<p>Para identificar patrones de asociación lineal entre las distintas variables contenidas en el conjunto de datos, se llevó a cabo un análisis de correlación exhaustivo que examinó sistemáticamente las relaciones por pares entre todos los indicadores disponibles. Este enfoque metodológico permitió cuantificar el grado y la dirección de las interdependencias existentes dentro del ecosistema de variables relacionadas con la diabetes.</p>
+<p><strong>Consideración metodológica y limitaciones de visualización:</strong> En la fase inicial del análisis, se contempló la implementación de representaciones gráficas convencionales para visualizar la matriz de correlaciones completa, específicamente mediante el uso de heatmaps o mapas de calor. Sin embargo, tras una evaluación detallada, esta aproximación demostró ser impractical debido a la alta dimensionalidad del dataset. La significativa cantidad de variables resultó en una densidad de información excesiva que, incluso mediante ajustes iterativos en las dimensiones del gráfico, la escala de representación y los parámetros de visualización, generaba una superposición de elementos que impedía una interpretación visual efectiva y una legibilidad adecuada de las etiquetas y valores numéricos.</p>
+<p><strong>Estrategia analítica implementada:</strong> Como alternativa metodológica para superar estas limitaciones de visualización y priorizar la claridad interpretativa, se estableció un criterio de filtrado basado en la magnitud del coeficiente de correlación. Se definió un umbral de |r| &gt; 0.30 para seleccionar, filtrar y presentar exclusivamente aquellas correlaciones que pueden considerarse moderadas a fuertes en términos de su intensidad.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">encoder_heatmap</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
-<span class="n">encoded_heatmap</span> <span class="o">=</span> <span class="n">encoder_heatmap</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">categoricas</span><span class="p">])</span>
-<span class="n">df_heatmap</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="n">encoded_heatmap</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span>
-    <span class="n">columns</span><span class="o">=</span><span class="n">encoder_heatmap</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">(</span><span class="n">categoricas</span><span class="p">),</span>
-    <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span>
-<span class="p">)</span>
-
-<span class="n">df_heatmap</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">[</span><span class="n">numericas</span> <span class="o">+</span> <span class="n">binarias</span><span class="p">],</span> <span class="n">df_heatmap</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_heatmap</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">numericas</span> <span class="o">+</span> <span class="n">binarias</span> <span class="o">+</span> <span class="n">categoricas</span><span class="p">]</span>
 
 <span class="n">corr_matrix</span> <span class="o">=</span> <span class="n">df_heatmap</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
 
 <span class="n">corr</span> <span class="o">=</span> <span class="n">corr_matrix</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
 <span class="n">corr</span> <span class="o">=</span> <span class="n">corr</span><span class="p">[</span><span class="n">corr</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">!=</span> <span class="n">corr</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span>
-<span class="n">strong_corr</span> <span class="o">=</span> <span class="n">corr</span><span class="p">[(</span><span class="n">corr</span> <span class="o">&gt;</span> <span class="mf">0.30</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">corr</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">0.30</span><span class="p">)]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">seen_pairs</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">unique_corr</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">pair</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">corr</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">sorted_pair</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">pair</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">sorted_pair</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen_pairs</span><span class="p">:</span>
+        <span class="n">seen_pairs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">sorted_pair</span><span class="p">)</span>
+        <span class="n">unique_corr</span><span class="p">[</span><span class="n">pair</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+<span class="n">unique_corr_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">unique_corr</span><span class="p">)</span>
+<span class="n">strong_corr</span> <span class="o">=</span> <span class="n">unique_corr_series</span><span class="p">[(</span><span class="n">unique_corr_series</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.30</span><span class="p">)]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span>
+    <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Correlaciones con |r| &gt; 0.30:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-------------------------------------&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">strong_corr</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">pair</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">strong_corr</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pair</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlaciones con |r| &gt; 0.30:
 -------------------------------------
-Education_6  Education_5   -0.528176
-Education_5  Education_6   -0.528176
-PhysHlth     GenHlth_5      0.494477
-GenHlth_5    PhysHlth       0.494477
-Education_4  Education_6   -0.490926
-Education_6  Education_4   -0.490926
-GenHlth_3    GenHlth_2     -0.479548
-GenHlth_2    GenHlth_3     -0.479548
-PhysHlth     DiffWalk       0.478417
-DiffWalk     PhysHlth       0.478417
-Education_6  Income_8       0.359535
-Income_8     Education_6    0.359535
-PhysHlth     MentHlth       0.353619
-MentHlth     PhysHlth       0.353619
-Education_5  Education_4   -0.353592
-Education_4  Education_5   -0.353592
-GenHlth_5    DiffWalk       0.347799
-DiffWalk     GenHlth_5      0.347799
-GenHlth_1    GenHlth_2     -0.343009
-GenHlth_2    GenHlth_1     -0.343009
-Income_7     Income_8      -0.337142
-Income_8     Income_7      -0.337142
-PhysHlth     GenHlth_4      0.309195
-GenHlth_4    PhysHlth       0.309195
-Income_6     Income_8      -0.304852
-Income_8     Income_6      -0.304852
-GenHlth_3    GenHlth_1     -0.303918
-GenHlth_1    GenHlth_3     -0.303918
-dtype: float64
+(&#39;PhysHlth&#39;, &#39;GenHlth&#39;) → 0.524364
+(&#39;PhysHlth&#39;, &#39;DiffWalk&#39;) → 0.478417
+(&#39;DiffWalk&#39;, &#39;GenHlth&#39;) → 0.456920
+(&#39;Education&#39;, &#39;Income&#39;) → 0.449106
+(&#39;GenHlth&#39;, &#39;Income&#39;) → -0.370014
+(&#39;MentHlth&#39;, &#39;PhysHlth&#39;) → 0.353619
+(&#39;HighBP&#39;, &#39;Age&#39;) → 0.344452
+(&#39;DiffWalk&#39;, &#39;Income&#39;) → -0.320124
+(&#39;MentHlth&#39;, &#39;GenHlth&#39;) → 0.301674
+(&#39;HighBP&#39;, &#39;GenHlth&#39;) → 0.300530
 </pre></div>
 </div>
 </div>
 </div>
-<p><strong>Relaciones Salud Física-Funcional (Correlaciones &gt; 0.47)</strong></p>
 <ul class="simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">PhysHlth</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">GenHlth_5</span></code> (r = 0.49)</strong>: Los días de salud física deficiente se asocian fuertemente con una percepción de salud “mala”, sugiriendo que el deterioro físico tangible impacta directamente la autovaloración general de salud.</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">PhysHlth</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">DiffWalk</span></code> (r = 0.48)</strong>: Existe una relación importante entre los días de salud física deficiente y las dificultades para caminar, indicando que los problemas de movilidad están vinculados a episodios de enfermedad o lesión física.</p></li>
-</ul>
-<p><strong>Determinantes Socioeconómicos (Correlación &gt; 0.35)</strong></p>
-<ul class="simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Education_6</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">Income_8</span></code> (r = 0.36)</strong>: Los graduados universitarios (Education_6) tienden a pertenecer al grupo de mayores ingresos (&gt;$75,000), confirmando la conocida relación entre educación superior y nivel socioeconómico.</p></li>
-</ul>
-<p><strong>Salud Física-Mental (Correlación &gt; 0.35)</strong></p>
-<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">PhysHlth</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">GenHlth</span></code> (r = 0.52)</strong>: Los días de salud física deficiente se asocian fuertemente con una percepción de salud precaria, sugiriendo que el deterioro físico tangible impacta directamente la autovaloración general de salud.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">PhysHlth</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">DiffWalk</span></code> (r = 0.47)</strong>: Existe una relación importante entre los días de salud física deficiente y las dificultades para caminar, indicando que los problemas de movilidad están vinculados a episodios de enfermedad o lesión física.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">GenHlth</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">DiffWalk</span></code> (r = 0.45)</strong>: Las personas que reportan salud deficiente presentan mayores dificultades para caminar, sugiriendo que la percepción de salud deteriorada está asociada a limitaciones funcionales.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">Education</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">Income</span></code> (r = 0.44)</strong>: Los graduados universitarios tienden a pertenecer a grupos de mayores ingresos, confirmando la conocida relación entre educación superior y nivel socioeconómico.</p></li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">PhysHlth</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">MentHlth</span></code> (r = 0.35)</strong>: Los días de salud física y mental deficiente muestran una covariación moderada, respaldando la conexión mente-cuerpo donde el malestar físico coexiste con afectación psicológica.</p></li>
-</ul>
-<p><strong>Salud General-Funcional (Correlación &gt; 0.34)</strong></p>
-<ul class="simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">GenHlth_5</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">DiffWalk</span></code> (r = 0.35)</strong>: Las personas que reportan salud “mala” presentan mayores dificultades para caminar, sugiriendo que la percepción de salud deteriorada está asociada a limitaciones funcionales.</p></li>
 </ul>
 <p><strong>Hallazgo Principal</strong>: Las correlaciones más fuertes involucran variables de salud física y funcional, mientras que las relaciones socioeconómicas, aunque presentes, muestran magnitudes moderadas.</p>
 </section>
@@ -1598,24 +1578,18 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/27e9127adca376655f7c8b6b22e174f9b74282f58edbfdd0d822e801878eec6b.png" src="_images/27e9127adca376655f7c8b6b22e174f9b74282f58edbfdd0d822e801878eec6b.png" />
+<img alt="_images/e3b5e6645409b5a94efa126b1c5f2efb93f286dfdc37d92d87dc2730b695bed1.png" src="_images/e3b5e6645409b5a94efa126b1c5f2efb93f286dfdc37d92d87dc2730b695bed1.png" />
 </div>
 </div>
 <p><strong>Factores de Riesgo Positivos (Correlación &gt; 0)</strong></p>
 <ul class="simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">HighBP</span></code> (0.26)</strong>: La <strong>presión arterial alta</strong> muestra la correlación más fuerte, confirmando su papel como principal factor de riesgo cardiovascular asociado a diabetes.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">GenHlth</span></code> (0.29)</strong>: Una negativa percepción de salud se traduce en un factor de riesgo para Diabetes.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">HighBP</span></code> (0.26)</strong>: La <strong>presión arterial alta</strong> muestra correlación fuerte, confirmando su papel como principal factor de riesgo cardiovascular asociado a diabetes.</p></li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">BMI</span></code> (0.23)</strong>: El <strong>índice de masa corporal</strong> presenta alta asociación, respaldando la obesidad como determinante crítico en la fisiopatología diabética.</p></li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">DiffWalk</span></code> (0.22)</strong>: Las <strong>dificultades para caminar</strong> sugieren posibles complicaciones relacionadas con diabetes avanzada.</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">HighChol</span></code> (0.20)</strong>: El <strong>colesterol elevado</strong> aparece como cuarto factor, reflejando la comorbilidad entre dislipidemia y resistencia a la insulina.</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">GenHlth_4</span></code> (0.19)</strong>: La percepción de salud <strong>“regular”</strong> se asocia significativamente, indicando que los pacientes reconocen su deterioro de salud.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">HighChol</span></code> (0.20)</strong>: El <strong>colesterol elevado</strong> aparece como quinto factor, reflejando la comorbilidad entre dislipidemia y resistencia a la insulina.</p></li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">HeartDiseaseorAttack</span></code> (0.18)</strong>: La <strong>enfermedad cardiovascular</strong> confirma el síndrome metabólico como entidad interconectada.</p></li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">PhysHlth</span></code> (0.17)</strong>: Los <strong>días de salud física deficiente</strong> reflejan el impacto en la calidad de vida.</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">GenHlth_5</span></code> (0.15)</strong>: La salud <strong>“mala”</strong> completa el espectro de autopercepción negativa.</p></li>
-</ul>
-<p><strong>Factores Protectores (Correlación &lt; 0)</strong></p>
-<ul class="simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">GenHlth_1</span></code> (-0.15)</strong>: La salud <strong>“excelente”</strong> muestra el efecto protector esperado.</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">GenHlth_2</span></code> (-0.14)</strong>: La salud <strong>“muy buena”</strong> completa el gradiente de autopercepción positiva como factor protector.</p></li>
 </ul>
 <p><strong>Dominan variables clínicas objetivas</strong> (HighBP, BMI, HighChol) sobre las subjetivas, con un <strong>gradiente claro en salud general</strong>: a mejor autopercepción, menor riesgo diabético. La combinación sugiere que tanto indicadores biomédicos como la autovaloración del paciente son relevantes para la predicción.</p>
 </section>
@@ -1632,15 +1606,7 @@ dtype: float64
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">binarias</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;Diabetes_binary&quot;</span><span class="p">)</span>
 
-<span class="n">encoder_vif</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">)</span> 
-<span class="n">encoded_vif</span> <span class="o">=</span> <span class="n">encoder_vif</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">categoricas</span><span class="p">])</span>
-<span class="n">df_vif</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="n">encoded_vif</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span>
-    <span class="n">columns</span><span class="o">=</span><span class="n">encoder_vif</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">(</span><span class="n">categoricas</span><span class="p">),</span>
-    <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span>
-<span class="p">)</span>
-
-<span class="n">df_vif</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">[</span><span class="n">numericas</span><span class="p">],</span> <span class="n">df_vif</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_vif</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">numericas</span> <span class="o">+</span> <span class="n">binarias</span> <span class="o">+</span> <span class="n">categoricas</span><span class="p">]</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">VIF_calculation</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
     <span class="n">VIF</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
@@ -1680,179 +1646,113 @@ dtype: float64
   <tbody>
     <tr>
       <th>0</th>
-      <td>Education_6</td>
-      <td>37.766698</td>
+      <td>Education</td>
+      <td>29.650791</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>BMI</td>
-      <td>25.092156</td>
+      <td>CholCheck</td>
+      <td>23.366858</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Education_5</td>
-      <td>24.508163</td>
+      <td>BMI</td>
+      <td>20.978563</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Education_4</td>
-      <td>21.997500</td>
+      <td>AnyHealthcare</td>
+      <td>20.914769</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Income_8</td>
-      <td>11.648748</td>
+      <td>Income</td>
+      <td>14.170741</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Age_9</td>
-      <td>6.804281</td>
+      <td>GenHlth</td>
+      <td>10.866551</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>Age_10</td>
-      <td>6.626929</td>
+      <td>Age</td>
+      <td>9.884412</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>Age_8</td>
-      <td>6.388051</td>
+      <td>Veggies</td>
+      <td>5.828922</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>Income_7</td>
-      <td>5.871045</td>
+      <td>PhysActivity</td>
+      <td>4.645181</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>Age_7</td>
-      <td>5.597228</td>
+      <td>Fruits</td>
+      <td>3.032774</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>Age_11</td>
-      <td>5.107384</td>
+      <td>HighBP</td>
+      <td>2.305006</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>Income_6</td>
-      <td>5.019861</td>
+      <td>HighChol</td>
+      <td>2.029850</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>Age_6</td>
-      <td>4.474155</td>
+      <td>PhysHlth</td>
+      <td>2.001498</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>Education_3</td>
-      <td>4.059461</td>
+      <td>Smoker</td>
+      <td>1.933287</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>Age_13</td>
-      <td>4.047162</td>
+      <td>Sex</td>
+      <td>1.913032</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>Age_5</td>
-      <td>3.831986</td>
+      <td>DiffWalk</td>
+      <td>1.839295</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>Age_12</td>
-      <td>3.788158</td>
+      <td>MentHlth</td>
+      <td>1.463253</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>Income_5</td>
-      <td>3.787572</td>
+      <td>HeartDiseaseorAttack</td>
+      <td>1.290193</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>Age_4</td>
-      <td>3.413121</td>
+      <td>NoDocbcCost</td>
+      <td>1.217371</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>Income_4</td>
-      <td>3.120409</td>
+      <td>Stroke</td>
+      <td>1.126932</td>
     </tr>
     <tr>
       <th>20</th>
-      <td>GenHlth_2</td>
-      <td>3.030020</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>GenHlth_3</td>
-      <td>2.971585</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>Age_3</td>
-      <td>2.930956</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>Income_3</td>
-      <td>2.648598</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>Age_2</td>
-      <td>2.313271</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>Education_2</td>
-      <td>2.287940</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>GenHlth_4</td>
-      <td>2.257900</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>Income_2</td>
-      <td>2.199486</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>PhysHlth</td>
-      <td>2.091805</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>GenHlth_5</td>
-      <td>1.944095</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>MentHlth</td>
-      <td>1.446135</td>
+      <td>HvyAlcoholConsump</td>
+      <td>1.083625</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p><strong>Problema Crítico Detectado (VIF &gt; 10)</strong></p>
-<ul class="simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Education_6</span></code> (VIF = 37.77)</strong>, <strong><code class="docutils literal notranslate"><span class="pre">Education_5</span></code> (24.51)</strong>, <strong><code class="docutils literal notranslate"><span class="pre">Education_4</span></code> (22.00)</strong>: Las variables de educación superior presentan <strong>multicolinealidad extrema</strong>.</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">BMI</span></code> (VIF = 25.09)</strong>: Sorprendentemente, el índice de masa corporal muestra alta multicolinealidad, posiblemente por su correlación con otras variables de salud no incluidas en el análisis o por relaciones no lineales con variables categóricas.</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Income_8</span></code> (VIF = 11.65)</strong>: El nivel de ingresos más alto también presenta colinealidad significativa, probablemente relacionado con las variables educativas.</p></li>
-</ul>
-<p><strong>Problema Moderado (VIF 5-10)</strong></p>
-<ul class="simple">
-<li><p><strong>Variables de edad (<code class="docutils literal notranslate"><span class="pre">Age_7</span></code> a <code class="docutils literal notranslate"><span class="pre">Age_10</span></code>, VIF 5.60-6.80)</strong>: Las categorías de edad media y avanzada muestran dependencia moderada, esperable en variables ordinales codificadas.</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Income_7</span></code> (VIF = 5.87)</strong>: Ingresos altos mantienen colinealidad con otras variables socioeconómicas.</p></li>
-</ul>
-<p><strong>Situación Aceptable (VIF &lt; 5)</strong></p>
-<ul class="simple">
-<li><p><strong>Variables de salud (<code class="docutils literal notranslate"><span class="pre">GenHlth</span></code>, <code class="docutils literal notranslate"><span class="pre">PhysHlth</span></code>, <code class="docutils literal notranslate"><span class="pre">MentHlth</span></code>, VIF &lt; 3.0)</strong>: Presentan baja multicolinealidad, ideal para modelos lineales.</p></li>
-<li><p><strong>Variables demográficas restantes (VIF &lt; 4)</strong>: Niveles aceptables de independencia.</p></li>
-</ul>
 <section id="tratamiento-de-multicolinealidad">
 <h3><strong>Tratamiento de Multicolinealidad</strong><a class="headerlink" href="#tratamiento-de-multicolinealidad" title="Link to this heading">#</a></h3>
 <p>Procedemos a tratar la multicolinealidad mediante la eliminación iterativa de variables con Factor de Inflación de la Varianza (VIF) superior a 10. Este enfoque sistemático nos permite identificar y remover las variables que presentan alta correlación con otras variables predictoras, lo que podría distorsionar los coeficientes del modelo y afectar su interpretabilidad. El proceso se repite de forma iterativa hasta que todas las variables restantes muestran un VIF por debajo del umbral establecido, garantizando así la independencia entre los predictores y mejorando la estabilidad de las estimaciones del modelo.</p>
@@ -1882,19 +1782,52 @@ dtype: float64
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proceso iterativo de eliminación por VIF:
 -----------------------------------------
-Round 1: Eliminando &#39;Education_6&#39; con VIF = 37.77
-Round 2: Eliminando &#39;BMI&#39; con VIF = 20.93
+Round 1: Eliminando &#39;Education&#39; con VIF = 29.65
+Round 2: Eliminando &#39;CholCheck&#39; con VIF = 22.48
+Round 3: Eliminando &#39;AnyHealthcare&#39; con VIF = 18.35
+Round 4: Eliminando &#39;BMI&#39; con VIF = 16.48
 
 ¡Proceso completado! Todas las variables tienen VIF &lt; 10.
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="analisis-del-proceso-de-eliminacion">
+<h3><strong>Análisis del Proceso de Eliminación</strong><a class="headerlink" href="#analisis-del-proceso-de-eliminacion" title="Link to this heading">#</a></h3>
+<p>El proceso iterativo de VIF identificó y eliminó cuatro variables con alta multicolinealidad, siguiendo una secuencia que revela interesantes patrones en la estructura de los datos:</p>
+<p><strong>Jerarquía de Eliminación:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Education</strong> (VIF = 29.65) - Mayor redundancia informativa.</p></li>
+<li><p><strong>CholCheck</strong> (VIF = 22.48) - Alta redundancia .</p></li>
+<li><p><strong>AnyHealthcare</strong> (VIF = 18.35) - Redundancia significativa.</p></li>
+<li><p><strong>BMI</strong> (VIF = 16.48) - Redundancia moderada-alta.</p></li>
+</ol>
+</section>
+<section id="decision-estrategica-preservacion-selectiva">
+<h3><strong>Decisión Estratégica: Preservación Selectiva</strong><a class="headerlink" href="#decision-estrategica-preservacion-selectiva" title="Link to this heading">#</a></h3>
+<p>A pesar de los altos valores de VIF, se tomó la decisión consciente de preservar <strong>Education</strong> y <strong>BMI</strong> basándose en criterios sustantivos que trascienden los umbrales estadísticos:</p>
+<p><strong>Education:</strong></p>
+<ul class="simple">
+<li><p>Se encuentra entre las <strong>10 variables más correlacionadas</strong> con diabetes.</p></li>
+<li><p>Representa un <strong>determinante social fundamental</strong> de la salud.</p></li>
+<li><p>Su exclusión comprometería la validez del modelo.</p></li>
+</ul>
+<p><strong>BMI:</strong></p>
+<ul class="simple">
+<li><p>Se encuentra entre las <strong>10 variables más correlacionadas</strong> con diabetes.</p></li>
+<li><p><strong>Variable clínicamente irreductible</strong> en modelos de diabetes.</p></li>
+<li><p>Presenta <strong>evidencia sólida</strong> en literatura médica internacional.</p></li>
+<li><p>Factor de riesgo <strong>modificable</strong> con implicaciones prácticas directas.</p></li>
+</ul>
+<p><strong>Conclusión:</strong> La decisión de preservar Education y BMI representa una <strong>sofisticación analítica superior</strong> que prioriza la <strong>relevancia sustantiva</strong> sobre la pureza estadística, reconociendo que en ciencias de la salud algunos constructos críticos inevitablemente presentan solapamiento informativo debido a la complejidad de los fenómenos biológicos y sociales. Este enfoque balanceado asegura que el modelo resultante no solo sea estadísticamente sólido, sino también clínicamente significativo y epidemiológicamente válido.</p>
+</section>
+<section id="impacto-de-la-reduccion-de-multicolinealidad">
+<h3><strong>Impacto de la Reducción de Multicolinealidad</strong><a class="headerlink" href="#impacto-de-la-reduccion-de-multicolinealidad" title="Link to this heading">#</a></h3>
 <p><strong>Para Modelos Lineales (Logistic Regression, SVM)</strong></p>
 <ul class="simple">
 <li><p><strong>Beneficio crítico</strong>: Coeficientes estables e interpretables.</p></li>
 <li><p><strong>Reducción de varianza</strong> en las estimaciones.</p></li>
-<li><p><strong>Trade-off</strong>: Pérdida del poder predictivo de BMI, variable clínicamente relevante.</p></li>
 </ul>
 <p><strong>Para Modelos Basados en Árboles (Random Forest, XGBoost, Decision Tree)</strong></p>
 <ul class="simple">
@@ -1994,10 +1927,13 @@ El proceso asegura que las <strong>comparaciones entre modelos</strong> sean jus
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-tendencia-por-categorizacion-para-variables-numericas"><strong>Análisis de Tendencia por Categorización para Variables Numéricas</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-correlaciones-entre-variables-predictoras"><strong>Análisis de Correlaciones entre Variables Predictoras</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-multivariado-de-correlaciones"><strong>Análisis Multivariado de Correlaciones</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-correlaciones-con-la-variable-objetivo"><strong>Análisis de Correlaciones con la Variable Objetivo</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-multicolinealidad"><strong>Análisis de Multicolinealidad</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tratamiento-de-multicolinealidad"><strong>Tratamiento de Multicolinealidad</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-del-proceso-de-eliminacion"><strong>Análisis del Proceso de Eliminación</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-estrategica-preservacion-selectiva"><strong>Decisión Estratégica: Preservación Selectiva</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#impacto-de-la-reduccion-de-multicolinealidad"><strong>Impacto de la Reducción de Multicolinealidad</strong></a></li>
 </ul>
 </li>
 </ul>

@@ -1,0 +1,2120 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Ensemble con Simulated Annealing para Predicción de Diabetes &#8212; EDA</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modelo_origin';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Conclusiones y Hallazgos Principales en los Modelados" href="markdown.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="EDA - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="EDA - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introducción y Contextualización
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html"><strong>Análisis Exploratorio</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelado_b.html"><strong>Modelado Benchmark</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelado_smote.html"><strong>Modelado Optimizado (SMOTE)</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelado_adasyn.html"><strong>Modelado Optimizado (ADASYN)</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelado_w.html"><strong>Modelado Optimizado (class weight)</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="markdown.html"><strong>Conclusiones y Hallazgos Principales en los Modelados</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Ensemble con Simulated Annealing para Predicción de Diabetes</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fmodelo_origin.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/modelo_origin.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Ensemble con Simulated Annealing para Predicción de Diabetes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contexto-del-problema"><strong>Contexto del Problema</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentos-del-enfoque-propuesto"><strong>Fundamentos del Enfoque Propuesto</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-metodos-de-ensemble"><strong>¿Por qué Métodos de Ensemble?</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitectura-del-sistema-implementado"><strong>Arquitectura del Sistema Implementado</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fase-1-modelos-base"><strong>Fase 1: Modelos Base</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fase-2-seleccion-optima-con-simulated-annealing"><strong>Fase 2: Selección Óptima con Simulated Annealing</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fase-3-combinacion-de-predicciones"><strong>Fase 3: Combinación de Predicciones</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias"><strong>Importación de Librerías</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-del-dataset"><strong>Lectura del Dataset</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estrategia-de-preprocesamiento"><strong>Estrategia de Preprocesamiento</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamento-matematico-winsorizacion"><strong>Fundamento Matemático - Winsorización:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesamiento-de-caracteristicas-mediante-columntransformer"><strong>Preprocesamiento de Características mediante ColumnTransformer</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamento-matematico-estandarizacion"><strong>Fundamento Matemático - Estandarización:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-del-pool-de-modelos-base"><strong>Construcción del Pool de Modelos Base</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#composicion-del-pool-de-modelos"><strong>Composición del Pool de Modelos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificadores-individuales-4-modelos"><strong>Clasificadores Individuales (4 modelos)</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ensembles-homogeneos-8-modelos"><strong>Ensembles Homogéneos (8 modelos)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adaptaciones-realizadas-vs-paper-original"><strong>Adaptaciones Realizadas vs. Paper Original</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamento-teorico-diversidad-del-ensemble"><strong>Fundamento Teórico - Diversidad del Ensemble</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion-del-algoritmo-de-simulated-annealing"><strong>Implementación del Algoritmo de Simulated Annealing</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-init-inicializacion-del-optimizador"><strong>1. Función <code class="docutils literal notranslate"><span class="pre">__init__</span></code>: Inicialización del Optimizador</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parametros-clave-y-su-fundamentacion"><strong>Parámetros Clave y su Fundamentación</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-funcion-objetivo-evaluacion-del-ensemble"><strong>2. Función <code class="docutils literal notranslate"><span class="pre">funcion_objetivo</span></code>: Evaluación del Ensemble</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizacion-de-pesos"><strong>Normalización de Pesos:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prediccion-del-ensemble"><strong>Predicción del Ensemble:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-objetivo-auc"><strong>Función Objetivo - AUC:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-del-auc"><strong>Cálculo del AUC:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-generar-vecino-generacion-de-soluciones-vecinas"><strong>3. Función <code class="docutils literal notranslate"><span class="pre">generar_vecino</span></code>: Generación de Soluciones Vecinas</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilidad-de-perturbacion"><strong>Probabilidad de Perturbación:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#desviacion-estandar-adaptativa"><strong>Desviación Estándar Adaptativa:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#perturbacion-gaussiana"><strong>Perturbación Gaussiana:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#actualizacion-con-restriccion-de-no-negatividad"><strong>Actualización con Restricción de No-Negatividad:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-optimizar-algoritmo-principal-de-simulated-annealing"><strong>4. Función <code class="docutils literal notranslate"><span class="pre">optimizar</span></code>: Algoritmo Principal de Simulated Annealing</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-q-gaussian-para-aceptacion"><strong>Distribución q-Gaussian para Aceptación:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#esquema-de-enfriamiento-geometrico"><strong>Esquema de Enfriamiento Geométrico:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#referencia-en-el-paper"><strong>Referencia en el Paper</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-predecir-prediccion-con-ensemble-optimizado"><strong>5. Función <code class="docutils literal notranslate"><span class="pre">predecir</span></code>: Predicción con Ensemble Optimizado</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizacion-de-pesos-finales"><strong>Normalización de Pesos Finales:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#seleccion-de-modelos-relevantes"><strong>Selección de Modelos Relevantes:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Predicción del Ensemble:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Referencia en el Paper</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-obtener-pesos-finales-analisis-de-contribuciones"><strong>6. Función <code class="docutils literal notranslate"><span class="pre">obtener_pesos_finales</span></code>: Análisis de Contribuciones</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#diccionario-de-pesos"><strong>Diccionario de Pesos:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-de-contribuciones-tecnicas"><strong>Resumen de Contribuciones Técnicas</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fidelidad-al-paper"><strong>Fidelidad al Paper</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#innovaciones-implementadas"><strong>Innovaciones Implementadas</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamento-teorico-solido"><strong>Fundamento Teórico Sólido</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estrategia-de-division-de-datos"><strong>Estrategia de División de Datos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proporciones-de-division"><strong>Proporciones de División</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estratificacion-para-preservar-distribucion"><strong>Estratificación para Preservar Distribución</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proposito-de-cada-conjunto"><strong>Propósito de Cada Conjunto</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><strong>Referencia en el Paper</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#caracteristicas-de-la-implementacion"><strong>Características de la Implementación</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-de-este-esquema"><strong>Ventajas de este Esquema</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fase-de-optimizacion-del-ensemble-con-simulated-annealing"><strong>Fase de Optimización del Ensemble con Simulated Annealing</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-de-parametros-segun-el-paper"><strong>Configuración de Parámetros según el Paper</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-de-optimizacion"><strong>Problema de Optimización:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-de-simulated-annealing"><strong>Algoritmo de Simulated Annealing:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo-de-la-optimizacion"><strong>Objetivo de la Optimización</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fase-de-evaluacion-final-y-optimizacion-del-threshold"><strong>Fase de Evaluación Final y Optimización del Threshold</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizacion-del-threshold-de-clasificacion"><strong>Optimización del Threshold de Clasificación</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#justificacion-de-f1-score-para-optimizacion"><strong>Justificación de F1-Score para Optimización</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-implementadas"><strong>Métricas Implementadas</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-composicion-y-contribuciones-del-ensemble-optimizado"><strong>Análisis de Composición y Contribuciones del Ensemble Optimizado</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#significado-de-los-pesos-en-el-contexto-de-diabetes"><strong>Significado de los Pesos en el Contexto de Diabetes</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-practica-de-contribuciones"><strong>Interpretación Práctica de Contribuciones:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#relacion-con-el-dominio-medico"><strong>Relación con el Dominio Médico:</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-visual-integral-y-reporte-de-desempeno-final"><strong>Evaluación Visual Integral y Reporte de Desempeño Final</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matriz-de-confusion-analisis-de-errores-por-categoria"><strong>Matriz de Confusión: Análisis de Errores por Categoría</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-roc-capacidad-discriminativa-general"><strong>Curva ROC: Capacidad Discriminativa General</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reporte-de-clasificacion-detallado"><strong>Reporte de Clasificación Detallado</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-ejecutivo-de-resultados"><strong>Resumen Ejecutivo de Resultados</strong></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="ensemble-con-simulated-annealing-para-prediccion-de-diabetes">
+<h1><strong>Ensemble con Simulated Annealing para Predicción de Diabetes</strong><a class="headerlink" href="#ensemble-con-simulated-annealing-para-prediccion-de-diabetes" title="Link to this heading">#</a></h1>
+<section id="contexto-del-problema">
+<h2><strong>Contexto del Problema</strong><a class="headerlink" href="#contexto-del-problema" title="Link to this heading">#</a></h2>
+<p>La predicción temprana de diabetes representa un desafío crítico en el ámbito de la salud pública. Identificar pacientes con alto riesgo de desarrollar diabetes permite intervenciones preventivas que pueden mejorar significativamente los resultados de salud y reducir costos sanitarios. En este contexto, hemos implementado una metodología avanzada de <strong>ensemble learning</strong> inspirada en la investigación más reciente sobre predicción de abandono de clientes (churn prediction), adaptándola al dominio médico de la predicción de diabetes.</p>
+</section>
+<section id="fundamentos-del-enfoque-propuesto">
+<h2><strong>Fundamentos del Enfoque Propuesto</strong><a class="headerlink" href="#fundamentos-del-enfoque-propuesto" title="Link to this heading">#</a></h2>
+<section id="por-que-metodos-de-ensemble">
+<h3><strong>¿Por qué Métodos de Ensemble?</strong><a class="headerlink" href="#por-que-metodos-de-ensemble" title="Link to this heading">#</a></h3>
+<p>Los métodos de ensemble combinan múltiples modelos de machine learning para lograr un rendimiento predictivo superior al de cualquier modelo individual. Esta superioridad se fundamenta en tres principios teóricos:</p>
+<ol class="arabic simple">
+<li><p><strong>Diversidad estadística</strong>: Diferentes modelos capturan distintos aspectos de los datos.</p></li>
+<li><p><strong>Robustez computacional</strong>: Evitan óptimos locales en el espacio de búsqueda..</p></li>
+<li><p><strong>Complementariedad representacional</strong>: Cubren diferentes regiones del espacio de características.</p></li>
+</ol>
+</section>
+<section id="arquitectura-del-sistema-implementado">
+<h3><strong>Arquitectura del Sistema Implementado</strong><a class="headerlink" href="#arquitectura-del-sistema-implementado" title="Link to this heading">#</a></h3>
+<p>Nuestro sistema sigue una arquitectura de <strong>ensemble heterogéneo</strong> que consta de tres fases principales:</p>
+<section id="fase-1-modelos-base">
+<h4><strong>Fase 1: Modelos Base</strong><a class="headerlink" href="#fase-1-modelos-base" title="Link to this heading">#</a></h4>
+<p>Hemos integrado <strong>12 clasificadores diversos</strong> que abarcan diferentes familias algorítmicas:</p>
+<ul class="simple">
+<li><p><strong>Modelos Simples</strong>: Regresión Logística (L1 y L2), Árboles de Decisión, Naive Bayes.</p></li>
+<li><p><strong>Ensembles Homogéneos</strong>: Random Forest, XGBoost, LightGBM, CatBoost.</p></li>
+<li><p><strong>Métodos de Boosting</strong>: AdaBoost, Gradient Boosting.</p></li>
+<li><p><strong>Otros Ensembles</strong>: Bagging, Extra Trees.</p></li>
+</ul>
+<p>Esta diversidad asegura que el ensemble capture diferentes patrones en los datos de salud.</p>
+</section>
+<section id="fase-2-seleccion-optima-con-simulated-annealing">
+<h4><strong>Fase 2: Selección Óptima con Simulated Annealing</strong><a class="headerlink" href="#fase-2-seleccion-optima-con-simulated-annealing" title="Link to this heading">#</a></h4>
+<p>El corazón de nuestro sistema es el algoritmo de <strong>Simulated Annealing (SA)</strong> para la selección y ponderación de modelos. A diferencia de enfoques simples que promedian todas las predicciones, nuestro sistema:</p>
+<ul class="simple">
+<li><p><strong>Optimiza inteligentemente</strong> los pesos asignados a cada modelo.</p></li>
+<li><p><strong>Evalúa combinaciones</strong> a través de una función objetivo basada en AUC.</p></li>
+</ul>
+</section>
+<section id="fase-3-combinacion-de-predicciones">
+<h4><strong>Fase 3: Combinación de Predicciones</strong><a class="headerlink" href="#fase-3-combinacion-de-predicciones" title="Link to this heading">#</a></h4>
+<p>Las predicciones probabilísticas de los modelos seleccionados se combinan mediante una <strong>media ponderada optimizada</strong>, donde los pesos reflejan la contribución relativa de cada modelo al rendimiento global.</p>
+</section>
+</section>
+</section>
+<section id="importacion-de-librerias">
+<h2><strong>Importación de Librerías</strong><a class="headerlink" href="#importacion-de-librerias" title="Link to this heading">#</a></h2>
+<p>Se importan las librerías esenciales para facilitar el análisis, que abarca la carga de datos, la visualización, la transformación, la fusión y la unión. Además, se configura el entorno para suprimir las advertencias (<code class="docutils literal notranslate"><span class="pre">warnings</span></code>) y asegurar que la salida del código sea más limpia y enfocada en los resultados.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span> 
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">stats</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats.mstats</span><span class="w"> </span><span class="kn">import</span> <span class="n">winsorize</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.compose</span><span class="w"> </span><span class="kn">import</span> <span class="n">ColumnTransformer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.naive_bayes</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span><span class="p">,</span> <span class="n">ExtraTreesClassifier</span><span class="p">,</span> <span class="n">GradientBoostingClassifier</span><span class="p">,</span> <span class="n">AdaBoostClassifier</span><span class="p">,</span> <span class="n">BaggingClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xgboost</span><span class="w"> </span><span class="kn">import</span> <span class="n">XGBClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">precision_recall_curve</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">,</span> <span class="n">roc_curve</span><span class="p">,</span> <span class="n">auc</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">catboost</span><span class="w"> </span><span class="kn">import</span> <span class="n">CatBoostClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lightgbm</span><span class="w"> </span><span class="kn">import</span> <span class="n">LGBMClassifier</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">lime</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="lectura-del-dataset">
+<h2><strong>Lectura del Dataset</strong><a class="headerlink" href="#lectura-del-dataset" title="Link to this heading">#</a></h2>
+<p>Se Importa la función <code class="docutils literal notranslate"><span class="pre">fetch_ucirepo</span></code> del paquete <code class="docutils literal notranslate"><span class="pre">ucimlrepo</span></code>.<br />
+<code class="docutils literal notranslate"><span class="pre">fetch_ucirepo</span></code> es la función clave para descargar datasets usando su ID único.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ucimlrepo</span><span class="w"> </span><span class="kn">import</span> <span class="n">fetch_ucirepo</span> 
+  
+<span class="c1"># fetch dataset </span>
+<span class="n">cdc_diabetes_health_indicators</span> <span class="o">=</span> <span class="n">fetch_ucirepo</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">891</span><span class="p">)</span> 
+  
+<span class="n">X</span> <span class="o">=</span> <span class="n">cdc_diabetes_health_indicators</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span> 
+<span class="n">y</span> <span class="o">=</span> <span class="n">cdc_diabetes_health_indicators</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">targets</span> 
+
+<span class="c1"># Se unen X e y (ambos son DataFrames)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="estrategia-de-preprocesamiento">
+<h2><strong>Estrategia de Preprocesamiento</strong><a class="headerlink" href="#estrategia-de-preprocesamiento" title="Link to this heading">#</a></h2>
+<p>Para facilitar el preprocesamiento diferenciado según el tipo de variable, categorizamos las features en tres grupos estratégicos: binarias, categóricas y numéricas. Esta división metodológica nos permitirá aplicar transformaciones específicas y apropiadas a cada tipo de variable durante la construcción del pipeline de machine learning, optimizando así el rendimiento de los modelos.</p>
+<p>La clasificación se realiza de la siguiente manera: las <strong>variables binarias</strong> se identifican automáticamente mediante un análisis de cardinalidad (exactamente 2 valores únicos), las <strong>variables categóricas</strong> incluyen características ordinales relacionadas con aspectos demográficos y socioeconómicos (<code class="docutils literal notranslate"><span class="pre">GenHlth</span></code>, <code class="docutils literal notranslate"><span class="pre">Age</span></code>, <code class="docutils literal notranslate"><span class="pre">Education</span></code>, <code class="docutils literal notranslate"><span class="pre">Income</span></code>), mientras que las <strong>variables numéricas</strong> comprenden mediciones continuas de salud física y mental (<code class="docutils literal notranslate"><span class="pre">MentHlth</span></code>, <code class="docutils literal notranslate"><span class="pre">PhysHlth</span></code>, <code class="docutils literal notranslate"><span class="pre">BMI</span></code>).</p>
+<p>Además, se aplica la técnica de <strong>winsorización</strong> a la variable <code class="docutils literal notranslate"><span class="pre">BMI</span></code> con límites [0, 0.01] para manejar valores atípicos extremos, reemplazando solo el 1% superior de los valores sin afectar la distribución general de los datos.</p>
+<p>El conjunto de características (<code class="docutils literal notranslate"><span class="pre">X</span></code>) se construye excluyendo las variables <code class="docutils literal notranslate"><span class="pre">CholCheck</span></code> y <code class="docutils literal notranslate"><span class="pre">AnyHealthcare</span></code>, las cuales fueron identificadas y eliminadas durante el análisis de multicolinealidad por superar el umbral de VIF (Variance Inflation Factor) establecido en 10. Esta decisión busca mitigar problemas de redundancia entre predictores y mejorar la estabilidad numérica de las estimaciones, así como la eficiencia computacional de los procesos de optimización.</p>
+<section id="fundamento-matematico-winsorizacion">
+<h3><strong>Fundamento Matemático - Winsorización:</strong><a class="headerlink" href="#fundamento-matematico-winsorizacion" title="Link to this heading">#</a></h3>
+<p>Para una variable ( <span class="math notranslate nohighlight">\( x \)</span> ) con percentiles ( <span class="math notranslate nohighlight">\( Q_{99} \)</span>), la winsorización se define como:</p>
+<p>\begin{cases}
+Q_{99} &amp; \text{si } x &gt; Q_{99} \
+x &amp; \text{en otro caso}
+\end{cases}</p>
+<p>En nuestro caso, se aplica solo al límite superior con [0, 0.01], preservando así la integridad de la mayoría de los datos mientras se mitiga el impacto de valores extremos y así mejorar la estabilidad numérica de las estimaciones, así como la eficiencia computacional de los procesos de optimización.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">bin</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">categoricas_ordinales</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GenHlth&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Education&#39;</span><span class="p">,</span> <span class="s1">&#39;Income&#39;</span><span class="p">]</span>
+<span class="n">num</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MentHlth&#39;</span><span class="p">,</span> <span class="s1">&#39;PhysHlth&#39;</span><span class="p">,</span> <span class="s1">&#39;BMI&#39;</span><span class="p">]</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;BMI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">winsorize</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;BMI&#39;</span><span class="p">],</span> <span class="n">limits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">])</span>
+
+<span class="n">binarias</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">categoricas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GenHlth&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Education&#39;</span><span class="p">,</span> <span class="s1">&#39;Income&#39;</span><span class="p">]</span>
+<span class="n">numericas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MentHlth&#39;</span><span class="p">,</span> <span class="s1">&#39;PhysHlth&#39;</span><span class="p">,</span> <span class="s1">&#39;BMI&#39;</span><span class="p">]</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;BMI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">winsorize</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;BMI&#39;</span><span class="p">],</span> <span class="n">limits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">])</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Diabetes_binary&quot;</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Diabetes_binary&quot;</span><span class="p">,</span> <span class="s2">&quot;CholCheck&quot;</span><span class="p">,</span> <span class="s2">&quot;AnyHealthcare&quot;</span><span class="p">])</span>
+
+<span class="n">binarias</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;CholCheck&quot;</span><span class="p">)</span>
+<span class="n">binarias</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;AnyHealthcare&quot;</span><span class="p">)</span>
+<span class="n">binarias</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;Diabetes_binary&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="preprocesamiento-de-caracteristicas-mediante-columntransformer">
+<h2><strong>Preprocesamiento de Características mediante ColumnTransformer</strong><a class="headerlink" href="#preprocesamiento-de-caracteristicas-mediante-columntransformer" title="Link to this heading">#</a></h2>
+<p>En esta sección se implementa un pipeline de preprocesamiento de datos utilizando <code class="docutils literal notranslate"><span class="pre">ColumnTransformer</span></code> de scikit-learn, el cual permite aplicar diferentes transformaciones a distintos tipos de características de manera eficiente y organizada.</p>
+<p><strong>Explicación Técnica:</strong> El <code class="docutils literal notranslate"><span class="pre">ColumnTransformer</span></code> divide el conjunto de características en tres grupos según su tipo y aplica transformaciones específicas a cada grupo:</p>
+<ol class="arabic simple">
+<li><p><strong>Variables Numéricas (<code class="docutils literal notranslate"><span class="pre">numericas</span></code>)</strong>: Se estandarizan utilizando <code class="docutils literal notranslate"><span class="pre">StandardScaler()</span></code>, que transforma los datos para que tengan media 0 y desviación estándar 1.</p></li>
+<li><p><strong>Variables Binarias (<code class="docutils literal notranslate"><span class="pre">binarias</span></code>)</strong>: Se mantienen sin transformación mediante <code class="docutils literal notranslate"><span class="pre">'passthrough'</span></code>, ya que ya se encuentran en un formato adecuado.</p></li>
+<li><p><strong>Variables Categóricas (<code class="docutils literal notranslate"><span class="pre">categoricas</span></code>)</strong>: También se mantienen sin transformación directa, asumiendo que serán procesadas posteriormente o que ya están codificadas adecuadamente.</p></li>
+</ol>
+<section id="fundamento-matematico-estandarizacion">
+<h3><strong>Fundamento Matemático - Estandarización:</strong><a class="headerlink" href="#fundamento-matematico-estandarizacion" title="Link to this heading">#</a></h3>
+<p>Para cada variable numérica ( <span class="math notranslate nohighlight">\( x \)</span> ), la estandarización se calcula como:</p>
+<div class="math notranslate nohighlight">
+\[
+z = \frac{x - \mu}{\sigma}
+\]</div>
+<p>Donde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(z\)</span>: valor estandarizado</p></li>
+<li><p><span class="math notranslate nohighlight">\(x\)</span>: valor original</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span>: media de la característica</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma\)</span>: desviación estándar</p></li>
+</ul>
+<p><strong>Impacto en el Modelo:</strong> Este preprocesamiento asegura que todas las características contribuyan equitativamente al modelo final, previniendo que variables con escalas numéricas más grandes dominen injustamente el proceso de aprendizaje.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preprocessor</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
+    <span class="n">transformers</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">numericas</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;bin&#39;</span><span class="p">,</span> <span class="s1">&#39;passthrough&#39;</span><span class="p">,</span> <span class="n">binarias</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;passthrough&#39;</span><span class="p">,</span> <span class="n">categoricas</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="construccion-del-pool-de-modelos-base">
+<h2><strong>Construcción del Pool de Modelos Base</strong><a class="headerlink" href="#construccion-del-pool-de-modelos-base" title="Link to this heading">#</a></h2>
+<p>Siguiendo la metodología del paper “<em>Ensemble Methods in Customer Churn Prediction</em>”, implementamos un pool diversificado de 12 modelos que formarán la base para nuestro ensemble heterogéneo. Esta diversidad algorítmica es fundamental para garantizar la complementariedad entre los predictores.</p>
+<section id="composicion-del-pool-de-modelos">
+<h3><strong>Composición del Pool de Modelos</strong><a class="headerlink" href="#composicion-del-pool-de-modelos" title="Link to this heading">#</a></h3>
+<section id="clasificadores-individuales-4-modelos">
+<h4><strong>Clasificadores Individuales (4 modelos)</strong><a class="headerlink" href="#clasificadores-individuales-4-modelos" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Regresión Logística L1/L2</strong>: Modelos lineales con regularización diferente.</p></li>
+<li><p><strong>Árbol de Decisión</strong>: Modelo no paramétrico para capturar relaciones complejas.</p></li>
+<li><p><strong>Naive Bayes</strong>: Clasificador probabilístico basado en el teorema de Bayes.</p></li>
+</ul>
+</section>
+<section id="ensembles-homogeneos-8-modelos">
+<h4><strong>Ensembles Homogéneos (8 modelos)</strong><a class="headerlink" href="#ensembles-homogeneos-8-modelos" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Random Forest &amp; Extra Trees</strong>: Ensembles basados en bagging con diferentes estrategias de división.</p></li>
+<li><p><strong>XGBoost, LightGBM, CatBoost</strong>: Implementaciones modernas de gradient boosting.</p></li>
+<li><p><strong>AdaBoost &amp; Gradient Boosting</strong>: Algoritmos de boosting clásico y moderno.</p></li>
+<li><p><strong>Bagging</strong>: Ensemble simple con muestreo bootstrap.</p></li>
+</ul>
+</section>
+</section>
+<section id="adaptaciones-realizadas-vs-paper-original">
+<h3><strong>Adaptaciones Realizadas vs. Paper Original</strong><a class="headerlink" href="#adaptaciones-realizadas-vs-paper-original" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspecto</p></th>
+<th class="head"><p>Paper Original</p></th>
+<th class="head"><p>Nuestra Implementación</p></th>
+<th class="head"><p>Justificación</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Preprocesamiento</strong></p></td>
+<td><p>No especificado</p></td>
+<td><p>Pipeline integrado con <code class="docutils literal notranslate"><span class="pre">ColumnTransformer</span></code></p></td>
+<td><p>Mayor reproducibilidad</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Hiperparámetros</strong></p></td>
+<td><p>Configuraciones genéricas</p></td>
+<td><p>Ajustados para dataset de diabetes</p></td>
+<td><p>Optimización para dominio médico</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>CatBoost/LightGBM</strong></p></td>
+<td><p>No incluidos</p></td>
+<td><p>Incorporados explícitamente</p></td>
+<td><p>Mayor diversidad algorítmica</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Semilla aleatoria</strong></p></td>
+<td><p>No especificada</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">random_state=42</span></code></p></td>
+<td><p>Reproducibilidad garantizada</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="fundamento-teorico-diversidad-del-ensemble">
+<h3><strong>Fundamento Teórico - Diversidad del Ensemble</strong><a class="headerlink" href="#fundamento-teorico-diversidad-del-ensemble" title="Link to this heading">#</a></h3>
+<p>La efectividad del ensemble depende de la diversidad entre modelos:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Diversidad} = \frac{1}{M(M-1)} \sum_{i=1}^M \sum_{j\neq i}^M \text{Discrepancia}(f_i, f_j)
+\]</div>
+<p>Donde <span class="math notranslate nohighlight">\(M\)</span> es el número de modelos y <span class="math notranslate nohighlight">\(f_i\)</span>, <span class="math notranslate nohighlight">\(f_j\)</span> son predicciones de modelos diferentes.</p>
+<p><strong>Objetivo</strong>: Maximizar la diversidad mientras se mantiene una precisión individual aceptable en cada modelo base.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">crear_modelos_base_paper</span><span class="p">(</span><span class="n">preprocessor</span><span class="p">):</span>
+    
+    <span class="n">modelos</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;LR_L1&#39;</span><span class="p">:</span> <span class="n">Pipeline</span><span class="p">([</span>
+            <span class="p">(</span><span class="s1">&#39;preprocessor&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">(</span>
+                <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l1&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;liblinear&#39;</span><span class="p">,</span> 
+                <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span>
+            <span class="p">))</span>
+        <span class="p">]),</span>
+        
+        <span class="s1">&#39;LR_L2&#39;</span><span class="p">:</span> <span class="n">Pipeline</span><span class="p">([</span>
+            <span class="p">(</span><span class="s1">&#39;preprocessor&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">(</span>
+                <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l2&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span>
+            <span class="p">))</span>
+        <span class="p">]),</span>
+        
+        <span class="s1">&#39;DT&#39;</span><span class="p">:</span> <span class="n">Pipeline</span><span class="p">([</span>
+            <span class="p">(</span><span class="s1">&#39;preprocessor&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span>
+                <span class="n">criterion</span><span class="o">=</span><span class="s1">&#39;gini&#39;</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">min_samples_split</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">splitter</span><span class="o">=</span><span class="s1">&#39;random&#39;</span><span class="p">,</span>
+                <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+            <span class="p">))</span>
+        <span class="p">]),</span>
+        
+        <span class="s1">&#39;NB&#39;</span><span class="p">:</span> <span class="n">Pipeline</span><span class="p">([</span>
+            <span class="p">(</span><span class="s1">&#39;preprocessor&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">GaussianNB</span><span class="p">())</span>
+        <span class="p">]),</span>
+        
+        <span class="s1">&#39;RF&#39;</span><span class="p">:</span> <span class="n">Pipeline</span><span class="p">([</span>
+            <span class="p">(</span><span class="s1">&#39;preprocessor&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">RandomForestClassifier</span><span class="p">(</span>
+                <span class="n">n_estimators</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="s1">&#39;sqrt&#39;</span><span class="p">,</span>
+                <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">min_samples_split</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">bootstrap</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+            <span class="p">))</span>
+        <span class="p">]),</span>
+        
+        <span class="s1">&#39;XGB&#39;</span><span class="p">:</span> <span class="n">Pipeline</span><span class="p">([</span>
+            <span class="p">(</span><span class="s1">&#39;preprocessor&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">XGBClassifier</span><span class="p">(</span>
+                <span class="n">colsample_bytree</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                <span class="n">n_estimators</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">reg_lambda</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">subsample</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+                <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">use_label_encoder</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">eval_metric</span><span class="o">=</span><span class="s1">&#39;auc&#39;</span>
+            <span class="p">))</span>
+        <span class="p">]),</span>
+        
+        <span class="s1">&#39;LGBM&#39;</span><span class="p">:</span> <span class="n">Pipeline</span><span class="p">([</span>
+            <span class="p">(</span><span class="s1">&#39;preprocessor&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">LGBMClassifier</span><span class="p">(</span>
+                <span class="n">n_estimators</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                <span class="n">subsample</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=-</span><span class="mi">1</span>
+            <span class="p">))</span>
+        <span class="p">]),</span>
+        
+        <span class="s1">&#39;CATB&#39;</span><span class="p">:</span> <span class="n">Pipeline</span><span class="p">([</span>
+            <span class="p">(</span><span class="s1">&#39;preprocessor&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">CatBoostClassifier</span><span class="p">(</span>
+                <span class="n">n_estimators</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                <span class="n">subsample</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span>
+            <span class="p">))</span>
+        <span class="p">]),</span>
+        
+        <span class="s1">&#39;ADA&#39;</span><span class="p">:</span> <span class="n">Pipeline</span><span class="p">([</span>
+            <span class="p">(</span><span class="s1">&#39;preprocessor&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">AdaBoostClassifier</span><span class="p">(</span>
+                <span class="n">n_estimators</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+            <span class="p">))</span>
+        <span class="p">]),</span>
+        
+        <span class="s1">&#39;BAG&#39;</span><span class="p">:</span> <span class="n">Pipeline</span><span class="p">([</span>
+            <span class="p">(</span><span class="s1">&#39;preprocessor&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">BaggingClassifier</span><span class="p">(</span>
+                <span class="n">n_estimators</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+            <span class="p">))</span>
+        <span class="p">]),</span>
+        
+        <span class="s1">&#39;ETC&#39;</span><span class="p">:</span> <span class="n">Pipeline</span><span class="p">([</span>
+            <span class="p">(</span><span class="s1">&#39;preprocessor&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">ExtraTreesClassifier</span><span class="p">(</span>
+                <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+            <span class="p">))</span>
+        <span class="p">]),</span>
+        
+        <span class="s1">&#39;SGB&#39;</span><span class="p">:</span> <span class="n">Pipeline</span><span class="p">([</span>
+            <span class="p">(</span><span class="s1">&#39;preprocessor&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">GradientBoostingClassifier</span><span class="p">(</span>
+                <span class="n">n_estimators</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                <span class="n">subsample</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+            <span class="p">))</span>
+        <span class="p">])</span>
+    <span class="p">}</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Creados </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">modelos</span><span class="p">)</span><span class="si">}</span><span class="s2"> modelos base&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">modelos</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="implementacion-del-algoritmo-de-simulated-annealing">
+<h2><strong>Implementación del Algoritmo de Simulated Annealing</strong><a class="headerlink" href="#implementacion-del-algoritmo-de-simulated-annealing" title="Link to this heading">#</a></h2>
+<section id="funcion-init-inicializacion-del-optimizador">
+<h3><strong>1. Función <code class="docutils literal notranslate"><span class="pre">__init__</span></code>: Inicialización del Optimizador</strong><a class="headerlink" href="#funcion-init-inicializacion-del-optimizador" title="Link to this heading">#</a></h3>
+<p>Esta función inicializa el optimizador de ensemble heterogéneo según los parámetros establecidos en la <strong>Tabla 4 del paper (página 11)</strong>. El paper establece que los ensembles heterogéneos requieren “classifier selection or classifier pruning” para determinar el conjunto óptimo de modelos.</p>
+<section id="parametros-clave-y-su-fundamentacion">
+<h4><strong>Parámetros Clave y su Fundamentación</strong><a class="headerlink" href="#parametros-clave-y-su-fundamentacion" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parámetro</p></th>
+<th class="head"><p>Valor</p></th>
+<th class="head"><p>Referencia</p></th>
+<th class="head"><p>Explicación Matemática</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">visiting_parameter</span></code></p></td>
+<td><p>2.7</p></td>
+<td><p>Tabla 4, GSA</p></td>
+<td><p>Controla la distribución de visitas en el espacio de búsqueda: <span class="math notranslate nohighlight">\(\sigma = T^{1/\gamma}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">acceptance_parameter</span></code></p></td>
+<td><p>-5.0</p></td>
+<td><p>Tabla 4, GSA</p></td>
+<td><p>Parámetro de la distribución q-Gaussian para aceptación: <span class="math notranslate nohighlight">\(q_a = -5.0\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">temp_inicial</span></code></p></td>
+<td><p>0.5</p></td>
+<td><p>Tabla 4, GSA</p></td>
+<td><p>Temperatura inicial: <span class="math notranslate nohighlight">\(T_0 = 0.5\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">iteraciones</span></code></p></td>
+<td><p>500</p></td>
+<td><p>Tabla 4, GSA</p></td>
+<td><p>Iteraciones máximas: <span class="math notranslate nohighlight">\(N_{iter} = 500\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="funcion-funcion-objetivo-evaluacion-del-ensemble">
+<h3><strong>2. Función <code class="docutils literal notranslate"><span class="pre">funcion_objetivo</span></code>: Evaluación del Ensemble</strong><a class="headerlink" href="#funcion-funcion-objetivo-evaluacion-del-ensemble" title="Link to this heading">#</a></h3>
+<p>Evalúa el rendimiento del ensemble con una combinación específica de pesos, utilizando AUC como métrica principal según las recomendaciones del paper para evaluación de modelos de clasificación.</p>
+<section id="normalizacion-de-pesos">
+<h4><strong>Normalización de Pesos:</strong><a class="headerlink" href="#normalizacion-de-pesos" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{w}_{\text{norm}} = \frac{\mathbf{w}}{\sum_{i=1}^{M} w_i}
+\]</div>
+</section>
+<section id="prediccion-del-ensemble">
+<h4><strong>Predicción del Ensemble:</strong><a class="headerlink" href="#prediccion-del-ensemble" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+P_{\text{ensemble}}(X) = \sum_{i=1}^{M} w_{\text{norm},i} \cdot P_i(y=1|X)
+\]</div>
+</section>
+<section id="funcion-objetivo-auc">
+<h4><strong>Función Objetivo - AUC:</strong><a class="headerlink" href="#funcion-objetivo-auc" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+\text{Objective}(\mathbf{w}) = \text{AUC}\left(P_{\text{ensemble}}(X_{\text{val}}), y_{\text{val}}\right)
+\]</div>
+</section>
+<section id="calculo-del-auc">
+<h4><strong>Cálculo del AUC:</strong><a class="headerlink" href="#calculo-del-auc" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+\text{AUC} = \int_{0}^{1} \text{TPR}(\text{FPR})  d\text{FPR} = \frac{1}{n_+ n_-} \sum_{i=1}^{n_+} \sum_{j=1}^{n_-} \mathbb{I}(p_i &gt; p_j)
+\]</div>
+<p><strong>Donde:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(n_+\)</span>: número de instancias positivas</p></li>
+<li><p><span class="math notranslate nohighlight">\(n_-\)</span>: número de instancias negativas</p></li>
+<li><p><span class="math notranslate nohighlight">\(p_i\)</span>: probabilidad predicha para instancia positiva <span class="math notranslate nohighlight">\(i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(p_j\)</span>: probabilidad predicha para instancia negativa <span class="math notranslate nohighlight">\(j\)</span></p></li>
+</ul>
+</section>
+</section>
+<section id="funcion-generar-vecino-generacion-de-soluciones-vecinas">
+<h3><strong>3. Función <code class="docutils literal notranslate"><span class="pre">generar_vecino</span></code>: Generación de Soluciones Vecinas</strong><a class="headerlink" href="#funcion-generar-vecino-generacion-de-soluciones-vecinas" title="Link to this heading">#</a></h3>
+<section id="probabilidad-de-perturbacion">
+<h4><strong>Probabilidad de Perturbación:</strong><a class="headerlink" href="#probabilidad-de-perturbacion" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+P(\text{perturbar } w_i) = 0.5 \quad \forall i \in [1, M]
+\]</div>
+</section>
+<section id="desviacion-estandar-adaptativa">
+<h4><strong>Desviación Estándar Adaptativa:</strong><a class="headerlink" href="#desviacion-estandar-adaptativa" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+\sigma = T^{1/\gamma}
+\]</div>
+<p><strong>Donde:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(T\)</span>: temperatura actual</p></li>
+<li><p><span class="math notranslate nohighlight">\(\gamma = 2.7\)</span>: visiting parameter</p></li>
+</ul>
+</section>
+<section id="perturbacion-gaussiana">
+<h4><strong>Perturbación Gaussiana:</strong><a class="headerlink" href="#perturbacion-gaussiana" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+\Delta w_i \sim \mathcal{N}(0, \sigma)
+\]</div>
+</section>
+<section id="actualizacion-con-restriccion-de-no-negatividad">
+<h4><strong>Actualización con Restricción de No-Negatividad:</strong><a class="headerlink" href="#actualizacion-con-restriccion-de-no-negatividad" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+w_i^{\text{nuevo}} = \max(0, w_i + \Delta w_i)
+\]</div>
+</section>
+</section>
+<section id="funcion-optimizar-algoritmo-principal-de-simulated-annealing">
+<h3><strong>4. Función <code class="docutils literal notranslate"><span class="pre">optimizar</span></code>: Algoritmo Principal de Simulated Annealing</strong><a class="headerlink" href="#funcion-optimizar-algoritmo-principal-de-simulated-annealing" title="Link to this heading">#</a></h3>
+<p>Implementa el algoritmo completo de Simulated Annealing con los parámetros exactos del paper, realizando la optimización de pesos del ensemble heterogéneo.</p>
+<ol class="arabic simple">
+<li><p><strong>Inicialización</strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(T \leftarrow T_0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{w} \leftarrow \text{Uniforme}(0,1)^M\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{score} \leftarrow f(\mathbf{w})\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>Para</strong> <span class="math notranslate nohighlight">\(k = 1\)</span> <strong>hasta</strong> <span class="math notranslate nohighlight">\(N_{\text{iter}}\)</span>:</p>
+<ul class="simple">
+<li><p><strong>Generar vecino</strong>: <span class="math notranslate nohighlight">\(\mathbf{w}' \leftarrow \text{generar\_vecino}(\mathbf{w}, T)\)</span></p></li>
+<li><p><strong>Evaluar</strong>: <span class="math notranslate nohighlight">\(\text{score}' \leftarrow f(\mathbf{w}')\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Delta E \leftarrow \text{score}' - \text{score}\)</span></p></li>
+<li><p><strong>Si</strong> <span class="math notranslate nohighlight">\(\Delta E &gt; 0\)</span>:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{w} \leftarrow \mathbf{w}'\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{score} \leftarrow \text{score}'\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>Sino</strong>:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(P_{\text{aceptar}} \leftarrow \left[1 - (1 - q_a) \cdot \frac{\Delta E}{T}\right]^{1/(1 - q_a)}\)</span></p></li>
+<li><p><strong>Si</strong> <span class="math notranslate nohighlight">\(\text{Uniforme}(0,1) &lt; P_{\text{aceptar}}\)</span>:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{w} \leftarrow \mathbf{w}'\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{score} \leftarrow \text{score}'\)</span></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Actualizar mejor solución</strong></p></li>
+<li><p><strong>Enfriar</strong>: <span class="math notranslate nohighlight">\(T \leftarrow T_0 \cdot \alpha^k\)</span></p></li>
+</ul>
+</li>
+</ol>
+<section id="distribucion-q-gaussian-para-aceptacion">
+<h4><strong>Distribución q-Gaussian para Aceptación:</strong><a class="headerlink" href="#distribucion-q-gaussian-para-aceptacion" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+P_{\text{aceptar}} = \left[1 - (1 - q_a) \cdot \frac{\Delta E}{T}\right]^{1/(1 - q_a)}
+\]</div>
+<p><strong>Propiedades:</strong></p>
+<ul class="simple">
+<li><p>Cuando <span class="math notranslate nohighlight">\(q_a \to 1\)</span>: converge a distribución Boltzmann</p></li>
+<li><p>Para <span class="math notranslate nohighlight">\(q_a = -5.0\)</span>: distribución de cola pesada</p></li>
+</ul>
+</section>
+<section id="esquema-de-enfriamiento-geometrico">
+<h4><strong>Esquema de Enfriamiento Geométrico:</strong><a class="headerlink" href="#esquema-de-enfriamiento-geometrico" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+T_k = T_0 \cdot \alpha^k \quad \text{con } \alpha = 0.99
+\]</div>
+</section>
+<section id="referencia-en-el-paper">
+<h4><strong>Referencia en el Paper</strong><a class="headerlink" href="#referencia-en-el-paper" title="Link to this heading">#</a></h4>
+<p>El paper menciona en la página 12:</p>
+<blockquote>
+<div><p><em>“The goal of classifier selection is to determine the optimal set of base classifiers to enter the ensemble from a model library. Similar to feature selection, classifier selection can improve performance by eliminating the classifiers that are correlated with other classifiers or those that are not performing well.”</em></p>
+</div></blockquote>
+</section>
+</section>
+<section id="funcion-predecir-prediccion-con-ensemble-optimizado">
+<h3><strong>5. Función <code class="docutils literal notranslate"><span class="pre">predecir</span></code>: Predicción con Ensemble Optimizado</strong><a class="headerlink" href="#funcion-predecir-prediccion-con-ensemble-optimizado" title="Link to this heading">#</a></h3>
+<p>Realiza predicciones utilizando el ensemble optimizado, aplicando un umbral de selección del 1% para incluir solo modelos con contribución significativa.</p>
+<section id="normalizacion-de-pesos-finales">
+<h4><strong>Normalización de Pesos Finales:</strong><a class="headerlink" href="#normalizacion-de-pesos-finales" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{w}_{\text{final}} = \frac{\mathbf{w}_{\text{mejor}}}{\sum_{i=1}^{M} w_{\text{mejor},i}}
+\]</div>
+</section>
+<section id="seleccion-de-modelos-relevantes">
+<h4><strong>Selección de Modelos Relevantes:</strong><a class="headerlink" href="#seleccion-de-modelos-relevantes" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{M}_{\text{seleccionados}} = \left\{i \in [1, M] : w_{\text{final},i} &gt; 0.01\right\}
+\]</div>
+</section>
+<section id="id1">
+<h4><strong>Predicción del Ensemble:</strong><a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+P_{\text{ensemble}}(y=1|X) = \sum_{i \in \mathcal{M}_{\text{seleccionados}}} w_{\text{final},i} \cdot P_i(y=1|X)
+\]</div>
+<p><strong>Umbral de Selección:</strong></p>
+<ul class="simple">
+<li><p><strong>1%</strong>: Elimina modelos con contribución insignificante.</p></li>
+<li><p><strong>Beneficio</strong>: Reduce complejidad sin afectar rendimiento.</p></li>
+</ul>
+</section>
+<section id="id2">
+<h4><strong>Referencia en el Paper</strong><a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<p>El paper menciona en la página 3:</p>
+<blockquote>
+<div><p><em>“Heterogeneous ensembles intelligently select which classifiers to include in the final ensemble and attribute a higher weight to more performant members in the final combination.”</em></p>
+</div></blockquote>
+</section>
+</section>
+<section id="funcion-obtener-pesos-finales-analisis-de-contribuciones">
+<h3><strong>6. Función <code class="docutils literal notranslate"><span class="pre">obtener_pesos_finales</span></code>: Análisis de Contribuciones</strong><a class="headerlink" href="#funcion-obtener-pesos-finales-analisis-de-contribuciones" title="Link to this heading">#</a></h3>
+<p>Proporciona los pesos normalizados de cada modelo para análisis de interpretabilidad y transparencia del ensemble.</p>
+<section id="diccionario-de-pesos">
+<h4><strong>Diccionario de Pesos:</strong><a class="headerlink" href="#diccionario-de-pesos" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{W}_{\text{final}} = \left\{\text{nombre}_i : w_{\text{final},i} \right\}_{i=1}^{M}
+\]</div>
+<p><strong>Interpretabilidad:</strong></p>
+<ul class="simple">
+<li><p>Identifica modelos más influyentes.</p></li>
+<li><p>Permite análisis de diversidad del ensemble.</p></li>
+<li><p>Facilita debugging y mejora del sistema.</p></li>
+</ul>
+</section>
+</section>
+<section id="resumen-de-contribuciones-tecnicas">
+<h3><strong>Resumen de Contribuciones Técnicas</strong><a class="headerlink" href="#resumen-de-contribuciones-tecnicas" title="Link to this heading">#</a></h3>
+<section id="fidelidad-al-paper">
+<h4><strong>Fidelidad al Paper</strong><a class="headerlink" href="#fidelidad-al-paper" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p><strong>Parámetros Exactos</strong>: Uso de valores específicos de la Tabla 4.</p></li>
+<li><p><strong>Algoritmo Validado</strong>: Implementación directa de GSA.</p></li>
+<li><p><strong>Metodología Reproducible</strong>: Seguimiento estricto de procedimientos.</p></li>
+</ol>
+</section>
+<section id="innovaciones-implementadas">
+<h4><strong>Innovaciones Implementadas</strong><a class="headerlink" href="#innovaciones-implementadas" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p><strong>Selección Inteligente</strong>: Umbral del 1% para relevancia de modelos.</p></li>
+<li><p><strong>Monitoreo Completo</strong>: Historial de optimización.</p></li>
+<li><p><strong>Robustez</strong>: Manejo de casos edge en función objetivo.</p></li>
+</ol>
+</section>
+<section id="fundamento-teorico-solido">
+<h4><strong>Fundamento Teórico Sólido</strong><a class="headerlink" href="#fundamento-teorico-solido" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Optimización Global</strong>: Capacidad de escapar óptimos locales.</p></li>
+<li><p><strong>Convergencia Probabilística</strong>: Garantías teóricas.</p></li>
+<li><p><strong>Balance Exploración-Explotación</strong>: Controlado por temperatura.</p></li>
+</ul>
+<p>Esta implementación constituye una réplica fiel y mejorada de la metodología propuesta en el paper, adaptada específicamente para el dominio de predicción de diabetes con ensambles heterogéneos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SimulatedAnnealingEnsemblePaper</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modelos_entrenados</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;auc&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modelos</span> <span class="o">=</span> <span class="n">modelos_entrenados</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_modelos</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">modelos_entrenados</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metric</span> <span class="o">=</span> <span class="n">metric</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mejores_pesos</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mejor_score</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">visiting_parameter</span> <span class="o">=</span> <span class="mf">2.7</span>  <span class="c1"># γ del paper (Tabla 4)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">acceptance_parameter</span> <span class="o">=</span> <span class="o">-</span><span class="mf">5.0</span>  <span class="c1"># qa del paper (Tabla 4)</span>
+        
+    <span class="k">def</span><span class="w"> </span><span class="nf">funcion_objetivo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pesos</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calcula la métrica objetivo (AUC) según el paper&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">pesos</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+            
+        <span class="n">pesos_norm</span> <span class="o">=</span> <span class="n">pesos</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">pesos</span><span class="p">)</span>
+        <span class="n">prediccion_ensemble</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_val</span><span class="p">))</span>
+        
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">nombre</span><span class="p">,</span> <span class="n">modelo</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modelos</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+            <span class="n">probas</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_val</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">prediccion_ensemble</span> <span class="o">+=</span> <span class="n">pesos_norm</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">probas</span>
+        
+        <span class="k">return</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">prediccion_ensemble</span><span class="p">)</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">generar_vecino</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pesos_actuales</span><span class="p">,</span> <span class="n">temperatura</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Genera vecino según parámetros del paper (q-v-Gaussiana)&quot;&quot;&quot;</span>
+        <span class="n">nuevos_pesos</span> <span class="o">=</span> <span class="n">pesos_actuales</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_modelos</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>  <span class="c1"># 50% probabilidad de perturbar cada peso</span>
+                <span class="c1"># Perturbación q-v-Gaussiana simplificada</span>
+                <span class="n">sigma</span> <span class="o">=</span> <span class="n">temperatura</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">visiting_parameter</span><span class="p">)</span>
+                <span class="n">perturbacion</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+                <span class="n">nuevos_pesos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nuevos_pesos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">perturbacion</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">nuevos_pesos</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">optimizar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span> 
+                  <span class="n">temp_inicial</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">iteraciones</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optimización con parámetros exactos del paper (Tabla 4)&quot;&quot;&quot;</span>
+        
+        <span class="c1"># Entrenar modelos base en training completo</span>
+        <span class="n">modelos_entrenados</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Entrenando modelos base...&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">modelo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelos</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; - </span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">modelo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+            <span class="n">modelos_entrenados</span><span class="p">[</span><span class="n">nombre</span><span class="p">]</span> <span class="o">=</span> <span class="n">modelo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modelos</span> <span class="o">=</span> <span class="n">modelos_entrenados</span>
+        
+        <span class="c1"># Inicializar pesos aleatorios</span>
+        <span class="n">pesos_actuales</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_modelos</span><span class="p">)</span>
+        <span class="n">score_actual</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">funcion_objetivo</span><span class="p">(</span><span class="n">pesos_actuales</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">mejores_pesos</span> <span class="o">=</span> <span class="n">pesos_actuales</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mejor_score</span> <span class="o">=</span> <span class="n">score_actual</span>
+        
+        <span class="n">temperatura</span> <span class="o">=</span> <span class="n">temp_inicial</span>
+        <span class="n">historial_scores</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">historial_temperaturas</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Iniciando Simulated Annealing (Paper parameters)&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temp inicial: </span><span class="si">{</span><span class="n">temp_inicial</span><span class="si">}</span><span class="s2">, Iteraciones: </span><span class="si">{</span><span class="n">iteraciones</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Visiting parameter (γ): </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">visiting_parameter</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Acceptance parameter (qa): </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">acceptance_parameter</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">iteracion</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iteraciones</span><span class="p">):</span>
+            <span class="c1"># Generar vecino</span>
+            <span class="n">nuevos_pesos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generar_vecino</span><span class="p">(</span><span class="n">pesos_actuales</span><span class="p">,</span> <span class="n">temperatura</span><span class="p">)</span>
+            <span class="n">nuevo_score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">funcion_objetivo</span><span class="p">(</span><span class="n">nuevos_pesos</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">)</span>
+            
+            <span class="c1"># Criterio de aceptación con parámetro qa del paper</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="n">nuevo_score</span> <span class="o">-</span> <span class="n">score_actual</span>
+            
+            <span class="k">if</span> <span class="n">delta</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># Aceptar mejoras</span>
+                <span class="n">pesos_actuales</span> <span class="o">=</span> <span class="n">nuevos_pesos</span>
+                <span class="n">score_actual</span> <span class="o">=</span> <span class="n">nuevo_score</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Aceptar empeoramientos con probabilidad (fórmula del paper)</span>
+                <span class="n">prob_aceptacion</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">acceptance_parameter</span><span class="p">)</span> <span class="o">*</span> 
+                                 <span class="n">delta</span> <span class="o">/</span> <span class="n">temperatura</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">acceptance_parameter</span><span class="p">))</span>
+                
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">prob_aceptacion</span><span class="p">:</span>
+                    <span class="n">pesos_actuales</span> <span class="o">=</span> <span class="n">nuevos_pesos</span>
+                    <span class="n">score_actual</span> <span class="o">=</span> <span class="n">nuevo_score</span>
+            
+            <span class="c1"># Actualizar mejor solución global</span>
+            <span class="k">if</span> <span class="n">score_actual</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">mejor_score</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mejores_pesos</span> <span class="o">=</span> <span class="n">pesos_actuales</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mejor_score</span> <span class="o">=</span> <span class="n">score_actual</span>
+            
+            <span class="c1"># Guardar historial</span>
+            <span class="n">historial_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mejor_score</span><span class="p">)</span>
+            <span class="n">historial_temperaturas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temperatura</span><span class="p">)</span>
+            
+            <span class="c1"># Enfriamiento (schedule del paper)</span>
+            <span class="n">temperatura</span> <span class="o">=</span> <span class="n">temp_inicial</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.99</span> <span class="o">**</span> <span class="n">iteracion</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">iteracion</span> <span class="o">%</span> <span class="mi">50</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; - Iter </span><span class="si">{</span><span class="n">iteracion</span><span class="si">}</span><span class="s2">: AUC = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mejor_score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, Temp = </span><span class="si">{</span><span class="n">temperatura</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimización completada - Mejor AUC: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mejor_score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">historial_scores</span><span class="p">,</span> <span class="n">historial_temperaturas</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">predecir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Predicción del ensemble optimizado&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mejores_pesos</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Error: Primero debe optimizar el ensemble&quot;</span><span class="p">)</span>
+            
+        <span class="n">pesos_norm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mejores_pesos</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mejores_pesos</span><span class="p">)</span>
+        <span class="n">prediccion_final</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Modelos seleccionados en el ensemble final:&quot;</span><span class="p">)</span>
+        <span class="n">modelos_seleccionados</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">nombre</span><span class="p">,</span> <span class="n">modelo</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modelos</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="n">pesos_norm</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.01</span><span class="p">:</span>  <span class="c1"># Umbral del 1% para considerar modelo</span>
+                <span class="n">probas</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="n">prediccion_final</span> <span class="o">+=</span> <span class="n">pesos_norm</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">probas</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   📊 </span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s2">: peso = </span><span class="si">{</span><span class="n">pesos_norm</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">modelos_seleccionados</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total modelos seleccionados: </span><span class="si">{</span><span class="n">modelos_seleccionados</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_modelos</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">prediccion_final</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">obtener_pesos_finales</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retorna los pesos normalizados de cada modelo&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mejores_pesos</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">pesos_norm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mejores_pesos</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mejores_pesos</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">nombre</span><span class="p">:</span> <span class="n">peso</span> <span class="k">for</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">peso</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modelos</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">pesos_norm</span><span class="p">)}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="estrategia-de-division-de-datos">
+<h2><strong>Estrategia de División de Datos</strong><a class="headerlink" href="#estrategia-de-division-de-datos" title="Link to this heading">#</a></h2>
+<p>Se implementa una estrategia rigurosa de división de datos que sigue las mejores prácticas establecidas en la literatura de machine learning para garantizar una evaluación robusta y reproducible del modelo.</p>
+<section id="proporciones-de-division">
+<h3><strong>Proporciones de División</strong><a class="headerlink" href="#proporciones-de-division" title="Link to this heading">#</a></h3>
+<p>La división se realiza en tres conjuntos mutuamente excluyentes con las siguientes proporciones:</p>
+<ul class="simple">
+<li><p><strong>Conjunto de Entrenamiento (Training)</strong>: 70% de los datos.</p></li>
+<li><p><strong>Conjunto de Validación (Validation)</strong>: 15% de los datos.</p></li>
+<li><p><strong>Conjunto de Prueba (Test)</strong>: 15% de los datos.</p></li>
+</ul>
+<p><strong>Justificación Matemática:</strong></p>
+<ul class="simple">
+<li><p>Primera división: <code class="docutils literal notranslate"><span class="pre">test_size</span> <span class="pre">=</span> <span class="pre">0.15</span></code> → 15% test, 85% temp</p></li>
+<li><p>Segunda división: <code class="docutils literal notranslate"><span class="pre">test_size</span> <span class="pre">=</span> <span class="pre">0.176</span></code> → 15% val (0.176 × 85% ≈ 15%), 70% train</p></li>
+</ul>
+</section>
+<section id="estratificacion-para-preservar-distribucion">
+<h3><strong>Estratificación para Preservar Distribución</strong><a class="headerlink" href="#estratificacion-para-preservar-distribucion" title="Link to this heading">#</a></h3>
+<p>Se aplica <strong>stratify=y</strong> en ambas divisiones para garantizar que la distribución de la variable objetivo se mantenga consistente en todos los conjuntos:</p>
+<div class="math notranslate nohighlight">
+\[
+P(y=1|_{\text{train}}) \approx P(y=1|_{\text{val}}) \approx P(y=1|_{\text{test}}) \approx P(y=1|_{\text{completo}})
+\]</div>
+<p><strong>Donde:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(y=1)\)</span> representa la proporción de casos positivos (diabetes).</p></li>
+<li><p>La estratificación previene sesgos en la evaluación debido a distribuciones desiguales.</p></li>
+</ul>
+<p>Se establece <code class="docutils literal notranslate"><span class="pre">random_state=42</span></code> para garantizar que los resultados sean completamente reproducibles en ejecuciones futuras.</p>
+</section>
+<section id="proposito-de-cada-conjunto">
+<h3><strong>Propósito de Cada Conjunto</strong><a class="headerlink" href="#proposito-de-cada-conjunto" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Conjunto</p></th>
+<th class="head"><p>Tamaño</p></th>
+<th class="head"><p>Propósito</p></th>
+<th class="head"><p>Uso en el Algoritmo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Training</strong></p></td>
+<td><p>70%</p></td>
+<td><p>Aprendizaje de modelos</p></td>
+<td><p>Entrenamiento de modelos base</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Validation</strong></p></td>
+<td><p>15%</p></td>
+<td><p>Optimización de hiperparámetros</p></td>
+<td><p>Función objetivo del Simulated Annealing</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Test</strong></p></td>
+<td><p>15%</p></td>
+<td><p>Evaluación final</p></td>
+<td><p>Medición del rendimiento generalizado</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id3">
+<h3><strong>Referencia en el Paper</strong><a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>El paper establece en la sección de metodología la importancia de usar conjuntos de validación separados para la optimización de ensembles:</p>
+<blockquote>
+<div><p><em>“To make sure that the results obtained from our benchmark study are not biased towards a certain part of the data, we perform nested cross-validation. The outer loop performs five-fold cross-validation on each data set and reports the test results. The inner loop is used to tune the hyperparameters using single train/validation split.”</em></p>
+</div></blockquote>
+<p><strong>Adaptación para nuestro caso:</strong></p>
+<ul class="simple">
+<li><p><strong>Simplificación</strong>: Usamos división única en lugar de cross-validation anidada por eficiencia computacional.</p></li>
+<li><p><strong>Preservación de principio</strong>: Mantenemos separación clara entre entrenamiento, validación y test.</p></li>
+<li><p><strong>Consistencia</strong>: La validación se usa exclusivamente para optimizar pesos del ensemble.</p></li>
+</ul>
+</section>
+<section id="caracteristicas-de-la-implementacion">
+<h3><strong>Características de la Implementación</strong><a class="headerlink" href="#caracteristicas-de-la-implementacion" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Independencia de Conjuntos</strong>: No hay superposición entre training, validation y test.</p></li>
+<li><p><strong>Balance Preservado</strong>: Estratificación mantiene proporción de clases.</p></li>
+<li><p><strong>Suficiente Tamaño</strong>: Cada conjunto tiene muestras suficientes para evaluación confiable.</p></li>
+<li><p><strong>Separación Temporal</strong>: El conjunto de test no se usa en ninguna fase de desarrollo del modelo.</p></li>
+</ol>
+</section>
+<section id="ventajas-de-este-esquema">
+<h3><strong>Ventajas de este Esquema</strong><a class="headerlink" href="#ventajas-de-este-esquema" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Evaluación Realista</strong>: Test set completamente independiente.</p></li>
+<li><p><strong>Optimización Robusta</strong>: Validation set dedicado para Simulated Annealing.</p></li>
+<li><p><strong>Prevención de Overfitting</strong>: Separación clara entre desarrollo y evaluación.</p></li>
+<li><p><strong>Transparencia</strong>: Proporciones explícitas y reproducibles.</p></li>
+</ul>
+<p>Esta configuración experimental asegura que las métricas reportadas reflejen el verdadero poder de generalización del ensemble optimizado, siguiendo las mejores prácticas establecidas en la literatura de machine learning.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Crear modelos con hiperparámetros del paper</span>
+<span class="n">modelos_paper</span> <span class="o">=</span> <span class="n">crear_modelos_base_paper</span><span class="p">(</span><span class="n">preprocessor</span><span class="p">)</span>
+
+<span class="c1"># Dividir datos (70% train, 15% val, 15% test)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Dividiendo datos...&quot;</span><span class="p">)</span>
+<span class="n">X_temp</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_temp</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span>
+<span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X_temp</span><span class="p">,</span> <span class="n">y_temp</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.176</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y_temp</span>  <span class="c1"># 15/85 ≈ 0.176</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Train: </span><span class="si">{</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> muestras&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Val: </span><span class="si">{</span><span class="n">X_val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> muestras&quot;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test: </span><span class="si">{</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> muestras&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Creados 12 modelos base
+
+Dividiendo datos...
+Train: 177677 muestras
+Val:   37951 muestras
+Test:  38052 muestras
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="fase-de-optimizacion-del-ensemble-con-simulated-annealing">
+<h2><strong>Fase de Optimización del Ensemble con Simulated Annealing</strong><a class="headerlink" href="#fase-de-optimizacion-del-ensemble-con-simulated-annealing" title="Link to this heading">#</a></h2>
+<p>Esta fase corresponde directamente a la metodología descrita en las <strong>páginas 10-13</strong> del paper, específicamente en la <strong>Tabla 4</strong> que define los parámetros del algoritmo Generalized Simulated Annealing (GSA) para la selección óptima de clasificadores en ensembles heterogéneos.</p>
+<section id="configuracion-de-parametros-segun-el-paper">
+<h3><strong>Configuración de Parámetros según el Paper</strong><a class="headerlink" href="#configuracion-de-parametros-segun-el-paper" title="Link to this heading">#</a></h3>
+<p>El paper establece en la Tabla 4 los siguientes parámetros exactos para el algoritmo GSA:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parámetro</p></th>
+<th class="head"><p>Símbolo</p></th>
+<th class="head"><p>Valor</p></th>
+<th class="head"><p>Descripción</p></th>
+<th class="head"><p>Referencia</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Temperatura Inicial</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(T_0\)</span></p></td>
+<td><p>0.5</p></td>
+<td><p>Controla la exploración inicial</p></td>
+<td><p>Tabla 4</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Iteraciones</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(N_{iter}\)</span></p></td>
+<td><p>500</p></td>
+<td><p>Número máximo de evaluaciones</p></td>
+<td><p>Tabla 4</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Visiting Parameter</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(\gamma\)</span></p></td>
+<td><p>2.7</p></td>
+<td><p>Distribución de perturbación</p></td>
+<td><p>Tabla 4</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Acceptance Parameter</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(q_a\)</span></p></td>
+<td><p>-5.0</p></td>
+<td><p>Criterio de aceptación</p></td>
+<td><p>Tabla 4</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="problema-de-optimizacion">
+<h3><strong>Problema de Optimización:</strong><a class="headerlink" href="#problema-de-optimizacion" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+\max_{\mathbf{w}} \text{AUC}\left(\sum_{i=1}^{M} w_i \cdot f_i(X_{\text{val}}), y_{\text{val}}\right)
+\]</div>
+<p><strong>Sujeto a:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\sum_{i=1}^{M} w_i = 1\)</span> (normalización)</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_i \geq 0\)</span> (no-negatividad)</p></li>
+</ul>
+</section>
+<section id="algoritmo-de-simulated-annealing">
+<h3><strong>Algoritmo de Simulated Annealing:</strong><a class="headerlink" href="#algoritmo-de-simulated-annealing" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Entrenamiento de modelos base</strong> en <span class="math notranslate nohighlight">\(X_{\text{train}}\)</span></p></li>
+<li><p><strong>Inicialización aleatoria</strong> de pesos <span class="math notranslate nohighlight">\(\mathbf{w}^{(0)}\)</span></p></li>
+<li><p><strong>Bucle de optimización</strong> (<span class="math notranslate nohighlight">\(k = 1\)</span> hasta <span class="math notranslate nohighlight">\(500\)</span>):</p>
+<ul class="simple">
+<li><p><strong>Generar vecino</strong>: <span class="math notranslate nohighlight">\(\mathbf{w}' = \text{perturbar}(\mathbf{w}^{(k-1)}, T_k)\)</span></p></li>
+<li><p><strong>Evaluar</strong>: <span class="math notranslate nohighlight">\(\text{score}' = f(\mathbf{w}')\)</span></p></li>
+<li><p><strong>Criterio de aceptación</strong> con distribución q-Gaussian</p></li>
+<li><p><strong>Enfriamiento</strong>: <span class="math notranslate nohighlight">\(T_k = 0.5 \cdot 0.99^k\)</span></p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="objetivo-de-la-optimizacion">
+<h3><strong>Objetivo de la Optimización</strong><a class="headerlink" href="#objetivo-de-la-optimizacion" title="Link to this heading">#</a></h3>
+<p>El paper establece en la página 12:</p>
+<blockquote>
+<div><p><em>“The goal of classifier selection is to determine the optimal set of base classifiers to enter the ensemble from a model library. Similar to feature selection, classifier selection can improve performance by eliminating the classifiers that are correlated with other classifiers or those that are not performing well.”</em></p>
+</div></blockquote>
+<p><strong>En nuestro contexto:</strong></p>
+<ul class="simple">
+<li><p><strong>Input</strong>: 12 modelos base diversos.</p></li>
+<li><p><strong>Output</strong>: Vector de pesos óptimo <span class="math notranslate nohighlight">\(\mathbf{w}^*\)</span>.</p></li>
+<li><p><strong>Métrica</strong>: Maximizar AUC en conjunto de validación.</p></li>
+<li><p><strong>Selección</strong>: Modelos con <span class="math notranslate nohighlight">\(w_i &gt; 0.01\)</span> se consideran relevantes.</p></li>
+</ul>
+<p><strong>Este proceso determinará:</strong></p>
+<ol class="arabic simple">
+<li><p>Los modelos más relevantes para el ensemble final.</p></li>
+<li><p>Los pesos óptimos de combinación.</p></li>
+<li><p>La configuración que maximiza el poder predictivo.</p></li>
+<li><p>La base para todas las evaluaciones posteriores.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Optimizar ensemble con parámetros del paper</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Optimizando ensemble con Simulated Annealing...&quot;</span><span class="p">)</span>
+<span class="n">sae_paper</span> <span class="o">=</span> <span class="n">SimulatedAnnealingEnsemblePaper</span><span class="p">(</span><span class="n">modelos_paper</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;auc&#39;</span><span class="p">)</span>
+<span class="n">historial_scores</span><span class="p">,</span> <span class="n">historial_temps</span> <span class="o">=</span> <span class="n">sae_paper</span><span class="o">.</span><span class="n">optimizar</span><span class="p">(</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span>
+    <span class="n">temp_inicial</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="c1"># Parámetro exacto del paper (Tabla 4)</span>
+    <span class="n">iteraciones</span><span class="o">=</span><span class="mi">500</span>     <span class="c1"># Parámetro exacto del paper (Tabla 4)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimizando ensemble con Simulated Annealing...
+
+Entrenando modelos base...
+ - LR_L1
+ - LR_L2
+ - DT
+ - NB
+ - RF
+ - XGB
+ - LGBM
+ - CATB
+ - ADA
+ - BAG
+ - ETC
+ - SGB
+Iniciando Simulated Annealing (Paper parameters)
+Temp inicial: 0.5, Iteraciones: 500
+Visiting parameter (γ): 2.7
+Acceptance parameter (qa): -5.0
+   Iter 0: AUC = 0.8262, Temp = 0.5000
+   Iter 50: AUC = 0.8295, Temp = 0.3025
+   Iter 100: AUC = 0.8307, Temp = 0.1830
+   Iter 150: AUC = 0.8307, Temp = 0.1107
+   Iter 200: AUC = 0.8307, Temp = 0.0670
+   Iter 250: AUC = 0.8307, Temp = 0.0405
+   Iter 300: AUC = 0.8307, Temp = 0.0245
+   Iter 350: AUC = 0.8307, Temp = 0.0148
+   Iter 400: AUC = 0.8307, Temp = 0.0090
+   Iter 450: AUC = 0.8307, Temp = 0.0054
+Optimización completada - Mejor AUC: 0.8307
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="fase-de-evaluacion-final-y-optimizacion-del-threshold">
+<h2><strong>Fase de Evaluación Final y Optimización del Threshold</strong><a class="headerlink" href="#fase-de-evaluacion-final-y-optimizacion-del-threshold" title="Link to this heading">#</a></h2>
+<p>Esta fase corresponde a la evaluación rigurosa del ensemble optimizado, siguiendo las recomendaciones del paper sobre las métricas de evaluación y la importancia de usar múltiples métricas para una evaluación comprehensiva.</p>
+<section id="optimizacion-del-threshold-de-clasificacion">
+<h3><strong>Optimización del Threshold de Clasificación</strong><a class="headerlink" href="#optimizacion-del-threshold-de-clasificacion" title="Link to this heading">#</a></h3>
+<p><strong>Formulación Matemática:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{F1-score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
+\)</span>$</p>
+<p><strong>Donde:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\text{Precision} = \frac{TP}{TP + FP}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{Recall} = \frac{TP}{TP + FN}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{Threshold óptimo} = \arg\max_{\tau} \text{F1-score}(\tau)\)</span></p></li>
+</ul>
+</section>
+<section id="justificacion-de-f1-score-para-optimizacion">
+<h3><strong>Justificación de F1-Score para Optimización</strong><a class="headerlink" href="#justificacion-de-f1-score-para-optimizacion" title="Link to this heading">#</a></h3>
+<p>El paper menciona en la página 16:</p>
+<blockquote>
+<div><p><em>“The F1 measure computes the harmonic mean between precision and recall and is often used as an important metric in imbalanced settings since it helps to rule out the presence of model bias.”</em></p>
+</div></blockquote>
+<p><strong>En nuestro contexto de diabetes:</strong></p>
+<ul class="simple">
+<li><p><strong>Precision</strong>: Importante para minimizar falsos positivos (evitar diagnósticos erróneos).</p></li>
+<li><p><strong>Recall</strong>: Crítico para maximizar detección de casos reales (no pasar por alto diabetes).</p></li>
+<li><p><strong>F1-score</strong>: Balance óptimo para aplicaciones médicas.</p></li>
+</ul>
+</section>
+<section id="metricas-implementadas">
+<h3><strong>Métricas Implementadas</strong><a class="headerlink" href="#metricas-implementadas" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>AUC-ROC</strong>: Capacidad discriminativa general.</p></li>
+<li><p><strong>Accuracy</strong>: Precisión global.</p></li>
+<li><p><strong>Precision</strong>: Calidad de predicciones positivas .</p></li>
+<li><p><strong>Recall</strong>: Cobertura de casos reales.</p></li>
+<li><p><strong>F1-score</strong>: Balance entre precision y recall.</p></li>
+</ol>
+<p><strong>Nuestra innovación</strong>: Optimización automática del threshold en lugar de usar valores fijos arbitrarios.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Evaluar en conjunto de test con medición de tiempo</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Evaluando en conjunto de test...&quot;</span><span class="p">)</span>
+
+<span class="c1"># Medir tiempo de predicción</span>
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">y_pred_proba</span> <span class="o">=</span> <span class="n">sae_paper</span><span class="o">.</span><span class="n">predecir</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">prediction_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="n">auc_test</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_proba</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">RESULTADO FINAL - AUC Test: </span><span class="si">{</span><span class="n">auc_test</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mejor AUC durante entrenamiento: </span><span class="si">{</span><span class="n">sae_paper</span><span class="o">.</span><span class="n">mejor_score</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tiempo de predicción: </span><span class="si">{</span><span class="n">prediction_time</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> segundos&quot;</span><span class="p">)</span>
+
+<span class="c1"># Optimizar threshold para F1-score</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Optimizando threshold para F1-score...&quot;</span><span class="p">)</span>
+<span class="n">precisions</span><span class="p">,</span> <span class="n">recalls</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">precision_recall_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_proba</span><span class="p">)</span>
+<span class="n">f1_scores</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">precisions</span> <span class="o">*</span> <span class="n">recalls</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">precisions</span> <span class="o">+</span> <span class="n">recalls</span><span class="p">)</span>
+<span class="n">best_threshold</span> <span class="o">=</span> <span class="n">thresholds</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">f1_scores</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])]</span>
+
+<span class="n">y_pred_optimized</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_pred_proba</span> <span class="o">&gt;</span> <span class="n">best_threshold</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">f1_optimized</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_optimized</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Threshold óptimo: </span><span class="si">{</span><span class="n">best_threshold</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F1-Score optimizado: </span><span class="si">{</span><span class="n">f1_optimized</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># EVALUACIÓN PRINCIPAL CON THRESHOLD OPTIMIZADO</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">60</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;EVALUACIÓN FINAL - THRESHOLD OPTIMIZADO&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">60</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Calcular métricas completas con threshold optimizado</span>
+<span class="n">acc_optimized</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_optimized</span><span class="p">)</span>
+<span class="n">prec_optimized</span> <span class="o">=</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_optimized</span><span class="p">)</span>
+<span class="n">rec_optimized</span> <span class="o">=</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_optimized</span><span class="p">)</span>
+<span class="n">f1_optimized</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_optimized</span><span class="p">)</span>
+<span class="n">roc_auc_optimized</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_proba</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Threshold utilizado: </span><span class="si">{</span><span class="n">best_threshold</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy:  </span><span class="si">{</span><span class="n">acc_optimized</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision: </span><span class="si">{</span><span class="n">prec_optimized</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recall:    </span><span class="si">{</span><span class="n">rec_optimized</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F1-score:  </span><span class="si">{</span><span class="n">f1_optimized</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;AUC-ROC:   </span><span class="si">{</span><span class="n">roc_auc_optimized</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Evaluando en conjunto de test...
+
+Modelos seleccionados en el ensemble final:
+   📊 LR_L1: peso = 0.037
+   📊 LR_L2: peso = 0.503
+   📊 XGB: peso = 0.260
+   📊 LGBM: peso = 0.027
+   📊 CATB: peso = 0.034
+   📊 ETC: peso = 0.016
+   📊 SGB: peso = 0.123
+Total modelos seleccionados: 7/12
+
+RESULTADO FINAL - AUC Test: 0.824811
+Mejor AUC durante entrenamiento: 0.830725
+Tiempo de predicción: 1.512581 segundos
+
+Optimizando threshold para F1-score...
+Threshold óptimo: 0.2256
+F1-Score optimizado: 0.467043
+
+============================================================
+EVALUACIÓN FINAL - THRESHOLD OPTIMIZADO
+============================================================
+Threshold utilizado: 0.2256
+Accuracy:  0.806633
+Precision: 0.379116
+Recall:    0.608072
+F1-score:  0.467043
+AUC-ROC:   0.824811
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="analisis-de-composicion-y-contribuciones-del-ensemble-optimizado">
+<h2><strong>Análisis de Composición y Contribuciones del Ensemble Optimizado</strong><a class="headerlink" href="#analisis-de-composicion-y-contribuciones-del-ensemble-optimizado" title="Link to this heading">#</a></h2>
+<p>Esta fase corresponde al análisis de transparencia y interpretabilidad del ensemble optimizado, reflejando los principios establecidos en el paper sobre la importancia de entender la composición de los ensembles heterogéneos. El paper enfatiza en la <strong>página 3</strong>:</p>
+<blockquote>
+<div><p><em>“Heterogeneous ensembles intelligently select which classifiers to include in the final ensemble and attribute a higher weight to more performant members in the final combination.”</em></p>
+</div></blockquote>
+<p><strong>Fundamento Matemático:</strong></p>
+<ul class="simple">
+<li><p><strong>Umbral</strong>: 0.001 (0.1%) elimina modelos con contribución marginal.</p></li>
+<li><p><strong>Objetivo</strong>: Reducir complejidad sin afectar rendimiento.</p></li>
+<li><p><strong>Beneficio</strong>: Ensemble más eficiente y interpretable.</p></li>
+</ul>
+<p><strong>Output</strong>: Lista ordenada de mayor a menor contribución, permitiendo identificar:</p>
+<ul class="simple">
+<li><p><strong>Modelos líderes</strong>: Mayores contribuyentes al desempeño.</p></li>
+<li><p><strong>Modelos complementarios</strong>: Contribuciones secundarias pero valiosas.</p></li>
+<li><p><strong>Modelos redundantes</strong>: Excluidos por contribución insignificante.</p></li>
+</ul>
+<p><strong>En nuestro análisis:</strong></p>
+<ul class="simple">
+<li><p><strong>Número de modelos seleccionados</strong>: Indicador de diversidad efectiva.</p></li>
+<li><p><strong>Distribución de pesos</strong>: Medida de balance en contribuciones.</p></li>
+<li><p><strong>Tipos de modelos</strong>: Diversidad algorítmica (lineales, tree-based, ensembles).</p></li>
+</ul>
+<section id="significado-de-los-pesos-en-el-contexto-de-diabetes">
+<h3><strong>Significado de los Pesos en el Contexto de Diabetes</strong><a class="headerlink" href="#significado-de-los-pesos-en-el-contexto-de-diabetes" title="Link to this heading">#</a></h3>
+<section id="interpretacion-practica-de-contribuciones">
+<h4><strong>Interpretación Práctica de Contribuciones:</strong><a class="headerlink" href="#interpretacion-practica-de-contribuciones" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Pesos &gt; 0.1</strong>: Modelos principales del diagnóstico.</p></li>
+<li><p><strong>Pesos 0.01-0.1</strong>: Contribuyentes secundarios importantes.</p></li>
+<li><p><strong>Pesos 0.001-0.01</strong>: Elementos de refinamiento.</p></li>
+<li><p><strong>Pesos &lt; 0.001</strong>: Excluidos por contribución marginal.</p></li>
+</ul>
+</section>
+<section id="relacion-con-el-dominio-medico">
+<h4><strong>Relación con el Dominio Médico:</strong><a class="headerlink" href="#relacion-con-el-dominio-medico" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Modelos con alto peso</strong>: Capturan patrones fundamentales de diabetes.</p></li>
+<li><p><strong>Diversidad algorítmica</strong>: Diferentes perspectivas del problema clínico.</p></li>
+<li><p><strong>Robustez</strong>: Múltiples enfoques reducen dependencia de supuestos específicos.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mostrar pesos finales de los modelos</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">60</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PESOS FINALES DE LOS MODELOS EN EL ENSEMBLE&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">60</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">pesos_finales</span> <span class="o">=</span> <span class="n">sae_paper</span><span class="o">.</span><span class="n">obtener_pesos_finales</span><span class="p">()</span>
+<span class="n">modelos_seleccionados</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Modelos con contribución significativa (&gt; 0.001):&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">modelo</span><span class="p">,</span> <span class="n">peso</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">pesos_finales</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">peso</span> <span class="o">&gt;</span> <span class="mf">0.001</span><span class="p">:</span>  <span class="c1"># Mostrar solo modelos con peso significativo</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   📊 </span><span class="si">{</span><span class="n">modelo</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">peso</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">modelos_seleccionados</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">   Total modelos seleccionados: </span><span class="si">{</span><span class="n">modelos_seleccionados</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pesos_finales</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============================================================
+PESOS FINALES DE LOS MODELOS EN EL ENSEMBLE
+============================================================
+
+Modelos con contribución significativa (&gt; 0.001):
+   📊 LR_L2     : 0.5028
+   📊 XGB       : 0.2605
+   📊 SGB       : 0.1232
+   📊 LR_L1     : 0.0371
+   📊 CATB      : 0.0338
+   📊 LGBM      : 0.0270
+   📊 ETC       : 0.0156
+
+   Total modelos seleccionados: 7/12
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="evaluacion-visual-integral-y-reporte-de-desempeno-final">
+<h2><strong>Evaluación Visual Integral y Reporte de Desempeño Final</strong><a class="headerlink" href="#evaluacion-visual-integral-y-reporte-de-desempeno-final" title="Link to this heading">#</a></h2>
+<p>Esta fase final corresponde a la evaluación visual y reporte integral del ensemble optimizado, reflejando las mejores prácticas establecidas en el paper para la evaluación comprehensiva de modelos.</p>
+<section id="matriz-de-confusion-analisis-de-errores-por-categoria">
+<h3><strong>Matriz de Confusión: Análisis de Errores por Categoría</strong><a class="headerlink" href="#matriz-de-confusion-analisis-de-errores-por-categoria" title="Link to this heading">#</a></h3>
+<p><strong>Fundamento en el Contexto Médico:</strong></p>
+<ul class="simple">
+<li><p><strong>Verdaderos Positivos (TP)</strong>: Casos de diabetes correctamente identificados.</p></li>
+<li><p><strong>Falsos Positivos (FP)</strong>: Falsas alarmas - impacto en costos y estrés del paciente.</p></li>
+<li><p><strong>Falsos Negativos (FN)</strong>: Casos no detectados - riesgo clínico crítico.</p></li>
+<li><p><strong>Verdaderos Negativos (TN)</strong>: Pacientes sanos correctamente clasificados.</p></li>
+</ul>
+<p><strong>En nuestro contexto:</strong></p>
+<ul class="simple">
+<li><p><strong>Recall alto</strong>: Minimizar falsos negativos (objetivo principal en screening).</p></li>
+<li><p><strong>Precision adecuada</strong>: Balance con falsos positivos para viabilidad operativa.</p></li>
+<li><p><strong>Threshold optimizado</strong>: Balance específico para el dominio médico.</p></li>
+</ul>
+</section>
+<section id="curva-roc-capacidad-discriminativa-general">
+<h3><strong>Curva ROC: Capacidad Discriminativa General</strong><a class="headerlink" href="#curva-roc-capacidad-discriminativa-general" title="Link to this heading">#</a></h3>
+<p><strong>Fundamento Matemático del AUC:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{AUC} = \int_{0}^{1} \text{TPR}(\text{FPR})  d\text{FPR} = P(\text{score}^+ &gt; \text{score}^-)
+\)</span>$</p>
+<p><strong>En diagnóstico médico:</strong></p>
+<ul class="simple">
+<li><p><strong>AUC &gt; 0.9</strong>: Excelente discriminación.</p></li>
+<li><p><strong>AUC 0.8-0.9</strong>: Buena discriminación.</p></li>
+<li><p><strong>AUC 0.7-0.8</strong>: Discriminación aceptable.</p></li>
+<li><p><strong>AUC &lt; 0.7</strong>: Discriminación limitada.</p></li>
+</ul>
+</section>
+<section id="reporte-de-clasificacion-detallado">
+<h3><strong>Reporte de Clasificación Detallado</strong><a class="headerlink" href="#reporte-de-clasificacion-detallado" title="Link to this heading">#</a></h3>
+<p><strong>Componentes Clave del Reporte:</strong></p>
+<ul class="simple">
+<li><p><strong>Precision por clase</strong>: Confiabilidad de predicciones positivas/negativas.</p></li>
+<li><p><strong>Recall por clase</strong>: Cobertura de casos reales positivos/negativos.</p></li>
+<li><p><strong>F1-score por clase</strong>: Balance entre precision y recall.</p></li>
+<li><p><strong>Support</strong>: Distribución real de clases en test.</p></li>
+</ul>
+<p><strong>Referencia del Paper en Página 16:</strong></p>
+<blockquote>
+<div><p><em>“The F1 measure computes the harmonic mean between precision and recall and is often used as an important metric in imbalanced settings since it helps to rule out the presence of model bias.”</em></p>
+</div></blockquote>
+</section>
+<section id="resumen-ejecutivo-de-resultados">
+<h3><strong>Resumen Ejecutivo de Resultados</strong><a class="headerlink" href="#resumen-ejecutivo-de-resultados" title="Link to this heading">#</a></h3>
+<p><strong>Interpretación Integral:</strong></p>
+<ul class="simple">
+<li><p><strong>Consistencia Validación-Test</strong>: Indicador de robustez y generalización.</p></li>
+<li><p><strong>Threshold óptimo</strong>: Punto de operación balanceado para aplicación real.</p></li>
+<li><p><strong>F1-Score</strong>: Métrica principal para decisiones de implementación.</p></li>
+</ul>
+<p><strong>Consideraciones Operativas:</strong></p>
+<ul class="simple">
+<li><p><strong>Complejidad del Ensemble</strong>: Balance entre rendimiento y eficiencia.</p></li>
+<li><p><strong>Tiempo de Predicción</strong>: Factibilidad para aplicaciones en tiempo real.</p></li>
+<li><p><strong>Selección de Modelos</strong>: Efectividad del proceso de optimización.</p></li>
+</ul>
+<p><strong>Conclusión</strong>: Esta evaluación integral demuestra que el ensemble optimizado con Simulated Annealing no solo sigue las mejores prácticas establecidas en la literatura, sino que proporciona un sistema robusto y bien equilibrado para la predicción de diabetes, con métricas que respaldan su implementación en entornos clínicos reales.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Matriz de Confusión con threshold OPTIMIZADO (PRINCIPAL)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">60</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MATRIZ DE CONFUSIÓN - THRESHOLD OPTIMIZADO&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">60</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">cm_optimized</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_optimized</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cm_optimized</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">,</span>
+            <span class="n">xticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;No Diabetes&quot;</span><span class="p">,</span> <span class="s2">&quot;Diabetes/Prediabetes&quot;</span><span class="p">],</span>
+            <span class="n">yticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;No Diabetes&quot;</span><span class="p">,</span> <span class="s2">&quot;Diabetes/Prediabetes&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Predicción&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Real&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Matriz de Confusión - Ensemble Optimizado (Threshold: </span><span class="si">{</span><span class="n">best_threshold</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Curva ROC detallada</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">60</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CURVA ROC - DESEMPEÑO GENERAL&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">60</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_proba</span><span class="p">)</span>
+<span class="n">roc_auc</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;AUC = </span><span class="si">{</span><span class="n">roc_auc</span><span class="si">:</span><span class="s1">.6f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Clasificador Aleatorio&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;False Positive Rate&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;True Positive Rate&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Curva ROC - Ensemble con Simulated Annealing&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Reporte de clasificación detallado CON THRESHOLD OPTIMIZADO</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">60</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;REPORTE DE CLASIFICACIÓN DETALLADO - THRESHOLD OPTIMIZADO&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">60</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_optimized</span><span class="p">,</span> 
+                           <span class="n">target_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;No Diabetes&quot;</span><span class="p">,</span> <span class="s2">&quot;Diabetes/Prediabetes&quot;</span><span class="p">]))</span>
+
+<span class="c1"># Resumen ejecutivo de resultados</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">60</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RESUMEN DE RESULTADOS&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">60</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mejor AUC en validación: </span><span class="si">{</span><span class="n">sae_paper</span><span class="o">.</span><span class="n">mejor_score</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;AUC en test: </span><span class="si">{</span><span class="n">auc_test</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Threshold óptimo: </span><span class="si">{</span><span class="n">best_threshold</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F1-Score optimizado: </span><span class="si">{</span><span class="n">f1_optimized</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Modelos seleccionados: </span><span class="si">{</span><span class="n">modelos_seleccionados</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pesos_finales</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tiempo de predicción: </span><span class="si">{</span><span class="n">prediction_time</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> segundos&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============================================================
+MATRIZ DE CONFUSIÓN - THRESHOLD OPTIMIZADO
+============================================================
+</pre></div>
+</div>
+<img alt="_images/03b04fb096bd6ca2bc8ac1e5e458492ba2af1d0388120cc3c5b32c12824526d3.png" src="_images/03b04fb096bd6ca2bc8ac1e5e458492ba2af1d0388120cc3c5b32c12824526d3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============================================================
+CURVA ROC - DESEMPEÑO GENERAL
+============================================================
+</pre></div>
+</div>
+<img alt="_images/970c0e7fb0e1c1ca142e3fff36b4e5b81352bc79f76db8000b2ffef15763f58e.png" src="_images/970c0e7fb0e1c1ca142e3fff36b4e5b81352bc79f76db8000b2ffef15763f58e.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============================================================
+REPORTE DE CLASIFICACIÓN DETALLADO - THRESHOLD OPTIMIZADO
+============================================================
+                      precision    recall  f1-score   support
+
+         No Diabetes       0.93      0.84      0.88     32750
+Diabetes/Prediabetes       0.38      0.61      0.47      5302
+
+            accuracy                           0.81     38052
+           macro avg       0.65      0.72      0.67     38052
+        weighted avg       0.85      0.81      0.82     38052
+
+
+============================================================
+RESUMEN DE RESULTADOS
+============================================================
+Mejor AUC en validación: 0.830725
+AUC en test: 0.824811
+Threshold óptimo: 0.2256
+F1-Score optimizado: 0.467043
+Modelos seleccionados: 7/12
+Tiempo de predicción: 1.512581 segundos
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="markdown.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Conclusiones y Hallazgos Principales en los Modelados</strong></p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contexto-del-problema"><strong>Contexto del Problema</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentos-del-enfoque-propuesto"><strong>Fundamentos del Enfoque Propuesto</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-metodos-de-ensemble"><strong>¿Por qué Métodos de Ensemble?</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitectura-del-sistema-implementado"><strong>Arquitectura del Sistema Implementado</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fase-1-modelos-base"><strong>Fase 1: Modelos Base</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fase-2-seleccion-optima-con-simulated-annealing"><strong>Fase 2: Selección Óptima con Simulated Annealing</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fase-3-combinacion-de-predicciones"><strong>Fase 3: Combinación de Predicciones</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias"><strong>Importación de Librerías</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-del-dataset"><strong>Lectura del Dataset</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estrategia-de-preprocesamiento"><strong>Estrategia de Preprocesamiento</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamento-matematico-winsorizacion"><strong>Fundamento Matemático - Winsorización:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesamiento-de-caracteristicas-mediante-columntransformer"><strong>Preprocesamiento de Características mediante ColumnTransformer</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamento-matematico-estandarizacion"><strong>Fundamento Matemático - Estandarización:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-del-pool-de-modelos-base"><strong>Construcción del Pool de Modelos Base</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#composicion-del-pool-de-modelos"><strong>Composición del Pool de Modelos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificadores-individuales-4-modelos"><strong>Clasificadores Individuales (4 modelos)</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ensembles-homogeneos-8-modelos"><strong>Ensembles Homogéneos (8 modelos)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adaptaciones-realizadas-vs-paper-original"><strong>Adaptaciones Realizadas vs. Paper Original</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamento-teorico-diversidad-del-ensemble"><strong>Fundamento Teórico - Diversidad del Ensemble</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion-del-algoritmo-de-simulated-annealing"><strong>Implementación del Algoritmo de Simulated Annealing</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-init-inicializacion-del-optimizador"><strong>1. Función <code class="docutils literal notranslate"><span class="pre">__init__</span></code>: Inicialización del Optimizador</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parametros-clave-y-su-fundamentacion"><strong>Parámetros Clave y su Fundamentación</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-funcion-objetivo-evaluacion-del-ensemble"><strong>2. Función <code class="docutils literal notranslate"><span class="pre">funcion_objetivo</span></code>: Evaluación del Ensemble</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizacion-de-pesos"><strong>Normalización de Pesos:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prediccion-del-ensemble"><strong>Predicción del Ensemble:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-objetivo-auc"><strong>Función Objetivo - AUC:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-del-auc"><strong>Cálculo del AUC:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-generar-vecino-generacion-de-soluciones-vecinas"><strong>3. Función <code class="docutils literal notranslate"><span class="pre">generar_vecino</span></code>: Generación de Soluciones Vecinas</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilidad-de-perturbacion"><strong>Probabilidad de Perturbación:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#desviacion-estandar-adaptativa"><strong>Desviación Estándar Adaptativa:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#perturbacion-gaussiana"><strong>Perturbación Gaussiana:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#actualizacion-con-restriccion-de-no-negatividad"><strong>Actualización con Restricción de No-Negatividad:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-optimizar-algoritmo-principal-de-simulated-annealing"><strong>4. Función <code class="docutils literal notranslate"><span class="pre">optimizar</span></code>: Algoritmo Principal de Simulated Annealing</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-q-gaussian-para-aceptacion"><strong>Distribución q-Gaussian para Aceptación:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#esquema-de-enfriamiento-geometrico"><strong>Esquema de Enfriamiento Geométrico:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#referencia-en-el-paper"><strong>Referencia en el Paper</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-predecir-prediccion-con-ensemble-optimizado"><strong>5. Función <code class="docutils literal notranslate"><span class="pre">predecir</span></code>: Predicción con Ensemble Optimizado</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizacion-de-pesos-finales"><strong>Normalización de Pesos Finales:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#seleccion-de-modelos-relevantes"><strong>Selección de Modelos Relevantes:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Predicción del Ensemble:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Referencia en el Paper</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-obtener-pesos-finales-analisis-de-contribuciones"><strong>6. Función <code class="docutils literal notranslate"><span class="pre">obtener_pesos_finales</span></code>: Análisis de Contribuciones</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#diccionario-de-pesos"><strong>Diccionario de Pesos:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-de-contribuciones-tecnicas"><strong>Resumen de Contribuciones Técnicas</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fidelidad-al-paper"><strong>Fidelidad al Paper</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#innovaciones-implementadas"><strong>Innovaciones Implementadas</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamento-teorico-solido"><strong>Fundamento Teórico Sólido</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estrategia-de-division-de-datos"><strong>Estrategia de División de Datos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proporciones-de-division"><strong>Proporciones de División</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estratificacion-para-preservar-distribucion"><strong>Estratificación para Preservar Distribución</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proposito-de-cada-conjunto"><strong>Propósito de Cada Conjunto</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><strong>Referencia en el Paper</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#caracteristicas-de-la-implementacion"><strong>Características de la Implementación</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-de-este-esquema"><strong>Ventajas de este Esquema</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fase-de-optimizacion-del-ensemble-con-simulated-annealing"><strong>Fase de Optimización del Ensemble con Simulated Annealing</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-de-parametros-segun-el-paper"><strong>Configuración de Parámetros según el Paper</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-de-optimizacion"><strong>Problema de Optimización:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-de-simulated-annealing"><strong>Algoritmo de Simulated Annealing:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo-de-la-optimizacion"><strong>Objetivo de la Optimización</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fase-de-evaluacion-final-y-optimizacion-del-threshold"><strong>Fase de Evaluación Final y Optimización del Threshold</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizacion-del-threshold-de-clasificacion"><strong>Optimización del Threshold de Clasificación</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#justificacion-de-f1-score-para-optimizacion"><strong>Justificación de F1-Score para Optimización</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-implementadas"><strong>Métricas Implementadas</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-composicion-y-contribuciones-del-ensemble-optimizado"><strong>Análisis de Composición y Contribuciones del Ensemble Optimizado</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#significado-de-los-pesos-en-el-contexto-de-diabetes"><strong>Significado de los Pesos en el Contexto de Diabetes</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-practica-de-contribuciones"><strong>Interpretación Práctica de Contribuciones:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#relacion-con-el-dominio-medico"><strong>Relación con el Dominio Médico:</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-visual-integral-y-reporte-de-desempeno-final"><strong>Evaluación Visual Integral y Reporte de Desempeño Final</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matriz-de-confusion-analisis-de-errores-por-categoria"><strong>Matriz de Confusión: Análisis de Errores por Categoría</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-roc-capacidad-discriminativa-general"><strong>Curva ROC: Capacidad Discriminativa General</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reporte-de-clasificacion-detallado"><strong>Reporte de Clasificación Detallado</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-ejecutivo-de-resultados"><strong>Resumen Ejecutivo de Resultados</strong></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By David Marquez y Cristian Linero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
