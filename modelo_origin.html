@@ -495,6 +495,49 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-ejecutivo-de-resultados"><strong>Resumen Ejecutivo de Resultados</strong></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-importancia-de-variables-del-ensemble-optimizado"><strong>Análisis de Importancia de Variables del Ensemble Optimizado</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-importancia-ensemble"><strong>Cálculo de Importancia Ensemble</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-comparativo-de-resultados"><strong>Análisis Comparativo de Resultados</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desempeno-del-ensemble-optimizado-vs-xgboost"><strong>Desempeño del Ensemble Optimizado vs XGBoost</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-del-ensemble-optimizado"><strong>Ventajas del Ensemble Optimizado</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mayor-balance-global-f1-score-superior"><strong>1. Mayor Balance Global (F1-score superior)</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-mejorada-significativamente"><strong>2. Precision Mejorada Significativamente</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-general-superior"><strong>3. Accuracy General Superior</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trade-off-aceptable-recall-vs-precision"><strong>Trade-off Aceptable: Recall vs Precision</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-del-compromiso"><strong>Análisis del Compromiso</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#desafios-del-problema-de-diabetes"><strong>Desafíos del Problema de Diabetes</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desbalance-de-clases-critico"><strong>Desbalance de Clases Crítico</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones-en-variables-disponibles"><strong>Limitaciones en Variables Disponibles</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#composicion-del-dataset"><strong>Composición del Dataset:</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-del-ambito-de-diabetes"><strong>Complejidad del Ámbito de Diabetes</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factores-que-dificultan-la-prediccion"><strong>Factores que Dificultan la Predicción</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multifactorialidad-de-la-enfermedad"><strong>1. Multifactorialidad de la Enfermedad</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#naturaleza-del-problema-medico"><strong>2. Naturaleza del Problema Médico</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recomendaciones-y-trabajo-futuro"><strong>Recomendaciones y Trabajo Futuro</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mejoras-potenciales"><strong>Mejoras Potenciales</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#enriquecimiento-de-variables"><strong>1. Enriquecimiento de Variables</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizacion-especifica-del-dominio"><strong>2. Optimización Específica del Dominio</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones-finales"><strong>Conclusiones Finales</strong></a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -548,6 +591,7 @@ document.write(`
 <section id="fase-3-combinacion-de-predicciones">
 <h4><strong>Fase 3: Combinación de Predicciones</strong><a class="headerlink" href="#fase-3-combinacion-de-predicciones" title="Link to this heading">#</a></h4>
 <p>Las predicciones probabilísticas de los modelos seleccionados se combinan mediante una <strong>media ponderada optimizada</strong>, donde los pesos reflejan la contribución relativa de cada modelo al rendimiento global.</p>
+<p><strong>Referencia</strong>: <a class="reference external" href="https://www.researchgate.net/publication/368868896_Ensemble_Methods_in_Customer_Churn_Prediction_A_Comparative_Analysis_of_the_State-of-the-Art">https://www.researchgate.net/publication/368868896_Ensemble_Methods_in_Customer_Churn_Prediction_A_Comparative_Analysis_of_the_State-of-the-Art</a></p>
 </section>
 </section>
 </section>
@@ -622,23 +666,15 @@ x &amp; \text{en otro caso}
 <p>En nuestro caso, se aplica solo al límite superior con [0, 0.01], preservando así la integridad de la mayoría de los datos mientras se mitiga el impacto de valores extremos y así mejorar la estabilidad numérica de las estimaciones, así como la eficiencia computacional de los procesos de optimización.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">bin</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span>
-<span class="n">categoricas_ordinales</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GenHlth&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Education&#39;</span><span class="p">,</span> <span class="s1">&#39;Income&#39;</span><span class="p">]</span>
-<span class="n">num</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MentHlth&#39;</span><span class="p">,</span> <span class="s1">&#39;PhysHlth&#39;</span><span class="p">,</span> <span class="s1">&#39;BMI&#39;</span><span class="p">]</span>
-
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;BMI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">winsorize</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;BMI&#39;</span><span class="p">],</span> <span class="n">limits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;BMI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">winsorize</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;BMI&#39;</span><span class="p">],</span> <span class="n">limits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">])</span>
 
 <span class="n">binarias</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span>
 <span class="n">categoricas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GenHlth&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Education&#39;</span><span class="p">,</span> <span class="s1">&#39;Income&#39;</span><span class="p">]</span>
 <span class="n">numericas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MentHlth&#39;</span><span class="p">,</span> <span class="s1">&#39;PhysHlth&#39;</span><span class="p">,</span> <span class="s1">&#39;BMI&#39;</span><span class="p">]</span>
 
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;BMI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">winsorize</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;BMI&#39;</span><span class="p">],</span> <span class="n">limits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">])</span>
-
 <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Diabetes_binary&quot;</span><span class="p">]</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Diabetes_binary&quot;</span><span class="p">,</span> <span class="s2">&quot;CholCheck&quot;</span><span class="p">,</span> <span class="s2">&quot;AnyHealthcare&quot;</span><span class="p">])</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Diabetes_binary&quot;</span><span class="p">])</span>
 
-<span class="n">binarias</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;CholCheck&quot;</span><span class="p">)</span>
-<span class="n">binarias</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;AnyHealthcare&quot;</span><span class="p">)</span>
 <span class="n">binarias</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;Diabetes_binary&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -760,15 +796,16 @@ z = \frac{x - \mu}{\sigma}
         <span class="s1">&#39;LR_L1&#39;</span><span class="p">:</span> <span class="n">Pipeline</span><span class="p">([</span>
             <span class="p">(</span><span class="s1">&#39;preprocessor&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
             <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">(</span>
-                <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l1&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;liblinear&#39;</span><span class="p">,</span> 
-                <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span>
+                <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l1&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;saga&#39;</span><span class="p">,</span> 
+                <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">3000</span>
             <span class="p">))</span>
         <span class="p">]),</span>
         
         <span class="s1">&#39;LR_L2&#39;</span><span class="p">:</span> <span class="n">Pipeline</span><span class="p">([</span>
             <span class="p">(</span><span class="s1">&#39;preprocessor&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
             <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">(</span>
-                <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l2&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span>
+                <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l2&#39;</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;saga&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+                <span class="n">max_iter</span><span class="o">=</span><span class="mi">3000</span>
             <span class="p">))</span>
         <span class="p">]),</span>
         
@@ -799,7 +836,7 @@ z = \frac{x - \mu}{\sigma}
             <span class="p">(</span><span class="s1">&#39;preprocessor&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
             <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">XGBClassifier</span><span class="p">(</span>
                 <span class="n">colsample_bytree</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                <span class="n">n_estimators</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">reg_lambda</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">subsample</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+                <span class="n">n_estimators</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">reg_lambda</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">subsample</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">tree_method</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">,</span>
                 <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">use_label_encoder</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">eval_metric</span><span class="o">=</span><span class="s1">&#39;auc&#39;</span>
             <span class="p">))</span>
         <span class="p">]),</span>
@@ -849,8 +886,7 @@ z = \frac{x - \mu}{\sigma}
             <span class="p">))</span>
         <span class="p">])</span>
     <span class="p">}</span>
-    
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Creados </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">modelos</span><span class="p">)</span><span class="si">}</span><span class="s2"> modelos base&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">modelos</span><span class="p">)</span><span class="si">}</span><span class="s2"> modelos base creados&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">modelos</span>
 </pre></div>
 </div>
@@ -1041,7 +1077,7 @@ T_k = T_0 \cdot \alpha^k \quad \text{con } \alpha = 0.99
 </section>
 <section id="funcion-predecir-prediccion-con-ensemble-optimizado">
 <h3><strong>5. Función <code class="docutils literal notranslate"><span class="pre">predecir</span></code>: Predicción con Ensemble Optimizado</strong><a class="headerlink" href="#funcion-predecir-prediccion-con-ensemble-optimizado" title="Link to this heading">#</a></h3>
-<p>Realiza predicciones utilizando el ensemble optimizado, aplicando un umbral de selección del 1% para incluir solo modelos con contribución significativa.</p>
+<p>Realiza predicciones utilizando el ensemble optimizado, aplicando un umbral de selección del 2% para incluir solo modelos con contribución significativa.</p>
 <section id="normalizacion-de-pesos-finales">
 <h4><strong>Normalización de Pesos Finales:</strong><a class="headerlink" href="#normalizacion-de-pesos-finales" title="Link to this heading">#</a></h4>
 <div class="math notranslate nohighlight">
@@ -1053,7 +1089,7 @@ T_k = T_0 \cdot \alpha^k \quad \text{con } \alpha = 0.99
 <h4><strong>Selección de Modelos Relevantes:</strong><a class="headerlink" href="#seleccion-de-modelos-relevantes" title="Link to this heading">#</a></h4>
 <div class="math notranslate nohighlight">
 \[
-\mathcal{M}_{\text{seleccionados}} = \left\{i \in [1, M] : w_{\text{final},i} &gt; 0.01\right\}
+\mathcal{M}_{\text{seleccionados}} = \left\{i \in [1, M] : w_{\text{final},i} &gt; 0.02\right\}
 \]</div>
 </section>
 <section id="id1">
@@ -1064,7 +1100,7 @@ P_{\text{ensemble}}(y=1|X) = \sum_{i \in \mathcal{M}_{\text{seleccionados}}} w_{
 \]</div>
 <p><strong>Umbral de Selección:</strong></p>
 <ul class="simple">
-<li><p><strong>1%</strong>: Elimina modelos con contribución insignificante.</p></li>
+<li><p><strong>2%</strong>: Elimina modelos con contribución insignificante.</p></li>
 <li><p><strong>Beneficio</strong>: Reduce complejidad sin afectar rendimiento.</p></li>
 </ul>
 </section>
@@ -1106,7 +1142,7 @@ P_{\text{ensemble}}(y=1|X) = \sum_{i \in \mathcal{M}_{\text{seleccionados}}} w_{
 <section id="innovaciones-implementadas">
 <h4><strong>Innovaciones Implementadas</strong><a class="headerlink" href="#innovaciones-implementadas" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
-<li><p><strong>Selección Inteligente</strong>: Umbral del 1% para relevancia de modelos.</p></li>
+<li><p><strong>Selección Inteligente</strong>: Umbral del 2% para relevancia de modelos.</p></li>
 <li><p><strong>Monitoreo Completo</strong>: Historial de optimización.</p></li>
 <li><p><strong>Robustez</strong>: Manejo de casos edge en función objetivo.</p></li>
 </ol>
@@ -1221,9 +1257,9 @@ P_{\text{ensemble}}(y=1|X) = \sum_{i \in \mathcal{M}_{\text{seleccionados}}} w_{
             <span class="n">temperatura</span> <span class="o">=</span> <span class="n">temp_inicial</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.99</span> <span class="o">**</span> <span class="n">iteracion</span><span class="p">)</span>
             
             <span class="k">if</span> <span class="n">iteracion</span> <span class="o">%</span> <span class="mi">50</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; - Iter </span><span class="si">{</span><span class="n">iteracion</span><span class="si">}</span><span class="s2">: AUC = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mejor_score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, Temp = </span><span class="si">{</span><span class="n">temperatura</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; - Iter </span><span class="si">{</span><span class="n">iteracion</span><span class="si">}</span><span class="s2">: AUC = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mejor_score</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">, Temp = </span><span class="si">{</span><span class="n">temperatura</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimización completada - Mejor AUC: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mejor_score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimización completada - Mejor AUC: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mejor_score</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">historial_scores</span><span class="p">,</span> <span class="n">historial_temperaturas</span>
     
     <span class="k">def</span><span class="w"> </span><span class="nf">predecir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
@@ -1237,10 +1273,10 @@ P_{\text{ensemble}}(y=1|X) = \sum_{i \in \mathcal{M}_{\text{seleccionados}}} w_{
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Modelos seleccionados en el ensemble final:&quot;</span><span class="p">)</span>
         <span class="n">modelos_seleccionados</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">nombre</span><span class="p">,</span> <span class="n">modelo</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modelos</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
-            <span class="k">if</span> <span class="n">pesos_norm</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.01</span><span class="p">:</span>  <span class="c1"># Umbral del 1% para considerar modelo</span>
+            <span class="k">if</span> <span class="n">pesos_norm</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.02</span><span class="p">:</span>  <span class="c1"># Umbral del 2% para considerar modelo</span>
                 <span class="n">probas</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
                 <span class="n">prediccion_final</span> <span class="o">+=</span> <span class="n">pesos_norm</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">probas</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   📊 </span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s2">: peso = </span><span class="si">{</span><span class="n">pesos_norm</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; - </span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s2">: peso = </span><span class="si">{</span><span class="n">pesos_norm</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                 <span class="n">modelos_seleccionados</span> <span class="o">+=</span> <span class="mi">1</span>
         
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total modelos seleccionados: </span><span class="si">{</span><span class="n">modelos_seleccionados</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_modelos</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1372,12 +1408,12 @@ P(y=1|_{\text{train}}) \approx P(y=1|_{\text{val}}) \approx P(y=1|_{\text{test}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Creados 12 modelos base
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12 modelos base creados
 
 Dividiendo datos...
 Train: 177677 muestras
-Val:   37951 muestras
-Test:  38052 muestras
+Val: 37951 muestras
+Test: 38052 muestras
 </pre></div>
 </div>
 </div>
@@ -1466,7 +1502,7 @@ Test:  38052 muestras
 <li><p><strong>Input</strong>: 12 modelos base diversos.</p></li>
 <li><p><strong>Output</strong>: Vector de pesos óptimo <span class="math notranslate nohighlight">\(\mathbf{w}^*\)</span>.</p></li>
 <li><p><strong>Métrica</strong>: Maximizar AUC en conjunto de validación.</p></li>
-<li><p><strong>Selección</strong>: Modelos con <span class="math notranslate nohighlight">\(w_i &gt; 0.01\)</span> se consideran relevantes.</p></li>
+<li><p><strong>Selección</strong>: Modelos con <span class="math notranslate nohighlight">\(w_i &gt; 0.02\)</span> se consideran relevantes.</p></li>
 </ul>
 <p><strong>Este proceso determinará:</strong></p>
 <ol class="arabic simple">
@@ -1504,21 +1540,22 @@ Entrenando modelos base...
  - BAG
  - ETC
  - SGB
+
 Iniciando Simulated Annealing (Paper parameters)
 Temp inicial: 0.5, Iteraciones: 500
 Visiting parameter (γ): 2.7
 Acceptance parameter (qa): -5.0
-   Iter 0: AUC = 0.8262, Temp = 0.5000
-   Iter 50: AUC = 0.8295, Temp = 0.3025
-   Iter 100: AUC = 0.8307, Temp = 0.1830
-   Iter 150: AUC = 0.8307, Temp = 0.1107
-   Iter 200: AUC = 0.8307, Temp = 0.0670
-   Iter 250: AUC = 0.8307, Temp = 0.0405
-   Iter 300: AUC = 0.8307, Temp = 0.0245
-   Iter 350: AUC = 0.8307, Temp = 0.0148
-   Iter 400: AUC = 0.8307, Temp = 0.0090
-   Iter 450: AUC = 0.8307, Temp = 0.0054
-Optimización completada - Mejor AUC: 0.8307
+ - Iter 0: AUC = 0.829880, Temp = 0.500000
+ - Iter 50: AUC = 0.832128, Temp = 0.302503
+ - Iter 100: AUC = 0.832128, Temp = 0.183016
+ - Iter 150: AUC = 0.832128, Temp = 0.110726
+ - Iter 200: AUC = 0.832128, Temp = 0.066990
+ - Iter 250: AUC = 0.832128, Temp = 0.040529
+ - Iter 300: AUC = 0.832128, Temp = 0.024520
+ - Iter 350: AUC = 0.832128, Temp = 0.014835
+ - Iter 400: AUC = 0.832128, Temp = 0.008975
+ - Iter 450: AUC = 0.832128, Temp = 0.005430
+Optimización completada - Mejor AUC: 0.832128
 </pre></div>
 </div>
 </div>
@@ -1617,32 +1654,34 @@ $<span class="math notranslate nohighlight">\(
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Evaluando en conjunto de test...
 
 Modelos seleccionados en el ensemble final:
-   📊 LR_L1: peso = 0.037
-   📊 LR_L2: peso = 0.503
-   📊 XGB: peso = 0.260
-   📊 LGBM: peso = 0.027
-   📊 CATB: peso = 0.034
-   📊 ETC: peso = 0.016
-   📊 SGB: peso = 0.123
-Total modelos seleccionados: 7/12
+ - LR_L2: peso = 0.1301
+ - DT: peso = 0.0445
+ - RF: peso = 0.0625
+ - XGB: peso = 0.1277
+ - CATB: peso = 0.2417
+ - ADA: peso = 0.0407
+ - BAG: peso = 0.0510
+ - ETC: peso = 0.0765
+ - SGB: peso = 0.2201
+Total modelos seleccionados: 9/12
 
-RESULTADO FINAL - AUC Test: 0.824811
-Mejor AUC durante entrenamiento: 0.830725
-Tiempo de predicción: 1.512581 segundos
+RESULTADO FINAL - AUC Test: 0.826881
+Mejor AUC durante entrenamiento: 0.832128
+Tiempo de predicción: 3.478875 segundos
 
 Optimizando threshold para F1-score...
-Threshold óptimo: 0.2256
-F1-Score optimizado: 0.467043
+Threshold óptimo: 0.2394
+F1-Score optimizado: 0.471240
 
 ============================================================
 EVALUACIÓN FINAL - THRESHOLD OPTIMIZADO
 ============================================================
-Threshold utilizado: 0.2256
-Accuracy:  0.806633
-Precision: 0.379116
-Recall:    0.608072
-F1-score:  0.467043
-AUC-ROC:   0.824811
+Threshold utilizado: 0.2394
+Accuracy:  0.806738
+Precision: 0.380781
+Recall:    0.618069
+F1-score:  0.471240
+AUC-ROC:   0.826881
 </pre></div>
 </div>
 </div>
@@ -1657,7 +1696,7 @@ AUC-ROC:   0.824811
 </div></blockquote>
 <p><strong>Fundamento Matemático:</strong></p>
 <ul class="simple">
-<li><p><strong>Umbral</strong>: 0.001 (0.1%) elimina modelos con contribución marginal.</p></li>
+<li><p><strong>Umbral</strong>: 0.02 (2%) elimina modelos con contribución marginal.</p></li>
 <li><p><strong>Objetivo</strong>: Reducir complejidad sin afectar rendimiento.</p></li>
 <li><p><strong>Beneficio</strong>: Ensemble más eficiente y interpretable.</p></li>
 </ul>
@@ -1679,9 +1718,8 @@ AUC-ROC:   0.824811
 <h4><strong>Interpretación Práctica de Contribuciones:</strong><a class="headerlink" href="#interpretacion-practica-de-contribuciones" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p><strong>Pesos &gt; 0.1</strong>: Modelos principales del diagnóstico.</p></li>
-<li><p><strong>Pesos 0.01-0.1</strong>: Contribuyentes secundarios importantes.</p></li>
-<li><p><strong>Pesos 0.001-0.01</strong>: Elementos de refinamiento.</p></li>
-<li><p><strong>Pesos &lt; 0.001</strong>: Excluidos por contribución marginal.</p></li>
+<li><p><strong>Pesos 0.02-0.1</strong>: Contribuyentes secundarios importantes.</p></li>
+<li><p><strong>Pesos &lt; 0.02</strong>: Excluidos por contribución marginal.</p></li>
 </ul>
 </section>
 <section id="relacion-con-el-dominio-medico">
@@ -1700,13 +1738,13 @@ AUC-ROC:   0.824811
 
 <span class="n">pesos_finales</span> <span class="o">=</span> <span class="n">sae_paper</span><span class="o">.</span><span class="n">obtener_pesos_finales</span><span class="p">()</span>
 <span class="n">modelos_seleccionados</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Modelos con contribución significativa (&gt; 0.001):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Modelos con contribución significativa (&gt; 0.02):&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">modelo</span><span class="p">,</span> <span class="n">peso</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">pesos_finales</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">peso</span> <span class="o">&gt;</span> <span class="mf">0.001</span><span class="p">:</span>  <span class="c1"># Mostrar solo modelos con peso significativo</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   📊 </span><span class="si">{</span><span class="n">modelo</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">peso</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">peso</span> <span class="o">&gt;</span> <span class="mf">0.02</span><span class="p">:</span>  <span class="c1"># Mostrar solo modelos con peso significativo</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; - </span><span class="si">{</span><span class="n">modelo</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">peso</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">modelos_seleccionados</span> <span class="o">+=</span> <span class="mi">1</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">   Total modelos seleccionados: </span><span class="si">{</span><span class="n">modelos_seleccionados</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pesos_finales</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  Total modelos seleccionados: </span><span class="si">{</span><span class="n">modelos_seleccionados</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pesos_finales</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1715,16 +1753,18 @@ AUC-ROC:   0.824811
 PESOS FINALES DE LOS MODELOS EN EL ENSEMBLE
 ============================================================
 
-Modelos con contribución significativa (&gt; 0.001):
-   📊 LR_L2     : 0.5028
-   📊 XGB       : 0.2605
-   📊 SGB       : 0.1232
-   📊 LR_L1     : 0.0371
-   📊 CATB      : 0.0338
-   📊 LGBM      : 0.0270
-   📊 ETC       : 0.0156
+Modelos con contribución significativa (&gt; 0.02):
+ - CATB      : 0.2417
+ - SGB       : 0.2201
+ - LR_L2     : 0.1301
+ - XGB       : 0.1277
+ - ETC       : 0.0765
+ - RF        : 0.0625
+ - BAG       : 0.0510
+ - DT        : 0.0445
+ - ADA       : 0.0407
 
-   Total modelos seleccionados: 7/12
+  Total modelos seleccionados: 9/12
 </pre></div>
 </div>
 </div>
@@ -1859,39 +1899,356 @@ MATRIZ DE CONFUSIÓN - THRESHOLD OPTIMIZADO
 ============================================================
 </pre></div>
 </div>
-<img alt="_images/03b04fb096bd6ca2bc8ac1e5e458492ba2af1d0388120cc3c5b32c12824526d3.png" src="_images/03b04fb096bd6ca2bc8ac1e5e458492ba2af1d0388120cc3c5b32c12824526d3.png" />
+<img alt="_images/de1a67defb30d2867f2e921899d6eb29d3a11d8c66ee959340fc34a0f9b5fbaf.png" src="_images/de1a67defb30d2867f2e921899d6eb29d3a11d8c66ee959340fc34a0f9b5fbaf.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============================================================
 CURVA ROC - DESEMPEÑO GENERAL
 ============================================================
 </pre></div>
 </div>
-<img alt="_images/970c0e7fb0e1c1ca142e3fff36b4e5b81352bc79f76db8000b2ffef15763f58e.png" src="_images/970c0e7fb0e1c1ca142e3fff36b4e5b81352bc79f76db8000b2ffef15763f58e.png" />
+<img alt="_images/59469bd7b964bed99fa1facbf9e46e46d96ddf79fb61155a89d99ca4c9343e69.png" src="_images/59469bd7b964bed99fa1facbf9e46e46d96ddf79fb61155a89d99ca4c9343e69.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============================================================
 REPORTE DE CLASIFICACIÓN DETALLADO - THRESHOLD OPTIMIZADO
 ============================================================
                       precision    recall  f1-score   support
 
          No Diabetes       0.93      0.84      0.88     32750
-Diabetes/Prediabetes       0.38      0.61      0.47      5302
+Diabetes/Prediabetes       0.38      0.62      0.47      5302
 
             accuracy                           0.81     38052
-           macro avg       0.65      0.72      0.67     38052
+           macro avg       0.66      0.73      0.68     38052
         weighted avg       0.85      0.81      0.82     38052
 
 
 ============================================================
 RESUMEN DE RESULTADOS
 ============================================================
-Mejor AUC en validación: 0.830725
-AUC en test: 0.824811
-Threshold óptimo: 0.2256
-F1-Score optimizado: 0.467043
-Modelos seleccionados: 7/12
-Tiempo de predicción: 1.512581 segundos
+Mejor AUC en validación: 0.832128
+AUC en test: 0.826881
+Threshold óptimo: 0.2394
+F1-Score optimizado: 0.471240
+Modelos seleccionados: 9/12
+Tiempo de predicción: 3.478875 segundos
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="analisis-de-importancia-de-variables-del-ensemble-optimizado">
+<h2><strong>Análisis de Importancia de Variables del Ensemble Optimizado</strong><a class="headerlink" href="#analisis-de-importancia-de-variables-del-ensemble-optimizado" title="Link to this heading">#</a></h2>
+<p>Esta fase implementa un análisis de importancia de variables refinado que sigue directamente los principios establecidos en el paper sobre la naturaleza de los ensembles heterogéneos. El paper establece en la <strong>página 3</strong>:</p>
+<blockquote>
+<div><p><em>“Heterogeneous ensembles intelligently select which classifiers to include in the final ensemble and attribute a higher weight to more performant members in the final combination.”</em></p>
+</div></blockquote>
+<p>La función <code class="docutils literal notranslate"><span class="pre">calcular_importancia_variables_ensemble</span></code> implementa una metodología que respeta la estructura óptima del ensemble identificada por el Simulated Annealing:</p>
+<p><strong>Principio Clave</strong>: Las importancias de variables deben reflejar la contribución real de cada modelo en el ensemble final, ponderada por su peso optimizado.</p>
+<p><strong>Umbral de Significancia</strong>: 2% - alineado con el criterio usado en la predicción del ensemble.</p>
+<p><strong>Justificación</strong>: Modelos con contribución marginal no deberían influir en el análisis de importancia.</p>
+<section id="calculo-de-importancia-ensemble">
+<h3><strong>Cálculo de Importancia Ensemble</strong><a class="headerlink" href="#calculo-de-importancia-ensemble" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+\text{Importancia}_{\text{ensemble}}(v) = \sum_{i \in \mathcal{M}_{\text{significativo}}} w_i \cdot I_i(v)
+\]</div>
+<p><strong>Donde:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathcal{M}_{\text{significativo}} = \{i : w_i &gt; 0.01\}\)</span>: Modelos con contribución significativa</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_i\)</span>: Peso optimizado del modelo <span class="math notranslate nohighlight">\(i\)</span> en el ensemble</p></li>
+<li><p><span class="math notranslate nohighlight">\(I_i(v)\)</span>: Importancia de la variable <span class="math notranslate nohighlight">\(v\)</span> en el modelo <span class="math notranslate nohighlight">\(i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{Importancia}_{\text{ensemble}}(v)\)</span>: Importancia final ponderada</p></li>
+</ul>
+<p><strong>Transformación:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{Importancia}_{\text{normalizada}}(v) = \frac{\text{Importancia}_{\text{ensemble}}(v)}{\sum_{j=1}^{P} \text{Importancia}_{\text{ensemble}}(v_j)}
+\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calcular_importancia_variables_ensemble</span><span class="p">(</span><span class="n">sae_ensemble</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calcula la importancia de variables solo para los modelos del ensemble optimizado&quot;&quot;&quot;</span>
+    
+    <span class="n">importancias_totales</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">pesos_finales</span> <span class="o">=</span> <span class="n">sae_ensemble</span><span class="o">.</span><span class="n">obtener_pesos_finales</span><span class="p">()</span>
+    <span class="n">modelos_utilizados</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">for</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">modelo</span> <span class="ow">in</span> <span class="n">sae_ensemble</span><span class="o">.</span><span class="n">modelos</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">peso</span> <span class="o">=</span> <span class="n">pesos_finales</span><span class="p">[</span><span class="n">nombre</span><span class="p">]</span>
+        
+        <span class="c1"># Solo considerar modelos con peso significativo</span>
+        <span class="k">if</span> <span class="n">peso</span> <span class="o">&gt;</span> <span class="mf">0.02</span><span class="p">:</span>
+            <span class="n">modelos_utilizados</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Calculando importancias para </span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s2"> (peso: </span><span class="si">{</span><span class="n">peso</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)...&quot;</span><span class="p">)</span>
+            
+            <span class="c1"># Asegurar que el modelo está entrenado</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">modelo</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;classifier&#39;</span><span class="p">],</span> <span class="s1">&#39;feature_importances_&#39;</span><span class="p">):</span>
+                <span class="c1"># Reentrenar si es necesario</span>
+                <span class="n">modelo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+            
+            <span class="c1"># Obtener importancias</span>
+            <span class="n">classifier</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;classifier&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="s1">&#39;feature_importances_&#39;</span><span class="p">):</span>
+                <span class="n">importancias</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">feature_importances_</span>
+            <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="s1">&#39;coef_&#39;</span><span class="p">):</span>
+                <span class="n">importancias</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">classifier</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">importancias</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+            
+            <span class="c1"># Ponderar por el peso del modelo en el ensemble</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">importancias_totales</span><span class="p">:</span>
+                    <span class="n">importancias_totales</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">importancias_totales</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">+=</span> <span class="n">importancias</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">peso</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Modelos utilizados para importancia: </span><span class="si">{</span><span class="n">modelos_utilizados</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Normalizar</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">importancias_totales</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">importancias_normalizadas</span> <span class="o">=</span> <span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="n">imp</span><span class="o">/</span><span class="n">total</span> <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">imp</span> <span class="ow">in</span> <span class="n">importancias_totales</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    
+    <span class="k">return</span> <span class="n">importancias_normalizadas</span>
+
+<span class="c1"># 2. USAR LA FUNCIÓN CORREGIDA</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Calculando importancia de variables del ENSEMBLE optimizado...&quot;</span><span class="p">)</span>
+<span class="n">importancias_corregidas</span> <span class="o">=</span> <span class="n">calcular_importancia_variables_ensemble</span><span class="p">(</span><span class="n">sae_paper</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Top 10 variables más importantes</span>
+<span class="n">top_10_corregido</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">importancias_corregidas</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">TOP 10 VARIABLES MÁS IMPORTANTES DEL ENSEMBLE:&quot;</span><span class="p">)</span>
+<span class="n">variables_corr</span><span class="p">,</span> <span class="n">importancias_corr</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">top_10_corregido</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">variables_corr</span><span class="p">,</span> <span class="n">importancias_corr</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Importancia Relativa en el Ensemble&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Top 10 Variables Más Importantes - Ensemble Optimizado&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Mostrar valores numéricos</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Importancias numéricas del ensemble:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">var</span><span class="p">,</span> <span class="n">imp</span> <span class="ow">in</span> <span class="n">top_10_corregido</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; - </span><span class="si">{</span><span class="n">var</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">imp</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calculando importancia de variables del ENSEMBLE optimizado...
+Calculando importancias para LR_L2 (peso: 0.1301)...
+Calculando importancias para DT (peso: 0.0445)...
+Calculando importancias para RF (peso: 0.0625)...
+Calculando importancias para XGB (peso: 0.1277)...
+Calculando importancias para CATB (peso: 0.2417)...
+Calculando importancias para ADA (peso: 0.0407)...
+Calculando importancias para BAG (peso: 0.0510)...
+Calculando importancias para ETC (peso: 0.0765)...
+Calculando importancias para SGB (peso: 0.2201)...
+Modelos utilizados para importancia: 9
+
+TOP 10 VARIABLES MÁS IMPORTANTES DEL ENSEMBLE:
+</pre></div>
+</div>
+<img alt="_images/0aae7c1d952afcc8c56792fc0dc60d3aa1f45a0ccb50bd1e1f006e5b826efb75.png" src="_images/0aae7c1d952afcc8c56792fc0dc60d3aa1f45a0ccb50bd1e1f006e5b826efb75.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Importancias numéricas del ensemble:
+ - Sex                 : 0.2060
+ - Age                 : 0.1793
+ - CholCheck           : 0.1509
+ - BMI                 : 0.1203
+ - Smoker              : 0.0720
+ - Stroke              : 0.0611
+ - Income              : 0.0374
+ - DiffWalk            : 0.0280
+ - NoDocbcCost         : 0.0256
+ - Fruits              : 0.0178
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="analisis-comparativo-de-resultados">
+<h2><strong>Análisis Comparativo de Resultados</strong><a class="headerlink" href="#analisis-comparativo-de-resultados" title="Link to this heading">#</a></h2>
+<section id="desempeno-del-ensemble-optimizado-vs-xgboost">
+<h3><strong>Desempeño del Ensemble Optimizado vs XGBoost</strong><a class="headerlink" href="#desempeno-del-ensemble-optimizado-vs-xgboost" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Métrica</p></th>
+<th class="head"><p><strong>Ensemble con SA</strong></p></th>
+<th class="head"><p><strong>XGBoost (mejor individual)</strong></p></th>
+<th class="head"><p><strong>Análisis Comparativo</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Accuracy</strong></p></td>
+<td><p>0.806738</p></td>
+<td><p>0.720987</p></td>
+<td><p><strong>+11.8%</strong> a favor del Ensemble</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Precision</strong></p></td>
+<td><p>0.380781</p></td>
+<td><p>0.306313</p></td>
+<td><p><strong>+24.3%</strong> a favor del Ensemble</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Recall</strong></p></td>
+<td><p>0.618069</p></td>
+<td><p>0.792757</p></td>
+<td><p><strong>-28.2%</strong> (XGBoost mejor)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>F1-score</strong></p></td>
+<td><p>0.471240</p></td>
+<td><p>0.441886</p></td>
+<td><p><strong>+6.4%</strong> a favor del Ensemble</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>AUC-ROC</strong></p></td>
+<td><p>0.826881</p></td>
+<td><p>0.825904</p></td>
+<td><p><strong>Equivalente</strong> (diferencia mínima)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ventajas-del-ensemble-optimizado">
+<h3><strong>Ventajas del Ensemble Optimizado</strong><a class="headerlink" href="#ventajas-del-ensemble-optimizado" title="Link to this heading">#</a></h3>
+<section id="mayor-balance-global-f1-score-superior">
+<h4><strong>1. Mayor Balance Global (F1-score superior)</strong><a class="headerlink" href="#mayor-balance-global-f1-score-superior" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Ensemble</strong>: F1-score = 0.4712.</p></li>
+<li><p><strong>XGBoost</strong>: F1-score = 0.4419.</p></li>
+<li><p><strong>Mejora</strong>: +6.6% en el balance entre Precision y Recall.</p></li>
+</ul>
+<p><strong>Significado clínico</strong>: El ensemble logra un mejor equilibrio entre:</p>
+<ul class="simple">
+<li><p><strong>Evitar falsas alarmas</strong> (Precision más alta).</p></li>
+<li><p><strong>Mantener detección adecuada</strong> (Recall aceptable).</p></li>
+</ul>
+</section>
+<section id="precision-mejorada-significativamente">
+<h4><strong>2. Precision Mejorada Significativamente</strong><a class="headerlink" href="#precision-mejorada-significativamente" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>+24.1%</strong> en Precision indica que el ensemble produce:</p>
+<ul>
+<li><p>Menos falsos positivos.</p></li>
+<li><p>Diagnósticos más confiables cuando predice diabetes.</p></li>
+<li><p>Mayor especificidad en la identificación.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="accuracy-general-superior">
+<h4><strong>3. Accuracy General Superior</strong><a class="headerlink" href="#accuracy-general-superior" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>+11.8%</strong> en Accuracy global refleja:</p>
+<ul>
+<li><p>Mejor desempeño general en todas las clasificaciones.</p></li>
+<li><p>Mayor consistencia predictiva.</p></li>
+<li><p>Robustez entre diferentes tipos de pacientes.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="trade-off-aceptable-recall-vs-precision">
+<h3><strong>Trade-off Aceptable: Recall vs Precision</strong><a class="headerlink" href="#trade-off-aceptable-recall-vs-precision" title="Link to this heading">#</a></h3>
+<section id="analisis-del-compromiso">
+<h4><strong>Análisis del Compromiso</strong><a class="headerlink" href="#analisis-del-compromiso" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>XGBoost</strong>: Recall más alto (0.7928) pero Precision baja (0.3063).</p></li>
+<li><p><strong>Ensemble</strong>: Recall moderado (0.6180) con Precision mejorada (0.3807).</p></li>
+</ul>
+<p><strong>En contexto médico</strong>:</p>
+<ul class="simple">
+<li><p><strong>Alto Recall</strong>: Importante para no pasar por alto casos reales.</p></li>
+<li><p><strong>Alta Precision</strong>: Crítica para evitar tratamientos innecesarios y ansiedad del paciente.</p></li>
+<li><p><strong>Balance óptimo</strong>: El ensemble encuentra un punto más equilibrado.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="desafios-del-problema-de-diabetes">
+<h2><strong>Desafíos del Problema de Diabetes</strong><a class="headerlink" href="#desafios-del-problema-de-diabetes" title="Link to this heading">#</a></h2>
+<section id="desbalance-de-clases-critico">
+<h3><strong>Desbalance de Clases Crítico</strong><a class="headerlink" href="#desbalance-de-clases-critico" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Distribución</span> <span class="n">aproximada</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">No</span> <span class="n">Diabetes</span><span class="p">:</span> <span class="mi">86</span><span class="o">%.</span>
+<span class="o">-</span> <span class="n">Diabetes</span><span class="o">/</span><span class="n">Prediabetes</span><span class="p">:</span> <span class="mi">14</span><span class="o">%.</span>
+</pre></div>
+</div>
+<p><strong>Impacto en los modelos</strong>:</p>
+<ul class="simple">
+<li><p><strong>Sesgo hacia la clase mayoritaria</strong>: Los modelos tienden a predecir “No Diabetes”.</p></li>
+<li><p><strong>Dificultad en detección</strong>: La clase minoritaria tiene menos patrones para aprender.</p></li>
+<li><p><strong>Métricas engañosas</strong>: Accuracy alto no necesariamente indica buen desempeño.</p></li>
+</ul>
+</section>
+<section id="limitaciones-en-variables-disponibles">
+<h3><strong>Limitaciones en Variables Disponibles</strong><a class="headerlink" href="#limitaciones-en-variables-disponibles" title="Link to this heading">#</a></h3>
+<section id="composicion-del-dataset">
+<h4><strong>Composición del Dataset:</strong><a class="headerlink" href="#composicion-del-dataset" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Variables subjetivas</strong>: Comportamientos, hábitos, percepciones.</p></li>
+<li><p><strong>Variables médicas limitadas</strong>: Pocos indicadores clínicos directos.</p></li>
+<li><p><strong>Variables demográficas</strong>: Edad, educación, ingresos.</p></li>
+</ul>
+<p><strong>Impacto en capacidad predictiva</strong>:</p>
+<ul class="simple">
+<li><p><strong>Menos señales fuertes</strong>: Variables médicas son más determinantes.</p></li>
+<li><p><strong>Ruido en datos</strong>: Variables subjetivas introducen variabilidad.</p></li>
+<li><p><strong>Complejidad del fenómeno</strong>: Diabetes depende de múltiples factores interrelacionados.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="complejidad-del-ambito-de-diabetes">
+<h2><strong>Complejidad del Ámbito de Diabetes</strong><a class="headerlink" href="#complejidad-del-ambito-de-diabetes" title="Link to this heading">#</a></h2>
+<section id="factores-que-dificultan-la-prediccion">
+<h3><strong>Factores que Dificultan la Predicción</strong><a class="headerlink" href="#factores-que-dificultan-la-prediccion" title="Link to this heading">#</a></h3>
+<section id="multifactorialidad-de-la-enfermedad">
+<h4><strong>1. Multifactorialidad de la Enfermedad</strong><a class="headerlink" href="#multifactorialidad-de-la-enfermedad" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Factores genéticos, ambientales, de estilo de vida.</p></li>
+<li><p>Progresión gradual y no lineal.</p></li>
+<li><p>Manifestaciones heterogéneas entre pacientes.</p></li>
+</ul>
+</section>
+<section id="naturaleza-del-problema-medico">
+<h4><strong>2. Naturaleza del Problema Médico</strong><a class="headerlink" href="#naturaleza-del-problema-medico" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Límites difusos entre prediabetes y diabetes.</p></li>
+<li><p>Progresión asintomática en etapas tempranas.</p></li>
+<li><p>Múltiples vías fisiopatológicas.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="recomendaciones-y-trabajo-futuro">
+<h2><strong>Recomendaciones y Trabajo Futuro</strong><a class="headerlink" href="#recomendaciones-y-trabajo-futuro" title="Link to this heading">#</a></h2>
+<section id="mejoras-potenciales">
+<h3><strong>Mejoras Potenciales</strong><a class="headerlink" href="#mejoras-potenciales" title="Link to this heading">#</a></h3>
+<section id="enriquecimiento-de-variables">
+<h4><strong>1. Enriquecimiento de Variables</strong><a class="headerlink" href="#enriquecimiento-de-variables" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Incorporación de más indicadores médicos directos.</p></li>
+<li><p>Variables de laboratorio (glucosa, HbA1c).</p></li>
+<li><p>Datos temporales y de progresión.</p></li>
+</ul>
+</section>
+<section id="optimizacion-especifica-del-dominio">
+<h4><strong>2. Optimización Específica del Dominio</strong><a class="headerlink" href="#optimizacion-especifica-del-dominio" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Funciones de pérdida que prioricen Recall médico.</p></li>
+<li><p>Threshold adaptativo por subpoblaciones.</p></li>
+<li><p>Validación con especialistas médicos.</p></li>
+</ul>
+</section>
+</section>
+<section id="conclusiones-finales">
+<h3><strong>Conclusiones Finales</strong><a class="headerlink" href="#conclusiones-finales" title="Link to this heading">#</a></h3>
+<p><strong>El ensemble optimizado con Simulated Annealing</strong> demuestra ser una aproximación superior para la predicción de diabetes en condiciones de desbalance y variables limitadas, logrando:</p>
+<ol class="arabic simple">
+<li><p><strong>Mejor balance global</strong> que el mejor modelo individual.</p></li>
+<li><p><strong>Precision significativamente mejorada</strong> para aplicaciones clínicas.</p></li>
+<li><p><strong>Robustez mediante diversidad algorítmica</strong>.</p></li>
+</ol>
+<p>A pesar de las limitaciones inherentes del dataset y la complejidad del problema médico, el enfoque de ensemble heterogéneo optimizado representa un avance significativo en la construcción de sistemas predictivos robustos para detección temprana de diabetes.</p>
 </section>
 </section>
 </section>
@@ -2061,6 +2418,49 @@ Tiempo de predicción: 1.512581 segundos
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-roc-capacidad-discriminativa-general"><strong>Curva ROC: Capacidad Discriminativa General</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reporte-de-clasificacion-detallado"><strong>Reporte de Clasificación Detallado</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-ejecutivo-de-resultados"><strong>Resumen Ejecutivo de Resultados</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-importancia-de-variables-del-ensemble-optimizado"><strong>Análisis de Importancia de Variables del Ensemble Optimizado</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-importancia-ensemble"><strong>Cálculo de Importancia Ensemble</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-comparativo-de-resultados"><strong>Análisis Comparativo de Resultados</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desempeno-del-ensemble-optimizado-vs-xgboost"><strong>Desempeño del Ensemble Optimizado vs XGBoost</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-del-ensemble-optimizado"><strong>Ventajas del Ensemble Optimizado</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mayor-balance-global-f1-score-superior"><strong>1. Mayor Balance Global (F1-score superior)</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-mejorada-significativamente"><strong>2. Precision Mejorada Significativamente</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-general-superior"><strong>3. Accuracy General Superior</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trade-off-aceptable-recall-vs-precision"><strong>Trade-off Aceptable: Recall vs Precision</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-del-compromiso"><strong>Análisis del Compromiso</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#desafios-del-problema-de-diabetes"><strong>Desafíos del Problema de Diabetes</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desbalance-de-clases-critico"><strong>Desbalance de Clases Crítico</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones-en-variables-disponibles"><strong>Limitaciones en Variables Disponibles</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#composicion-del-dataset"><strong>Composición del Dataset:</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-del-ambito-de-diabetes"><strong>Complejidad del Ámbito de Diabetes</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factores-que-dificultan-la-prediccion"><strong>Factores que Dificultan la Predicción</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multifactorialidad-de-la-enfermedad"><strong>1. Multifactorialidad de la Enfermedad</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#naturaleza-del-problema-medico"><strong>2. Naturaleza del Problema Médico</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recomendaciones-y-trabajo-futuro"><strong>Recomendaciones y Trabajo Futuro</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mejoras-potenciales"><strong>Mejoras Potenciales</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#enriquecimiento-de-variables"><strong>1. Enriquecimiento de Variables</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizacion-especifica-del-dominio"><strong>2. Optimización Específica del Dominio</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones-finales"><strong>Conclusiones Finales</strong></a></li>
 </ul>
 </li>
 </ul>
