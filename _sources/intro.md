@@ -1,6 +1,6 @@
 # **Introducción y Contextualización**
 
-La diabetes representa uno de los mayores desafíos de salud pública a nivel global, afectando a más de 537 millones de adultos en el mundo según la Federación Internacional de Diabetes. En Estados Unidos específicamente, aproximadamente 37.3 millones de personas padecen diabetes, lo que equivale al 11.3% de la población, mientras que 96 millones de adultos (38.0% de la población adulta) presentan prediabetes. Esta enfermedad crónica no solo impacta la calidad de vida de las personas, sino que también genera una carga económica significativa para los sistemas de salud, con un costo estimado de $327 mil millones anuales en EE. UU.
+La diabetes representa uno de los mayores desafíos de salud pública a nivel global, afectando a más de 589 millones de adultos en el mundo según la **Federación Internacional de Diabetes**, esto representa el 11.1% (1 de cada 9 personas) de la población adulta. Además, aproximadamente 252 millones de adultos viven con diabetes no diagnosticada. Esto representa alrededor del 40% de la población adulta con Diabetes. También, la **Federación Internacional de Diabetes** estima que para el año 2050 aproximadamente 853 millones de adultos padecerán de diabetes. Esta enfermedad crónica no solo impacta la calidad de vida de las personas, sino que también genera una carga económica significativa para los sistemas de salud.
 
 La detección temprana y la identificación de factores de riesgo modificables son cruciales para prevenir o retrasar la aparición de diabetes y sus complicaciones asociadas, como enfermedades cardiovasculares, neuropatía, retinopatía y nefropatía. En este contexto, el aprendizaje automático (Machine Learning) emerge como una herramienta poderosa para analizar patrones complejos en datos de salud y desarrollar modelos predictivos que puedan identificar individuos en riesgo.
 
@@ -65,7 +65,7 @@ Las variables pueden clasificarse en las siguientes categorías:
 ### **Comportamientos de Salud**
 - `BMI`: Índice de masa corporal.
 - `Smoker`: ¿Has fumado al menos 100 cigarrillos en toda tu vida? [Nota: 5 paquetes = 100 cigarrillos] (0 = no, 1 = yes).
-- `PhysActivity`: ¿Durante cuántos días durante los últimos 30 días su salud física no fue buena? (escala 0-30 días).
+- `PhysActivity`: ¿Durante los último 30 días realizó actividad física, sin incluir el trabajo? (0 = no, 1 = yes).
 - `Fruits`: Consume fruta 1 o más veces al día (0 = no, 1 = yes).
 - `Veggies`: Consume verduras 1 o más veces al día (0 = no, 1 = yes).
 - `HvyAlcoholConsump`: Bebedores empedernidos (Hombre adulto que consume más de 14 bebidas por semana o Mujer adulta que consume más de 7 bebidas por semana) (0 = no, 1 = yes).

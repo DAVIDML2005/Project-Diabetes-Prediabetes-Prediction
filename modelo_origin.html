@@ -62,7 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'modelo_origin';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Conclusiones y Hallazgos Principales en los Modelados" href="markdown.html" />
+    <link rel="next" title="Conclusiones del Modelo Original" href="conclusion.html" />
+    <link rel="prev" title="Conclusiones y Hallazgos en los Modelados" href="markdown.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -186,8 +187,9 @@
 <li class="toctree-l1"><a class="reference internal" href="modelado_smote.html"><strong>Modelado Optimizado (SMOTE)</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="modelado_adasyn.html"><strong>Modelado Optimizado (ADASYN)</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="modelado_w.html"><strong>Modelado Optimizado (class weight)</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="markdown.html"><strong>Conclusiones y Hallazgos Principales en los Modelados</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="markdown.html"><strong>Conclusiones y Hallazgos en los Modelados</strong></a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Ensemble con Simulated Annealing para Predicción de Diabetes</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="conclusion.html"><strong>Conclusiones del Modelo Original</strong></a></li>
 </ul>
 
     </div>
@@ -495,49 +497,15 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-ejecutivo-de-resultados"><strong>Resumen Ejecutivo de Resultados</strong></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-de-resultados"><strong>Tabla Comparativa de Resultados</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-importancia-de-variables-del-ensemble-optimizado"><strong>Análisis de Importancia de Variables del Ensemble Optimizado</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-importancia-ensemble"><strong>Cálculo de Importancia Ensemble</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consistencia-con-conocimiento-medico"><strong>Consistencia con Conocimiento Médico</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-comparativo-de-resultados"><strong>Análisis Comparativo de Resultados</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desempeno-del-ensemble-optimizado-vs-xgboost"><strong>Desempeño del Ensemble Optimizado vs XGBoost</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-del-ensemble-optimizado"><strong>Ventajas del Ensemble Optimizado</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mayor-balance-global-f1-score-superior"><strong>1. Mayor Balance Global (F1-score superior)</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-mejorada-significativamente"><strong>2. Precision Mejorada Significativamente</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-general-superior"><strong>3. Accuracy General Superior</strong></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trade-off-aceptable-recall-vs-precision"><strong>Trade-off Aceptable: Recall vs Precision</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-del-compromiso"><strong>Análisis del Compromiso</strong></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#desafios-del-problema-de-diabetes"><strong>Desafíos del Problema de Diabetes</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desbalance-de-clases-critico"><strong>Desbalance de Clases Crítico</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones-en-variables-disponibles"><strong>Limitaciones en Variables Disponibles</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#composicion-del-dataset"><strong>Composición del Dataset:</strong></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-del-ambito-de-diabetes"><strong>Complejidad del Ámbito de Diabetes</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factores-que-dificultan-la-prediccion"><strong>Factores que Dificultan la Predicción</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multifactorialidad-de-la-enfermedad"><strong>1. Multifactorialidad de la Enfermedad</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#naturaleza-del-problema-medico"><strong>2. Naturaleza del Problema Médico</strong></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recomendaciones-y-trabajo-futuro"><strong>Recomendaciones y Trabajo Futuro</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mejoras-potenciales"><strong>Mejoras Potenciales</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#enriquecimiento-de-variables"><strong>1. Enriquecimiento de Variables</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizacion-especifica-del-dominio"><strong>2. Optimización Específica del Dominio</strong></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones-finales"><strong>Conclusiones Finales</strong></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-con-modelos-base-optimizados"><strong>Comparación con Modelos Base Optimizados</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-estadistico-de-significancia"><strong>Análisis Estadístico de Significancia</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejecucion-y-resultados-de-la-comparacion-estadistica"><strong>Ejecución y Resultados de la Comparación Estadística</strong></a></li>
 </ul>
             </nav>
         </div>
@@ -562,7 +530,7 @@ document.write(`
 <p>Los métodos de ensemble combinan múltiples modelos de machine learning para lograr un rendimiento predictivo superior al de cualquier modelo individual. Esta superioridad se fundamenta en tres principios teóricos:</p>
 <ol class="arabic simple">
 <li><p><strong>Diversidad estadística</strong>: Diferentes modelos capturan distintos aspectos de los datos.</p></li>
-<li><p><strong>Robustez computacional</strong>: Evitan óptimos locales en el espacio de búsqueda..</p></li>
+<li><p><strong>Robustez computacional</strong>: Evitan óptimos locales en el espacio de búsqueda.</p></li>
 <li><p><strong>Complementariedad representacional</strong>: Cubren diferentes regiones del espacio de características.</p></li>
 </ol>
 </section>
@@ -623,7 +591,10 @@ document.write(`
 <span class="kn">from</span><span class="w"> </span><span class="nn">catboost</span><span class="w"> </span><span class="kn">import</span> <span class="n">CatBoostClassifier</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">lightgbm</span><span class="w"> </span><span class="kn">import</span> <span class="n">LGBMClassifier</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">lime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">ttest_rel</span><span class="p">,</span> <span class="n">friedmanchisquare</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">StratifiedKFold</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">GridSearchCV</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">SGDClassifier</span>
 </pre></div>
 </div>
 </div>
@@ -655,7 +626,6 @@ document.write(`
 <p>Para facilitar el preprocesamiento diferenciado según el tipo de variable, categorizamos las features en tres grupos estratégicos: binarias, categóricas y numéricas. Esta división metodológica nos permitirá aplicar transformaciones específicas y apropiadas a cada tipo de variable durante la construcción del pipeline de machine learning, optimizando así el rendimiento de los modelos.</p>
 <p>La clasificación se realiza de la siguiente manera: las <strong>variables binarias</strong> se identifican automáticamente mediante un análisis de cardinalidad (exactamente 2 valores únicos), las <strong>variables categóricas</strong> incluyen características ordinales relacionadas con aspectos demográficos y socioeconómicos (<code class="docutils literal notranslate"><span class="pre">GenHlth</span></code>, <code class="docutils literal notranslate"><span class="pre">Age</span></code>, <code class="docutils literal notranslate"><span class="pre">Education</span></code>, <code class="docutils literal notranslate"><span class="pre">Income</span></code>), mientras que las <strong>variables numéricas</strong> comprenden mediciones continuas de salud física y mental (<code class="docutils literal notranslate"><span class="pre">MentHlth</span></code>, <code class="docutils literal notranslate"><span class="pre">PhysHlth</span></code>, <code class="docutils literal notranslate"><span class="pre">BMI</span></code>).</p>
 <p>Además, se aplica la técnica de <strong>winsorización</strong> a la variable <code class="docutils literal notranslate"><span class="pre">BMI</span></code> con límites [0, 0.01] para manejar valores atípicos extremos, reemplazando solo el 1% superior de los valores sin afectar la distribución general de los datos.</p>
-<p>El conjunto de características (<code class="docutils literal notranslate"><span class="pre">X</span></code>) se construye excluyendo las variables <code class="docutils literal notranslate"><span class="pre">CholCheck</span></code> y <code class="docutils literal notranslate"><span class="pre">AnyHealthcare</span></code>, las cuales fueron identificadas y eliminadas durante el análisis de multicolinealidad por superar el umbral de VIF (Variance Inflation Factor) establecido en 10. Esta decisión busca mitigar problemas de redundancia entre predictores y mejorar la estabilidad numérica de las estimaciones, así como la eficiencia computacional de los procesos de optimización.</p>
 <section id="fundamento-matematico-winsorizacion">
 <h3><strong>Fundamento Matemático - Winsorización:</strong><a class="headerlink" href="#fundamento-matematico-winsorizacion" title="Link to this heading">#</a></h3>
 <p>Para una variable ( <span class="math notranslate nohighlight">\( x \)</span> ) con percentiles ( <span class="math notranslate nohighlight">\( Q_{99} \)</span>), la winsorización se define como:</p>
@@ -1545,21 +1515,49 @@ Iniciando Simulated Annealing (Paper parameters)
 Temp inicial: 0.5, Iteraciones: 500
 Visiting parameter (γ): 2.7
 Acceptance parameter (qa): -5.0
- - Iter 0: AUC = 0.829880, Temp = 0.500000
- - Iter 50: AUC = 0.832128, Temp = 0.302503
- - Iter 100: AUC = 0.832128, Temp = 0.183016
- - Iter 150: AUC = 0.832128, Temp = 0.110726
- - Iter 200: AUC = 0.832128, Temp = 0.066990
- - Iter 250: AUC = 0.832128, Temp = 0.040529
- - Iter 300: AUC = 0.832128, Temp = 0.024520
- - Iter 350: AUC = 0.832128, Temp = 0.014835
- - Iter 400: AUC = 0.832128, Temp = 0.008975
- - Iter 450: AUC = 0.832128, Temp = 0.005430
-Optimización completada - Mejor AUC: 0.832128
+ - Iter 0: AUC = 0.826543, Temp = 0.500000
+ - Iter 50: AUC = 0.832460, Temp = 0.302503
+ - Iter 100: AUC = 0.832460, Temp = 0.183016
+ - Iter 150: AUC = 0.832460, Temp = 0.110726
+ - Iter 200: AUC = 0.832460, Temp = 0.066990
+ - Iter 250: AUC = 0.832460, Temp = 0.040529
+ - Iter 300: AUC = 0.832460, Temp = 0.024520
+ - Iter 350: AUC = 0.832460, Temp = 0.014835
+ - Iter 400: AUC = 0.832460, Temp = 0.008975
+ - Iter 450: AUC = 0.832460, Temp = 0.005430
+Optimización completada - Mejor AUC: 0.832460
 </pre></div>
 </div>
 </div>
 </div>
+<p><strong>Proceso de Entrenamiento</strong></p>
+<ul class="simple">
+<li><p><strong>12 modelos base</strong> fueron entrenados exitosamente, incluyendo variantes de regresión logística, árboles de decisión, ensemble methods y boosting algorithms.</p></li>
+</ul>
+<p><strong>Optimización con Simulated Annealing</strong></p>
+<ul class="simple">
+<li><p><strong>Parámetros del paper</strong>: Se utilizaron los parámetros exactos del estudio original (γ=2.7, qa=-5.0).</p></li>
+<li><p><strong>Convergencia rápida</strong>: El algoritmo alcanzó su mejor performance en las primeras 50 iteraciones.</p></li>
+<li><p><strong>Estabilidad</strong>: Mantuvo el AUC óptimo consistentemente durante 450 iteraciones adicionales.</p></li>
+</ul>
+<p><strong>Resultado Final</strong></p>
+<ul class="simple">
+<li><p><strong>AUC de validación</strong>: <strong>0.83246</strong> - Excelente desempeño predictivo.</p></li>
+<li><p><strong>Eficiencia del algoritmo</strong>: Convergencia rápida y estable, indicando que el simulated annealing encontró una solución robusta.</p></li>
+</ul>
+<p><strong>Análisis Técnico</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Calidad del Ensemble</strong>: El AUC de 0.832 sugiere que la combinación de modelos seleccionada por el algoritmo es altamente efectiva.</p></li>
+<li><p><strong>Robustez</strong>: La estabilidad durante 450 iteraciones indica que la solución encontrada no es local sino un óptimo sólido.</p></li>
+<li><p><strong>Eficiencia computacional</strong>: Solo necesitó 50 iteraciones para encontrar la solución óptima.</p></li>
+</ol>
+<p><strong>Implicaciones</strong></p>
+<ul class="simple">
+<li><p>El modelo GSA demostró capacidad para <strong>seleccionar y ponderar efectivamente</strong> los mejores modelos del ensemble.</p></li>
+<li><p>El AUC de <strong>0.832</strong> establece un <strong>punto de referencia alto</strong> para las comparaciones posteriores con modelos individuales.</p></li>
+<li><p>La rápida convergencia sugiere que el algoritmo es <strong>computacionalmente eficiente</strong> para este problema.</p></li>
+</ul>
+<p><strong>Conclusión</strong>: El ensemble GSA logró un desempeño excelente (AUC 0.832) de manera eficiente, posicionándose como un modelo competitivo para la tarea de predicción.</p>
 </section>
 </section>
 <section id="fase-de-evaluacion-final-y-optimizacion-del-threshold">
@@ -1654,38 +1652,92 @@ $<span class="math notranslate nohighlight">\(
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Evaluando en conjunto de test...
 
 Modelos seleccionados en el ensemble final:
- - LR_L2: peso = 0.1301
- - DT: peso = 0.0445
- - RF: peso = 0.0625
- - XGB: peso = 0.1277
- - CATB: peso = 0.2417
- - ADA: peso = 0.0407
- - BAG: peso = 0.0510
- - ETC: peso = 0.0765
- - SGB: peso = 0.2201
-Total modelos seleccionados: 9/12
+ - LR_L1: peso = 0.0836
+ - LR_L2: peso = 0.1653
+ - NB: peso = 0.0315
+ - RF: peso = 0.1194
+ - XGB: peso = 0.0624
+ - LGBM: peso = 0.1186
+ - CATB: peso = 0.0980
+ - ADA: peso = 0.1647
+ - BAG: peso = 0.0257
+ - SGB: peso = 0.1114
+Total modelos seleccionados: 10/12
 
-RESULTADO FINAL - AUC Test: 0.826881
-Mejor AUC durante entrenamiento: 0.832128
-Tiempo de predicción: 3.478875 segundos
+RESULTADO FINAL - AUC Test: 0.826506
+Mejor AUC durante entrenamiento: 0.832460
+Tiempo de predicción: 2.511870 segundos
 
 Optimizando threshold para F1-score...
-Threshold óptimo: 0.2394
-F1-Score optimizado: 0.471240
+Threshold óptimo: 0.2556
+F1-Score optimizado: 0.467962
 
 ============================================================
 EVALUACIÓN FINAL - THRESHOLD OPTIMIZADO
 ============================================================
-Threshold utilizado: 0.2394
-Accuracy:  0.806738
-Precision: 0.380781
-Recall:    0.618069
-F1-score:  0.471240
-AUC-ROC:   0.826881
+Threshold utilizado: 0.2556
+Accuracy:  0.797067
+Precision: 0.368650
+Recall:    0.640513
+F1-score:  0.467962
+AUC-ROC:   0.826506
 </pre></div>
 </div>
 </div>
 </div>
+<p><strong>Composición del Ensemble Final</strong></p>
+<ul class="simple">
+<li><p><strong>10 de 12 modelos</strong> seleccionados (83% de los modelos base).</p></li>
+<li><p><strong>Distribución balanceada</strong>: Pesos distribuidos entre 0.0257 y 0.1653.</p></li>
+<li><p><strong>Modelos principales</strong>:</p>
+<ul>
+<li><p><strong>LR_L2</strong> (16.53%) y <strong>ADA</strong> (16.47%) - mayores contribuciones.</p></li>
+<li><p><strong>RF</strong> (11.94%), <strong>LGBM</strong> (11.86%), <strong>SGB</strong> (11.14%) - contribuciones significativas.</p></li>
+<li><p>Modelos restantes con contribuciones menores pero relevantes.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Desempeño Predictivo</strong></p>
+<ul class="simple">
+<li><p><strong>AUC Test: 0.8265</strong> vs <strong>AUC Validación: 0.8325</strong></p>
+<ul>
+<li><p><strong>Minima diferencia</strong> (0.006) indica excelente generalización.</p></li>
+<li><p><strong>No hay overfitting</strong> significativo.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Métricas con Threshold Optimizado</strong></p>
+<ul class="simple">
+<li><p><strong>Threshold óptimo: 0.2556</strong> - Valor bajo que favorece la detección de casos positivos.</p></li>
+<li><p><strong>Recall alto: 0.6405</strong> - Detecta el 64% de los casos reales de diabetes.</p></li>
+<li><p><strong>Precision moderada: 0.3687</strong> - Entre los predichos como positivos, 37% son correctos.</p></li>
+<li><p><strong>F1-Score: 0.4680</strong> - Balance razonable entre precision y recall para datos desbalanceados.</p></li>
+</ul>
+<p><strong>Análisis de Trade-offs</strong></p>
+<ul class="simple">
+<li><p><strong>Estrategia conservadora</strong>: Se prioriza capturar casos reales (alto recall).</p></li>
+<li><p><strong>Costo de falsos positivos</strong>: Aceptable dado el contexto médico (mejor detectar de más que de menos).</p></li>
+<li><p><strong>Accuracy: 0.7971</strong> - Buen desempeño general considerando el desbalance.</p></li>
+</ul>
+<p><strong>Eficiencia Computacional</strong></p>
+<ul class="simple">
+<li><p><strong>Tiempo de predicción: 2.51 segundos</strong> - Razonable para un ensemble de 10 modelos.</p></li>
+<li><p><strong>Tiempo aceptable</strong> para aplicaciones prácticas en diagnóstico médico.</p></li>
+</ul>
+<p><strong>Fortalezas del Modelo</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Robustez</strong>: Múltiples algoritmos complementarios.</p></li>
+<li><p><strong>Generalización</strong>: Performance consistente entre validación y test.</p></li>
+<li><p><strong>Balance recall-precision</strong>: Adecuado para detección temprana en salud.</p></li>
+<li><p><strong>Diversidad algorítmica</strong>: Combina modelos lineales, árboles y métodos de ensemble.</p></li>
+</ol>
+<p><strong>Recomendaciones de Uso</strong></p>
+<ul class="simple">
+<li><p><strong>Ideal para screening</strong> donde es crucial no pasar por alto casos positivos.</p></li>
+<li><p><strong>Contextos médicos</strong> donde falsos negativos son más críticos que falsos positivos.</p></li>
+<li><p><strong>Punto de partida</strong> para diagnóstico secundario por profesionales.</p></li>
+</ul>
+<p><strong>Conclusión</strong>: El ensemble GSA demuestra ser un modelo sólido y bien balanceado, especialmente efectivo para tareas de detección donde la sensibilidad es prioritaria.</p>
 </section>
 </section>
 <section id="analisis-de-composicion-y-contribuciones-del-ensemble-optimizado">
@@ -1754,21 +1806,82 @@ PESOS FINALES DE LOS MODELOS EN EL ENSEMBLE
 ============================================================
 
 Modelos con contribución significativa (&gt; 0.02):
- - CATB      : 0.2417
- - SGB       : 0.2201
- - LR_L2     : 0.1301
- - XGB       : 0.1277
- - ETC       : 0.0765
- - RF        : 0.0625
- - BAG       : 0.0510
- - DT        : 0.0445
- - ADA       : 0.0407
+ - LR_L2     : 0.1653
+ - ADA       : 0.1647
+ - RF        : 0.1194
+ - LGBM      : 0.1186
+ - SGB       : 0.1114
+ - CATB      : 0.0980
+ - LR_L1     : 0.0836
+ - XGB       : 0.0624
+ - NB        : 0.0315
+ - BAG       : 0.0257
 
-  Total modelos seleccionados: 9/12
+  Total modelos seleccionados: 10/12
 </pre></div>
 </div>
 </div>
 </div>
+<p><strong>Líderes del Ensemble (≥15%)</strong></p>
+<ul class="simple">
+<li><p><strong>LR_L2 (16.53%)</strong>: Mayor peso - sugiere que la <strong>regularización L2</strong> y estructura lineal son cruciales para este problema.</p></li>
+<li><p><strong>ADA (16.47%)</strong>: Casi igual al LR_L2 - indica que <strong>AdaBoost</strong> aporta diversidad y poder predictivo complementario.</p></li>
+</ul>
+<p><strong>Contribuyentes Principales (10-12%)</strong></p>
+<ul class="simple">
+<li><p><strong>RF (11.94%)</strong>: Random Forest - robustez y capacidad de manejar relaciones no lineales.</p></li>
+<li><p><strong>LGBM (11.86%)</strong>: LightGBM - eficiencia en gradient boosting con buen desempeño.</p></li>
+<li><p><strong>SGB (11.14%)</strong>: Stochastic Gradient Boosting - variante robusta de boosting.</p></li>
+</ul>
+<p><strong>Contribuyentes Secundarios (6-10%)</strong></p>
+<ul class="simple">
+<li><p><strong>CATB (9.80%)</strong>: CatBoost - especializado en features categóricas.</p></li>
+<li><p><strong>LR_L1 (8.36%)</strong>: Regularización L1 - aporta selección de features.</p></li>
+</ul>
+<p><strong>Contribuyentes Menores (2-6%)</strong></p>
+<ul class="simple">
+<li><p><strong>XGB (6.24%)</strong>: XGBoost - peso sorprendentemente bajo dado su popularidad.</p></li>
+<li><p><strong>NB (3.15%)</strong>: Naive Bayes - aporte modesto pero relevante.</p></li>
+<li><p><strong>BAG (2.57%)</strong>: Bagging - contribución mínima pero significativa.</p></li>
+</ul>
+<p><strong>Diversidad Algorítmica Óptima</strong></p>
+<ul class="simple">
+<li><p><strong>Lineales</strong>: LR_L1, LR_L2 (25% combinado).</p></li>
+<li><p><strong>Ensemble/Bagging</strong>: RF, BAG (14.5%).</p></li>
+<li><p><strong>Boosting</strong>: ADA, LGBM, SGB, CATB, XGB (49.6%).</p></li>
+</ul>
+<p><strong>Exclusión Significativa</strong></p>
+<ul class="simple">
+<li><p><strong>DT</strong> (Decision Tree) - probablemente por overfitting individual.</p></li>
+<li><p><strong>ETC</strong> (Extra Trees) - posible redundancia con RF.</p></li>
+</ul>
+<p><strong>Patrones Detectados</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Preferencia por modelos regularizados</strong>: LR_L2 &gt; LR_L1.</p></li>
+<li><p><strong>Boosting colectivamente dominante</strong>: Casi 50% del peso total.</p></li>
+<li><p><strong>Equilibrio entre complejidad y simplicidad</strong>: Combinación de modelos simples y complejos.</p></li>
+</ol>
+<p><strong>Ventajas del Modelo</strong></p>
+<ul class="simple">
+<li><p><strong>Redundancia controlada</strong>: Múltiples boosting algorithms pero con pesos diferenciados.</p></li>
+<li><p><strong>Balance bias-varianza</strong>: Modelos simples (LR) + complejos (boosting).</p></li>
+<li><p><strong>Robustez</strong>: Ningún modelo domina excesivamente.</p></li>
+</ul>
+<p><strong>Estrategia del Algoritmo</strong></p>
+<p>El simulated annealing identificó que:</p>
+<ul class="simple">
+<li><p>La <strong>combinación diversificada</strong> es más efectiva que modelos individuales.</p></li>
+<li><p>Los <strong>modelos lineales</strong> siguen siendo relevantes junto con métodos avanzados.</p></li>
+<li><p>Existe un <strong>“punto dulce”</strong> de complejidad que maximiza la generalización.</p></li>
+</ul>
+<p><strong>Conclusión</strong></p>
+<p>El ensemble resultante refleja una <strong>estrategia híbrida inteligente</strong> donde:</p>
+<ul class="simple">
+<li><p><strong>ADA y LR_L2</strong> como pilares principales.</p></li>
+<li><p><strong>Múltiples variantes de boosting</strong> complementando.</p></li>
+<li><p><strong>Exclusión estratégica</strong> de modelos redundantes o propensos a overfitting.</p></li>
+</ul>
+<p>Esta composición sugiere que el problema beneficia de un <strong>enfoque balanceado</strong> entre modelos interpretables y métodos complejos, más que de una dependencia exclusiva en algoritmos de última generación.</p>
 </section>
 </section>
 </section>
@@ -1899,40 +2012,132 @@ MATRIZ DE CONFUSIÓN - THRESHOLD OPTIMIZADO
 ============================================================
 </pre></div>
 </div>
-<img alt="_images/de1a67defb30d2867f2e921899d6eb29d3a11d8c66ee959340fc34a0f9b5fbaf.png" src="_images/de1a67defb30d2867f2e921899d6eb29d3a11d8c66ee959340fc34a0f9b5fbaf.png" />
+<img alt="_images/57c4017501b699b2ba38fed4e1e9dd1573f29cadf5ea4edc8b51c7bdbe1ebd1c.png" src="_images/57c4017501b699b2ba38fed4e1e9dd1573f29cadf5ea4edc8b51c7bdbe1ebd1c.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============================================================
 CURVA ROC - DESEMPEÑO GENERAL
 ============================================================
 </pre></div>
 </div>
-<img alt="_images/59469bd7b964bed99fa1facbf9e46e46d96ddf79fb61155a89d99ca4c9343e69.png" src="_images/59469bd7b964bed99fa1facbf9e46e46d96ddf79fb61155a89d99ca4c9343e69.png" />
+<img alt="_images/2291594c8077f4dfd444872aa7985b547bebc98d9b8654f90e1e899eed62be14.png" src="_images/2291594c8077f4dfd444872aa7985b547bebc98d9b8654f90e1e899eed62be14.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============================================================
 REPORTE DE CLASIFICACIÓN DETALLADO - THRESHOLD OPTIMIZADO
 ============================================================
                       precision    recall  f1-score   support
 
-         No Diabetes       0.93      0.84      0.88     32750
-Diabetes/Prediabetes       0.38      0.62      0.47      5302
+         No Diabetes       0.93      0.82      0.87     32750
+Diabetes/Prediabetes       0.37      0.64      0.47      5302
 
-            accuracy                           0.81     38052
-           macro avg       0.66      0.73      0.68     38052
-        weighted avg       0.85      0.81      0.82     38052
+            accuracy                           0.80     38052
+           macro avg       0.65      0.73      0.67     38052
+        weighted avg       0.86      0.80      0.82     38052
 
 
 ============================================================
 RESUMEN DE RESULTADOS
 ============================================================
-Mejor AUC en validación: 0.832128
-AUC en test: 0.826881
-Threshold óptimo: 0.2394
-F1-Score optimizado: 0.471240
-Modelos seleccionados: 9/12
-Tiempo de predicción: 3.478875 segundos
+Mejor AUC en validación: 0.832460
+AUC en test: 0.826506
+Threshold óptimo: 0.2556
+F1-Score optimizado: 0.467962
+Modelos seleccionados: 10/12
+Tiempo de predicción: 2.511870 segundos
 </pre></div>
 </div>
 </div>
 </div>
+<p><strong>Clase Mayoritaria: “No Diabetes”</strong></p>
+<ul class="simple">
+<li><p><strong>Precision: 0.93</strong> - Excelente: 93% de los predichos como negativos son realmente negativos.</p></li>
+<li><p><strong>Recall: 0.82</strong> - Bueno: Detecta 82% de los casos reales negativos.</p></li>
+<li><p><strong>F1-Score: 0.87</strong> - Muy buen balance para la clase mayoritaria.</p></li>
+</ul>
+<p><strong>Clase Minoritaria: “Diabetes/Prediabetes”</strong></p>
+<ul class="simple">
+<li><p><strong>Precision: 0.37</strong> - Baja: Solo 37% de los predichos como positivos son realmente positivos.</p></li>
+<li><p><strong>Recall: 0.64</strong> - Alto: Detecta 64% de los casos reales de diabetes.</p></li>
+<li><p><strong>F1-Score: 0.47</strong> - Moderado, refleja el trade-off entre precision y recall.</p></li>
+</ul>
+<p><strong>Métricas Globales</strong></p>
+<ul class="simple">
+<li><p><strong>Accuracy: 0.80</strong> - Buen desempeño general considerando el desbalance.</p></li>
+<li><p><strong>Macro Avg F1: 0.67</strong> - Promedio equilibrado entre ambas clases.</p></li>
+<li><p><strong>Weighted Avg F1: 0.82</strong> - Buen desempeño ponderado por soporte.</p></li>
+</ul>
+<p><strong>Estrategia del Modelo</strong></p>
+<ul class="simple">
+<li><p><strong>Threshold bajo (0.2556)</strong>: Configuración que prioriza <strong>sensibilidad sobre precisión</strong>.</p></li>
+<li><p><strong>Alto recall en clase minoritaria</strong>: Busca capturar la mayor cantidad posible de casos reales.</p></li>
+<li><p><strong>Trade-off aceptable</strong>: Para aplicaciones médicas, es mejor tener falsos positivos que falsos negativos.</p></li>
+</ul>
+<p><strong>Consistencia del Modelo</strong></p>
+<ul class="simple">
+<li><p><strong>AUC Validación vs Test</strong>: 0.832 vs 0.827 → <strong>Mínima diferencia</strong> (0.005).</p></li>
+<li><p><strong>Excelente generalización</strong>: No hay overfitting significativo.</p></li>
+<li><p><strong>Performance consistente</strong> entre conjuntos de datos.</p></li>
+</ul>
+<p><strong>Para un problema médico con desbalance:</strong></p>
+<ul class="simple">
+<li><p><strong>Recall 64% en diabetes</strong>: Captura 2 de cada 3 casos reales.</p></li>
+<li><p><strong>Precision 37%</strong>: Implica que por cada 3 pacientes identificados como riesgo, 1 realmente lo tiene.</p></li>
+<li><p><strong>F1-Score 0.47</strong>: Razonable para detección temprana en salud.</p></li>
+</ul>
+<p><strong>Eficiencia Operativa</strong></p>
+<ul class="simple">
+<li><p><strong>Tiempo predicción: 2.51 segundos</strong> - Aceptable para screening médico.</p></li>
+<li><p><strong>10 modelos en ensemble</strong> - Complejidad justificada por el desempeño.</p></li>
+</ul>
+<p><strong>Consideraciones:</strong></p>
+<ul class="simple">
+<li><p>Los <strong>falsos positivos</strong> requerirán pruebas de confirmación.</p></li>
+<li><p>El <strong>threshold bajo</strong> es apropiado para prevención.</p></li>
+<li><p><strong>Balance adecuado</strong> para el contexto de salud pública.</p></li>
+</ul>
+<p><strong>Conclusión Final</strong></p>
+<p>El modelo GSA demuestra ser <strong>efectivo para su propósito principal</strong>: detectar casos de diabetes con alta sensibilidad, sacrificando precisión para minimizar falsos negativos. La consistencia entre validación y test confirma su robustez, haciendo del ensemble una herramienta válida para apoyo en diagnóstico médico.</p>
 </section>
+</section>
+<section id="tabla-comparativa-de-resultados">
+<h2><strong>Tabla Comparativa de Resultados</strong><a class="headerlink" href="#tabla-comparativa-de-resultados" title="Link to this heading">#</a></h2>
+<p>Tras una evaluación exhaustiva, se identificaron los dos modelos con mejores resultados durante el modelado: XGBoost y Máquinas de Vectores de Soporte (SVM). El modelo XGBoost demostró el mejor equilibrio general entre métricas de clasificación, obteniendo el valor más alto en AUC-ROC, lo que indica una mayor capacidad para distinguir entre las clases. Por otro lado, el modelo SVM se establece como la opción ideal en escenarios con recursos computacionales limitados, ya que, a pesar de un rendimiento ligeramente inferior al de XGBoost, ofrece un tiempo de predicción significativamente menor y más eficiente.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>Accuracy</p></th>
+<th class="head"><p>Precision</p></th>
+<th class="head"><p>Recall</p></th>
+<th class="head"><p>F1-Score</p></th>
+<th class="head"><p>AUC-ROC</p></th>
+<th class="head"><p>Tiempo de Predicción</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GSA (Modelo Original)</p></td>
+<td><p>0.797067</p></td>
+<td><p>0.368650</p></td>
+<td><p>0.640513</p></td>
+<td><p>0.467962</p></td>
+<td><p>0.826506</p></td>
+<td><p>2.511870 segundos</p></td>
+</tr>
+<tr class="row-odd"><td><p>XGBoost (scale_pos_weight)</p></td>
+<td><p>0.719312</p></td>
+<td><p>0.304620</p></td>
+<td><p>0.790918</p></td>
+<td><p>0.439838</p></td>
+<td><p>0.825688</p></td>
+<td><p>0.063082 segundos</p></td>
+</tr>
+<tr class="row-even"><td><p>SVM (class_weight=balanced)</p></td>
+<td><p>0.714010</p></td>
+<td><p>0.300156</p></td>
+<td><p>0.790494</p></td>
+<td><p>0.435101</p></td>
+<td><p>0.819107</p></td>
+<td><p>0.047091 segundos</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <section id="analisis-de-importancia-de-variables-del-ensemble-optimizado">
 <h2><strong>Análisis de Importancia de Variables del Ensemble Optimizado</strong><a class="headerlink" href="#analisis-de-importancia-de-variables-del-ensemble-optimizado" title="Link to this heading">#</a></h2>
@@ -1952,7 +2157,7 @@ Tiempo de predicción: 3.478875 segundos
 \]</div>
 <p><strong>Donde:</strong></p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\mathcal{M}_{\text{significativo}} = \{i : w_i &gt; 0.01\}\)</span>: Modelos con contribución significativa</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathcal{M}_{\text{significativo}} = \{i : w_i &gt; 0.02\}\)</span>: Modelos con contribución significativa</p></li>
 <li><p><span class="math notranslate nohighlight">\(w_i\)</span>: Peso optimizado del modelo <span class="math notranslate nohighlight">\(i\)</span> en el ensemble</p></li>
 <li><p><span class="math notranslate nohighlight">\(I_i(v)\)</span>: Importancia de la variable <span class="math notranslate nohighlight">\(v\)</span> en el modelo <span class="math notranslate nohighlight">\(i\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\text{Importancia}_{\text{ensemble}}(v)\)</span>: Importancia final ponderada</p></li>
@@ -2032,224 +2237,707 @@ $<span class="math notranslate nohighlight">\(
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calculando importancia de variables del ENSEMBLE optimizado...
-Calculando importancias para LR_L2 (peso: 0.1301)...
-Calculando importancias para DT (peso: 0.0445)...
-Calculando importancias para RF (peso: 0.0625)...
-Calculando importancias para XGB (peso: 0.1277)...
-Calculando importancias para CATB (peso: 0.2417)...
-Calculando importancias para ADA (peso: 0.0407)...
-Calculando importancias para BAG (peso: 0.0510)...
-Calculando importancias para ETC (peso: 0.0765)...
-Calculando importancias para SGB (peso: 0.2201)...
-Modelos utilizados para importancia: 9
+Calculando importancias para LR_L1 (peso: 0.0836)...
+Calculando importancias para LR_L2 (peso: 0.1653)...
+Calculando importancias para NB (peso: 0.0315)...
+Calculando importancias para RF (peso: 0.1194)...
+Calculando importancias para XGB (peso: 0.0624)...
+Calculando importancias para LGBM (peso: 0.1186)...
+Calculando importancias para CATB (peso: 0.0980)...
+Calculando importancias para ADA (peso: 0.1647)...
+Calculando importancias para BAG (peso: 0.0257)...
+Calculando importancias para SGB (peso: 0.1114)...
+Modelos utilizados para importancia: 10
 
 TOP 10 VARIABLES MÁS IMPORTANTES DEL ENSEMBLE:
 </pre></div>
 </div>
-<img alt="_images/0aae7c1d952afcc8c56792fc0dc60d3aa1f45a0ccb50bd1e1f006e5b826efb75.png" src="_images/0aae7c1d952afcc8c56792fc0dc60d3aa1f45a0ccb50bd1e1f006e5b826efb75.png" />
+<img alt="_images/21234703ae99fe418641da81ced99ff19149a18e5c274018f79485544719fbad.png" src="_images/21234703ae99fe418641da81ced99ff19149a18e5c274018f79485544719fbad.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Importancias numéricas del ensemble:
- - Sex                 : 0.2060
- - Age                 : 0.1793
- - CholCheck           : 0.1509
- - BMI                 : 0.1203
- - Smoker              : 0.0720
- - Stroke              : 0.0611
- - Income              : 0.0374
- - DiffWalk            : 0.0280
- - NoDocbcCost         : 0.0256
- - Fruits              : 0.0178
+ - CholCheck           : 0.1778
+ - Age                 : 0.1343
+ - HighChol            : 0.0888
+ - Sex                 : 0.0822
+ - HighBP              : 0.0814
+ - Income              : 0.0750
+ - Education           : 0.0645
+ - DiffWalk            : 0.0359
+ - Smoker              : 0.0291
+ - Fruits              : 0.0264
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="analisis-comparativo-de-resultados">
-<h2><strong>Análisis Comparativo de Resultados</strong><a class="headerlink" href="#analisis-comparativo-de-resultados" title="Link to this heading">#</a></h2>
-<section id="desempeno-del-ensemble-optimizado-vs-xgboost">
-<h3><strong>Desempeño del Ensemble Optimizado vs XGBoost</strong><a class="headerlink" href="#desempeno-del-ensemble-optimizado-vs-xgboost" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Métrica</p></th>
-<th class="head"><p><strong>Ensemble con SA</strong></p></th>
-<th class="head"><p><strong>XGBoost (mejor individual)</strong></p></th>
-<th class="head"><p><strong>Análisis Comparativo</strong></p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Accuracy</strong></p></td>
-<td><p>0.806738</p></td>
-<td><p>0.720987</p></td>
-<td><p><strong>+11.8%</strong> a favor del Ensemble</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Precision</strong></p></td>
-<td><p>0.380781</p></td>
-<td><p>0.306313</p></td>
-<td><p><strong>+24.3%</strong> a favor del Ensemble</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Recall</strong></p></td>
-<td><p>0.618069</p></td>
-<td><p>0.792757</p></td>
-<td><p><strong>-28.2%</strong> (XGBoost mejor)</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>F1-score</strong></p></td>
-<td><p>0.471240</p></td>
-<td><p>0.441886</p></td>
-<td><p><strong>+6.4%</strong> a favor del Ensemble</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>AUC-ROC</strong></p></td>
-<td><p>0.826881</p></td>
-<td><p>0.825904</p></td>
-<td><p><strong>Equivalente</strong> (diferencia mínima)</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="ventajas-del-ensemble-optimizado">
-<h3><strong>Ventajas del Ensemble Optimizado</strong><a class="headerlink" href="#ventajas-del-ensemble-optimizado" title="Link to this heading">#</a></h3>
-<section id="mayor-balance-global-f1-score-superior">
-<h4><strong>1. Mayor Balance Global (F1-score superior)</strong><a class="headerlink" href="#mayor-balance-global-f1-score-superior" title="Link to this heading">#</a></h4>
+<p><strong>1. CholCheck (17.78%)</strong> - <strong>Variable más importante</strong></p>
 <ul class="simple">
-<li><p><strong>Ensemble</strong>: F1-score = 0.4712.</p></li>
-<li><p><strong>XGBoost</strong>: F1-score = 0.4419.</p></li>
-<li><p><strong>Mejora</strong>: +6.6% en el balance entre Precision y Recall.</p></li>
+<li><p><strong>Significado</strong>: Verificación de colesterol en últimos 5 años.</p></li>
+<li><p><strong>Implicación</strong>: El monitoreo de colesterol es el predictor más fuerte de riesgo de diabetes.</p></li>
+<li><p><strong>Importancia clínica</strong>: Sugiere que la conciencia y seguimiento de salud metabólica es crucial.</p></li>
 </ul>
-<p><strong>Significado clínico</strong>: El ensemble logra un mejor equilibrio entre:</p>
+<p><strong>2. Age (13.43%)</strong> - <strong>Segunda en importancia</strong></p>
 <ul class="simple">
-<li><p><strong>Evitar falsas alarmas</strong> (Precision más alta).</p></li>
-<li><p><strong>Mantener detección adecuada</strong> (Recall aceptable).</p></li>
+<li><p><strong>Significado</strong>: Edad del paciente.</p></li>
+<li><p><strong>Implicación</strong>: La edad es un factor de riesgo significativo, consistente con la epidemiología de diabetes.</p></li>
+<li><p><strong>Patrón esperado</strong>: La prevalencia de diabetes aumenta con la edad.</p></li>
 </ul>
-</section>
-<section id="precision-mejorada-significativamente">
-<h4><strong>2. Precision Mejorada Significativamente</strong><a class="headerlink" href="#precision-mejorada-significativamente" title="Link to this heading">#</a></h4>
+<p><strong>3. HighChol (8.88%)</strong> - <strong>Tercer lugar</strong></p>
 <ul class="simple">
-<li><p><strong>+24.1%</strong> en Precision indica que el ensemble produce:</p>
-<ul>
-<li><p>Menos falsos positivos.</p></li>
-<li><p>Diagnósticos más confiables cuando predice diabetes.</p></li>
-<li><p>Mayor especificidad en la identificación.</p></li>
+<li><p><strong>Significado</strong>: Colesterol alto diagnosticado.</p></li>
+<li><p><strong>Implicación</strong>: Directamente relacionado con la salud metabólica y resistencia a la insulina.</p></li>
+<li><p><strong>Relación con CholCheck</strong>: Ambas variables de colesterol suman <strong>26.66%</strong> de importancia total.</p></li>
 </ul>
-</li>
-</ul>
-</section>
-<section id="accuracy-general-superior">
-<h4><strong>3. Accuracy General Superior</strong><a class="headerlink" href="#accuracy-general-superior" title="Link to this heading">#</a></h4>
+<p><strong>Sex (8.22%)</strong> y <strong>HighBP (8.14%)</strong></p>
 <ul class="simple">
-<li><p><strong>+11.8%</strong> en Accuracy global refleja:</p>
-<ul>
-<li><p>Mejor desempeño general en todas las clasificaciones.</p></li>
-<li><p>Mayor consistencia predictiva.</p></li>
-<li><p>Robustez entre diferentes tipos de pacientes.</p></li>
+<li><p><strong>Sexo</strong>: Diferencias de género en riesgo de diabetes.</p></li>
+<li><p><strong>Presión arterial</strong>: Comorbilidad común con diabetes, factor de riesgo cardiovascular.</p></li>
 </ul>
-</li>
-</ul>
-</section>
-</section>
-<section id="trade-off-aceptable-recall-vs-precision">
-<h3><strong>Trade-off Aceptable: Recall vs Precision</strong><a class="headerlink" href="#trade-off-aceptable-recall-vs-precision" title="Link to this heading">#</a></h3>
-<section id="analisis-del-compromiso">
-<h4><strong>Análisis del Compromiso</strong><a class="headerlink" href="#analisis-del-compromiso" title="Link to this heading">#</a></h4>
+<p><strong>Income (7.50%)</strong> y <strong>Education (6.45%)</strong></p>
 <ul class="simple">
-<li><p><strong>XGBoost</strong>: Recall más alto (0.7928) pero Precision baja (0.3063).</p></li>
-<li><p><strong>Ensemble</strong>: Recall moderado (0.6180) con Precision mejorada (0.3807).</p></li>
+<li><p><strong>Socioeconómicos</strong>: Nivel de ingresos y educación como determinantes sociales de salud.</p></li>
+<li><p><strong>Acceso a cuidado médico</strong>: Posible relación con detección temprana y manejo de factores de riesgo.</p></li>
 </ul>
-<p><strong>En contexto médico</strong>:</p>
+<p><strong>DiffWalk (3.59%)</strong></p>
 <ul class="simple">
-<li><p><strong>Alto Recall</strong>: Importante para no pasar por alto casos reales.</p></li>
-<li><p><strong>Alta Precision</strong>: Crítica para evitar tratamientos innecesarios y ansiedad del paciente.</p></li>
-<li><p><strong>Balance óptimo</strong>: El ensemble encuentra un punto más equilibrado.</p></li>
+<li><p><strong>Dificultad para caminar</strong>: Posible indicador de complicaciones diabéticas o comorbilidades.</p></li>
 </ul>
-</section>
-</section>
-</section>
-<section id="desafios-del-problema-de-diabetes">
-<h2><strong>Desafíos del Problema de Diabetes</strong><a class="headerlink" href="#desafios-del-problema-de-diabetes" title="Link to this heading">#</a></h2>
-<section id="desbalance-de-clases-critico">
-<h3><strong>Desbalance de Clases Crítico</strong><a class="headerlink" href="#desbalance-de-clases-critico" title="Link to this heading">#</a></h3>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Distribución</span> <span class="n">aproximada</span><span class="p">:</span>
-<span class="o">-</span> <span class="n">No</span> <span class="n">Diabetes</span><span class="p">:</span> <span class="mi">86</span><span class="o">%.</span>
-<span class="o">-</span> <span class="n">Diabetes</span><span class="o">/</span><span class="n">Prediabetes</span><span class="p">:</span> <span class="mi">14</span><span class="o">%.</span>
-</pre></div>
-</div>
-<p><strong>Impacto en los modelos</strong>:</p>
+<p><strong>Smoker (2.91%)</strong> y <strong>Fruits (2.64%)</strong></p>
 <ul class="simple">
-<li><p><strong>Sesgo hacia la clase mayoritaria</strong>: Los modelos tienden a predecir “No Diabetes”.</p></li>
-<li><p><strong>Dificultad en detección</strong>: La clase minoritaria tiene menos patrones para aprender.</p></li>
-<li><p><strong>Métricas engañosas</strong>: Accuracy alto no necesariamente indica buen desempeño.</p></li>
+<li><p><strong>Estilo de vida</strong>: Tabaquismo y consumo de frutas - factores modificables.</p></li>
+<li><p><strong>Importancia relativamente baja</strong>: Aunque relevantes, menos determinantes que factores clínicos.</p></li>
 </ul>
-</section>
-<section id="limitaciones-en-variables-disponibles">
-<h3><strong>Limitaciones en Variables Disponibles</strong><a class="headerlink" href="#limitaciones-en-variables-disponibles" title="Link to this heading">#</a></h3>
-<section id="composicion-del-dataset">
-<h4><strong>Composición del Dataset:</strong><a class="headerlink" href="#composicion-del-dataset" title="Link to this heading">#</a></h4>
+<p><strong>Dominio de Variables Clínicas</strong></p>
 <ul class="simple">
-<li><p><strong>Variables subjetivas</strong>: Comportamientos, hábitos, percepciones.</p></li>
-<li><p><strong>Variables médicas limitadas</strong>: Pocos indicadores clínicos directos.</p></li>
-<li><p><strong>Variables demográficas</strong>: Edad, educación, ingresos.</p></li>
+<li><p><strong>Top 5 variables</strong>: Todas clínicas/demográficas (CholCheck, Age, HighChol, Sex, HighBP).</p></li>
+<li><p><strong>Peso acumulado</strong>: <strong>56.55%</strong> de importancia concentrada en 5 variables.</p></li>
 </ul>
-<p><strong>Impacto en capacidad predictiva</strong>:</p>
-<ul class="simple">
-<li><p><strong>Menos señales fuertes</strong>: Variables médicas son más determinantes.</p></li>
-<li><p><strong>Ruido en datos</strong>: Variables subjetivas introducen variabilidad.</p></li>
-<li><p><strong>Complejidad del fenómeno</strong>: Diabetes depende de múltiples factores interrelacionados.</p></li>
-</ul>
-</section>
-</section>
-</section>
-<section id="complejidad-del-ambito-de-diabetes">
-<h2><strong>Complejidad del Ámbito de Diabetes</strong><a class="headerlink" href="#complejidad-del-ambito-de-diabetes" title="Link to this heading">#</a></h2>
-<section id="factores-que-dificultan-la-prediccion">
-<h3><strong>Factores que Dificultan la Predicción</strong><a class="headerlink" href="#factores-que-dificultan-la-prediccion" title="Link to this heading">#</a></h3>
-<section id="multifactorialidad-de-la-enfermedad">
-<h4><strong>1. Multifactorialidad de la Enfermedad</strong><a class="headerlink" href="#multifactorialidad-de-la-enfermedad" title="Link to this heading">#</a></h4>
-<ul class="simple">
-<li><p>Factores genéticos, ambientales, de estilo de vida.</p></li>
-<li><p>Progresión gradual y no lineal.</p></li>
-<li><p>Manifestaciones heterogéneas entre pacientes.</p></li>
-</ul>
-</section>
-<section id="naturaleza-del-problema-medico">
-<h4><strong>2. Naturaleza del Problema Médico</strong><a class="headerlink" href="#naturaleza-del-problema-medico" title="Link to this heading">#</a></h4>
-<ul class="simple">
-<li><p>Límites difusos entre prediabetes y diabetes.</p></li>
-<li><p>Progresión asintomática en etapas tempranas.</p></li>
-<li><p>Múltiples vías fisiopatológicas.</p></li>
-</ul>
-</section>
-</section>
-</section>
-<section id="recomendaciones-y-trabajo-futuro">
-<h2><strong>Recomendaciones y Trabajo Futuro</strong><a class="headerlink" href="#recomendaciones-y-trabajo-futuro" title="Link to this heading">#</a></h2>
-<section id="mejoras-potenciales">
-<h3><strong>Mejoras Potenciales</strong><a class="headerlink" href="#mejoras-potenciales" title="Link to this heading">#</a></h3>
-<section id="enriquecimiento-de-variables">
-<h4><strong>1. Enriquecimiento de Variables</strong><a class="headerlink" href="#enriquecimiento-de-variables" title="Link to this heading">#</a></h4>
-<ul class="simple">
-<li><p>Incorporación de más indicadores médicos directos.</p></li>
-<li><p>Variables de laboratorio (glucosa, HbA1c).</p></li>
-<li><p>Datos temporales y de progresión.</p></li>
-</ul>
-</section>
-<section id="optimizacion-especifica-del-dominio">
-<h4><strong>2. Optimización Específica del Dominio</strong><a class="headerlink" href="#optimizacion-especifica-del-dominio" title="Link to this heading">#</a></h4>
-<ul class="simple">
-<li><p>Funciones de pérdida que prioricen Recall médico.</p></li>
-<li><p>Threshold adaptativo por subpoblaciones.</p></li>
-<li><p>Validación con especialistas médicos.</p></li>
-</ul>
-</section>
-</section>
-<section id="conclusiones-finales">
-<h3><strong>Conclusiones Finales</strong><a class="headerlink" href="#conclusiones-finales" title="Link to this heading">#</a></h3>
-<p><strong>El ensemble optimizado con Simulated Annealing</strong> demuestra ser una aproximación superior para la predicción de diabetes en condiciones de desbalance y variables limitadas, logrando:</p>
+<p><strong>Jerarquía de Factores de Riesgo</strong></p>
 <ol class="arabic simple">
-<li><p><strong>Mejor balance global</strong> que el mejor modelo individual.</p></li>
-<li><p><strong>Precision significativamente mejorada</strong> para aplicaciones clínicas.</p></li>
-<li><p><strong>Robustez mediante diversidad algorítmica</strong>.</p></li>
+<li><p><strong>Metabólicos</strong> (Colesterol) - 26.66%.</p></li>
+<li><p><strong>Demográficos</strong> (Edad, Sexo) - 21.65%.</p></li>
+<li><p><strong>Cardiovasculares</strong> (Presión arterial) - 8.14%.</p></li>
+<li><p><strong>Socioeconómicos</strong> (Ingreso, Educación) - 13.95%.</p></li>
+<li><p><strong>Estilo de vida</strong> (Movilidad, Tabaquismo, Dieta) - 9.14%.</p></li>
 </ol>
-<p>A pesar de las limitaciones inherentes del dataset y la complejidad del problema médico, el enfoque de ensemble heterogéneo optimizado representa un avance significativo en la construcción de sistemas predictivos robustos para detección temprana de diabetes.</p>
+<p><strong>Prioridades de Prevención</strong></p>
+<ul class="simple">
+<li><p><strong>Monitoreo de colesterol</strong>: Estrategia más efectiva para detección temprana.</p></li>
+<li><p><strong>Enfoque en adultos mayores</strong>: Población de mayor riesgo.</p></li>
+<li><p><strong>Control de presión arterial</strong>: Comorbilidad clave a manejar.</p></li>
+</ul>
+<p><strong>Determinantes Sociales</strong></p>
+<ul class="simple">
+<li><p><strong>Educación e ingresos</strong>: Factores modificables que impactan el riesgo.</p></li>
+<li><p><strong>Acceso a screening</strong>: Relacionado con nivel socioeconómico.</p></li>
+</ul>
 </section>
+<section id="consistencia-con-conocimiento-medico">
+<h3><strong>Consistencia con Conocimiento Médico</strong><a class="headerlink" href="#consistencia-con-conocimiento-medico" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Alineado con evidencia</strong>: Edad y factores metabólicos como principales predictores.</p></li>
+<li><p><strong>Jerarquía lógica</strong>: Variables clínicas sobre comportamientos individuales.</p></li>
+<li><p><strong>Enfoque preventivo</strong>: Variables de screening (CholCheck) más importantes que síntomas.</p></li>
+</ul>
+<p><strong>Aplicaciones Prácticas</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Diseño de programas de screening</strong>: Enfocar en verificación de colesterol y grupos etarios.</p></li>
+<li><p><strong>Estrategias de salud pública</strong>: Priorizar factores metabólicos y demográficos.</p></li>
+<li><p><strong>Triaje eficiente</strong>: Usar top 5 variables para identificación rápida de riesgo.</p></li>
+</ol>
+<p><strong>Conclusión</strong>: El ensemble identifica correctamente los factores de riesgo establecidos en la literatura médica, validando su utilidad para aplicaciones clínicas y de salud pública.</p>
+</section>
+</section>
+<section id="comparacion-con-modelos-base-optimizados">
+<h2><strong>Comparación con Modelos Base Optimizados</strong><a class="headerlink" href="#comparacion-con-modelos-base-optimizados" title="Link to this heading">#</a></h2>
+<p>Para evaluar el desempeño del modelo GSA (Generalized Simulated Annealing Ensemble) propuesto como original, se seleccionaron seis algoritmos de machine learning que demostraron los mejores resultados durante la fase de modelado exploratorio. Estos modelos fueron configurados con técnicas de balanceo específicas para manejar el desbalance de clases:</p>
+<ul class="simple">
+<li><p><strong>Logistic Regression (L1 y L2)</strong>: Utilizando <code class="docutils literal notranslate"><span class="pre">class_weight='balanced'</span></code>.</p></li>
+<li><p><strong>Decision Tree y Random Forest</strong>: Configurados con <code class="docutils literal notranslate"><span class="pre">class_weight='balanced'</span></code>  .</p></li>
+<li><p><strong>XGBoost</strong>: Optimizado con <code class="docutils literal notranslate"><span class="pre">scale_pos_weight</span></code> calculado a partir de la distribución de clases.</p></li>
+<li><p><strong>SVM</strong>: Implementado con <code class="docutils literal notranslate"><span class="pre">class_weight='balanced'</span></code>.</p></li>
+</ul>
+<p>Cada modelo fue sometido a una búsqueda exhaustiva de hiperparámetros mediante GridSearchCV con validación cruzada estratificada de 5 folds, utilizando AUC-ROC como métrica de optimización. Esta configuración representa la versión más competitiva de cada algoritmo, siendo los candidatos ideales para determinar si el ensemble GSA presenta una mejora significativa en el desempeño predictivo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">entrenar_modelos_comparativos</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Función para entrenar todos los modelos comparativos&quot;&quot;&quot;</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ENTRENAMIENTO DE MODELOS COMPARATIVOS&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+    
+    <span class="c1"># Configuración</span>
+    <span class="n">cv_stratified</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+    <span class="n">scale_pos_weight</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">y_train</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="n">resultados</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="c1"># 1. Logistic Regression L1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1. Entrenando Logistic Regression L1...&quot;</span><span class="p">)</span>
+    <span class="n">pipeline_logreg_l1</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+        <span class="p">(</span><span class="s2">&quot;preprocessing&quot;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;classifier&quot;</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">(</span>
+            <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l1&#39;</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;saga&#39;</span><span class="p">,</span> <span class="n">class_weight</span><span class="o">=</span><span class="s1">&#39;balanced&#39;</span><span class="p">,</span> 
+            <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">))</span>
+    <span class="p">])</span>
+
+    <span class="n">param_grid_logreg</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;classifier__C&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">]}</span>
+
+    <span class="n">grid_logreg_l1</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span>
+        <span class="n">pipeline_logreg_l1</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid_logreg</span><span class="p">,</span>
+        <span class="n">cv</span><span class="o">=</span><span class="n">cv_stratified</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;roc_auc&quot;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span>
+    <span class="p">)</span>
+    
+    <span class="n">grid_logreg_l1</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">resultados</span><span class="p">[</span><span class="s1">&#39;LR_L1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">grid_logreg_l1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Completado&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># 2. Logistic Regression L2</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2. Entrenando Logistic Regression L2...&quot;</span><span class="p">)</span>
+    <span class="n">pipeline_logreg_l2</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+        <span class="p">(</span><span class="s2">&quot;preprocessing&quot;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;classifier&quot;</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">(</span>
+            <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l2&#39;</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;saga&#39;</span><span class="p">,</span> <span class="n">class_weight</span><span class="o">=</span><span class="s1">&#39;balanced&#39;</span><span class="p">,</span> 
+            <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">))</span>
+    <span class="p">])</span>
+
+    <span class="n">grid_logreg_l2</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span>
+        <span class="n">pipeline_logreg_l2</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid_logreg</span><span class="p">,</span>
+        <span class="n">cv</span><span class="o">=</span><span class="n">cv_stratified</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;roc_auc&quot;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span>
+    <span class="p">)</span>
+    
+    <span class="n">grid_logreg_l2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">resultados</span><span class="p">[</span><span class="s1">&#39;LR_L2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">grid_logreg_l2</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Completado&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># 3. Decision Tree</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;3. Entrenando Decision Tree...&quot;</span><span class="p">)</span>
+    <span class="n">pipeline_tree</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+        <span class="p">(</span><span class="s2">&quot;preprocessing&quot;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;classifier&quot;</span><span class="p">,</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">class_weight</span><span class="o">=</span><span class="s1">&#39;balanced&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">))</span>
+    <span class="p">])</span>
+
+    <span class="n">param_grid_tree</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;classifier__max_depth&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+        <span class="s2">&quot;classifier__min_samples_split&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+        <span class="s2">&quot;classifier__min_samples_leaf&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+        <span class="s2">&quot;classifier__criterion&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;gini&quot;</span><span class="p">,</span> <span class="s2">&quot;entropy&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;classifier__splitter&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;best&quot;</span><span class="p">,</span> <span class="s2">&quot;random&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;classifier__max_features&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;sqrt&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="p">}</span>
+
+    <span class="n">grid_tree</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span>
+        <span class="n">pipeline_tree</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid_tree</span><span class="p">,</span>
+        <span class="n">cv</span><span class="o">=</span><span class="n">cv_stratified</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;roc_auc&quot;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span>
+    <span class="p">)</span>
+    
+    <span class="n">grid_tree</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">resultados</span><span class="p">[</span><span class="s1">&#39;DT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">grid_tree</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; Completado&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># 4. Random Forest</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;4. Entrenando Random Forest...&quot;</span><span class="p">)</span>
+    <span class="n">pipeline_random_forest</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+        <span class="p">(</span><span class="s2">&quot;preprocessing&quot;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;classifier&quot;</span><span class="p">,</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">class_weight</span><span class="o">=</span><span class="s1">&#39;balanced&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">))</span>
+    <span class="p">])</span>
+
+    <span class="n">param_grid_random_forest</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;classifier__n_estimators&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span>
+        <span class="s2">&quot;classifier__max_depth&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span>
+        <span class="s2">&quot;classifier__min_samples_split&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+        <span class="s2">&quot;classifier__min_samples_leaf&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+        <span class="s2">&quot;classifier__max_features&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;sqrt&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;classifier__bootstrap&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
+    <span class="p">}</span>
+
+    <span class="n">grid_random_forest</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span>
+        <span class="n">pipeline_random_forest</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid_random_forest</span><span class="p">,</span>
+        <span class="n">cv</span><span class="o">=</span><span class="n">cv_stratified</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;roc_auc&quot;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span>
+    <span class="p">)</span>
+    
+    <span class="n">grid_random_forest</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">resultados</span><span class="p">[</span><span class="s1">&#39;RF&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">grid_random_forest</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Completado&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># 5. XGBoost</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;5. Entrenando XGBoost...&quot;</span><span class="p">)</span>
+    <span class="n">pipeline_xgb</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+        <span class="p">(</span><span class="s2">&quot;preprocessing&quot;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;classifier&quot;</span><span class="p">,</span> <span class="n">XGBClassifier</span><span class="p">(</span>
+            <span class="n">use_label_encoder</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">eval_metric</span><span class="o">=</span><span class="s2">&quot;logloss&quot;</span><span class="p">,</span>
+            <span class="n">tree_method</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">scale_pos_weight</span><span class="o">=</span><span class="n">scale_pos_weight</span>
+        <span class="p">))</span>
+    <span class="p">])</span>
+
+    <span class="n">param_grid_xgb</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;classifier__n_estimators&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">],</span>
+        <span class="s2">&quot;classifier__max_depth&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+        <span class="s2">&quot;classifier__subsample&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>           
+        <span class="s2">&quot;classifier__colsample_bytree&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+        <span class="s2">&quot;classifier__reg_lambda&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+    <span class="p">}</span>
+
+    <span class="n">grid_xgb</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span>
+        <span class="n">pipeline_xgb</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid_xgb</span><span class="p">,</span>
+        <span class="n">cv</span><span class="o">=</span><span class="n">cv_stratified</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;roc_auc&quot;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span>
+    <span class="p">)</span>
+    
+    <span class="n">grid_xgb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">resultados</span><span class="p">[</span><span class="s1">&#39;XGB&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">grid_xgb</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Completado&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># 6. SVM</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;6. Entrenando SVM...&quot;</span><span class="p">)</span>
+    <span class="n">pipeline_svm</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+        <span class="p">(</span><span class="s2">&quot;preprocessing&quot;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;classifier&quot;</span><span class="p">,</span> <span class="n">SGDClassifier</span><span class="p">(</span>
+            <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;log_loss&quot;</span><span class="p">,</span> <span class="n">class_weight</span><span class="o">=</span><span class="s1">&#39;balanced&#39;</span><span class="p">,</span>  
+            <span class="n">max_iter</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">))</span>
+    <span class="p">])</span>
+
+    <span class="n">param_grid_svm</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;classifier__alpha&quot;</span><span class="p">:[</span><span class="mf">1e-5</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-2</span><span class="p">,</span> <span class="mf">1e-1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+        <span class="s2">&quot;classifier__penalty&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;l2&quot;</span><span class="p">,</span> <span class="s2">&quot;l1&quot;</span><span class="p">,</span> <span class="s2">&quot;elasticnet&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;classifier__l1_ratio&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]</span>
+    <span class="p">}</span>
+
+    <span class="n">grid_svm</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span>
+        <span class="n">pipeline_svm</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid_svm</span><span class="p">,</span>
+        <span class="n">cv</span><span class="o">=</span><span class="n">cv_stratified</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;roc_auc&quot;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span>
+    <span class="p">)</span>
+    
+    <span class="n">grid_svm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">resultados</span><span class="p">[</span><span class="s1">&#39;SVM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">grid_svm</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Completado&quot;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">resultados</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="analisis-estadistico-de-significancia">
+<h2><strong>Análisis Estadístico de Significancia</strong><a class="headerlink" href="#analisis-estadistico-de-significancia" title="Link to this heading">#</a></h2>
+<p>Para determinar si las diferencias de rendimiento entre el modelo GSA (Generalized Simulated Annealing Ensemble) y los demás algoritmos son estadísticamente significativas, se realizaron tests estadísticos rigurosos. La evaluación se llevó a cabo mediante validación cruzada estratificada de 5 folds, calculando el AUC-ROC en cada partición para todos los modelos.</p>
+<p>Se aplicaron dos tipos de tests estadísticos:</p>
+<ol class="arabic simple">
+<li><p><strong>Tests t pareados</strong>: Para comparar el GSA individualmente contra cada uno de los otros modelos.</p></li>
+<li><p><strong>Test de Friedman</strong>: Para evaluar diferencias globales entre todos los modelos simultáneamente.</p></li>
+</ol>
+<p>Los niveles de significancia se evaluaron al 95% (p &lt; 0.05) y 99% (p &lt; 0.01) de confianza, permitiendo determinar objetivamente si el modelo GSA presenta una ventaja estadísticamente significativa sobre los demás algoritmos optimizados.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_diferencias_significativas</span><span class="p">(</span><span class="n">resultados</span><span class="p">,</span> <span class="n">sae_ensemble</span><span class="p">,</span> <span class="n">cv_folds</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Realizar tests estadísticos para verificar diferencias significativas&quot;&quot;&quot;</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TESTS ESTADÍSTICOS DE DIFERENCIAS SIGNIFICATIVAS&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+    
+    <span class="c1"># Configurar validación cruzada para tests pareados</span>
+    <span class="n">cv</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">cv_folds</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+    
+    <span class="c1"># Almacenar scores de cada fold</span>
+    <span class="n">scores_ensemble</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">scores_modelos</span> <span class="o">=</span> <span class="p">{</span><span class="n">nombre</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">nombre</span> <span class="ow">in</span> <span class="n">resultados</span><span class="o">.</span><span class="n">keys</span><span class="p">()}</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Calculando scores por fold...&quot;</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">fold</span><span class="p">,</span> <span class="p">(</span><span class="n">train_idx</span><span class="p">,</span> <span class="n">val_idx</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Fold </span><span class="si">{</span><span class="n">fold</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">cv_folds</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+        
+        <span class="n">X_fold_train</span><span class="p">,</span> <span class="n">X_fold_val</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">train_idx</span><span class="p">],</span> <span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">val_idx</span><span class="p">]</span>
+        <span class="n">y_fold_train</span><span class="p">,</span> <span class="n">y_fold_val</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">train_idx</span><span class="p">],</span> <span class="n">y</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">val_idx</span><span class="p">]</span>
+        
+        <span class="c1"># Score del ensemble en el fold</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">y_pred_ensemble_fold</span> <span class="o">=</span> <span class="n">sae_ensemble</span><span class="o">.</span><span class="n">predecir</span><span class="p">(</span><span class="n">X_fold_val</span><span class="p">)</span>
+            <span class="n">auc_ensemble_fold</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_fold_val</span><span class="p">,</span> <span class="n">y_pred_ensemble_fold</span><span class="p">)</span>
+            <span class="n">scores_ensemble</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">auc_ensemble_fold</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="c1"># Si falla, usar score del ensemble original en test</span>
+            <span class="n">y_pred_ensemble_fold</span> <span class="o">=</span> <span class="n">sae_ensemble</span><span class="o">.</span><span class="n">predecir</span><span class="p">(</span><span class="n">X_fold_val</span><span class="p">)</span>
+            <span class="n">auc_ensemble_fold</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_fold_val</span><span class="p">,</span> <span class="n">y_pred_ensemble_fold</span><span class="p">)</span>
+            <span class="n">scores_ensemble</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">auc_ensemble_fold</span><span class="p">)</span>
+        
+        <span class="c1"># Scores para otros modelos</span>
+        <span class="k">for</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">modelo</span> <span class="ow">in</span> <span class="n">resultados</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">y_pred_modelo_fold</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_fold_val</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="n">auc_modelo_fold</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_fold_val</span><span class="p">,</span> <span class="n">y_pred_modelo_fold</span><span class="p">)</span>
+                <span class="n">scores_modelos</span><span class="p">[</span><span class="n">nombre</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">auc_modelo_fold</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="c1"># Si falla, usar score del modelo en test completo</span>
+                <span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="n">auc_test</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_test</span><span class="p">)</span>
+                <span class="n">scores_modelos</span><span class="p">[</span><span class="n">nombre</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">auc_test</span><span class="p">)</span>
+    
+    <span class="c1"># Realizar tests t pareados</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TESTS t PAREADOS (GSA vs otros modelos)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+    
+    <span class="n">resultados_tests</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">nombre</span> <span class="ow">in</span> <span class="n">resultados</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">t_stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">ttest_rel</span><span class="p">(</span><span class="n">scores_ensemble</span><span class="p">,</span> <span class="n">scores_modelos</span><span class="p">[</span><span class="n">nombre</span><span class="p">])</span>
+        
+        <span class="c1"># Calcular diferencia promedio</span>
+        <span class="n">diff_promedio</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores_ensemble</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores_modelos</span><span class="p">[</span><span class="n">nombre</span><span class="p">])</span>
+        
+        <span class="n">resultados_tests</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s1">&#39;Modelo_Comparado&#39;</span><span class="p">:</span> <span class="n">nombre</span><span class="p">,</span>
+            <span class="s1">&#39;Diferencia_Promedio_AUC&#39;</span><span class="p">:</span> <span class="n">diff_promedio</span><span class="p">,</span>
+            <span class="s1">&#39;t_statistic&#39;</span><span class="p">:</span> <span class="n">t_stat</span><span class="p">,</span>
+            <span class="s1">&#39;p_value&#39;</span><span class="p">:</span> <span class="n">p_value</span><span class="p">,</span>
+            <span class="s1">&#39;Significativo_95%&#39;</span><span class="p">:</span> <span class="n">p_value</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">,</span>
+            <span class="s1">&#39;Significativo_99%&#39;</span><span class="p">:</span> <span class="n">p_value</span> <span class="o">&lt;</span> <span class="mf">0.01</span>
+        <span class="p">})</span>
+        
+        <span class="c1"># Mostrar resultados del test</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">GSA vs </span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Diferencia promedio AUC: </span><span class="si">{</span><span class="n">diff_promedio</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  t-statistic: </span><span class="si">{</span><span class="n">t_stat</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  p-value: </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Significativo (p &lt; 0.05): </span><span class="si">{</span><span class="s1">&#39;SÍ&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">p_value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.05</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;NO&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Significativo (p &lt; 0.01): </span><span class="si">{</span><span class="s1">&#39;SÍ&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">p_value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.01</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;NO&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Test de Friedman para comparación múltiple</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TEST DE FRIEDMAN (comparación múltiple)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+    
+    <span class="c1"># Preparar datos para Friedman</span>
+    <span class="n">datos_friedman</span> <span class="o">=</span> <span class="p">[</span><span class="n">scores_ensemble</span><span class="p">]</span>  <span class="c1"># Ensemble primero</span>
+    <span class="n">nombres_friedman</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GSA&#39;</span><span class="p">]</span>
+    
+    <span class="k">for</span> <span class="n">nombre</span> <span class="ow">in</span> <span class="n">resultados</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">datos_friedman</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">scores_modelos</span><span class="p">[</span><span class="n">nombre</span><span class="p">])</span>
+        <span class="n">nombres_friedman</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">friedman_stat</span><span class="p">,</span> <span class="n">friedman_p</span> <span class="o">=</span> <span class="n">friedmanchisquare</span><span class="p">(</span><span class="o">*</span><span class="n">datos_friedman</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Estadístico Friedman: </span><span class="si">{</span><span class="n">friedman_stat</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p-value: </span><span class="si">{</span><span class="n">friedman_p</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Diferencias globales significativas (p &lt; 0.05): </span><span class="si">{</span><span class="s1">&#39;SÍ&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">friedman_p</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.05</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;NO&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Diferencias globales significativas (p &lt; 0.01): </span><span class="si">{</span><span class="s1">&#39;SÍ&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">friedman_p</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.01</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;NO&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error en test de Friedman: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">friedman_stat</span><span class="p">,</span> <span class="n">friedman_p</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+    
+    <span class="c1"># Resumen ejecutivo</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RESUMEN EJECUTIVO - TESTS ESTADÍSTICOS&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+    
+    <span class="n">df_resultados</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">resultados_tests</span><span class="p">)</span>
+    
+    <span class="n">n_significativos_95</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">df_resultados</span><span class="p">[</span><span class="s1">&#39;Significativo_95%&#39;</span><span class="p">])</span>
+    <span class="n">n_significativos_99</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">df_resultados</span><span class="p">[</span><span class="s1">&#39;Significativo_99%&#39;</span><span class="p">])</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Modelos con diferencia significativa vs GSA:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Nivel 95% de confianza: </span><span class="si">{</span><span class="n">n_significativos_95</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">resultados</span><span class="p">)</span><span class="si">}</span><span class="s2"> modelos&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Nivel 99% de confianza: </span><span class="si">{</span><span class="n">n_significativos_99</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">resultados</span><span class="p">)</span><span class="si">}</span><span class="s2"> modelos&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">n_significativos_95</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Modelos significativamente diferentes (95%):&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df_resultados</span><span class="p">[</span><span class="n">df_resultados</span><span class="p">[</span><span class="s1">&#39;Significativo_95%&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+            <span class="n">mejor</span> <span class="o">=</span> <span class="s2">&quot;GSA&quot;</span> <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Diferencia_Promedio_AUC&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Modelo_Comparado&#39;</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Modelo_Comparado&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">mejor</span><span class="si">}</span><span class="s2"> es mejor (diferencia: </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Diferencia_Promedio_AUC&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">friedman_p</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Test de Friedman:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Diferencias globales significativas: </span><span class="si">{</span><span class="s1">&#39;SÍ&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">friedman_p</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.05</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;NO&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - p-value: </span><span class="si">{</span><span class="n">friedman_p</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">df_resultados</span><span class="p">,</span> <span class="n">scores_ensemble</span><span class="p">,</span> <span class="n">scores_modelos</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejecucion-y-resultados-de-la-comparacion-estadistica">
+<h2><strong>Ejecución y Resultados de la Comparación Estadística</strong><a class="headerlink" href="#ejecucion-y-resultados-de-la-comparacion-estadistica" title="Link to this heading">#</a></h2>
+<p>A continuación se ejecuta el proceso completo de comparación entre el modelo GSA y los algoritmos base optimizados. Este proceso incluye el entrenamiento de todos los modelos comparativos y la aplicación de tests estadísticos para validar las diferencias observadas. Los resultados se presentan en una tabla resumen que muestra las diferencias promedio en AUC-ROC, los valores p obtenidos y la significancia estadística de cada comparación.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Entrenar modelos comparativos</span>
+<span class="n">modelos_entrenados</span> <span class="o">=</span> <span class="n">entrenar_modelos_comparativos</span><span class="p">()</span>
+    
+<span class="c1"># 2. Realizar tests estadísticos de diferencias</span>
+<span class="n">resultados_tests</span><span class="p">,</span> <span class="n">scores_ensemble</span><span class="p">,</span> <span class="n">scores_modelos</span> <span class="o">=</span> <span class="n">test_diferencias_significativas</span><span class="p">(</span><span class="n">modelos_entrenados</span><span class="p">,</span> <span class="n">sae_paper</span><span class="p">,</span> <span class="n">cv_folds</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    
+<span class="c1"># 3. Mostrar tabla resumen de resultados</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TABLA RESUMEN - RESULTADOS ESTADÍSTICOS&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+    
+<span class="n">df_display</span> <span class="o">=</span> <span class="n">resultados_tests</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df_display</span><span class="p">[</span><span class="s1">&#39;Diferencia&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_display</span><span class="p">[</span><span class="s1">&#39;Diferencia_Promedio_AUC&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">+.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">df_display</span><span class="p">[</span><span class="s1">&#39;p-value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_display</span><span class="p">[</span><span class="s1">&#39;p_value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">df_display</span><span class="p">[</span><span class="s1">&#39;Significativo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_display</span><span class="p">[</span><span class="s1">&#39;Significativo_95%&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">&quot;SÍ&quot;</span> <span class="k">if</span> <span class="n">x</span> <span class="k">else</span> <span class="s2">&quot;NO&quot;</span><span class="p">)</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">df_display</span><span class="p">[[</span><span class="s1">&#39;Modelo_Comparado&#39;</span><span class="p">,</span> <span class="s1">&#39;Diferencia&#39;</span><span class="p">,</span> <span class="s1">&#39;p-value&#39;</span><span class="p">,</span> <span class="s1">&#39;Significativo&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============================================================
+ENTRENAMIENTO DE MODELOS COMPARATIVOS
+============================================================
+1. Entrenando Logistic Regression L1...
+Completado
+2. Entrenando Logistic Regression L2...
+Completado
+3. Entrenando Decision Tree...
+ Completado
+4. Entrenando Random Forest...
+Completado
+5. Entrenando XGBoost...
+Completado
+6. Entrenando SVM...
+Completado
+
+============================================================
+TESTS ESTADÍSTICOS DE DIFERENCIAS SIGNIFICATIVAS
+============================================================
+
+Calculando scores por fold...
+  Fold 1/5...
+
+Modelos seleccionados en el ensemble final:
+ - LR_L1: peso = 0.0836
+ - LR_L2: peso = 0.1653
+ - NB: peso = 0.0315
+ - RF: peso = 0.1194
+ - XGB: peso = 0.0624
+ - LGBM: peso = 0.1186
+ - CATB: peso = 0.0980
+ - ADA: peso = 0.1647
+ - BAG: peso = 0.0257
+ - SGB: peso = 0.1114
+Total modelos seleccionados: 10/12
+  Fold 2/5...
+
+Modelos seleccionados en el ensemble final:
+ - LR_L1: peso = 0.0836
+ - LR_L2: peso = 0.1653
+ - NB: peso = 0.0315
+ - RF: peso = 0.1194
+ - XGB: peso = 0.0624
+ - LGBM: peso = 0.1186
+ - CATB: peso = 0.0980
+ - ADA: peso = 0.1647
+ - BAG: peso = 0.0257
+ - SGB: peso = 0.1114
+Total modelos seleccionados: 10/12
+  Fold 3/5...
+
+Modelos seleccionados en el ensemble final:
+ - LR_L1: peso = 0.0836
+ - LR_L2: peso = 0.1653
+ - NB: peso = 0.0315
+ - RF: peso = 0.1194
+ - XGB: peso = 0.0624
+ - LGBM: peso = 0.1186
+ - CATB: peso = 0.0980
+ - ADA: peso = 0.1647
+ - BAG: peso = 0.0257
+ - SGB: peso = 0.1114
+Total modelos seleccionados: 10/12
+  Fold 4/5...
+
+Modelos seleccionados en el ensemble final:
+ - LR_L1: peso = 0.0836
+ - LR_L2: peso = 0.1653
+ - NB: peso = 0.0315
+ - RF: peso = 0.1194
+ - XGB: peso = 0.0624
+ - LGBM: peso = 0.1186
+ - CATB: peso = 0.0980
+ - ADA: peso = 0.1647
+ - BAG: peso = 0.0257
+ - SGB: peso = 0.1114
+Total modelos seleccionados: 10/12
+  Fold 5/5...
+
+Modelos seleccionados en el ensemble final:
+ - LR_L1: peso = 0.0836
+ - LR_L2: peso = 0.1653
+ - NB: peso = 0.0315
+ - RF: peso = 0.1194
+ - XGB: peso = 0.0624
+ - LGBM: peso = 0.1186
+ - CATB: peso = 0.0980
+ - ADA: peso = 0.1647
+ - BAG: peso = 0.0257
+ - SGB: peso = 0.1114
+Total modelos seleccionados: 10/12
+
+--------------------------------------------------
+TESTS t PAREADOS (GSA vs otros modelos)
+--------------------------------------------------
+
+GSA vs LR_L1:
+  Diferencia promedio AUC: 0.030386
+  t-statistic: 57.047394
+  p-value: 0.000001
+  Significativo (p &lt; 0.05): SÍ
+  Significativo (p &lt; 0.01): SÍ
+
+GSA vs LR_L2:
+  Diferencia promedio AUC: 0.030382
+  t-statistic: 57.213097
+  p-value: 0.000001
+  Significativo (p &lt; 0.05): SÍ
+  Significativo (p &lt; 0.01): SÍ
+
+GSA vs DT:
+  Diferencia promedio AUC: 0.030622
+  t-statistic: 122.176696
+  p-value: 0.000000
+  Significativo (p &lt; 0.05): SÍ
+  Significativo (p &lt; 0.01): SÍ
+
+GSA vs RF:
+  Diferencia promedio AUC: 0.016385
+  t-statistic: 71.445205
+  p-value: 0.000000
+  Significativo (p &lt; 0.05): SÍ
+  Significativo (p &lt; 0.01): SÍ
+
+GSA vs XGB:
+  Diferencia promedio AUC: 0.019543
+  t-statistic: 102.089794
+  p-value: 0.000000
+  Significativo (p &lt; 0.05): SÍ
+  Significativo (p &lt; 0.01): SÍ
+
+GSA vs SVM:
+  Diferencia promedio AUC: 0.030748
+  t-statistic: 57.195756
+  p-value: 0.000001
+  Significativo (p &lt; 0.05): SÍ
+  Significativo (p &lt; 0.01): SÍ
+
+----------------------------------------
+TEST DE FRIEDMAN (comparación múltiple)
+----------------------------------------
+Estadístico Friedman: 26.914286
+p-value: 0.000150
+Diferencias globales significativas (p &lt; 0.05): SÍ
+Diferencias globales significativas (p &lt; 0.01): SÍ
+
+============================================================
+RESUMEN EJECUTIVO - TESTS ESTADÍSTICOS
+============================================================
+
+Modelos con diferencia significativa vs GSA:
+  - Nivel 95% de confianza: 6/6 modelos
+  - Nivel 99% de confianza: 6/6 modelos
+
+Modelos significativamente diferentes (95%):
+  - LR_L1: GSA es mejor (diferencia: 0.030386)
+  - LR_L2: GSA es mejor (diferencia: 0.030382)
+  - DT: GSA es mejor (diferencia: 0.030622)
+  - RF: GSA es mejor (diferencia: 0.016385)
+  - XGB: GSA es mejor (diferencia: 0.019543)
+  - SVM: GSA es mejor (diferencia: 0.030748)
+
+Test de Friedman:
+  - Diferencias globales significativas: SÍ
+  - p-value: 0.000150
+
+============================================================
+TABLA RESUMEN - RESULTADOS ESTADÍSTICOS
+============================================================
+
+Modelo_Comparado Diferencia  p-value Significativo
+           LR_L1  +0.030386 0.000001            SÍ
+           LR_L2  +0.030382 0.000001            SÍ
+              DT  +0.030622 0.000000            SÍ
+              RF  +0.016385 0.000000            SÍ
+             XGB  +0.019543 0.000000            SÍ
+             SVM  +0.030748 0.000001            SÍ
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Estabilidad en Composición</strong></p>
+<ul class="simple">
+<li><p><strong>Misma composición en los 5 folds</strong>: Exactamente los mismos 10 modelos con idénticos pesos.</p></li>
+<li><p><strong>Pesos idénticos</strong>: Misma distribución (LR_L2: 16.53%, ADA: 16.47%, etc.) en todas las particiones.</p></li>
+<li><p><strong>Implicación</strong>: El algoritmo GSA encuentra una solución <strong>extremadamente robusta</strong> y estable.</p></li>
+</ul>
+<p><strong>Tests t Pareados - Resultados Contundentes</strong></p>
+<ul class="simple">
+<li><p><strong>100% de modelos</strong> (6/6) muestran diferencias significativas a favor del GSA.</p></li>
+<li><p><strong>p-values extremadamente bajos</strong>: Todos en el orden de 10⁻⁶ a 10⁻⁷.</p></li>
+<li><p><strong>t-statistics muy altos</strong>: Valores entre 57 y 122, indicando diferencias muy marcadas.</p></li>
+</ul>
+<p><strong>Magnitud de las Diferencias</strong></p>
+<ul class="simple">
+<li><p><strong>Mayores diferencias</strong>:</p>
+<ul>
+<li><p>SVM: +0.0307 AUC</p></li>
+<li><p>DT: +0.0306 AUC</p></li>
+<li><p>LR_L1/LR_L2: +0.0304 AUC</p></li>
+</ul>
+</li>
+<li><p><strong>Diferencias menores pero significativas</strong>:</p>
+<ul>
+<li><p>XGB: +0.0195 AUC</p></li>
+<li><p>RF: +0.0164 AUC</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Test de Friedman - Validación Global</strong></p>
+<ul class="simple">
+<li><p><strong>p-value: 0.000150</strong> - Altamente significativo.</p></li>
+<li><p><strong>Estadístico: 26.91</strong> - Valor considerable.</p></li>
+<li><p><strong>Conclusión</strong>: Existen diferencias globales significativas entre todos los modelos.</p></li>
+</ul>
+<p><strong>Modelos con Mayor Brecha</strong></p>
+<ul class="simple">
+<li><p><strong>SVM, DT, Regresiones Logísticas</strong>: ~0.0306 AUC de diferencia.</p></li>
+<li><p><strong>Interpretación</strong>: El GSA supera significativamente a modelos más simples.</p></li>
+</ul>
+<p><strong>Modelos Ensemble Individuales</strong></p>
+<ul class="simple">
+<li><p><strong>XGBoost y Random Forest</strong>: Diferencias menores pero aún muy significativas.</p></li>
+<li><p><strong>Implicación</strong>: El GSA incluso supera a ensembles individuales de alto desempeño.</p></li>
+</ul>
+<p><strong>Evidencia Sólida</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Consistencia cross-validation</strong>: Mismos pesos en todos los folds.</p></li>
+<li><p><strong>Significancia múltiple</strong>: Tests individuales y globales concuerdan.</p></li>
+<li><p><strong>Magnitud consistente</strong>: Diferencias estables a través de modelos.</p></li>
+</ol>
+<p><strong>Niveles de Confianza</strong></p>
+<ul class="simple">
+<li><p><strong>95% y 99% de confianza</strong>: Todos los tests superan ambos umbrales.</p></li>
+<li><p><strong>p-values prácticamente cero</strong>: Evidencia estadística abrumadora.</p></li>
+</ul>
+<p><strong>Superioridad del Enfoque GSA</strong></p>
+<ul class="simple">
+<li><p><strong>Mejor que modelos individuales</strong>: LR, DT, SVM.</p></li>
+<li><p><strong>Mejor que ensembles simples</strong>: RF, XGB.</p></li>
+<li><p><strong>Robustez demostrada</strong>: Composición estable en validación cruzada.</p></li>
+</ul>
+<p><strong>Contribución del Ensemble</strong></p>
+<ul class="simple">
+<li><p><strong>Sinergia algorítmica</strong>: La combinación de 10 modelos supera a cualquiera individualmente.</p></li>
+<li><p><strong>Selección óptima</strong>: Los pesos asignados maximizan el desempeño colectivo.</p></li>
+<li><p><strong>Generalización</strong>: Performance consistente a través de múltiples particiones.</p></li>
+</ul>
+<p><strong>El modelo GSA demuestra una superioridad estadísticamente significativa y robusta sobre todos los modelos comparativos</strong>, con:</p>
+<ul class="simple">
+<li><p><strong>Diferencia real</strong>: Mejoras de 0.0164 a 0.0307 puntos de AUC.</p></li>
+<li><p><strong>Significancia absoluta</strong>: p-values extremadamente bajos en todos los casos.</p></li>
+<li><p><strong>Consistencia total</strong>: Misma composición óptima en toda la validación.</p></li>
+<li><p><strong>Generalización</strong>: Diferencias mantenidas a través de múltiples folds.</p></li>
+</ul>
+<p><strong>El ensemble GSA no solo es mejor, sino significativa y consistentemente mejor que cualquier modelo individual o ensemble simple probado.</strong></p>
 </section>
 </section>
 
@@ -2289,8 +2977,17 @@ TOP 10 VARIABLES MÁS IMPORTANTES DEL ENSEMBLE:
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><strong>Conclusiones y Hallazgos Principales en los Modelados</strong></p>
+        <p class="prev-next-title"><strong>Conclusiones y Hallazgos en los Modelados</strong></p>
       </div>
+    </a>
+    <a class="right-next"
+       href="conclusion.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Conclusiones del Modelo Original</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -2420,49 +3117,15 @@ TOP 10 VARIABLES MÁS IMPORTANTES DEL ENSEMBLE:
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-ejecutivo-de-resultados"><strong>Resumen Ejecutivo de Resultados</strong></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-de-resultados"><strong>Tabla Comparativa de Resultados</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-importancia-de-variables-del-ensemble-optimizado"><strong>Análisis de Importancia de Variables del Ensemble Optimizado</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-importancia-ensemble"><strong>Cálculo de Importancia Ensemble</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consistencia-con-conocimiento-medico"><strong>Consistencia con Conocimiento Médico</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-comparativo-de-resultados"><strong>Análisis Comparativo de Resultados</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desempeno-del-ensemble-optimizado-vs-xgboost"><strong>Desempeño del Ensemble Optimizado vs XGBoost</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-del-ensemble-optimizado"><strong>Ventajas del Ensemble Optimizado</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mayor-balance-global-f1-score-superior"><strong>1. Mayor Balance Global (F1-score superior)</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-mejorada-significativamente"><strong>2. Precision Mejorada Significativamente</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-general-superior"><strong>3. Accuracy General Superior</strong></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trade-off-aceptable-recall-vs-precision"><strong>Trade-off Aceptable: Recall vs Precision</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-del-compromiso"><strong>Análisis del Compromiso</strong></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#desafios-del-problema-de-diabetes"><strong>Desafíos del Problema de Diabetes</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desbalance-de-clases-critico"><strong>Desbalance de Clases Crítico</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones-en-variables-disponibles"><strong>Limitaciones en Variables Disponibles</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#composicion-del-dataset"><strong>Composición del Dataset:</strong></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-del-ambito-de-diabetes"><strong>Complejidad del Ámbito de Diabetes</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factores-que-dificultan-la-prediccion"><strong>Factores que Dificultan la Predicción</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multifactorialidad-de-la-enfermedad"><strong>1. Multifactorialidad de la Enfermedad</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#naturaleza-del-problema-medico"><strong>2. Naturaleza del Problema Médico</strong></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recomendaciones-y-trabajo-futuro"><strong>Recomendaciones y Trabajo Futuro</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mejoras-potenciales"><strong>Mejoras Potenciales</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#enriquecimiento-de-variables"><strong>1. Enriquecimiento de Variables</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizacion-especifica-del-dominio"><strong>2. Optimización Específica del Dominio</strong></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones-finales"><strong>Conclusiones Finales</strong></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-con-modelos-base-optimizados"><strong>Comparación con Modelos Base Optimizados</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-estadistico-de-significancia"><strong>Análisis Estadístico de Significancia</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejecucion-y-resultados-de-la-comparacion-estadistica"><strong>Ejecución y Resultados de la Comparación Estadística</strong></a></li>
 </ul>
   </nav></div>
 

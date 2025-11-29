@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Conclusiones y Hallazgos Principales en los Modelados &#8212; EDA</title>
+    <title>Conclusiones y Hallazgos en los Modelados &#8212; EDA</title>
   
   
   
@@ -185,8 +185,9 @@
 <li class="toctree-l1"><a class="reference internal" href="modelado_smote.html"><strong>Modelado Optimizado (SMOTE)</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="modelado_adasyn.html"><strong>Modelado Optimizado (ADASYN)</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="modelado_w.html"><strong>Modelado Optimizado (class weight)</strong></a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Conclusiones y Hallazgos Principales en los Modelados</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Conclusiones y Hallazgos en los Modelados</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="modelo_origin.html"><strong>Ensemble con Simulated Annealing para Predicción de Diabetes</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="conclusion.html"><strong>Conclusiones del Modelo Original</strong></a></li>
 </ul>
 
     </div>
@@ -372,7 +373,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Conclusiones y Hallazgos Principales en los Modelados</h1>
+    <h1>Conclusiones y Hallazgos en los Modelados</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -461,8 +462,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="conclusiones-y-hallazgos-principales-en-los-modelados">
-<h1><strong>Conclusiones y Hallazgos Principales en los Modelados</strong><a class="headerlink" href="#conclusiones-y-hallazgos-principales-en-los-modelados" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="conclusiones-y-hallazgos-en-los-modelados">
+<h1><strong>Conclusiones y Hallazgos en los Modelados</strong><a class="headerlink" href="#conclusiones-y-hallazgos-en-los-modelados" title="Link to this heading">#</a></h1>
 <section id="logro-de-los-objetivos-propuestos">
 <h2><strong>1. Logro de los Objetivos Propuestos</strong><a class="headerlink" href="#logro-de-los-objetivos-propuestos" title="Link to this heading">#</a></h2>
 <p>El presente proyecto ha cumplido satisfactoriamente con todos los objetivos planteados inicialmente, demostrando la viabilidad de utilizar algoritmos de machine learning para la predicción temprana de diabetes y prediabetes. A través de un proceso sistemático que incluyó desde el análisis exploratorio hasta la interpretación avanzada de los modelos. Por tanto, se ha desarrollado un framework robusto capaz de identificar pacientes con alto riesgo metabólico con métricas competitivas.</p>
@@ -471,9 +472,9 @@ document.write(`
 <h2><strong>2. Hallazgos Clínicos y Epidemiológicos Relevantes</strong><a class="headerlink" href="#hallazgos-clinicos-y-epidemiologicos-relevantes" title="Link to this heading">#</a></h2>
 <p>El análisis exploratorio y de importancia de variables reveló patrones epidemiológicos significativos que coinciden con la literatura médica existente:</p>
 <ul class="simple">
-<li><p><strong>Perfil de riesgo identificado</strong>: Los pacientes con mayor probabilidad de diabetes presentan <strong>edad avanzada</strong> (categorías cat_Age_10 - cat_Age_13), <strong>consumo excesivo de alcohol</strong> (bin_HvyAlcoholConsump), <strong>hipertensión y colesterol alto</strong> (bin_HighBP, bin_HighChol) y <strong>condiciones de salud general deficiente</strong> (cat_GenHlth_4, cat_GenHlth_5).</p></li>
-<li><p><strong>Variables críticas identificadas</strong>: Las <strong>variables de salud general autopercibida</strong> emergieron como los predictores más potentes acompañado de <strong>indicadores médicos directos</strong> (HighBP, HighChol)..</p></li>
-<li><p><strong>Factores protectores consistentes</strong>: La <strong>ausencia de consumo excesivo de alcohol</strong> y la <strong>pertenencia a grupos de edad media</strong> se identificaron como factores protectores clave en múltiples modelos.</p></li>
+<li><p><strong>Perfil de riesgo identificado</strong>: Los pacientes con mayor probabilidad de diabetes presentan <strong>edad avanzada</strong> (categorías cat_Age_10 - cat_Age_13), <strong>hipertensión y colesterol alto</strong> (bin_HighBP, bin_HighChol) y <strong>condiciones de salud general deficiente</strong> (cat_GenHlth_4, cat_GenHlth_5).</p></li>
+<li><p><strong>Variables críticas identificadas</strong>: Las <strong>variables de salud general autopercibida</strong> emergieron como los predictores más potentes acompañado de <strong>indicadores médicos directos</strong> (HighBP, HighChol).</p></li>
+<li><p><strong>Factores protectores consistentes</strong>: El <strong>consumo excesivo de alcohol</strong> y la <strong>pertenencia a grupos de edad jocen</strong> se identificaron como factores protectores clave en múltiples modelos.</p></li>
 </ul>
 </section>
 <section id="analisis-comparativo-de-tecnicas-de-balanceo-por-modelo">
@@ -485,7 +486,7 @@ document.write(`
 <h4><strong>Modelos Lineales (Logistic Regression L1, L2, SVM):</strong><a class="headerlink" href="#modelos-lineales-logistic-regression-l1-l2-svm" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p><strong>Class Weight (‘balanced’)</strong> - Óptimo para regresión logística y SVM.</p></li>
-<li><p><strong>SMOTE</strong> - Alternativa competitiva con mejor balance general.</p></li>
+<li><p><strong>SMOTE</strong> - Alternativa competitiva con buen balance general.</p></li>
 </ul>
 </section>
 <section id="modelos-basados-en-arboles-xgboost-random-forest-decision-tree-catboost">
@@ -512,9 +513,8 @@ document.write(`
 <section id="patrones-generales-en-tecnicas-de-balanceo">
 <h3><strong>Patrones Generales en Técnicas de Balanceo</strong><a class="headerlink" href="#patrones-generales-en-tecnicas-de-balanceo" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>SMOTE</strong>: Óptimo para modelos lineales, con <strong>AUC-ROC consistentemente alto</strong> y buen balance general.</p></li>
+<li><p><strong>SMOTE</strong>: Óptimo para modelos lineales, con <strong>AUC-ROC consistentemente alto</strong> y buen balance general. También, superior para modelos <strong>Naive Bayes</strong> presentando un buen balance general.</p></li>
 <li><p><strong>Class Weight y scale_pos_weight</strong>: Superior en modelos lineales y basados en árboles, maximizando <strong>F1-Score y AUC-ROC</strong>.</p></li>
-<li><p><strong>ADASYN</strong>: Superior para modelos <strong>Naive Bayes</strong> presentando un buen balance general.</p></li>
 <li><p><strong>Sin Balanceo</strong>: Produjo <strong>accuracy inflado artificialmente</strong> con recall muy bajo, confirmando la necesidad crítica de técnicas de balanceo.</p></li>
 </ul>
 </section>
@@ -526,7 +526,7 @@ document.write(`
 <section id="auc-roc-capacidad-discriminativa">
 <h4><strong>AUC-ROC (Capacidad Discriminativa)</strong><a class="headerlink" href="#auc-roc-capacidad-discriminativa" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
-<li><p>XGBoost (scale_pos_weight) - 0.825904.</p></li>
+<li><p>XGBoost (scale_pos_weight) - 0.825688.</p></li>
 <li><p>Random Forest (Class Weight) - 0.822041.</p></li>
 <li><p>Logistic Regression L2 (Class Weight) - 0.819243.</p></li>
 <li><p>Logistic Regression L1 (Class Weight) - 0.819240.</p></li>
@@ -543,9 +543,9 @@ document.write(`
 <h4><strong>F1-Score (Balance Precision-Recall)</strong><a class="headerlink" href="#f1-score-balance-precision-recall" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
 <li><p>Random Forest (Class Weight) - 0.443151.</p></li>
-<li><p>XGBoost (scale_pos_weight) - 0.441886.</p></li>
 <li><p>Logistic Regression L1 (SMOTE) - 0.440772.</p></li>
 <li><p>Logistic Regression L2 (SMOTE) - 0.440770.</p></li>
+<li><p>XGBoost (scale_pos_weight) - 0.439838.</p></li>
 <li><p>SVM (ADASYN) - 0.438498.</p></li>
 <li><p>Decision Tree (Class Weight) - 0.427827.</p></li>
 <li><p>GaussianNB (SMOTE) - 0.427725.</p></li>
@@ -558,7 +558,7 @@ document.write(`
 <section id="sensibilidad-recall-deteccion-de-casos-positivos">
 <h4><strong>Sensibilidad (Recall - Detección de Casos Positivos)</strong><a class="headerlink" href="#sensibilidad-recall-deteccion-de-casos-positivos" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
-<li><p>XGBoost (scale_pos_weight) - 0.792757.</p></li>
+<li><p>XGBoost (scale_pos_weight) - 0.790918.</p></li>
 <li><p>SVM (Class Weight) - 0.790494.</p></li>
 <li><p>Logistic Regression L1 (ADASYN) - 0.780308.</p></li>
 <li><p>Logistic Regression L2 (ADASYN) - 0.778752.</p></li>
@@ -577,8 +577,8 @@ document.write(`
 <li><p>Random Forest (Class Weight) - 0.311963.</p></li>
 <li><p>Logistic Regression L2 (SMOTE) - 0.310735.</p></li>
 <li><p>Logistic Regression L1 (SMOTE) - 0.310335.</p></li>
-<li><p>XGBoost (scale_pos_weight) - 0.306313.</p></li>
 <li><p>SVM (ADASYN) - 0.305689.</p></li>
+<li><p>XGBoost (scale_pos_weight) - 0.304620.</p></li>
 <li><p>GaussianNB (SMOTE) - 0.304195.</p></li>
 <li><p>Decision Tree (Class Weight) - 0.297523.</p></li>
 <li><p>MultinomialNB (SMOTE) - 0.294308.</p></li>
@@ -694,7 +694,7 @@ document.write(`
 <section id="para-screening-masivo-maximizar-recall">
 <h3><strong>Para Screening Masivo (Maximizar Recall):</strong><a class="headerlink" href="#para-screening-masivo-maximizar-recall" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p><strong>XGBoost (scale_pos_weight)</strong> (Recall: 79.2%).</p></li>
+<li><p><strong>XGBoost (scale_pos_weight)</strong> (Recall: 790%).</p></li>
 <li><p><strong>SVM (Class Weight)</strong> (Recall: 79.0%).</p></li>
 <li><p><strong>Logistic Regression L1 (ADASYN)</strong> (Recall: 78.0%).</p></li>
 </ol>
@@ -710,7 +710,7 @@ document.write(`
 <section id="para-balance-optimo-general">
 <h3><strong>Para Balance Óptimo General:</strong><a class="headerlink" href="#para-balance-optimo-general" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p><strong>XGBoost con scale_pos_weight</strong> (AUC: 0.825904).</p></li>
+<li><p><strong>XGBoost con scale_pos_weight</strong> (AUC: 0.825688).</p></li>
 <li><p><strong>Random Forest con Class Weight</strong> (F1-Score: 0.443151).</p></li>
 <li><p><strong>SVM con Class Weight</strong> (Velocidad + Rendimiento).</p></li>
 </ol>
@@ -770,8 +770,8 @@ document.write(`
 <h3><strong>Recomendación Final por Escenario</strong><a class="headerlink" href="#recomendacion-final-por-escenario" title="Link to this heading">#</a></h3>
 <p><strong>Para la mayoría de aplicaciones clínicas</strong> en predicción de diabetes, se recomienda la <strong>implementación de XGBoost con scale_pos_weight</strong> como solución óptima que ofrece:</p>
 <ul class="simple">
-<li><p><strong>Máximo AUC-ROC</strong> (0.825904).</p></li>
-<li><p><strong>Recall excelente</strong> (78.27%).</p></li>
+<li><p><strong>Máximo AUC-ROC</strong> (0.825688).</p></li>
+<li><p><strong>Recall excelente</strong> (79.0%).</p></li>
 </ul>
 <p><strong>Para implementaciones con restricciones computacionales</strong>, <strong>SVM con Class Weight</strong> constituye la alternativa ideal:</p>
 <ul class="simple">

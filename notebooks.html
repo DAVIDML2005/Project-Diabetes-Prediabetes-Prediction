@@ -187,8 +187,9 @@
 <li class="toctree-l1"><a class="reference internal" href="modelado_smote.html"><strong>Modelado Optimizado (SMOTE)</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="modelado_adasyn.html"><strong>Modelado Optimizado (ADASYN)</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="modelado_w.html"><strong>Modelado Optimizado (class weight)</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="markdown.html"><strong>Conclusiones y Hallazgos Principales en los Modelados</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="markdown.html"><strong>Conclusiones y Hallazgos en los Modelados</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="modelo_origin.html"><strong>Ensemble con Simulated Annealing para Predicción de Diabetes</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="conclusion.html"><strong>Conclusiones del Modelo Original</strong></a></li>
 </ul>
 
     </div>
@@ -1346,8 +1347,8 @@ Coeficiente de Variación:  21.39 %
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/9749b3f95ff63948ce95bae851efbf4b4cf741fb67f5e44ff91628818fba9574.png" src="_images/9749b3f95ff63948ce95bae851efbf4b4cf741fb67f5e44ff91628818fba9574.png" />
-<img alt="_images/db0dfbabd25d9a82e300ff738dc9f24c8dc9b3ecab2c96ae3800b51c672d96b1.png" src="_images/db0dfbabd25d9a82e300ff738dc9f24c8dc9b3ecab2c96ae3800b51c672d96b1.png" />
+<img alt="_images/14f86092b8dde43f19c768462d53d40b2de1af0f4743adbdcbf7659694d6f333.png" src="_images/14f86092b8dde43f19c768462d53d40b2de1af0f4743adbdcbf7659694d6f333.png" />
+<img alt="_images/22eaa921cc2327b4a8e1abcc0334380e3e9823f04c130a2dffe0b39fa0987e99.png" src="_images/22eaa921cc2327b4a8e1abcc0334380e3e9823f04c130a2dffe0b39fa0987e99.png" />
 <img alt="_images/cb9f70b678b55349cd218cb3ec683a4ce20890f26d71bfe93706babb0568beac.png" src="_images/cb9f70b678b55349cd218cb3ec683a4ce20890f26d71bfe93706babb0568beac.png" />
 </div>
 </div>
@@ -1401,6 +1402,7 @@ Coeficiente de Variación:  21.39 %
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1"> vs Diabetes&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Porcentaje con diabetes&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1409,15 +1411,15 @@ Coeficiente de Variación:  21.39 %
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== MENTHLTH ===
 </pre></div>
 </div>
-<img alt="_images/fc779e22902126e01aa3c20d68bb01b43cac8272f0aa805ba907a7a5d9225ee2.png" src="_images/fc779e22902126e01aa3c20d68bb01b43cac8272f0aa805ba907a7a5d9225ee2.png" />
+<img alt="_images/eda59536249b516682e5c5f9daa5447a49752063f21c3cc8e8457d412922f600.png" src="_images/eda59536249b516682e5c5f9daa5447a49752063f21c3cc8e8457d412922f600.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== PHYSHLTH ===
 </pre></div>
 </div>
-<img alt="_images/9f8128e6e5ba9a54bfa4aca6ea90d02670e4602b5a0e86e46981dbc4a3d4b997.png" src="_images/9f8128e6e5ba9a54bfa4aca6ea90d02670e4602b5a0e86e46981dbc4a3d4b997.png" />
+<img alt="_images/c467d1bf2c470b184f8bd2de9c3c8ef56a1a6dd0d32160df43d55e444f087770.png" src="_images/c467d1bf2c470b184f8bd2de9c3c8ef56a1a6dd0d32160df43d55e444f087770.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== BMI ===
 </pre></div>
 </div>
-<img alt="_images/c5891587e3209d8c5c57190cc8547f30268512beaedae705936314aec1e2635d.png" src="_images/c5891587e3209d8c5c57190cc8547f30268512beaedae705936314aec1e2635d.png" />
+<img alt="_images/ad9e0ae936fcf1b868a9bf7c849e392ee99b355e83bb770f70cec95927cf8093.png" src="_images/ad9e0ae936fcf1b868a9bf7c849e392ee99b355e83bb770f70cec95927cf8093.png" />
 </div>
 </div>
 <p>Estos gráficos corroboran claras asociaciones entre la diabetes y diversos factores relacionados con la salud física, mental y el Índice de Masa Corporal. En primer lugar, se evidencia una relación directa entre el deterioro de la salud mental y el aumento en la proporción de personas con diabetes. A medida que se incrementan los días con problemas de salud mental, también aumenta el porcentaje de personas con diagnóstico de diabetes, lo que sugiere una posible interacción entre el bienestar psicológico y el desarrollo o manejo de esta enfermedad.</p>
@@ -1782,7 +1784,9 @@ Coeficiente de Variación:  21.39 %
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proceso iterativo de eliminación por VIF:
 -----------------------------------------
-Round 1: Eliminando &#39;Education&#39; con VIF = 29.65
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Round 1: Eliminando &#39;Education&#39; con VIF = 29.65
 Round 2: Eliminando &#39;CholCheck&#39; con VIF = 22.48
 Round 3: Eliminando &#39;AnyHealthcare&#39; con VIF = 18.35
 Round 4: Eliminando &#39;BMI&#39; con VIF = 16.48

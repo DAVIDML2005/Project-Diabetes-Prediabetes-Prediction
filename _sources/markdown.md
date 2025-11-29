@@ -1,4 +1,4 @@
-# **Conclusiones y Hallazgos Principales en los Modelados**
+# **Conclusiones y Hallazgos en los Modelados**
 
 ## **1. Logro de los Objetivos Propuestos**
 
@@ -8,11 +8,11 @@ El presente proyecto ha cumplido satisfactoriamente con todos los objetivos plan
 
 El análisis exploratorio y de importancia de variables reveló patrones epidemiológicos significativos que coinciden con la literatura médica existente:
 
-- **Perfil de riesgo identificado**: Los pacientes con mayor probabilidad de diabetes presentan **edad avanzada** (categorías cat_Age_10 - cat_Age_13), **consumo excesivo de alcohol** (bin_HvyAlcoholConsump), **hipertensión y colesterol alto** (bin_HighBP, bin_HighChol) y **condiciones de salud general deficiente** (cat_GenHlth_4, cat_GenHlth_5).
+- **Perfil de riesgo identificado**: Los pacientes con mayor probabilidad de diabetes presentan **edad avanzada** (categorías cat_Age_10 - cat_Age_13), **hipertensión y colesterol alto** (bin_HighBP, bin_HighChol) y **condiciones de salud general deficiente** (cat_GenHlth_4, cat_GenHlth_5).
 
-- **Variables críticas identificadas**: Las **variables de salud general autopercibida** emergieron como los predictores más potentes acompañado de **indicadores médicos directos** (HighBP, HighChol)..
+- **Variables críticas identificadas**: Las **variables de salud general autopercibida** emergieron como los predictores más potentes acompañado de **indicadores médicos directos** (HighBP, HighChol).
 
-- **Factores protectores consistentes**: La **ausencia de consumo excesivo de alcohol** y la **pertenencia a grupos de edad media** se identificaron como factores protectores clave en múltiples modelos.
+- **Factores protectores consistentes**: El **consumo excesivo de alcohol** y la **pertenencia a grupos de edad jocen** se identificaron como factores protectores clave en múltiples modelos.
 
 ## **3. Análisis Comparativo de Técnicas de Balanceo por Modelo**
 
@@ -22,7 +22,7 @@ El análisis exhaustivo de las diferentes técnicas de balanceo reveló patrones
 
 #### **Modelos Lineales (Logistic Regression L1, L2, SVM):**
 - **Class Weight ('balanced')** - Óptimo para regresión logística y SVM.
-- **SMOTE** - Alternativa competitiva con mejor balance general.
+- **SMOTE** - Alternativa competitiva con buen balance general.
 
 #### **Modelos Basados en Árboles (XGBoost, Random Forest, Decision Tree, CatBoost):**
 - **scale_pos_weight (XGBoost)** - Máximo rendimiento predictivo.
@@ -37,11 +37,9 @@ El análisis exhaustivo de las diferentes técnicas de balanceo reveló patrones
 
 ### **Patrones Generales en Técnicas de Balanceo**
 
-- **SMOTE**: Óptimo para modelos lineales, con **AUC-ROC consistentemente alto** y buen balance general.
+- **SMOTE**: Óptimo para modelos lineales, con **AUC-ROC consistentemente alto** y buen balance general. También, superior para modelos **Naive Bayes** presentando un buen balance general.
 
 - **Class Weight y scale_pos_weight**: Superior en modelos lineales y basados en árboles, maximizando **F1-Score y AUC-ROC**.
-
-- **ADASYN**: Superior para modelos **Naive Bayes** presentando un buen balance general.
 
 - **Sin Balanceo**: Produjo **accuracy inflado artificialmente** con recall muy bajo, confirmando la necesidad crítica de técnicas de balanceo.
 
@@ -50,7 +48,7 @@ El análisis exhaustivo de las diferentes técnicas de balanceo reveló patrones
 ### **Jerarquía de Rendimiento por Métrica Clave**
 
 #### **AUC-ROC (Capacidad Discriminativa)**
-1. XGBoost (scale_pos_weight) - 0.825904.
+1. XGBoost (scale_pos_weight) - 0.825688.
 2. Random Forest (Class Weight) - 0.822041.
 3. Logistic Regression L2 (Class Weight) - 0.819243.
 4. Logistic Regression L1 (Class Weight) - 0.819240.
@@ -64,9 +62,9 @@ El análisis exhaustivo de las diferentes técnicas de balanceo reveló patrones
 
 #### **F1-Score (Balance Precision-Recall)**
 1. Random Forest (Class Weight) - 0.443151.
-2. XGBoost (scale_pos_weight) - 0.441886.
-3. Logistic Regression L1 (SMOTE) - 0.440772.
-4. Logistic Regression L2 (SMOTE) - 0.440770.
+2. Logistic Regression L1 (SMOTE) - 0.440772.
+3. Logistic Regression L2 (SMOTE) - 0.440770.
+4. XGBoost (scale_pos_weight) - 0.439838.
 5. SVM (ADASYN) - 0.438498.
 6. Decision Tree (Class Weight) - 0.427827.
 7. GaussianNB (SMOTE) - 0.427725.
@@ -76,7 +74,7 @@ El análisis exhaustivo de las diferentes técnicas de balanceo reveló patrones
 11. KNN (SMOTE) - 0.388172.
 
 #### **Sensibilidad (Recall - Detección de Casos Positivos)**
-1. XGBoost (scale_pos_weight) - 0.792757.
+1. XGBoost (scale_pos_weight) - 0.790918.
 2. SVM (Class Weight) - 0.790494.
 3. Logistic Regression L1 (ADASYN) - 0.780308.
 4. Logistic Regression L2 (ADASYN) - 0.778752.
@@ -92,8 +90,8 @@ El análisis exhaustivo de las diferentes técnicas de balanceo reveló patrones
 1. Random Forest (Class Weight) - 0.311963.
 2. Logistic Regression L2 (SMOTE) - 0.310735.
 3. Logistic Regression L1 (SMOTE) - 0.310335.
-4. XGBoost (scale_pos_weight) - 0.306313.
-5. SVM (ADASYN) - 0.305689.
+4. SVM (ADASYN) - 0.305689.
+5. XGBoost (scale_pos_weight) - 0.304620.
 6. GaussianNB (SMOTE) - 0.304195.
 7. Decision Tree (Class Weight) - 0.297523.
 8. MultinomialNB (SMOTE) - 0.294308.
@@ -175,7 +173,7 @@ El paciente 30 representa exactamente el tipo de caso donde el criterio clínico
 ## **7. Estrategias de Selección por Caso de Uso**
 
 ### **Para Screening Masivo (Maximizar Recall):**
-1. **XGBoost (scale_pos_weight)** (Recall: 79.2%).
+1. **XGBoost (scale_pos_weight)** (Recall: 790%).
 2. **SVM (Class Weight)** (Recall: 79.0%).
 3. **Logistic Regression L1 (ADASYN)** (Recall: 78.0%).
 
@@ -185,7 +183,7 @@ El paciente 30 representa exactamente el tipo de caso donde el criterio clínico
 3. **Logistic Regression L1 (SMOTE)** (Precision: 31.0%).
 
 ### **Para Balance Óptimo General:**
-1. **XGBoost con scale_pos_weight** (AUC: 0.825904).
+1. **XGBoost con scale_pos_weight** (AUC: 0.825688).
 2. **Random Forest con Class Weight** (F1-Score: 0.443151).
 3. **SVM con Class Weight** (Velocidad + Rendimiento).
 
@@ -242,8 +240,8 @@ El paciente 30 representa exactamente el tipo de caso donde el criterio clínico
 ### **Recomendación Final por Escenario**
 
 **Para la mayoría de aplicaciones clínicas** en predicción de diabetes, se recomienda la **implementación de XGBoost con scale_pos_weight** como solución óptima que ofrece:
-- **Máximo AUC-ROC** (0.825904).
-- **Recall excelente** (78.27%).
+- **Máximo AUC-ROC** (0.825688).
+- **Recall excelente** (79.0%).
 
 **Para implementaciones con restricciones computacionales**, **SVM con Class Weight** constituye la alternativa ideal:
 - **Alto AUC-ROC** (0.819107).
