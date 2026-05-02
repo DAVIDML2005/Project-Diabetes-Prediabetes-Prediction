@@ -1,0 +1,14 @@
+# Carpeta de construcción de Jupyter-Book (donde está el HTML y source)
+_build/
+.jupyter_cache/
+
+# Carpeta de información de modelos (CatBoost)
+catboost_info/
+
+# Archivos temporales de Jupyter y Python
+.ipynb_checkpoints/
+__pycache__/
+
+# Entornos virtuales
+ml_venv/
+.venv/

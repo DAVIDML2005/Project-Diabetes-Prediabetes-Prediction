@@ -1,0 +1,12 @@
+# Table of contents
+format: jb-book
+root: introduccion
+chapters:
+- file: eda
+- file: modelado_benchmark
+- file: modelado_optimizado_smote
+- file: modelado_optimizado_adasyn
+- file: modelado_optimizado_class_weight
+- file: conclusiones_modelado
+- file: modelo_original
+- file: conclusiones_modelo_original
