@@ -10,8 +10,8 @@ Este trabajo fue desarrollado como parte del curso de **Machine Learning** en la
 
 ## Colaboradores
 
-* David Marquez
-* Cristian Linero
+* David Ricardo Marquez Luna (https://github.com/DAVIDML2005)
+* Cristian Camilo Linero Cantillo (https://github.com/cristianclc)
 
 ## Objetivos
 
